@@ -1,0 +1,82 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+.logo {
+  width: 125px;
+  height: 105px;
+}
+
+.menuList {
+  display: flex;
+  width: 756px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.menuItems {
+  font-size: 20px;
+  line-height: 24px;
+  margin-right: 30px;
+  width: 144px;
+  height: 26px;
+  white-space: nowrap;
+  margin-bottom: 1px;
+  &:hover {
+    cursor: pointer;
+    color: #D78DFF;
+    border-bottom: 1px solid #D78DFF;
+  }
+}
+
+
+.login {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+.button {
+
+}
+
+.singUp {
+  border: 2px solid #D78DFF;
+  margin-right: 10px;
+  background: none;
+  color: #D78DFF;
+// дубль - вынести в класс button
+  padding: 20px 30px;
+  border-radius: 40px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  &:hover {
+    cursor: pointer;
+    color: #5D3274;
+    border-color: #5D3274;;
+  }
+}
+
+.singOut {
+  border: 2px solid #D78DFF;
+  background: #D78DFF;
+  color: #fff;
+  // дубль - вынести в класс button
+  padding: 20px 30px;
+  border-radius: 40px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  &:hover {
+    cursor: pointer;
+    background: #5D3274;
+    border-radius: 40px;
+    border-color: #5D3274;
+  }
+}
