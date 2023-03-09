@@ -1,16 +1,14 @@
-import {Header} from "./components/Header/Header";
-import {Main} from "./components/Main/Main";
-import {Footer} from "./components/Footer/Footer";
 import './index.scss'
 
+import {RouterProvider} from "react-router-dom";
+import {router} from "./router";
+
 function App() {
-  return (
-    <div className="App">
-      <Header />
-      <Main />
-      <Footer />
-    </div>
-  );
+    return (
+        <div className="App">
+            <RouterProvider router={router}/>
+        </div>
+    );
 }
 
 export default App;
