@@ -7,11 +7,7 @@ export const Navigate = () => {
         <nav className={s.nav}>
             <ul className={s.menuList}>
                 <li className={s.menuItems}>
-                    <NavLink
-                        to='/about'
-                        className={({isActive}) => isActive ? "active" : ""}>
-                        О нас
-                    </NavLink>
+                    <NavLink to='/'>О нас</NavLink>
                 </li>
                 <li className={s.menuItems}>
                     <NavLink to='/specialists'>Специалисты</NavLink>

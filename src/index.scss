@@ -3,6 +3,8 @@
 * {
   font-family: Rubik;
   color: #4F4E4E;
+  margin: 0;
+  padding: 0;
 }
 
 li {
@@ -16,6 +18,22 @@ li {
 
 .container-color {
   background: linear-gradient(79.76deg, #FAF4F9 0%, #FEFEFE 100%);
+}
+.container-slider {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  &::after{
+    z-index: -2;
+    content: "";
+    background-image: url(./assets/vectorpaint.svg);
+    width: 100%;
+    height: 715px;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 }
 
 a {

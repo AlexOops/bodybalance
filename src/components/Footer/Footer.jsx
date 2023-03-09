@@ -1,6 +1,6 @@
 import s from './Footer.module.scss'
 import '../../index.scss'
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logo.svg'
 import instagram from '../../assets/instagram.svg'
 import vk from '../../assets/vk.svg'
 import telegram from '../../assets/telegram.svg'
