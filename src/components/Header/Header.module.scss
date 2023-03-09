@@ -1,0 +1,49 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+.logo {
+  width: 125px;
+  height: 105px;
+}
+
+
+.login {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+.button {
+  padding: 20px 30px;
+  border-radius: 40px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #9e8dff;
+    border: 2px solid #9e8dff;
+  }
+}
+
+.singUp {
+  border: 2px solid #D78DFF;
+  margin-right: 10px;
+  background: none;
+  color: #D78DFF;
+
+}
+
+.singOut {
+  border: 2px solid #D78DFF;
+  background: #D78DFF;
+  color: #fff;
+
+}

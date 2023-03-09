@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;800;900&display=swap');
+
+* {
+  font-family: Rubik;
+  color: #4F4E4E;
+}
+
+li {
+  list-style-type: none;
+}
+
+.container {
+  width: 1290px;
+  margin: 0 auto;
+}
+
+.container-color {
+  background: linear-gradient(79.76deg, #FAF4F9 0%, #FEFEFE 100%);
+}
+
+a {
+  text-decoration: none;
+}
+
+.active {
+  color: #D78DFF;
+}
