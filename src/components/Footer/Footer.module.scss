@@ -1,0 +1,46 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 307px;
+
+}
+
+.img {
+  height: 147px;
+}
+
+.menu {
+  height: 147px;
+}
+.menuList{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 147px;
+}
+
+
+.menuItems {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  margin-bottom: 13.2px;
+  display: flex;
+  align-items: center;
+}
+
+.contacts {
+  height: 147px;
+}
+
+.socialNetwork {
+  margin-top: 23px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.image {
+  margin-right: 12px;
+}
