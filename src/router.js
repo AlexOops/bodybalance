@@ -6,12 +6,16 @@ import {OnlineRecording} from "./components/Layout/OnlineRecording";
 import {Services} from "./components/Layout/Services";
 import {Specialists} from "./components/Layout/Specialists";
 import {Training} from "./components/Layout/Training";
+import {Login} from "./pages/Login";
+import {Registration} from "./pages/Registration";
+
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <Main />,
-        children: [{
+        children: [
+            {
                 path: "/contacts",
                 element: <Contacts/>,
             },
@@ -34,6 +38,15 @@ export const router = createBrowserRouter([
             {
                 path: "/training",
                 element: <Training/>,
-        }]
+            },
+            {
+                path: "/login",
+                element: <Login/>,
+            },
+            {
+                path: "/register",
+                element: <Registration/>,
+            },
+        ]
     },
 ]);
