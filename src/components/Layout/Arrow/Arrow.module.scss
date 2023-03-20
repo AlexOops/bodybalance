@@ -1,6 +1,5 @@
 .arrowBackground {
   position: absolute;
-  bottom: 293px;
   width: 64px;
   height: 64px;
   background: #D78DFF;
@@ -8,6 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
   &:hover {
     cursor: pointer;
   }
@@ -18,19 +18,30 @@
   color: #fff;
   background-color: #D78DFF;
   border: none;
+
   &:hover {
     cursor: pointer;
   }
 }
 
-.right {
+.rotate {
   transform: rotate(180deg);
 }
 
 .arrowPositionRight {
   right: 191px;
+  top: 50%;
 }
 
 .arrowPositionLeft {
   left: 191px;
+  top: 50%;
+}
+
+.size {
+  width: 11px;
+  height: 22px;
+  align-items: center;
+  display: flex;
+  text-align: center;
 }

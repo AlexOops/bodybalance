@@ -1,0 +1,40 @@
+.wrapper {
+  margin-top: 80px;
+  height: 604px;
+  background: linear-gradient(79.76deg, #FAF4F9 0%, #FEFEFE 100%);
+}
+
+.section {
+  margin: 60px 0;
+  text-align: center;
+}
+
+.direction {
+  display: flex;
+}
+
+.img {
+  margin-right: 60px;
+}
+
+.line {
+  background: #D78DFF;
+  border-radius: 20px;
+  width: 950px;
+  height: 3px;
+}
+
+.quotes {
+  margin: 40px 0 30px 0;
+}
+
+.name {
+  margin: 20px 0 40px 0;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 130%;
+}
+
+span {
+  color: #D78DFF;
+}

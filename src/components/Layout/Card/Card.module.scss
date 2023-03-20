@@ -1,0 +1,49 @@
+.center {
+  text-align: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 30px 0 30px;
+  gap: 20px;
+  width: 410px;
+  height: 550px;
+  background: #FFFFFF;
+  box-shadow: 0 0 20px rgba(255, 226, 255, 0.65);
+  border-radius: 25px;
+  &:hover {
+    box-shadow: 0px 0px 20px rgba(255, 153, 255, 0.65);
+    cursor: pointer;
+  }
+}
+
+.img {
+  width: 200px;
+  height: 200px;
+}
+
+
+.circle {
+  width: 16px;
+  height: 16px;
+  background-color: #D78DFF;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.price {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 140%;
+  color: #D78DFF;
+  margin-top: 18px;
+}
+
+.direction {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 12px 0;
+}
