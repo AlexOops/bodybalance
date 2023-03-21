@@ -7,7 +7,7 @@ import {Dots} from "./Dots/Dots";
 export const Slider = () => {
     return (
         <>
-            <div className={'container-color container-slider'}>
+            <div className={'container-color container-slider container-carousel'}>
                 <ArrowLeft/>
             <div className={'container'}>
                 <div className={s.slider}>
