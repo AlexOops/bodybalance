@@ -1,6 +1,5 @@
 import React from 'react';
 import s from "./Card.module.scss";
-import service from "../../../assets/img-service.png";
 import ReactMarkdown from "react-markdown";
 export const Card = ({
     id,

@@ -4,7 +4,7 @@ import {ArrowRight} from "../../Arrow/ArrowRight";
 import s from './PopularServices.module.scss'
 import {Card} from "../../Card/Card";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchServices} from "../../../../redux/slices/services";
+import {fetchServices, fetchServicesByRating} from "../../../../redux/slices/services";
 
 // при загрузке с сервера убрать эту переменную и изменить её ниже. пока для заглушки
 // const price = 7200
@@ -15,7 +15,7 @@ export const PopularServices = () => {
     const isServicesLoading = services.status === 'loading'; // boolean
 
     React.useEffect(() => {
-        dispatch(fetchServices());
+        dispatch(fetchServicesByRating());
     }, [] );
 
     return (
