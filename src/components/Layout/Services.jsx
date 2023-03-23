@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {fetchServices} from "../../redux/slices/services";
 import ReactMarkdown from "react-markdown";
 import s from './Services.module.scss'
+import {Card} from "./Card/Card";
 
 export const Services = () => {
     const dispatch = useDispatch();
@@ -29,17 +30,25 @@ export const Services = () => {
                 </div>
                 <div className={s.servicesItems}>{(isServicesLoading ? [...Array(3)] : services.items).map((obj, index)=>
                     isServicesLoading ? (<div > Загрузка...</div>) : (
-                        <div className={s.serviceItem} key={index}>
-                            <div className={s.image}>
-                                <img
-                                    src={(obj.imageUrl) ?`http://localhost:4444${obj.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
-                                    alt={obj.name}
-                                 />
-                            </div>
-                            <h3 className={s.h3} > {obj.name} </h3>
-                            <p className={s.itemText}><ReactMarkdown>{obj.description}</ReactMarkdown></p>
-                            <div className={s.itemPrice}> {obj.price} </div>
-                        </div>
+                        <Card
+                            id={obj._id}
+                            price={obj.price}
+                            name={obj.name}
+                            description={obj.description}
+                            text={obj.text}
+                            imageUrl={(obj.imageUrl) ?`http://localhost:4444${obj.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                        />
+                        // <div className={s.serviceItem} key={index}>
+                        //     <div className={s.image}>
+                        //         <img
+                        //             src={(obj.imageUrl) ?`http://localhost:4444${obj.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                        //             alt={obj.name}
+                        //          />
+                        //     </div>
+                        //     <h3 className={s.h3} > {obj.name} </h3>
+                        //     <p className={s.itemText}><ReactMarkdown>{obj.text}</ReactMarkdown></p>
+                        //     <div className={s.itemPrice}> {obj.price} </div>
+                        // </div>
                     )
                 )}
                 </div>
