@@ -1,40 +1,37 @@
 import React from 'react';
 import s from "./Card.module.scss";
-import service from "../../../assets/img-service.png";
-
-export const Card = ({price}) => {
+import ReactMarkdown from "react-markdown";
+export const Card = ({
+    id,
+    price,
+    name,
+    description,
+    text,
+    isPopular,
+    imageUrl,
+}) => {
     return (
         <div className={s.card}>
+            <div className={s.flexCenter}>
             <div className={`${s.img} ${s.center}`}>
-                <img src={service} alt=""/>
+                <img src={imageUrl} alt=""/>
             </div>
-            <div className={`${s.center}`}>
-                <h3>
-                    Восстановительный комплекс
+
+                <h3 className={s.name}>
+                    {name}
                 </h3>
+
+                {isPopular ?
+                    <>
+                        <ReactMarkdown>{description}</ReactMarkdown>
+                    </>
+                    :
+                    <>
+                        <div className={s.text}><ReactMarkdown>{text}</ReactMarkdown></div>
+                    </>
+                }
             </div>
-            {price ?
-                <div>
-                    <div className={s.direction}>
-                        <div className={s.circle}></div>
-                        <p>От боли в спине</p>
-                    </div>
-                    <div className={s.direction}>
-                        <div className={s.circle}></div>
-                        <p>Восстановление после травм</p>
-                    </div>
-                    <div className={s.direction}>
-                        <div className={s.circle}></div>
-                        <p>Восстановление после операции</p>
-                    </div>
-                    <div className={s.price}>От {price}</div>
-                </div>
-                :
-                <div className={`${s.center}`}>
-                    <p>Банальные, но неопровержимые выводы, а также интерактивные прототипы неоднозначны и будут
-                        функционально разнесены на независимые элементы</p>
-                </div>
-            }
+            {isPopular?? <div className={s.price}>{price}</div>}
 
         </div>
     );

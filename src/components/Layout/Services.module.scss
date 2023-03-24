@@ -37,6 +37,9 @@
   z-index: -1;
 }
 
+.margin{
+  margin-bottom: 30px;
+}
 .title {
   //font-family: 'Rubik';
   font-style: normal;
@@ -88,8 +91,10 @@
 
 .servicesItems{
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin: 40px 0 0 0;
+  //gap: 30px;
 }
 .serviceItem{
   display: flex;
@@ -129,8 +134,8 @@
     top:0;
     left:0;
   }
-
 }
+
 .h3 {
   font-style: normal;
   font-weight: 600;
