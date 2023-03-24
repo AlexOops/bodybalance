@@ -9,6 +9,7 @@ export const Services = () => {
     const {services} = useSelector( state => state.services);
 
     const isServicesLoading = services.status === 'loading'; // boolean
+    // const isServicesLoading = true; // проверить скелетон
 
     React.useEffect(() => {
         dispatch(fetchServices());
@@ -27,9 +28,14 @@ export const Services = () => {
                 <div className={s.servicesTitleWrap}>
                     <h2 className={s.servicesTitle}>Все услуги</h2>
                 </div>
-                <div className={s.servicesItems}>{(isServicesLoading ? [...Array(3)] : services.items).map((obj, index)=>
-                    isServicesLoading ? (<div > Загрузка...</div>) : (
-                        <div className={s.margin}>
+                <div className={s.servicesItems}>{(isServicesLoading ? [...Array(6)] : services.items).map((obj, index)=>
+                    isServicesLoading
+                        ? (<div className={s.margin} key={index}>
+                                <Card key={index} isLoading={true}/>
+                            </div>
+                        )
+                        : (
+                        <div className={s.margin} key={obj._id}>
                             <Card
                                 id={obj._id}
                                 price={obj.price}
