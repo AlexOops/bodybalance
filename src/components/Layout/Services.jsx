@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {fetchServices} from "../../redux/slices/services";
 import s from './Services.module.scss'
 import {Card} from "./Card/Card";
+import {AppointmentForm} from "../AppointmentForm/AppointmentForm";
 
 export const Services = () => {
     const dispatch = useDispatch();
@@ -16,7 +17,8 @@ export const Services = () => {
     },[]);
 
     return (
-        <div className="container-color">
+        <>
+            <div className="container-color">
             <div className={s.main}>
                 <div className={s.description}>
                     <div className={s.circleFirst}></div>
@@ -50,7 +52,7 @@ export const Services = () => {
                 </div>
             </div>
         </div>
-
-
+            <div className="container"><AppointmentForm services={services.items}/></div>
+        </>
     )
 }
