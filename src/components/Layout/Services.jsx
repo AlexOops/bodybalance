@@ -8,6 +8,7 @@ import {AppointmentForm} from "../AppointmentForm/AppointmentForm";
 export const Services = () => {
     const dispatch = useDispatch();
     const {services} = useSelector( state => state.services);
+    // const {date, time} = useSelector( state => state.datepicker);
 
     const isServicesLoading = services.status === 'loading'; // boolean
     // const isServicesLoading = true; // проверить скелетон

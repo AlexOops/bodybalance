@@ -1,23 +1,20 @@
-
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import s from './AppointmentForm.module.scss';
-import {Form, Formik, Field} from 'formik';
+import {Form, Formik, Field, isFunction} from 'formik';
 
-import dayjs, { Dayjs } from 'dayjs';
+// import dayjs, { Dayjs } from 'dayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import {DatePicker, LocalizationProvider} from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+
+import {useSelector} from "react-redux";
+import {CalendarPicker} from "../Layout/Main/DataPicker/CalendarPicker";
+import FormListItem from "./FormListItem";
+// import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 
 export const AppointmentForm = ({services}) => {
     //Быстрая запись
-    console.log(services);
-
-    const [value, setValue] = useState(dayjs('2022-04-17T15:30'));
-    const [workTimes, setWorkTimes] = useState([]);
-    const [workDate, setWorkDate] = useState('');
-    //Окна для записи на услугу
     const workDates = [
         {
             date: "2023-03-30",
@@ -33,24 +30,30 @@ export const AppointmentForm = ({services}) => {
         },
     ];
 
+    // const [value, setValue] = useState(dayjs('2022-04-17T15:30'));
+    const [workTimes, setWorkTimes] = useState([]);
+    const [workDate, setWorkDate] = useState('');
+
+    //активный компонент по dataset
+    const [active, setActive] = useState(null);
+    const onClickItem = (e) => {
+        setActive(e.target.dataset.index);
+    };
+
     //получим все рабочие даты в массив
     const workDatesArr = workDates.map((obj) => obj.date);
 
-    //отобразим в календаре только рабочие даты
-    const disableCustomDt = (day) => {
-        return !(workDatesArr.includes(day.format('YYYY-MM-DD')));
-    };
-
-    const getWorkTime = (date) => { //получим список времени приема для выбранной даты.
-
+    const getWorkTimes = (date) => { //получим список времени приема для выбранной даты.
+        console.log('Что получиили', date);
         workDates.map((obj) => {
-            if(obj.date === date.format('YYYY-MM-DD')){
-                setWorkDate(obj.date);
-                setWorkTimes(obj.time);
-            }
+                if(obj.date === date.format('YYYY-MM-DD')) {
+                    setWorkDate(obj.date);
+                    setWorkTimes(obj.time);
+                    return console.log(obj.time);
+                }
         });
-    }
-
+        return console.log('Нет свободных часов на такую дату');
+    };
 
     return (
         <div className={s.main}>
@@ -66,6 +69,7 @@ export const AppointmentForm = ({services}) => {
                         phone: '',
                         datetime: '',
                         text: '',
+                        // picked: '',
                     }}
                     validate={values => {
                         const errors = {};
@@ -85,14 +89,22 @@ export const AppointmentForm = ({services}) => {
                         }, 400);
                     }}
                 >
-                    {({isSubmitting}) => (
+                    {({isSubmitting, values}) => (
                         <Form>
-                            <label htmlFor="service">Выберите услугу</label>
-                            <Field component="select" name="serviceId" id="service">
+                            <div className={s.select}>
+                                <h3 id="select-group" className={s.selectHeader}>Выберите услугу</h3>
                                     {services.map((service, key) =>
-                                        <option key={service._id} value={service._id}>{service.name}</option>
+                                        <FormListItem
+                                            service={service}
+                                            key={key}
+                                            onClickItem={onClickItem}
+                                            active={active}
+                                        />
+
                                     )}
-                            </Field>
+
+
+                            </div>
                             <label htmlFor="firstName">Ваше имя</label>
                             <Field type="text" name="firstName" id="firstName"/>
 
@@ -104,14 +116,9 @@ export const AppointmentForm = ({services}) => {
 
                             <label htmlFor="phone">Введите телефон</label>
                             <Field type="text" name="phone" id="phone"/>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DemoContainer components={['DateTimePicker', 'DateTimePicker']}>
-                                    <DatePicker
-                                        shouldDisableDate={disableCustomDt}
-                                        onAccept={getWorkTime}
-                                    />
-                                </DemoContainer>
-                            </LocalizationProvider>
+
+                            <CalendarPicker workDatesArr={workDatesArr} getWorkTimes={getWorkTimes}/>
+
                             <label htmlFor="time">Выбор времени</label>
                             <Field
                                 component="select"
