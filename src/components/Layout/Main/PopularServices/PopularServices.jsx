@@ -1,53 +1,86 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {ArrowLeft} from "../../Arrow/ArrowLeft";
 import {ArrowRight} from "../../Arrow/ArrowRight";
 import s from './PopularServices.module.scss'
 import {Card} from "../../Card/Card";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchServices, fetchServicesByRating} from "../../../../redux/slices/services";
-
-// при загрузке с сервера убрать эту переменную и изменить её ниже. пока для заглушки
-// const price = 7200
+import {fetchServicesByRating} from "../../../../redux/slices/services";
 
 export const PopularServices = () => {
     const dispatch = useDispatch();
     const {services} = useSelector(state => state.services);
     const isServicesLoading = services.status === 'loading'; // boolean
 
+    // сервисы
+    const [count, setCount] = useState(0)
+    const [filterService, setFilterService] = useState([])
+    const [flag, setFlag] = useState(1)
+
+
     React.useEffect(() => {
         dispatch(fetchServicesByRating());
-    }, [] );
+    }, [dispatch]);
+
+
+    // первый рендеринг после получения всех сервисов
+    useEffect(() => {
+        setFilterService(Object.values(services.items).filter((el, idx) => idx < count + 3))
+        console.log(filterService)
+    },[services, count])
+
+    // фильтрация массива сервисов
+    useEffect(() => {
+        if(flag !== count) {
+            setFlag(count)
+            setFilterService(Object.values(services.items).filter((el, idx) => (idx >= count && idx < count + 3)))
+            if (services.items.length < count) {
+                setCount(0)
+            } else if (count < 0) {
+                setCount(services.items.length)
+            }
+        }
+        console.log(filterService)
+    }, [services, filterService, count, flag])
 
     return (
-        <>
-            <div className='container-carousel'>
-                <ArrowLeft/>
-                <div className='container'>
-                    <div className={s.position}>
-                        <div className={s.services}>
-                            <h2 className={s.space}>популярные услуги</h2>
-                            <div className={s.cards}>
-                                {/* изменить на получение с сервера пока только статика */}
-                                {(isServicesLoading ? [...Array(3)] : services.items).map((obj, index) =>
-                                    isServicesLoading
-                                        ? <Card key={index} isLoading={true}/>
-                                        : <Card isPopular={true}
+    <>
+        <div className='container-carousel'>
+            <ArrowLeft setCount={setCount}/>
+            <div className='container'>
+                <div className={s.position}>
+                    <div className={s.services}>
+                        <h2 className={s.space}>популярные услуги</h2>
+                        <div className={s.cards}>
+                            {filterService.map((obj, index) =>
+                                isServicesLoading
+                                    ? <Card key={index} />
+                                    : <Card key={obj.id}
                                             price={obj.price}
                                             name={obj.name}
                                             description={obj.description}
                                             text={obj.text}
-                                            imageUrl={(obj.imageUrl) ?`http://localhost:4444${obj.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
-                                        />
-                                )}
-                                {/*<Card price={price} />*/}
-                                {/*<Card />*/}
-                                {/*<Card />*/}
-                            </div>
+                                            imageUrl={(obj.imageUrl) ? `http://localhost:4444${obj.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                                    />
+                            )}
                         </div>
+                        {/*<div className={s.cards}>*/}
+                        {/*    {(isServicesLoading ? [...Array(3)] : services.items).map((obj, index) =>*/}
+                        {/*        isServicesLoading*/}
+                        {/*            ? <Card key={index} isLoading={true}/>*/}
+                        {/*            : <Card key={obj.id} isPopular={true}*/}
+                        {/*                    price={obj.price}*/}
+                        {/*                    name={obj.name}*/}
+                        {/*                    description={obj.description}*/}
+                        {/*                    text={obj.text}*/}
+                        {/*                    imageUrl={(obj.imageUrl) ? `http://localhost:4444${obj.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}*/}
+                        {/*            />*/}
+                        {/*    )}*/}
+                        {/*</div>*/}
                     </div>
                 </div>
-                <ArrowRight/>
             </div>
-        </>
-    )
+            <ArrowRight setCount={setCount}/>
+        </div>
+    </>
+)
 }
