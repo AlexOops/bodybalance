@@ -1,0 +1,21 @@
+.position {
+  position: relative;
+
+}
+.services {
+  height: 654px
+}
+
+.space {
+  margin-top: 44px;
+  margin-bottom: 30px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 30px;
+}

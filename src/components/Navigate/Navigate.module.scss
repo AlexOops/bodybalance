@@ -1,0 +1,27 @@
+
+
+.menuList {
+  display: flex;
+  width: 756px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.menuItems {
+  font-size: 20px;
+  line-height: 24px;
+  margin-right: 30px;
+  width: 144px;
+  height: 26px;
+  white-space: nowrap;
+  margin-bottom: 1px;
+  &:hover {
+    cursor: pointer;
+    color: #9e8dff;
+    border-bottom: 1px solid #D78DFF;
+  }
+}
+
+.nav {
+  display: flex;
+}

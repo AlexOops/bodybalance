@@ -1,0 +1,53 @@
+.slider {
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 160px;
+  box-sizing: border-box;
+
+}
+
+.sliderBackground{
+  position: absolute;
+  top: -140px;
+}
+
+.sliderName {
+  font-weight: 500;
+  font-size: 80px;
+  line-height: 140%;
+  text-transform: uppercase;
+  width: 630px;
+  height: 112px;
+}
+
+.sliderText {
+  margin-top: 10px;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 140%;
+  width: 630px;
+  height: 102px;
+}
+
+.signUp {
+  margin-top: 30px;
+  width: 174px;
+  height: 64px;
+  background: #D78DFF;
+  border-radius: 40px;
+  border: none;
+  color: #fff;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 60px;
+}

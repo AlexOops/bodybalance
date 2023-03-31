@@ -1,0 +1,47 @@
+.arrowBackground {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  background: #D78DFF;
+  border-radius: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.arrow {
+  font-size: 22px;
+  color: #fff;
+  background-color: #D78DFF;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+.arrowPositionRight {
+  right: 191px;
+  top: 50%;
+}
+
+.arrowPositionLeft {
+  left: 191px;
+  top: 50%;
+}
+
+.size {
+  width: 11px;
+  height: 22px;
+  align-items: center;
+  display: flex;
+  text-align: center;
+}
