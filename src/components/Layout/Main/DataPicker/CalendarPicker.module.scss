@@ -1,0 +1,23 @@
+.calendar {
+    display: none;
+    &.visible {
+        display: block;
+    }
+}
+
+.picker {
+    background: #FFFFFF;
+    /* pink */
+
+    border: 1.5px solid #D78DFF;
+    border-radius: 40px;
+}
+
+.myInput fieldset{
+    border: none;
+}
+.red {
+    color: red;
+}
+
+

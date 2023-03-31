@@ -1,13 +1,7 @@
 import React, {useEffect, useState} from "react";
 import s from './AppointmentForm.module.scss';
-import {Form, Formik, Field, isFunction} from 'formik';
+import {Form, Formik, Field} from 'formik';
 
-// import dayjs, { Dayjs } from 'dayjs';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import {DatePicker, LocalizationProvider} from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-
-import {useSelector} from "react-redux";
 import {CalendarPicker} from "../Layout/Main/DataPicker/CalendarPicker";
 import FormListItem from "./FormListItem";
 // import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
@@ -100,7 +94,6 @@ export const AppointmentForm = ({services}) => {
                                             onClickItem={onClickItem}
                                             active={active}
                                         />
-
                                     )}
 
 
@@ -117,9 +110,8 @@ export const AppointmentForm = ({services}) => {
                             <label htmlFor="phone">Введите телефон</label>
                             <Field type="text" name="phone" id="phone"/>
 
-                            <CalendarPicker workDatesArr={workDatesArr} getWorkTimes={getWorkTimes}/>
+                            <CalendarPicker id="datetime" workDatesArr={workDatesArr} getWorkTimes={getWorkTimes} placeholderText={'Дата и время приема'}/>
 
-                            <label htmlFor="time">Выбор времени</label>
                             <Field
                                 component="select"
                                 id="time"
