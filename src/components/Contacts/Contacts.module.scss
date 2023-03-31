@@ -1,0 +1,125 @@
+.header {
+  padding-top: 80px;
+  width: 410px;
+  height: 348px;
+
+  .title {
+    font-size: 60px;
+    font-weight: 500;
+  }
+
+  .text {
+    font-weight: 300;
+    font-size: 24px;
+  }
+}
+
+.content {
+  width: 1290px;
+  margin: 0 auto;
+  padding: 80px 0;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+
+  .contacts {
+    width: 520px;
+
+    &Title {
+      font-size: 40px;
+      font-weight: 500;
+      padding-bottom: 40px;
+    }
+
+    .contactList {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+
+      &Item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:nth-child(n-2) {
+          padding-bottom: 20px;
+        }
+      }
+
+      &Text {
+        padding-left: 30px;
+        font-weight: 400;
+        font-size: 20px;
+      }
+    }
+  }
+
+  .form {
+    width: 630px;
+    height: 533px;
+
+    &Item {
+      outline: none;
+      padding-left: 30px;
+      border: 1px solid #D78DFF;
+      border-radius: 40px;
+      width: 630px;
+      height: 66px;
+      font-weight: 400;
+      font-size: 20px;
+
+      &:focus {
+        border: 1px solid #D78DFF;
+        box-shadow: 0 4px 4px rgb(216, 159, 246);
+      }
+
+      &:nth-child(-n+3) {
+        width: 305px;
+      }
+
+      &:nth-child(n-2) {
+        margin-bottom: 20px;
+      }
+
+      &:nth-child(3n) {
+        margin-left: 20px;
+      }
+    }
+
+    &Message {
+      width: 630px;
+      height: 190px;
+
+      &:focus {
+        border: 1px solid #D78DFF;
+      }
+    }
+  }
+
+  // надо вынести кнопку, дублирование кода
+  .button {
+    border: 2px solid #D78DFF;
+    background: #D78DFF;
+    color: #fff;
+    padding: 20px 30px;
+    border-radius: 40px;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    &:hover {
+      cursor: pointer;
+      color: #fff;
+      background-color: #9e8dff;
+      border: 2px solid #9e8dff;
+    }
+  }
+
+}
+
+::placeholder {
+  font-weight: 400;
+  font-size: 20px;
+  color: #AEAEAE;
+}
+
