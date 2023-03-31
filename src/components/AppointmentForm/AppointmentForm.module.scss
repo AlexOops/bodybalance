@@ -1,0 +1,244 @@
+label {
+  display: flex;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  margin: 80px 0;
+}
+.calendarField {
+  margin: 10px 0;
+
+}
+.select {
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  width: 843px;
+
+  /* white */
+  background: #FFFFFF;
+  /* pink */
+  outline: 1.5px solid #D78DFF;
+  border-radius: 34px;
+}
+
+.selectHeader {
+  padding: 20px 62px 20px 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 130%;
+  color: #4F4E4E;
+  &::after {
+    content: "";
+    display: block;
+    background-image: url(../../assets/select_arrow.svg);
+    width: 10px;
+    height: 5px;
+    padding: 5px 5px;
+    background-repeat: no-repeat;
+    text-align: center;
+    background-position: center;
+  }
+}
+
+.selectInput {
+  display: none;
+}
+
+.selectLabel {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  padding: 30px 30px 30px 40px;
+/* Label Text */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 130%;
+  color: #4F4E4E;
+  &:last-child {
+    border-radius: 0 0 34px 34px;
+  }
+
+
+  &:hover {
+    background-color: #D78DFF !important;
+    color: #ffffff;
+  }
+  &.active {
+    background-color: #D78DFF !important;
+    color: #ffffff;
+  }
+
+}
+
+.selectText {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 130%;
+  color: #4F4E4E;
+}
+.selectFields {
+  padding: 20px 30px 20px 40px;
+  gap: 30px;
+  width: 100%;
+  height: 66px;
+  border: none;
+  /* Text field */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 130%;
+  background: transparent;
+  &:focus-visible {
+    border: none;
+  }
+  color: #4F4E4E;
+}
+
+.selected {
+  background: #D78DFF;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flexRowContainer{
+  display: flex;
+  flex-direction: row;
+  margin: 20px 0;
+  column-gap: 20px;
+}
+
+.textField {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px 30px;
+  gap: 12px;
+
+  width: 100%;
+  height: 66px;
+
+  background: #FFFFFF;
+  /* pink */
+  border: 1.5px solid #D78DFF;
+  border-radius: 40px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 130%;
+  color: #AEAEAE;
+
+  &:focus-visible {
+    border: 1px dashed #9747FF;
+  }
+
+  &:hover {
+    border: 1px dashed #5D3274;
+  }
+
+}
+
+.textArea {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 20px 30px;
+  gap: 12px;
+
+  width: 100%;
+  height: 191px;
+
+  background: #FFFFFF;
+  /* pink */
+  border: 1.5px solid #D78DFF;
+  border-radius: 40px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 130%;
+
+  color: #AEAEAE;
+  margin: 0 0 20px 0;
+
+}
+
+.timeTittle{
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 130%;
+
+  color: #4F4E4E;
+}
+
+.hidden {
+  display: none;
+}
+.flexEnd {
+  display: flex;
+  justify-content: end;
+}
+
+.time{
+  margin: 20px 0;
+  padding: 20px;
+  display: block;
+  width: 250px;
+  height: 95px;
+  background: #FFFFFF;
+  border: 1.5px solid #D78DFF;
+  border-radius: 40px;
+}
+
+.button {
+  margin: 40px 0 0 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 20px 30px;
+  gap: 10px;
+  border: none;
+
+  width: 172px;
+  height: 64px;
+
+  /* pink */
+
+  background: #D78DFF;
+  border-radius: 40px;
+
+  /* Inside auto layout */
+
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  /* identical to box height */
+
+
+  /* white */
+
+  color: #FFFFFF;
+
+}
+
