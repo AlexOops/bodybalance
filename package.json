@@ -6,7 +6,8 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/material": "^5.11.13",
-    "@mui/x-date-pickers": "^6.0.3",
+    "@mui/x-date-pickers": "^6.0.4",
+    "@pbe/react-yandex-maps": "^1.2.3",
     "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -20,6 +21,7 @@
     "react-markdown": "^8.0.6",
     "react-redux": "^8.0.5",
     "react-scripts": "5.0.1",
+    "react-yandex-maps": "^4.6.0",
     "sass": "^1.58.3",
     "web-vitals": "^2.1.4"
   },

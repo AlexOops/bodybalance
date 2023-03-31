@@ -1,15 +1,9 @@
 import React, {useState} from "react";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DemoContainer} from "@mui/x-date-pickers/internals/demo";
-import {DatePicker, LocalizationProvider, MobileDatePicker, ruRU, StaticDatePicker,DateField } from "@mui/x-date-pickers";
-import {useDispatch, useSelector} from "react-redux";
+import {DatePicker, LocalizationProvider, MobileDatePicker, ruRU} from "@mui/x-date-pickers";
+import {useDispatch} from "react-redux";
 import s from './CalendarPicker.module.scss';
-import {FilledInput, InputAdornment, inputAdornmentClasses, TextField} from "@mui/material";
-import {green} from "@mui/material/colors";
-
-function AccountCircle() {
-    return null;
-}
 
 export const CalendarPicker = ({workDatesArr, getWorkTimes}) => { //получает массив дат, делает только их активными, отдает выбранную дату в функцию getWorkTimes
     const dispatch = useDispatch();
@@ -20,10 +14,11 @@ export const CalendarPicker = ({workDatesArr, getWorkTimes}) => { //получа
         return !(workDatesArr.includes(day.format('YYYY-MM-DD')));
     };
 
-    const toggleCalendarState = () => {
-        console.log(calendarState);
-        setCalendarState(prevState => !prevState);
-    }
+    // статичный
+    // const toggleCalendarState = () => {
+    //     console.log(calendarState);
+    //     setCalendarState(prevState => !prevState);
+    // }
 
     return (
     <LocalizationProvider dateAdapter={AdapterDayjs}
@@ -39,7 +34,7 @@ export const CalendarPicker = ({workDatesArr, getWorkTimes}) => { //получа
             {/*    onAccept={getWorkTimes} //отправили полученную дату для поиска времени по ней.*/}
             {/*/>*/}
 
-            <DatePicker
+            <MobileDatePicker
                         slotProps={{
                     textField: {
                         className: s.myInput,
@@ -59,7 +54,6 @@ export const CalendarPicker = ({workDatesArr, getWorkTimes}) => { //получа
                 onAccept={getWorkTimes} //отправили полученную дату для поиска времени по ней.
 
             />
-
 
         </DemoContainer>
     </LocalizationProvider>
