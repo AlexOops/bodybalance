@@ -4,8 +4,6 @@ import {Form, Formik, Field} from 'formik';
 
 import {CalendarPicker} from "../Layout/Main/DataPicker/CalendarPicker";
 import FormListItem from "./FormListItem";
-// import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-
 
 export const AppointmentForm = ({services}) => {
     //Быстрая запись
@@ -48,7 +46,7 @@ export const AppointmentForm = ({services}) => {
         });
         return console.log('Нет свободных часов на такую дату');
     };
-
+    console.log('workTimes', workTimes);
     return (
         <div className={s.main}>
             <h2>Быстрая запись</h2>
@@ -98,31 +96,35 @@ export const AppointmentForm = ({services}) => {
 
 
                             </div>
-                            <label htmlFor="firstName">Ваше имя</label>
-                            <Field type="text" name="firstName" id="firstName"/>
+                            <div className={s.flexRowContainer}>
+                                <Field name="firstName"  type="text"  id="firstName" placeholder="Имя" className={s.textField}/>
+                                <Field type="text" name="secondName" id="secondName"  placeholder="Фамилия" className={s.textField}/>
+                            </div>
 
-                            <label htmlFor="secondName">Ваша фамилия</label>
-                            <Field type="text" name="secondName" id="secondName"/>
+                            <div className={s.flexRowContainer}>
+                                <Field type="email" name="email" id="email" placeholder="E-mail" className={s.textField}/>
+                                <Field type="text" name="phone" id="phone" placeholder="+7 (999) 999-99-99" className={s.textField}/>
+                            </div>
 
-                            <label htmlFor="mail">Введите почту</label>
-                            <Field type="email" name="email" id="email"/>
-
-                            <label htmlFor="phone">Введите телефон</label>
-                            <Field type="text" name="phone" id="phone"/>
+                            <Field type="textarea" as="textarea"  name="text" className={s.textArea} placeholder="Напишите текст"/>
 
                             <CalendarPicker id="datetime" workDatesArr={workDatesArr} getWorkTimes={getWorkTimes} placeholderText={'Дата и время приема'}/>
 
-                            <Field
-                                component="select"
-                                id="time"
-                                name="datetime"
-                                // multiple={true}
-                            > {workTimes.map((time, key) =>
-                                <option key={key} value={`${workDate} ${time}`}>{time}</option>
-                            )}
-                            </Field>
-                            <Field type="text" name="text"/>
-                            <button type ="submit" disabled={isSubmitting}>Записаться </button>
+                            <div className={(!workTimes || (workTimes.length === 0))? s.hidden: s.time}>
+                                <h3 className={s.timeTittle}>Доступные даты</h3>
+                                <Field
+                                    component="select"
+                                    id="time"
+                                    name="datetime"
+
+                                > {workTimes.map((time, key) =>
+                                    <option key={key} value={`${workDate} ${time}`}>{time}</option>
+                                )}
+                                </Field>
+                            </div>
+                            <div className={s.flexEnd}>
+                                <button className={s.button} type ="submit" disabled={isSubmitting}>Записаться </button>
+                            </div>
                         </Form>
                     )}
                 </Formik>

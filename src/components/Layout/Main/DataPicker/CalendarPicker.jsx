@@ -40,8 +40,7 @@ export const CalendarPicker = ({workDatesArr, getWorkTimes}) => { //получа
             {/*/>*/}
 
             <DatePicker
-
-                slotProps={{
+                        slotProps={{
                     textField: {
                         className: s.myInput,
                         inputProps: {
