@@ -1,3 +1,4 @@
+import React from "react";
 import s from "./Contacts.module.scss";
 import '../../index.scss'
 import mail from "../../assets/mail.svg";
@@ -8,14 +9,7 @@ import telegram from "../../assets/telegram.svg";
 import {MapYandex} from "./Map/MapYandex";
 import Select from "./Select/Select"
 
-
 export const Contacts = () => {
-
-
-    // const handleChange = (selectedOption) => {
-    //     console.log(selectedOption)
-    // }
-
     return (
         <>
             <div className={'container-color'}>
@@ -50,9 +44,13 @@ export const Contacts = () => {
                     <input className={s.formItem} type="text" placeholder={'Имя'}/>
                     <input className={s.formItem} type="text" placeholder={'Фамилия'}/>
                     <input className={s.formItem} type="email" placeholder={'E-mail'}/>
-                    <input className={`${s.formMessage} ${s.formItem}`} type="text" placeholder={'Напишите нам'}/>
+                    <textarea className={s.formMessage} placeholder={'Напишите нам'}/>
                     <button className={s.button}>Отправить письмо</button>
                 </form>
+                <div className={s.circleFirst}></div>
+                <div className={s.circleSecond}></div>
+                <div className={s.circleThird}></div>
+                <div className={s.circleFourth}></div>
             </div>
             <MapYandex/>
         </>
