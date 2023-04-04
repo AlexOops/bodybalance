@@ -1,6 +1,9 @@
 .center {
   text-align: center;
 }
+.margin_tb_10{
+  margin: 10px 0;
+}
 .name {
   min-height: 68px;
   font-style: normal;
@@ -125,4 +128,50 @@
     margin-bottom: 15px;
   }
 
+}
+.serviceImage {
+  border-radius: 50px 0 0 50px;
+}
+.modalCard{
+  padding: 40px;
+}
+.modalName{
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 140%;
+  text-transform: uppercase;
+  color: #4F4E4E;
+}
+
+.moduleText {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 140%;
+  color: #4F4E4E;
+}
+
+.moduleFullText {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 140%;
+  color: #4F4E4E;
+  li {
+    margin: 10px 0 10px 25px;
+    position: relative;
+
+  }
+
+  li::before {
+    display: block;
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: -25px;
+    top: 6px;
+    border-radius: 50%;
+    background: #D78DFF;
+  }
 }

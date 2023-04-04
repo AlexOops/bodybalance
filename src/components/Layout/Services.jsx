@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchServices} from "../../redux/slices/services";
 import s from './Services.module.scss'
 import {Card} from "./Card/Card";
 import {AppointmentForm} from "../AppointmentForm/AppointmentForm";
+import Modal from "../Modal/Modal";
 
 export const Services = () => {
     const dispatch = useDispatch();
@@ -12,6 +13,8 @@ export const Services = () => {
 
     const isServicesLoading = services.status === 'loading'; // boolean
     // const isServicesLoading = true; // проверить скелетон
+
+
 
     React.useEffect(() => {
         dispatch(fetchServices());
@@ -31,6 +34,7 @@ export const Services = () => {
                 <div className={s.servicesTitleWrap}>
                     <h2 className={s.servicesTitle}>Все услуги</h2>
                 </div>
+
                 <div className={s.servicesItems}>{(isServicesLoading ? [...Array(6)] : services.items).map((obj, index)=>
                     isServicesLoading
                         ? (<div className={s.margin} key={index}>
@@ -47,6 +51,7 @@ export const Services = () => {
                                 text={obj.text}
                                 imageUrl={(obj.imageUrl) ?`http://localhost:4444${obj.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
                             />
+
                         </div>
                     )
                 )}
