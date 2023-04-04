@@ -134,6 +134,9 @@
 }
 .modalCard{
   padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .modalName{
   font-weight: 600;
@@ -173,5 +176,41 @@
     top: 6px;
     border-radius: 50%;
     background: #D78DFF;
+  }
+}
+
+.flexSB {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 20px 30px;
+  gap: 10px;
+
+  width: 174px;
+  height: 64px;
+
+  /* pink */
+
+  background: #D78DFF;
+  border: none;
+  border-radius: 40px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #FFFFFF;
+
+  &:hover {
+    background: #5D3274;
+  }
+  &:active {
+    background: #5D3274;
   }
 }

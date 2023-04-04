@@ -21,6 +21,7 @@
   }
 
   .content {
+    position: relative;
     display: flex;
     //margin: 325px auto;
     //align-items: center;
@@ -37,10 +38,28 @@
     transition: 0.4s all;
 
     z-index: 50;
+
+    .cross{
+      display: block;
+      width: 15px;
+      height: 15px;
+      content: '';
+      background: url(../../assets/modal_cross.svg);
+      position: absolute;
+      top:35px;
+      right: 35px;
+      &:hover {
+        //background: rgba(211, 211, 211, 0.47);
+        filter: shadow(10px);
+      }
+    }
+
     &.active {
       transform: scale(1);
     }
+
   }
+
 
 }
 

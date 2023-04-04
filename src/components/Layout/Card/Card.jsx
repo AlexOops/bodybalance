@@ -49,15 +49,21 @@ export const Card = ({
            <Modal active={modalActive} setActive={setModalActive}>
                <img className={s.serviceImage} src={card_img} alt=""/>
                <div className={s.modalCard}>
-                   <h3 className={s.modalName}>
-                       {name}
-                   </h3>
-                   <div className={s.margin_tb_10}>
-                   <ReactMarkdown>{description}</ReactMarkdown>
+                   <div>
+                       <h3 className={s.modalName}>
+                           {name}
+                       </h3>
+                       <div className={s.margin_tb_10}>
+                           <ReactMarkdown>{description}</ReactMarkdown>
+                       </div>
+                       <div className={s.moduleText}>Данный комплекс отличнно подойдет при:</div>
+                       <div className={s.moduleFullText}><ReactMarkdown>{text}</ReactMarkdown></div>
                    </div>
-                   <div className={s.moduleText}>Данный комплекс отличнно подойдет при:</div>
-                   <div className={s.moduleFullText}><ReactMarkdown>{text}</ReactMarkdown></div>
-                   <div className={s.price}>{price}</div>
+
+                   <div className={s.flexSB}>
+                       <div className={s.price}>{price}</div>
+                       <button className={s.button} type ="submit">Записаться </button>
+                   </div>
                </div>
 
            </Modal>
