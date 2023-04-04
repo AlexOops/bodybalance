@@ -2,19 +2,20 @@ import React, {useState} from "react";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DemoContainer} from "@mui/x-date-pickers/internals/demo";
 import {DatePicker, LocalizationProvider, MobileDatePicker, ruRU} from "@mui/x-date-pickers";
-import {useDispatch} from "react-redux";
 import s from './CalendarPicker.module.scss';
 
 export const CalendarPicker = ({workDatesArr, getWorkTimes}) => { //получает массив дат, делает только их активными, отдает выбранную дату в функцию getWorkTimes
-    const dispatch = useDispatch();
-    const [calendarState, setCalendarState] = useState(false);
+
 
     //отобразим в календаре только рабочие даты
     const disableCustomDt = (day) => {
         return !(workDatesArr.includes(day.format('YYYY-MM-DD')));
     };
 
-    // статичный
+    // статичный календарь
+    // const dispatch = useDispatch();
+    // const [calendarState, setCalendarState] = useState(false);
+
     // const toggleCalendarState = () => {
     //     console.log(calendarState);
     //     setCalendarState(prevState => !prevState);
@@ -42,17 +43,15 @@ export const CalendarPicker = ({workDatesArr, getWorkTimes}) => { //получа
                         },
                         placeholder: "Дата и время приема",
                         // variant: "standard",
-                        disableUnderline: false,
                         // InputProps: {},
                         sx:{border: '1.5px solid #D78DFF', borderRadius: '40px'},
                     },
                 }}
-
                 // sx={{border: '1.5px solid #D78DFF'}}
                 // label="Дата и время приема"
+
                 shouldDisableDate={disableCustomDt}
                 onAccept={getWorkTimes} //отправили полученную дату для поиска времени по ней.
-
             />
 
         </DemoContainer>

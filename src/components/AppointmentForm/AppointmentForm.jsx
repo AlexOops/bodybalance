@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import s from './AppointmentForm.module.scss';
 import {Form, Formik, Field} from 'formik';
 
-import {CalendarPicker} from "../Layout/Main/DataPicker/CalendarPicker";
-import FormListItem from "./FormListItem";
+import {CalendarPicker} from "./DataPicker/CalendarPicker";
+import ServicesSelectItem from "./ServicesSelectItem";
 
 export const AppointmentForm = ({services}) => {
     //Быстрая запись
@@ -25,32 +25,41 @@ export const AppointmentForm = ({services}) => {
     // const [value, setValue] = useState(dayjs('2022-04-17T15:30'));
     const [workTimes, setWorkTimes] = useState([]);
     const [workDate, setWorkDate] = useState('');
+    const [headerValue, setHeaderValue] = useState('Выберите услугу');
+    const [isOpen, setOpen] = useState(false);
 
-    //активный компонент по dataset
+    //активный компонент по dataset (отмечать активный, если меню не сворачиваем при выборе)
     const [active, setActive] = useState(null);
-    const onClickItem = (e) => {
+
+    const handleOpen = () => {
+        setOpen((prevOpen) => !prevOpen);
+    };
+    const onClickItem = (e, value) => {
         setActive(e.target.dataset.index);
+        setOpen(false);
+        setHeaderValue(value);
     };
 
     //получим все рабочие даты в массив
     const workDatesArr = workDates.map((obj) => obj.date);
 
-    const getWorkTimes = (date) => { //получим список времени приема для выбранной даты.
-        console.log('Что получиили', date);
-        workDates.map((obj) => {
+    const getWorkTimes = (date) => { //отобразим список времени приема для даты.
+        if(date){
+            workDates.map((obj) => {
                 if(obj.date === date.format('YYYY-MM-DD')) {
                     setWorkDate(obj.date);
                     setWorkTimes(obj.time);
-                    return console.log(obj.time);
                 }
-        });
-        return console.log('Нет свободных часов на такую дату');
+            });
+        } else {
+            console.log('Дата не выбрана');
+        }
+
     };
-    console.log('workTimes', workTimes);
+
     return (
         <div className={s.main}>
             <h2>Быстрая запись</h2>
-
             <div className={s.form}>
                 <Formik
                     initialValues={{
@@ -81,18 +90,22 @@ export const AppointmentForm = ({services}) => {
                         }, 400);
                     }}
                 >
-                    {({isSubmitting, values}) => (
+                    {({isSubmitting, values, errors}) => (
                         <Form>
                             <div className={s.select}>
-                                <h3 id="select-group" className={s.selectHeader}>Выберите услугу</h3>
-                                    {services.map((service, key) =>
-                                        <FormListItem
-                                            service={service}
-                                            key={key}
-                                            onClickItem={onClickItem}
-                                            active={active}
-                                        />
-                                    )}
+                                <div onClick={handleOpen} className={`${s.selectHeader} ${(isOpen)? s.open : s.close}`}>{headerValue}</div>
+
+                                    <div className={isOpen ? s.selectContainer : `${s.selectContainer} ${s.closeContainer}`}>
+                                        {services.map((service, key) =>
+                                            <ServicesSelectItem
+                                                service={service}
+                                                key={key}
+                                                onClickItem={(e)=>onClickItem( e, service.name )}
+                                                active={active}
+                                            />
+                                        )}
+                                    </div>
+
 
 
                             </div>
@@ -102,14 +115,19 @@ export const AppointmentForm = ({services}) => {
                             </div>
 
                             <div className={s.flexRowContainer}>
-                                <Field type="email" name="email" id="email" placeholder="E-mail" className={s.textField}/>
+                                <div className={s.flexRelative}>
+                                    <Field type="email" name="email" id="email" placeholder="E-mail" className={s.textField}/>
+                                    {errors.email && <div className={s.error}>{errors.email}</div>}
+                                </div>
                                 <Field type="text" name="phone" id="phone" placeholder="+7 (999) 999-99-99" className={s.textField}/>
+
                             </div>
 
                             <Field type="textarea" as="textarea"  name="text" className={s.textArea} placeholder="Напишите текст"/>
 
+                            {/*Календарь*/}
                             <CalendarPicker id="datetime" workDatesArr={workDatesArr} getWorkTimes={getWorkTimes} placeholderText={'Дата и время приема'}/>
-
+                            {/*Часы приема*/}
                             <div className={(!workTimes || (workTimes.length === 0))? s.hidden: s.time}>
                                 <h3 className={s.timeTittle}>Доступные даты</h3>
                                 <Field
