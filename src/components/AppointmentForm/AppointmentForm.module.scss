@@ -24,6 +24,7 @@ label {
   /* pink */
   outline: 1.5px solid #D78DFF;
   border-radius: 34px;
+
 }
 
 .selectHeader {
@@ -38,18 +39,53 @@ label {
   font-size: 20px;
   line-height: 130%;
   color: #4F4E4E;
-  &::after {
-    content: "";
-    display: block;
-    background-image: url(../../assets/select_arrow.svg);
-    width: 10px;
-    height: 5px;
-    padding: 5px 5px;
-    background-repeat: no-repeat;
-    text-align: center;
-    background-position: center;
+  &.open {
+    &::after {
+      content: "";
+      display: block;
+      background-image: url(../../assets/select_arrow.svg);
+      width: 10px;
+      height: 5px;
+      padding: 5px 5px;
+      background-repeat: no-repeat;
+      text-align: center;
+      background-position: center;
+    }
+  }
+
+  &.close {
+    &::after {
+      content: "";
+      display: block;
+      background-image: url(../../assets/select_arrow.svg);
+      transform: rotate(180deg);
+
+      width: 10px;
+      height: 5px;
+      padding: 5px 5px;
+      background-repeat: no-repeat;
+      text-align: center;
+      background-position: center;
+    }
+  }
+  //&:hover ~ .selectContainer{
+  //  display: flex;
+  //}
+}
+
+.selectContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  width: 100%;
+  background: #FFFFFF;
+  &.closeContainer {
+    display: none;
   }
 }
+
+
 
 .selectInput {
   display: none;
@@ -82,6 +118,7 @@ label {
   }
 
 }
+
 
 .selectText {
   font-style: normal;
@@ -123,6 +160,21 @@ label {
   flex-direction: row;
   margin: 20px 0;
   column-gap: 20px;
+}
+
+.flexRelative{
+  position: relative;
+  width: 100%;
+}
+
+.error{
+  display: block;
+  height: 20px;
+  position: absolute;
+  bottom: 3px;
+  right: 20px;
+  color: coral;
+
 }
 
 .textField {
@@ -226,18 +278,11 @@ label {
   background: #D78DFF;
   border-radius: 40px;
 
-  /* Inside auto layout */
 
-  font-family: 'Rubik';
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
-  /* identical to box height */
-
-
-  /* white */
-
   color: #FFFFFF;
 
 }
