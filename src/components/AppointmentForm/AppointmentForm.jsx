@@ -92,7 +92,8 @@ export const AppointmentForm = ({services}) => {
                 >
                     {({isSubmitting, values, errors}) => (
                         <Form>
-                            <div className={s.select}>
+                            <div className={s.selectRow}>
+                                <div className={s.select}>
                                 <div onClick={handleOpen} className={`${s.selectHeader} ${(isOpen)? s.open : s.close}`}>{headerValue}</div>
 
                                     <div className={isOpen ? s.selectContainer : `${s.selectContainer} ${s.closeContainer}`}>
@@ -105,21 +106,19 @@ export const AppointmentForm = ({services}) => {
                                             />
                                         )}
                                     </div>
-
-
-
+                                </div>
                             </div>
                             <div className={s.flexRowContainer}>
-                                <Field name="firstName"  type="text"  id="firstName" placeholder="Имя" className={s.textField}/>
-                                <Field type="text" name="secondName" id="secondName"  placeholder="Фамилия" className={s.textField}/>
+                                <Field name="firstName"  type="text"  id="firstName" placeholder="Имя" className={`${s.textField} ${s.width50}`}/>
+                                <Field type="text" name="secondName" id="secondName"  placeholder="Фамилия" className={`${s.textField} ${s.width50}`}/>
                             </div>
 
                             <div className={s.flexRowContainer}>
-                                <div className={s.flexRelative}>
-                                    <Field type="email" name="email" id="email" placeholder="E-mail" className={s.textField}/>
+                                <div className={`${s.flexRelative} ${s.width50}`} >
+                                    <Field type="email" name="email" id="email" placeholder="E-mail" className={`${s.textField} ${s.width100}`}/>
                                     {errors.email && <div className={s.error}>{errors.email}</div>}
                                 </div>
-                                <Field type="text" name="phone" id="phone" placeholder="+7 (999) 999-99-99" className={s.textField}/>
+                                <Field type="text" name="phone" id="phone" placeholder="+7 (999) 999-99-99" className={`${s.textField} ${s.width50}`}/>
 
                             </div>
 
