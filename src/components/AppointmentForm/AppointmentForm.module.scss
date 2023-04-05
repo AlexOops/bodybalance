@@ -78,9 +78,7 @@ label {
       background-position: center;
     }
   }
-  //&:hover ~ .selectContainer{
-  //  display: flex;
-  //}
+
 }
 
 .selectContainer {
@@ -201,10 +199,12 @@ label {
   padding: 20px 30px;
   gap: 12px;
   height: 66px;
+  width: 100%;
 
   background: #FFFFFF;
   /* pink */
-  border: 1.5px solid #D78DFF;
+  outline: 1.5px solid #D78DFF;
+  border: none;
   border-radius: 40px;
 
   font-style: normal;
@@ -235,7 +235,8 @@ label {
 
   background: #FFFFFF;
   /* pink */
-  border: 1.5px solid #D78DFF;
+  outline: 1.5px solid #D78DFF;
+  border:none;
   border-radius: 40px;
 
   font-style: normal;
