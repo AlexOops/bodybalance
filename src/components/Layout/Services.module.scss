@@ -49,13 +49,14 @@
   color: #4F4E4E;
 }
 .servicesTitleWrap {
+  margin-top: 110px ;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .servicesTitle{
-  width: 248px;
+  min-width: 248px;
   position: relative;
-  margin-top: 110px ;
   font-style: normal;
   font-weight: 500;
   font-size: 40px;
@@ -63,7 +64,8 @@
   text-transform: uppercase;
   /* main_text */
   color: #4F4E4E;
-  text-align: center;
+  padding: 0 250px;
+
   &:before {
     content: "";
     display: block;
@@ -72,8 +74,10 @@
     background: #F0D3FF;
     border-radius: 55px;
     position: absolute;
-    top: 16px;
-    left: -254px;
+    text-align: center;
+    top: calc(50% - 3px);
+    left: 0px;
+    text-align: center;
   }
 
   &:after {
@@ -84,8 +88,10 @@
     background: #F0D3FF;
     border-radius: 55px;
     position: absolute;
-    top: 16px;
-    left: 278px;
+    top: calc(50% - 3px);
+    right: 0px;
+    text-align: center;
+
   }
 }
 
