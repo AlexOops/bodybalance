@@ -69,6 +69,7 @@ export const AppointmentForm = ({services}) => {
                     setWorkDate(obj.date);
                     setWorkTimes(obj.time);
                 }
+                return obj
             });
         } else {
             console.log('Дата не выбрана');
