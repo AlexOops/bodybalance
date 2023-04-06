@@ -1,19 +1,18 @@
-import React, {useEffect, useState} from "react";
-import {ArrowLeft} from "../../Arrow/ArrowLeft";
-import {ArrowRight} from "../../Arrow/ArrowRight";
 import s from './PopularServices.module.scss'
 import {Card} from "../../Card/Card";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchServicesByRating} from "../../../../redux/slices/services";
+import {useEffect} from "react";
 
 export const PopularServices = () => {
     const dispatch = useDispatch();
     const {services} = useSelector(state => state.services);
     const isServicesLoading = services.status === 'loading'; // boolean
 
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(fetchServicesByRating());
-    }, [dispatch]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // сервисы
     // const [count, setCount] = useState(0)
