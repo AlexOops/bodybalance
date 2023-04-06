@@ -7,11 +7,16 @@ label {
   flex-direction: column;
   margin: 80px 0;
 }
+
 .calendarField {
   margin: 10px 0;
-
 }
-.selectRow{
+
+.name {
+  margin-bottom: 40px;
+}
+
+.selectRow {
   position: relative;
   display: flex;
   width: 843px;
@@ -49,6 +54,7 @@ label {
   font-size: 20px;
   line-height: 130%;
   color: #4F4E4E;
+
   &.open {
     &::after {
       content: "";
@@ -88,11 +94,11 @@ label {
   padding: 0;
   width: 100%;
   background: transparent;
+
   &.closeContainer {
     display: none;
   }
 }
-
 
 
 .selectInput {
@@ -105,12 +111,13 @@ label {
   width: 100%;
   height: 40px;
   padding: 30px 30px 30px 40px;
-/* Label Text */
+  /* Label Text */
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
   line-height: 130%;
   color: #4F4E4E;
+
   &:last-child {
     border-radius: 0 0 34px 34px;
   }
@@ -120,6 +127,7 @@ label {
     background-color: #D78DFF !important;
     color: #ffffff;
   }
+
   &.active {
     background-color: #D78DFF !important;
     color: #ffffff;
@@ -135,6 +143,7 @@ label {
   line-height: 130%;
   color: #4F4E4E;
 }
+
 .selectFields {
   padding: 20px 30px 20px 40px;
   gap: 30px;
@@ -147,9 +156,11 @@ label {
   font-size: 20px;
   line-height: 130%;
   background: transparent;
+
   &:focus-visible {
     border: none;
   }
+
   color: #4F4E4E;
 }
 
@@ -163,18 +174,18 @@ label {
   align-items: center;
 }
 
-.flexRowContainer{
+.flexRowContainer {
   display: flex;
   flex-direction: row;
   margin: 20px 0;
   column-gap: 20px;
 }
 
-.flexRelative{
+.flexRelative {
   position: relative;
 }
 
-.error{
+.error {
   display: block;
   height: 20px;
   position: absolute;
@@ -184,7 +195,7 @@ label {
 
 }
 
-.width50{
+.width50 {
   width: 50%;
 }
 
@@ -236,7 +247,7 @@ label {
   background: #FFFFFF;
   /* pink */
   outline: 1.5px solid #D78DFF;
-  border:none;
+  border: none;
   border-radius: 40px;
 
   font-style: normal;
@@ -249,7 +260,7 @@ label {
 
 }
 
-.timeTittle{
+.timeTittle {
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
@@ -261,12 +272,13 @@ label {
 .hidden {
   display: none;
 }
+
 .flexEnd {
   display: flex;
   justify-content: flex-end;
 }
 
-.time{
+.time {
   margin: 20px 0;
   padding: 20px;
   display: block;

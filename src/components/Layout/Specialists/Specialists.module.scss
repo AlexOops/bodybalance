@@ -1,61 +1,32 @@
-.back {
-  z-index: -5;
-}
 .main {
   display: grid;
   max-width: 1290px;
   margin: 0 auto;
 }
+
 .description {
-  position: relative;
   max-width: 630px;
-  z-index: 3;
   margin-top: 80px;
 }
 
-.circleFirst {
-  position: absolute;
-  width: 432px;
-  border-radius: 50%;
-  height: 418px;
-  left: -115px;
-  top: -44px;
-  background: rgba(237, 207, 253, 0.2);
-  transform: matrix(-0.62, -0.79, -0.79, 0.62, 0, 0);
-  z-index: -2;
-}
-
-.circleSecond {
-  position: absolute;
-  width: 279.42px;
-  height: 277.62px;
-  left: 155px;
-  top: -20px;
-  background: rgba(237, 207, 253, 0.2);
-  transform: matrix(-0.62, -0.79, -0.79, 0.62, 0, 0);
-  border-radius: 50%;
-  z-index: -1;
-}
-
-.margin{
-  margin-bottom: 30px;
-}
 .title {
-  //font-family: 'Rubik';
   font-style: normal;
   font-weight: 500;
   font-size: 60px;
   line-height: 140%;
   color: #4F4E4E;
 }
+
 .servicesTitleWrap {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
-.servicesTitle{
-  width: 248px;
+
+.servicesTitle {
+  margin-top: 110px;
+  min-width: 248px;
   position: relative;
-  margin-top: 110px ;
   font-style: normal;
   font-weight: 500;
   font-size: 40px;
@@ -63,7 +34,8 @@
   text-transform: uppercase;
   /* main_text */
   color: #4F4E4E;
-  text-align: center;
+  padding: 0 250px;
+
   &:before {
     content: "";
     display: block;
@@ -72,8 +44,9 @@
     background: #F0D3FF;
     border-radius: 55px;
     position: absolute;
-    top: 16px;
-    left: -254px;
+    text-align: center;
+    top: calc(50% - 3px);
+    left: 0;
   }
 
   &:after {
@@ -84,67 +57,10 @@
     background: #F0D3FF;
     border-radius: 55px;
     position: absolute;
-    top: 16px;
-    left: 278px;
+    top: calc(50% - 3px);
+    right: 0;
+    text-align: center;
   }
-}
-
-.servicesItems{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 40px 0 0 0;
-  //gap: 30px;
-}
-.serviceItem{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  padding: 30px;
-  gap: 30px;
-  width: 410px;
-  height: 570px;
-  background: #FFFFFF;
-  box-shadow: 0 0 20px rgba(255, 226, 255, 0.65);
-  border-radius: 25px;
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-  box-sizing: border-box;         /* Opera/IE 8+ */
-}
-
-.image {
-  display: block;
-  position: relative;
-  width: 200px;
-  height: 200px;
-  z-index: 10;
-
-  &::after {
-    z-index:-2;
-    position: absolute;
-    display: block;
-    content: "";
-    width: 216px;
-    height: 216px;
-    background: rgba(255, 226, 255, 0.5);
-    filter: blur(10px);
-    border-radius: 50%;
-    top:0;
-    left:0;
-  }
-}
-
-.h3 {
-  font-style: normal;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 140%;
-  text-align: center;
-  text-transform: uppercase;
-  color: #4F4E4E;
-
 }
 
 .text {
@@ -153,41 +69,63 @@
   font-size: 24px;
   line-height: 140%;
   color: #4F4E4E;
+  margin: 16px 0 80px 0;
 }
 
-.itemText{
-  //position: relative;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 20px;
-  line-height: 140%;
-  color: #4F4E4E;
-  li {
-    margin-left: 25px;
-    position: relative;
-  }
-
-    li::before {
-     display: block;
-     content: "";
-     position: absolute;
-     width: 16px;
-     height: 16px;
-     left: -25px;
-     top: 6px;
-     border-radius: 50%;
-     background: #D78DFF;
-   }
-}
-
-.itemPrice{
+.position {
   display: flex;
-  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left {
+  width: 520px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.right {
+  width: 660px;
+  margin-top: -70px;
+}
+
+.logo {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  left: -61.69px;
+  top: 41.87px;
+  background: #F0D3FF;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nameSection {
+  text-align: left;
+}
+
+.descriptionSpecialist {
+  margin: 10px 0 30px 0;
+  font-size: 24px;
+}
+.nameSpecialist {
+  margin: 30px 0 12px 0;
   font-style: normal;
-  font-weight: 500;
-  font-size: 30px;
-  line-height: 140%;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 130%;
+  text-align: center;
   color: #D78DFF;
+}
+
+.profSpecialist {
+  line-height: 130%;
+  text-align: center;
+  width: 460px;
 }
 
 .button {
@@ -196,10 +134,47 @@
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
+  background-color: #D78DFF;
+  color: #fff;
+  border: none;
   &:hover {
     cursor: pointer;
     color: #fff;
     background-color: #9e8dff;
-    border: 2px solid #9e8dff;
   }
+}
+
+.positionDoc {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.cardDoctor {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  box-shadow: 0 0 20px rgba(255, 226, 255, 0.65);
+  border-radius: 20px;
+  margin-bottom: 80px;
+  &:hover{
+    box-shadow: 0 0 8px 4px #D78DFF;
+  }
+}
+
+.name {
+  font-weight: 500;
+  color: #D78DFF;
+  margin: 30px 0 10px 0;
+}
+
+.profession {
+  margin-bottom: 30px;
+}
+
+.magrin {
+  height: 40px;
 }
