@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DemoContainer} from "@mui/x-date-pickers/internals/demo";
-import {DatePicker, LocalizationProvider, MobileDatePicker, ruRU} from "@mui/x-date-pickers";
+import {LocalizationProvider, MobileDatePicker, ruRU} from "@mui/x-date-pickers";
 import s from './CalendarPicker.module.scss';
 
 export const CalendarPicker = ({workDatesArr, getWorkTimes}) => { //получает массив дат, делает только их активными, отдает выбранную дату в функцию getWorkTimes

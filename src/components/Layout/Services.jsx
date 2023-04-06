@@ -1,10 +1,9 @@
-import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchServices} from "../../redux/slices/services";
 import s from './Services.module.scss'
 import {Card} from "./Card/Card";
 import {AppointmentForm} from "../AppointmentForm/AppointmentForm";
-import Modal from "../Modal/Modal";
+import {useEffect} from "react";
 
 export const Services = () => {
     const dispatch = useDispatch();
@@ -16,8 +15,9 @@ export const Services = () => {
 
 
 
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(fetchServices());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
     return (

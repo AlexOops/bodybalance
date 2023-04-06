@@ -3,15 +3,16 @@ import './index.scss'
 
 import {RouterProvider} from "react-router-dom";
 import {router} from "./router";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchAuthMe, selectIsAuth} from "./redux/slices/auth";
+import {useDispatch} from "react-redux";
+import {fetchAuthMe} from "./redux/slices/auth";
 
 function App() {
     const dispatch = useDispatch();
-    const isAuth = useSelector(selectIsAuth); // будем добавлять действия если авторизован
+    // const isAuth = useSelector(selectIsAuth); // будем добавлять действия если авторизован
 
     React.useEffect(() => {
         dispatch(fetchAuthMe());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
