@@ -5,6 +5,9 @@
   background: #F0D3FF;
   margin-right: 10px;
   border: none;
+  &:hover{
+    cursor: pointer;
+  }
 }
 
 .dotsActive {
