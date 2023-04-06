@@ -58,7 +58,7 @@ export const Services = () => {
                 </div>
             </div>
         </div>
-            <div className="container"><AppointmentForm services={services.items}/></div>
+            <div className="container"><AppointmentForm name={'Быстрая запись'} services={services.items}/></div>
         </>
     )
 }

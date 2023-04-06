@@ -59,7 +59,15 @@
     }
 
   }
+}
 
-
+.crossImg {
+  &:hover {
+    filter: contrast(0.5);
+    cursor: pointer;
+  }
+  &:active {
+    filter: brightness(0.7);
+  }
 }
 

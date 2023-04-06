@@ -24,7 +24,7 @@ const SignupSchema = Yup.object().shape({
 
 });
 
-export const AppointmentForm = ({services}) => {
+export const AppointmentForm = ({services, name}) => {
     //Быстрая запись
     const workDates = [
         {
@@ -77,8 +77,9 @@ export const AppointmentForm = ({services}) => {
     };
 
     return (
+
         <div className={s.main}>
-            <h2>Быстрая запись</h2>
+            <h2 className={s.name}>{name}</h2>
             <div className={s.form}>
                 <Formik
                     initialValues={{
