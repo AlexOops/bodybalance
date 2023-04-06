@@ -42,8 +42,10 @@ export const Specialists = () => {
     const dispatch = useDispatch();
     const {services} = useSelector(state => state.services);
 
+
     React.useEffect(() => {
         dispatch(fetchServices());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
