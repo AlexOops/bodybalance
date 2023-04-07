@@ -1,0 +1,180 @@
+.main {
+  display: grid;
+  max-width: 1290px;
+  margin: 0 auto;
+}
+
+.description {
+  max-width: 630px;
+  margin-top: 80px;
+}
+
+.title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 60px;
+  line-height: 140%;
+  color: #4F4E4E;
+}
+
+.servicesTitleWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.servicesTitle {
+  margin-top: 110px;
+  min-width: 248px;
+  position: relative;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 47px;
+  text-transform: uppercase;
+  /* main_text */
+  color: #4F4E4E;
+  padding: 0 250px;
+
+  &:before {
+    content: "";
+    display: block;
+    width: 220px;
+    height: 6px;
+    background: #F0D3FF;
+    border-radius: 55px;
+    position: absolute;
+    text-align: center;
+    top: calc(50% - 3px);
+    left: 0;
+  }
+
+  &:after {
+    content: "";
+    display: block;
+    width: 220px;
+    height: 6px;
+    background: #F0D3FF;
+    border-radius: 55px;
+    position: absolute;
+    top: calc(50% - 3px);
+    right: 0;
+    text-align: center;
+  }
+}
+
+.text {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 140%;
+  color: #4F4E4E;
+  margin: 16px 0 80px 0;
+}
+
+.position {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left {
+  width: 520px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.right {
+  width: 660px;
+  margin-top: -70px;
+}
+
+.logo {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  left: -61.69px;
+  top: 41.87px;
+  background: #F0D3FF;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nameSection {
+  text-align: left;
+}
+
+.descriptionSpecialist {
+  margin: 10px 0 30px 0;
+  font-size: 24px;
+}
+.nameSpecialist {
+  margin: 30px 0 12px 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 130%;
+  text-align: center;
+  color: #D78DFF;
+}
+
+.profSpecialist {
+  line-height: 130%;
+  text-align: center;
+  width: 460px;
+}
+
+.button {
+  padding: 20px 30px;
+  border-radius: 40px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  background-color: #D78DFF;
+  color: #fff;
+  border: none;
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #9e8dff;
+  }
+}
+
+.positionDoc {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.cardDoctor {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  box-shadow: 0 0 20px rgba(255, 226, 255, 0.65);
+  border-radius: 20px;
+  margin-bottom: 80px;
+  &:hover{
+    box-shadow: 0 0 8px 4px #D78DFF;
+  }
+}
+
+.name {
+  font-weight: 500;
+  color: #D78DFF;
+  margin: 30px 0 10px 0;
+}
+
+.profession {
+  margin-bottom: 30px;
+}
+
+.magrin {
+  height: 40px;
+}

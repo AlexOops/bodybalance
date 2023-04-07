@@ -1,6 +1,9 @@
 .center {
   text-align: center;
 }
+.margin_tb_10{
+  margin: 10px 0;
+}
 .name {
   min-height: 68px;
   font-style: normal;
@@ -17,7 +20,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  //align-items: center;
   padding: 30px;
   gap: 20px;
   width: 410px;
@@ -106,4 +109,108 @@
   flex-direction: row;
   align-items: center;
   margin: 12px 0;
+}
+
+.skeleton {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  &Content {
+    padding: 38px;
+  }
+
+
+  &Title {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+}
+.serviceImage {
+  border-radius: 50px 0 0 50px;
+}
+.modalCard{
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.modalName{
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 140%;
+  text-transform: uppercase;
+  color: #4F4E4E;
+}
+
+.moduleText {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 140%;
+  color: #4F4E4E;
+}
+
+.moduleFullText {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 140%;
+  color: #4F4E4E;
+  li {
+    margin: 10px 0 10px 25px;
+    position: relative;
+
+  }
+
+  li::before {
+    display: block;
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: -25px;
+    top: 6px;
+    border-radius: 50%;
+    background: #D78DFF;
+  }
+}
+
+.flexSB {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 20px 30px;
+  gap: 10px;
+
+  width: 174px;
+  height: 64px;
+
+  /* pink */
+
+  background: #D78DFF;
+  border: none;
+  border-radius: 40px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #FFFFFF;
+
+  &:hover {
+    background: #5D3274;
+  }
+  &:active {
+    background: #5D3274;
+  }
 }

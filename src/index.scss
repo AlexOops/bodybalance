@@ -49,16 +49,6 @@ p {
 
 .container-slider {
   z-index: 1;
-  &::after{
-    height: 650px;
-    z-index: -2;
-    content: "";
-    background-image: url(./assets/vectorpaint.svg);
-    width: 100%;
-    position: absolute;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
 }
 
 a {

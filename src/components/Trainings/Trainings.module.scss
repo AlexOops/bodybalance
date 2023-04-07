@@ -15,53 +15,55 @@
   }
 }
 
-.advice {
-  height: 565px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+.training {
 
+  //TODO ДУБЛИРОВАНИЕ КОДА В 3х местах
 
-  &_title {
-    font-weight: 500;
-    font-size: 40px;
-    text-transform: uppercase;
-    margin-bottom: 60px;
-  }
-
-  &_content {
+  .servicesTitleWrap {
     display: flex;
     justify-content: center;
+    align-items: center;
+  }
 
-    &_description {
-      width: 950px;
-      height: 285px;
-      border-top: 3px solid #D78DFF;
-      border-bottom: 3px solid #D78DFF;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      align-items: start;
-      margin-left: 50px;
+  .servicesTitle {
+    margin-top: 110px;
+    min-width: 248px;
+    position: relative;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 47px;
+    text-transform: uppercase;
+    /* main_text */
+    color: #4F4E4E;
+    padding: 0 250px;
+
+    &:before {
+      content: "";
+      display: block;
+      width: 220px;
+      height: 6px;
+      background: #F0D3FF;
+      border-radius: 55px;
+      position: absolute;
+      text-align: center;
+      top: calc(50% - 3px);
+      left: 0;
     }
 
-    &_text {
-      font-weight: 400;
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-
-    &_autor {
-      font-weight: 400;
-      font-size: 24px;
+    &:after {
+      content: "";
+      display: block;
+      width: 220px;
+      height: 6px;
+      background: #F0D3FF;
+      border-radius: 55px;
+      position: absolute;
+      top: calc(50% - 3px);
+      right: 0;
+      text-align: center;
     }
   }
-}
-
-.training {
-  padding: 110px 0 110px 0;
-  text-align: center;
 
   &_title {
     //дублирование
@@ -75,6 +77,7 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    padding: 10px 0 110px 0;
   }
 
   &_item {

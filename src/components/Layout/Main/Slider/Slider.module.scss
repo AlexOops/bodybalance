@@ -7,9 +7,19 @@
 
 }
 
-.sliderBackground{
+.sliderBackground {
   position: absolute;
   top: -140px;
+}
+
+.sliderImg {
+  position: absolute;
+  width: 100vw;
+  height: 650px;
+  z-index: -2;
+  content: "";
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .sliderName {
@@ -41,6 +51,7 @@
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
+
   &:hover {
     cursor: pointer;
   }

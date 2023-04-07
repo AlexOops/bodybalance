@@ -1,7 +1,7 @@
 import {YMaps, Map, Placemark} from '@pbe/react-yandex-maps';
 
 export const MapYandex = () => {
-    // const mapState = {center: [55.829804, 37.492662], zoom: 16.5};
+    const mapState = {center: [55.829804, 37.492662], zoom: 16.5};
 
     return (
         <>
@@ -13,7 +13,7 @@ export const MapYandex = () => {
                 <Map
                     width="100%"
                     height="640px"
-                    defaultState={{center: [55.829804, 37.492662], zoom: 16.5}}
+                    defaultState={mapState}
                     defaultOptions={{
                         vector: true,
                         layerVectorRevealThreshold: 0,

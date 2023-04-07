@@ -1,0 +1,73 @@
+.modal {
+  width:100%;
+  min-height:100%;
+  background-color: rgba(0,0,0,0.4);
+  //overflow:hidden;
+  position:fixed;
+  top:0;
+  left:0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  //transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.5s;
+  &.active {
+    opacity: 1;
+    pointer-events: all;
+    //transform: scale(1);
+  }
+
+  .content {
+    position: relative;
+    display: flex;
+    //margin: 325px auto;
+    //align-items: center;
+    //isolation: isolate;
+
+    width: 1070px;
+    height: 490px;
+    /* white */
+
+    background: #FFFFFF;
+    border-radius: 50px;
+
+    transform: scale(0.5);
+    transition: 0.4s all;
+
+    z-index: 50;
+
+    .cross{
+      display: block;
+      width: 15px;
+      height: 15px;
+      content: '';
+      background: url(../../assets/modal_cross.svg);
+      position: absolute;
+      top:35px;
+      right: 35px;
+      &:hover {
+        //background: rgba(211, 211, 211, 0.47);
+        filter: shadow(10px);
+      }
+    }
+
+    &.active {
+      transform: scale(1);
+    }
+
+  }
+}
+
+.crossImg {
+  &:hover {
+    filter: contrast(0.5);
+    cursor: pointer;
+  }
+  &:active {
+    filter: brightness(0.7);
+  }
+}
+
