@@ -1,0 +1,117 @@
+.header {
+  padding-top: 80px;
+  width: 410px;
+  height: 348px;
+
+  .title {
+    font-size: 60px;
+    font-weight: 500;
+  }
+
+  .text {
+    font-weight: 300;
+    font-size: 24px;
+    width: 610px;
+  }
+}
+
+.training {
+
+  //TODO ДУБЛИРОВАНИЕ КОДА В 3х местах
+
+  .servicesTitleWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .servicesTitle {
+    margin-top: 110px;
+    min-width: 248px;
+    position: relative;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 47px;
+    text-transform: uppercase;
+    /* main_text */
+    color: #4F4E4E;
+    padding: 0 250px;
+
+    &:before {
+      content: "";
+      display: block;
+      width: 220px;
+      height: 6px;
+      background: #F0D3FF;
+      border-radius: 55px;
+      position: absolute;
+      text-align: center;
+      top: calc(50% - 3px);
+      left: 0;
+    }
+
+    &:after {
+      content: "";
+      display: block;
+      width: 220px;
+      height: 6px;
+      background: #F0D3FF;
+      border-radius: 55px;
+      position: absolute;
+      top: calc(50% - 3px);
+      right: 0;
+      text-align: center;
+    }
+  }
+
+  &_title {
+    //дублирование
+    font-weight: 500;
+    font-size: 40px;
+    text-transform: uppercase;
+    margin-bottom: 60px;
+  }
+
+  &_list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 10px 0 110px 0;
+  }
+
+  &_item {
+    padding-top: 30px;
+    width: 410px;
+    display: flex;
+    flex-direction: column;
+    background: none;
+    &:hover {
+      cursor: pointer;
+    }
+
+    &_wrp {
+      width: 410px;
+      height: 180px;
+      background: white;
+      padding-left: 30px;
+      box-shadow: 0 0 20px rgba(255, 226, 255, 0.65);
+      border-radius: 0 0 25px 25px;
+      position: relative;
+    }
+
+    &_text {
+      width: 295px;
+      height: 110px;
+      padding-top: 30px;
+      font-weight: 300;
+      font-size: 20px;
+    }
+
+    &_img {
+      position: absolute;
+      top: 110px;
+      left: 330px;
+    }
+  }
+}

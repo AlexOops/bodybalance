@@ -4,7 +4,7 @@ import {Contacts} from "./components/Contacts/Contacts";
 import {About} from "./components/Layout/About";
 import {OnlineRecording} from "./components/Layout/OnlineRecording";
 import {Services} from "./components/Layout/Services";
-import {Training} from "./components/Layout/Training";
+import {Trainings} from "./components/Trainings/Trainings";
 import {Login} from "./pages/Login";
 import {Registration} from "./pages/Registration";
 import {Specialists} from "./components/Layout/Specialists/Specialists";
@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/training",
-                element: <Training/>,
+                element: <Trainings/>,
             },
             {
                 path: "/login",
