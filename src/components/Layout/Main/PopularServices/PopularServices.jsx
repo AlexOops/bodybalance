@@ -62,7 +62,7 @@ export const PopularServices = () => {
                         {/*    )}*/}
                         {/*</div>*/}
                         <div className={s.cards}>
-                            {(isServicesLoading ? [...Array(3)] : services.items).map((obj, index) =>
+                            {(isServicesLoading ? [...Array(3)] : services.items.slice(0,3)).map((obj, index) =>
                                 isServicesLoading
                                     ? <Card key={index} isLoading={true}/>
                                     : <Card key={obj.id} isPopular={true}
