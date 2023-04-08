@@ -1,8 +1,8 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchServices} from "../../redux/slices/services";
 import s from './Services.module.scss'
-import {Card} from "./Card/Card";
-import {AppointmentForm} from "../AppointmentForm/AppointmentForm";
+import {Card} from "../../components/Layout/Card/Card";
+import {AppointmentForm} from "../../components/AppointmentForm/AppointmentForm";
 import {useEffect} from "react";
 
 export const Services = () => {
