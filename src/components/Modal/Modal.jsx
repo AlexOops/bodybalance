@@ -6,8 +6,9 @@ import {active, selectIsActive} from "../../redux/slices/modal";
 const Modal = ({children, width='1070px', height='490px'}) => {
     const dispatch = useDispatch();
     const modalActive = useSelector(selectIsActive);
-    console.log('globalActive', modalActive)
+
     useEffect(() => {
+
         if (modalActive) {
             document.body.style.overflow = 'hidden';
         } else {

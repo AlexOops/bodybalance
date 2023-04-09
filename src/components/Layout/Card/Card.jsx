@@ -5,8 +5,8 @@ import {CardSkeleton} from "./CardSkeleton";
 import Modal from "../../Modal/Modal";
 import {useState} from "react";
 import card_img from "../../../assets/rectangle33.jpg";
-import {useDispatch} from "react-redux";
-import {active} from "../../../redux/slices/modal";
+import {useDispatch, useSelector} from "react-redux";
+import {active, selectIsActive} from "../../../redux/slices/modal";
 export const Card = ({
     id,
     price,
@@ -17,21 +17,14 @@ export const Card = ({
     imageUrl,
     isLoading,
 }) => {
-    const[modalActive, setModalActive] = useState(false);
-    const dispatch = useDispatch();
-    const [modalClick, setModalClick] = useState(false);
-
-    if (isLoading){
+   if (isLoading){
         return <CardSkeleton/>
     }
 
-    const clickHandle = () => {
-        dispatch(active(true));
-        setModalClick(true);
-    }
+
     return (
        <>
-           <div className={s.card} onClick={clickHandle}>
+           <div className={s.card}>
                <div className={s.flexCenter}>
                    <div className={`${s.img} ${s.center}`}>
                        <img src={imageUrl} alt=""/>
@@ -55,29 +48,7 @@ export const Card = ({
                {isPopular?? <div className={s.price}>{price}</div>}
 
            </div>
-           {modalClick &&
-               <Modal active={modalActive} setActive={setModalActive} width={'1070px'} height={'490px'}>
-                   <img className={s.serviceImage} src={card_img} alt=""/>
-                   <div className={s.modalCard}>
-                       <div>
-                           <h3 className={s.modalName}>
-                               {name}
-                           </h3>
-                           <div className={s.margin_tb_10}>
-                               <ReactMarkdown>{description}</ReactMarkdown>
-                           </div>
-                           <div className={s.moduleText}>Данный комплекс отличнно подойдет при:</div>
-                           <div className={s.moduleFullText}><ReactMarkdown>{text}</ReactMarkdown></div>
-                       </div>
 
-                       <div className={s.flexSB}>
-                           <div className={s.price}>{price}</div>
-                           <button className={s.button} type ="submit">Записаться </button>
-                       </div>
-                   </div>
-
-               </Modal>
-           }
 
        </>
     );
