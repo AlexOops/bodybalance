@@ -7,6 +7,7 @@
 
 .login {
   padding: 80px 110px;
+  width: 100%;
 }
 
 .title {
@@ -15,9 +16,12 @@
   font-size: 30px;
   line-height: 140%;
   color: #4F4E4E;
+  text-transform: inherit;
+  margin: 0 0 40px 0;
   //text-decoration: ;
 }
 
 .field {
   margin-bottom: 20px !important;
+
 }

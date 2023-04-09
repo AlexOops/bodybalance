@@ -21,6 +21,7 @@ export const fetchAuthMe = createAsyncThunk('auth/fetchAuthMe', async () => {
 const initialState = {
     data: null,
     status: 'loading',
+    isRegistration: false,
 };
 
 const authSlice = createSlice({
@@ -29,7 +30,10 @@ const authSlice = createSlice({
     reducers:{
         logout: (state) => {
             state.data = null;
-        }
+        },
+        clickRegistration: (state, action ) => {
+            state.isRegistration = action.payload;
+        },
     },
     extraReducers: {
         [fetchAuth.pending]: (state) => { //загрузка
@@ -74,8 +78,11 @@ const authSlice = createSlice({
 });
 
 export const selectIsAuth = (state) => Boolean(state.auth.data);
+export const isRegistration = (state) => Boolean(state.auth.isRegistration);
+
 
 export const authReducer = authSlice.reducer;
 
 //вытаскиваем экшены из слайса
-export const {logout} = authSlice.actions;
+export const {logout, clickRegistration} = authSlice.actions;
+

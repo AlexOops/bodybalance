@@ -1,14 +1,13 @@
-import React from "react";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
+import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchAuth, selectIsAuth} from "../../redux/slices/auth";
+import {clickRegistration, fetchAuth, selectIsAuth,} from "../../redux/slices/auth";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import {useForm} from 'react-hook-form';
-import {Navigate} from 'react-router-dom';
+// import {Navigate} from 'react-router-dom';
 
 import styles from "./Login.module.scss";
+import {active} from "../../redux/slices/modal";
 
 export const Login = () => {
     const isAuth = useSelector(selectIsAuth);
@@ -34,19 +33,20 @@ export const Login = () => {
     };
 
     if(isAuth){
-        return <Navigate to="/" />
+        dispatch(active(false));
     }
 
     return (
         <>
-            <Paper classes={{ root: styles.root }}>
-                <Typography classes={{ root: styles.title }} variant="h5">
-                    Вход в аккаунт
-                </Typography>
+            <div className={styles.login}>
+                <h2 className={styles.title}>
+                    Вход
+                </h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <TextField
-                        className={styles.field}
-                        label="E-Mail"
+
+                        classes={{ root: styles.field }}
+                        // label="E-Mail"
                         type="email"
                         error={Boolean(errors.email?.message)} //подсвечиваем красным если true
                         helperText={errors.email?.message}
@@ -54,19 +54,20 @@ export const Login = () => {
                         fullWidth
                     />
                     <TextField
-                        className={styles.field}
-                        label="Пароль"
+                        classes={{ root: styles.field }}
+                        // label="Пароль"
                         type="password"
                         error={Boolean(errors.password?.message)} //подсвечиваем красным если true
                         helperText={errors.password?.message}
                         {...register('password', {required: 'Введите пароль'})}
                         fullWidth
                     />
+                    <div>Нет аккаунта? <span>Зарегистрируйтесь!</span></div>
                     <Button type="submit" disabled={!isValid} size="large" variant="contained" fullWidth>
                         Войти
                     </Button>
                 </form>
-            </Paper>
+            </div>
         </>
     )
 }
