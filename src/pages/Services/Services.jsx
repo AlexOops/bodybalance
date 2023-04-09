@@ -75,25 +75,14 @@ export const Services = () => {
         </div>
             <div className="container"><AppointmentForm name={'Быстрая запись'} services={services.items}/></div>
             <Modal width={'1070px'} height={'490px'}>
-                <img className={m.serviceImage} src={card_img} alt=""/>
-                <div className={m.modalCard}>
-                    <div>
-                        <h3 className={m.modalName}>
-                            {service.name}
-                        </h3>
-                        <div className={m.margin_tb_10}>
-                            <ReactMarkdown>{service.description}</ReactMarkdown>
-                        </div>
-                        <div className={m.moduleText}>Данный комплекс отличнно подойдет при:</div>
-                        <div className={m.moduleFullText}><ReactMarkdown>{service.text}</ReactMarkdown></div>
-                    </div>
-
-                    <div className={m.flexSB}>
-                        <div className={m.price}>{service.price}</div>
-                        <button className={m.button} type ="submit">Записаться </button>
-                    </div>
-                </div>
-
+                <Card
+                    isFull={true}
+                    id={service._id}
+                    price={service.price}
+                    name={service.name}
+                    description={service.description}
+                    text={service.text}
+                />
             </Modal>
         </>
 

@@ -2,11 +2,7 @@ import React from 'react';
 import s from "./Card.module.scss";
 import ReactMarkdown from "react-markdown";
 import {CardSkeleton} from "./CardSkeleton";
-import Modal from "../../Modal/Modal";
-import {useState} from "react";
 import card_img from "../../../assets/rectangle33.jpg";
-import {useDispatch, useSelector} from "react-redux";
-import {active, selectIsActive} from "../../../redux/slices/modal";
 export const Card = ({
     id,
     price,
@@ -16,11 +12,33 @@ export const Card = ({
     isPopular,
     imageUrl,
     isLoading,
+    isFull,
 }) => {
-   if (isLoading){
+   if (isLoading) {
         return <CardSkeleton/>
     }
+   if (isFull) {
+       return <>
+           <img className={s.serviceImage} src={card_img} alt=""/>
+           <div className={s.modalCard}>
+               <div>
+                   <h3 className={s.modalName}>
+                       {name}
+                   </h3>
+                   <div className={s.margin_tb_10}>
+                       <ReactMarkdown>{description}</ReactMarkdown>
+                   </div>
+                   <div className={s.moduleText}>Данный комплекс отличнно подойдет при:</div>
+                   <div className={s.moduleFullText}><ReactMarkdown>{text}</ReactMarkdown></div>
+               </div>
 
+               <div className={s.flexSB}>
+                   <div className={s.price}>{price}</div>
+                   <button className={s.button} type ="submit">Записаться </button>
+               </div>
+           </div>
+       </>
+   }
 
     return (
        <>
