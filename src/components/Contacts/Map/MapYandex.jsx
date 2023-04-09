@@ -5,11 +5,6 @@ export const MapYandex = () => {
 
     return (
         <>
-            <YMaps
-                query={{
-                    ns: "ymaps" // для векторной карты
-                }}
-            >
                 <Map
                     width="100%"
                     height="640px"
@@ -234,7 +229,6 @@ export const MapYandex = () => {
                         modules={['geoObject.addon.balloon']}
                     />
                 </Map>
-            </YMaps>
         </>
     );
 };

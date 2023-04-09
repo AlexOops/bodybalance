@@ -39,7 +39,7 @@ export const Slider = () => {
 
     // интервал на слайды
     useEffect(() => {
-        const timeout = setInterval(() => setCount(prevState => prevState + 1), 2000)
+        const timeout = setInterval(() => setCount(prevState => prevState + 1), 4000)
         return() => {
             clearInterval(timeout)
         }
