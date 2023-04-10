@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {clickRegistration, isRegistration, logout, selectIsAuth} from "../../redux/slices/auth";
 import {active, openModal} from "../../redux/slices/modal";
 import Modal from "../Modal/Modal";
-import {Login} from "../../pages/Login";
+import {Login} from "../../pages/Login/Login";
 import {useState} from "react";
 import {Registration} from "../../pages/Registration";
 

@@ -7,7 +7,7 @@ import {useForm} from 'react-hook-form';
 // import {Navigate} from 'react-router-dom';
 
 import styles from "./Login.module.scss";
-import {active, openModal} from "../../redux/slices/modal";
+import {active, closeModal, openModal} from "../../redux/slices/modal";
 import {Registration} from "../Registration";
 
 export const Login = () => {
@@ -34,7 +34,7 @@ export const Login = () => {
     };
 
     if(isAuth){
-        dispatch(active(false));
+        dispatch(closeModal());
     }
 
     return (

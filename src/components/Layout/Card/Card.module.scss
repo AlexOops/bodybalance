@@ -214,9 +214,10 @@
   color: #FFFFFF;
 
   &:hover {
-    background: #5D3274;
+    background: #9e8dff;
   }
   &:active {
-    background: #5D3274;
+    background: #9e8dff;
+    opacity: 0.8;
   }
 }
