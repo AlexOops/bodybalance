@@ -1,14 +1,14 @@
 import s from './Arrow.module.scss'
 import arrow from "../../../assets/Vector.svg";
 
-export const ArrowRight = ({setCount}) => {
+export const ArrowRight = ({setWidth, offset, width}) => {
 
-    const changeCount = () => {
-        setCount(prev => prev + 1)
+    const handleClick = () => {
+        setWidth(width - offset)
     }
 
     return (
-        <div onClick={changeCount} className={ `${s.arrowBackground} ${s.arrowPositionRight}`}>
+        <div onClick={handleClick} className={ `${s.arrowBackground} ${s.arrowPositionRight}`}>
             <button className={`${s.arrow}`}><img className={s.size} src={arrow} alt=""/> </button>
         </div>
     )

@@ -1,12 +1,12 @@
 import s from './Dots.module.scss'
 
-export const Dots = ({index, count, setCount}) => {
+export const Dots = ({index, width, setWidth, offset}) => {
 
     const handleClick = () => {
-        setCount(index)
+        setWidth(index*-offset)
     }
 
     return (
-        <button onClick={handleClick} className={index === count ? `${s.dots} ${s.dotsActive}` : s.dots }></button>
+        <button onClick={handleClick} className={index === -width/offset ? `${s.dots} ${s.dotsActive}` : s.dots }></button>
     )
 }
