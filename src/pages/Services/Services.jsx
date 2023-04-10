@@ -9,7 +9,7 @@ import card_img from "../../assets/rectangle33.jpg";
 import ReactMarkdown from "react-markdown";
 import Modal from "../../components/Modal/Modal";
 import React from "react";
-import {active, selectIsActive} from "../../redux/slices/modal";
+import {active, openModal, selectIsActive} from "../../redux/slices/modal";
 
 
 export const Services = () => {
@@ -25,7 +25,17 @@ export const Services = () => {
 
     const setModal = (event, obj) => {
         setService(obj);
-        dispatch(active(true));
+        // dispatch(active(true));
+        dispatch(openModal(
+                <Card
+                isFull={true}
+                id={obj._id}
+                price={obj.price}
+                name={obj.name}
+                description={obj.description}
+                text={obj.text}
+            />
+        ));
     }
 
 
@@ -74,16 +84,16 @@ export const Services = () => {
             </div>
         </div>
             <div className="container"><AppointmentForm name={'Быстрая запись'} services={services.items}/></div>
-            <Modal width={'1070px'} height={'490px'}>
-                <Card
-                    isFull={true}
-                    id={service._id}
-                    price={service.price}
-                    name={service.name}
-                    description={service.description}
-                    text={service.text}
-                />
-            </Modal>
+            {/*<Modal width={'1070px'} height={'490px'}>*/}
+            {/*    <Card*/}
+            {/*        isFull={true}*/}
+            {/*        id={service._id}*/}
+            {/*        price={service.price}*/}
+            {/*        name={service.name}*/}
+            {/*        description={service.description}*/}
+            {/*        text={service.text}*/}
+            {/*    />*/}
+            {/*</Modal>*/}
         </>
 
     )

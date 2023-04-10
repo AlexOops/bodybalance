@@ -7,7 +7,8 @@ import {useForm} from 'react-hook-form';
 // import {Navigate} from 'react-router-dom';
 
 import styles from "./Login.module.scss";
-import {active} from "../../redux/slices/modal";
+import {active, openModal} from "../../redux/slices/modal";
+import {Registration} from "../Registration";
 
 export const Login = () => {
     const isAuth = useSelector(selectIsAuth);
@@ -62,7 +63,7 @@ export const Login = () => {
                         {...register('password', {required: 'Введите пароль'})}
                         fullWidth
                     />
-                    <div>Нет аккаунта? <span>Зарегистрируйтесь!</span></div>
+                    <div>Нет аккаунта? <span onClick={()=>dispatch(openModal(<Registration/>))}>Зарегистрируйтесь!</span></div>
                     <Button type="submit" disabled={!isValid} size="large" variant="contained" fullWidth>
                         Войти
                     </Button>

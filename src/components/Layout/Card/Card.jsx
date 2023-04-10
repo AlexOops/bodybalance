@@ -18,7 +18,7 @@ export const Card = ({
         return <CardSkeleton/>
     }
    if (isFull) {
-       return <>
+       return <div className={s.fullCard}>
            <img className={s.serviceImage} src={card_img} alt=""/>
            <div className={s.modalCard}>
                <div>
@@ -37,7 +37,7 @@ export const Card = ({
                    <button className={s.button} type ="submit">Записаться </button>
                </div>
            </div>
-       </>
+       </div>
    }
 
     return (

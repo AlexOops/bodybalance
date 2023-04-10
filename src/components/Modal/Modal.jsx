@@ -2,10 +2,11 @@ import React, {useEffect} from 'react';
 import s from './Modal.module.scss';
 import cross from '../../assets/modal_cross.svg'
 import {useDispatch, useSelector} from "react-redux";
-import {active, selectIsActive} from "../../redux/slices/modal";
-const Modal = ({children, width='1070px', height='490px'}) => {
+import {active, closeModal, selectIsActive, selectModalBody} from "../../redux/slices/modal";
+const Modal = () => {
     const dispatch = useDispatch();
     const modalActive = useSelector(selectIsActive);
+    const body = useSelector(selectModalBody);
 
     useEffect(() => {
 
@@ -16,10 +17,10 @@ const Modal = ({children, width='1070px', height='490px'}) => {
         }
     }, [modalActive]);
     return (
-        <div className={(modalActive) ? `${s.modal} ${s.active}` : s.modal} onClick={()=>dispatch(active(false))}>
-            <div style={{ width, height }} className={(modalActive) ? `${s.content} ${s.active}` : s.content} onClick={(e)=> e.stopPropagation()}>
-                <div className={s.cross} onClick={()=>dispatch(active(false))}><img className={s.crossImg} src={cross} alt=""/></div>
-                {children}
+        <div className={(modalActive) ? `${s.modal} ${s.active}` : s.modal} onClick={()=>dispatch(closeModal())}>
+            <div className={(modalActive) ? `${s.content} ${s.active}` : s.content} onClick={(e)=> e.stopPropagation()}>
+                <div className={s.cross} onClick={()=>dispatch(closeModal())}><img className={s.crossImg} src={cross} alt=""/></div>
+                {body}
             </div>
         </div>
     );

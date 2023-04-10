@@ -33,6 +33,12 @@
     cursor: pointer;
   }
 }
+.fullCard{
+  display: flex;
+  width: 1070px;
+  height: 490px;
+}
+
 .flexCenter{
   display: flex;
   flex-direction: column;
