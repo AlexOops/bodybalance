@@ -9,12 +9,14 @@ import {Partners} from "../Partners/Partners";
 import s from "../Feedback/Feedback.module.scss";
 import {ArrowLeft} from "../../Arrow/ArrowLeft";
 import {ArrowRight} from "../../Arrow/ArrowRight";
+import Modal from "../../../Modal/Modal"
 
 export const Main = () => {
     const location = useLocation()
     return (
         <>
             <Header/>
+            <Modal/>
             {location.pathname === '/' ?
                 <>
                     <Slider/>

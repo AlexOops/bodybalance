@@ -1,14 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { servicesReducer } from "./slices/services";
 import {authReducer} from "./slices/auth";
-import {datepickerReducer} from "./slices/datepicker";
+import {modalReducer} from "./slices/modal";
+
 
 
 const store = configureStore({
     reducer: {
         services: servicesReducer,
         auth: authReducer,
-        datepicker: datepickerReducer,
+        modal: modalReducer,
+
     }
 });
 

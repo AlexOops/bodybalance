@@ -5,8 +5,6 @@ import {About} from "./components/Layout/About";
 import {OnlineRecording} from "./components/Layout/OnlineRecording";
 import {Services} from "./pages/Services/Services";
 import {Trainings} from "./pages/Trainings/Trainings";
-import {Login} from "./pages/Login";
-import {Registration} from "./pages/Registration";
 import {Specialists} from "./components/Layout/Specialists/Specialists";
 
 
@@ -39,14 +37,7 @@ export const router = createBrowserRouter([
                 path: "/training",
                 element: <Trainings/>,
             },
-            {
-                path: "/login",
-                element: <Login/>,
-            },
-            {
-                path: "/register",
-                element: <Registration/>,
-            },
+
         ]
     },
 ]);

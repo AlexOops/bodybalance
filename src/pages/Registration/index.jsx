@@ -5,11 +5,12 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 
-import styles from './Login.module.scss';
+import styles from './Registration.module.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {fetchRegister, selectIsAuth} from "../../redux/slices/auth";
 import {useForm} from "react-hook-form";
-import {Navigate} from "react-router-dom";
+// import {Navigate} from "react-router-dom";
+import {closeModal} from "../../redux/slices/modal";
 
 export const Registration = () => {
     const isAuth = useSelector(selectIsAuth)
@@ -42,11 +43,11 @@ export const Registration = () => {
         }
     };
     if(isAuth){
-        return <Navigate to="/" />
+        dispatch(closeModal());
     }
 
   return (
-    <Paper classes={{ root: styles.root }}>
+    <div className={styles.registration}>
       <Typography classes={{ root: styles.title }} variant="h5">
         Создание аккаунта
       </Typography>
@@ -80,6 +81,6 @@ export const Registration = () => {
               Зарегистрироваться
           </Button>
       </form>
-    </Paper>
+    </div>
   );
 };
