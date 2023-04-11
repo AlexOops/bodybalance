@@ -5,7 +5,8 @@ import {Card} from "../../components/Card/Card";
 import {AppointmentForm} from "../../components/AppointmentForm/AppointmentForm";
 import {useEffect, useState} from "react";
 import React from "react";
-import {active, openModal, selectIsActive} from "../../redux/slices/modal";
+import {active, openModal} from "../../redux/slices/modal";
+import Modal from "../../components/Modal/Modal";
 
 export const Services = () => {
     const dispatch = useDispatch();
@@ -16,21 +17,12 @@ export const Services = () => {
     const isServicesLoading = services.status === 'loading'; // boolean
     // const isServicesLoading = true; // проверить скелетон
 
-    const modalActive = useSelector(selectIsActive);
+    // const modalActive = useSelector(selectIsActive);
 
     const setModal = (event, obj) => {
         setService(obj);
         // dispatch(active(true));
-        dispatch(openModal(
-                <Card
-                isFull={true}
-                id={obj._id}
-                price={obj.price}
-                name={obj.name}
-                description={obj.description}
-                text={obj.text}
-            />
-        ));
+        dispatch(openModal('modalService'));
     }
 
     useEffect(() => {
@@ -76,16 +68,16 @@ export const Services = () => {
             </div>
         </div>
             <div className="container"><AppointmentForm name={'Быстрая запись'} services={services.items}/></div>
-            {/*<Modal width={'1070px'} height={'490px'}>*/}
-            {/*    <Card*/}
-            {/*        isFull={true}*/}
-            {/*        id={service._id}*/}
-            {/*        price={service.price}*/}
-            {/*        name={service.name}*/}
-            {/*        description={service.description}*/}
-            {/*        text={service.text}*/}
-            {/*    />*/}
-            {/*</Modal>*/}
+            <Modal type='modalService'>
+                <Card
+                    isFull={true}
+                    id={service._id}
+                    price={service.price}
+                    name={service.name}
+                    description={service.description}
+                    text={service.text}
+                />
+            </Modal>
         </>
 
     )
