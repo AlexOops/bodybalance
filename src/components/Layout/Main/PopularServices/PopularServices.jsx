@@ -1,5 +1,5 @@
 import s from './PopularServices.module.scss'
-import {Card} from "../../Card/Card";
+import {Card} from "../../../Card/Card";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchServicesByRating} from "../../../../redux/slices/services";
 import {useEffect} from "react";

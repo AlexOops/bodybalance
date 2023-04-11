@@ -1,5 +1,5 @@
 import s from './Arrow.module.scss'
-import arrow from "../../../assets/Vector.svg";
+import arrow from "../../assets/Vector.svg";
 
 export const ArrowRight = ({setWidth, offset, width}) => {
 

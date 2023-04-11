@@ -3,7 +3,7 @@ import s from "./Trainings.module.scss";
 import "../../index.scss";
 import play_item from "../../assets/play_item.svg";
 import training_1 from "../../assets/training_1.png"
-import {Feedback} from "../../components/Layout/Main/Feedback/Feedback";
+import {Feedback} from "../../components/Feedback/Feedback";
 import {Link} from "react-router-dom";
 
 export const Trainings = () => {

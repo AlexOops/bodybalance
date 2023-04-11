@@ -1,13 +1,12 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {clickRegistration, fetchAuth, selectIsAuth,} from "../../redux/slices/auth";
+import {fetchAuth, selectIsAuth,} from "../../redux/slices/auth";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import {useForm} from 'react-hook-form';
-// import {Navigate} from 'react-router-dom';
 
 import styles from "./Login.module.scss";
-import {active, closeModal, openModal} from "../../redux/slices/modal";
+import {closeModal, openModal} from "../../redux/slices/modal";
 import {Registration} from "../Registration";
 
 export const Login = () => {

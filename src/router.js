@@ -1,12 +1,10 @@
 import {createBrowserRouter} from "react-router-dom";
 import {Main} from "./components/Layout/Main/Main/Main";
 import {Contacts} from "./pages/Contacts/Contacts";
-import {About} from "./components/Layout/About";
-import {OnlineRecording} from "./components/Layout/OnlineRecording";
+import {OnlineRehabilitation} from "./pages/OnlineRehabilitation/OnlineRehabilitation";
 import {Services} from "./pages/Services/Services";
 import {Trainings} from "./pages/Trainings/Trainings";
-import {Specialists} from "./components/Layout/Specialists/Specialists";
-
+import {Specialists} from "./pages/Specialists/Specialists";
 
 export const router = createBrowserRouter([
     {
@@ -18,12 +16,8 @@ export const router = createBrowserRouter([
                 element: <Contacts/>,
             },
             {
-                path: "/about",
-                element: <About/>,
-            },
-            {
-                path: "/online_recording",
-                element: <OnlineRecording/>,
+                path: "/online_rehabilitation",
+                element: <OnlineRehabilitation/>,
             },
             {
                 path: "/services",

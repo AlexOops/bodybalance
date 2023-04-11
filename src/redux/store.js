@@ -10,8 +10,8 @@ const store = configureStore({
         services: servicesReducer,
         auth: authReducer,
         modal: modalReducer,
+    },
 
-    }
 });
 
 export default store;

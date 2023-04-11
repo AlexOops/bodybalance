@@ -1,7 +1,7 @@
 import '../../../../index.scss'
 import s from './Slider.module.scss'
-import {ArrowRight} from "../../Arrow/ArrowRight";
-import {ArrowLeft} from "../../Arrow/ArrowLeft";
+import {ArrowRight} from "../../../Arrow/ArrowRight";
+import {ArrowLeft} from "../../../Arrow/ArrowLeft";
 import {Dots} from "./Dots/Dots";
 import sliderImg from '../../../../assets/vectorpaint.svg'
 import {useEffect, useRef, useState} from "react";

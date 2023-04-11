@@ -1,16 +1,11 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchServices} from "../../redux/slices/services";
 import s from './Services.module.scss';
-import m from './../../components/Layout/Card/Card.module.scss'
-import {Card} from "../../components/Layout/Card/Card";
+import {Card} from "../../components/Card/Card";
 import {AppointmentForm} from "../../components/AppointmentForm/AppointmentForm";
 import {useEffect, useState} from "react";
-import card_img from "../../assets/rectangle33.jpg";
-import ReactMarkdown from "react-markdown";
-import Modal from "../../components/Modal/Modal";
 import React from "react";
 import {active, openModal, selectIsActive} from "../../redux/slices/modal";
-
 
 export const Services = () => {
     const dispatch = useDispatch();
@@ -38,13 +33,10 @@ export const Services = () => {
         ));
     }
 
-
     useEffect(() => {
         dispatch(fetchServices());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
-
-
 
     return (
         <>

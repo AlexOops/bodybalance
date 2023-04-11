@@ -2,7 +2,7 @@ import React from 'react';
 import s from "./Card.module.scss";
 import ReactMarkdown from "react-markdown";
 import {CardSkeleton} from "./CardSkeleton";
-import card_img from "../../../assets/rectangle33.jpg";
+import card_img from "../../assets/rectangle33.jpg";
 export const Card = ({
     id,
     price,

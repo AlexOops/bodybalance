@@ -8,13 +8,7 @@ import telegram from "../../assets/telegram.svg";
 import {MapYandex} from "../../components/Contacts/Map/MapYandex";
 import Select from "../../components/Contacts/Select/Select"
 
-
 export const Contacts = () => {
-
-
-    // const handleChange = (selectedOption) => {
-    //     console.log(selectedOption)
-    // }
 
     return (
         <>
