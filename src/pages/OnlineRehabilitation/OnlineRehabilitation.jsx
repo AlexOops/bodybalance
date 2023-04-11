@@ -1,5 +1,5 @@
 import React from 'react';
-import s from "./OnlineRecording.module.scss"
+import s from "./OnlineRehabilitation.module.scss"
 import Recommendation from "../../components/Recommendation/Recommendation";
 import {AppointmentForm} from "../../components/AppointmentForm/AppointmentForm";
 import service1 from "../../assets/img-service.png"
@@ -7,7 +7,7 @@ import card_img from "../../assets/rectangle33.jpg"
 import {useDispatch, useSelector} from "react-redux";
 import {openModal} from "../../redux/slices/modal";
 
-export const OnlineRecording = () => {
+export const OnlineRehabilitation = () => {
 
     const onlineServiceList = [
         {

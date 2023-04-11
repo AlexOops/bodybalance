@@ -16,7 +16,7 @@ export const Navigate = () => {
                     <NavLink to='/services'>Услуги</NavLink>
                 </li>
                 <li className={s.menuItems}>
-                    <NavLink to='/online_recording'>Онлайн-реабилитация</NavLink>
+                    <NavLink to='/online_rehabilitation'>Онлайн-реабилитация</NavLink>
                 </li>
                 <li className={s.menuItems}>
                     <NavLink to='/training'>Тренировки</NavLink>
