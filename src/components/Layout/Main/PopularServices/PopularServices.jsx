@@ -1,5 +1,5 @@
 import s from './PopularServices.module.scss'
-import {Card} from "../../Card/Card";
+import {Card} from "../../../Card/Card";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchServicesByRating} from "../../../../redux/slices/services";
 import {useEffect} from "react";
@@ -62,7 +62,7 @@ export const PopularServices = () => {
                         {/*    )}*/}
                         {/*</div>*/}
                         <div className={s.cards}>
-                            {(isServicesLoading ? [...Array(3)] : services.items).map((obj, index) =>
+                            {(isServicesLoading ? [...Array(3)] : services.items.slice(0,3)).map((obj, index) =>
                                 isServicesLoading
                                     ? <Card key={index} isLoading={true}/>
                                     : <Card key={obj.id} isPopular={true}

@@ -5,6 +5,7 @@ import {RouterProvider} from "react-router-dom";
 import {router} from "./router";
 import {useDispatch} from "react-redux";
 import {fetchAuthMe} from "./redux/slices/auth";
+import {YMaps} from "@pbe/react-yandex-maps";
 
 function App() {
     const dispatch = useDispatch();
@@ -17,7 +18,13 @@ function App() {
 
     return (
             <div className="App">
+                <YMaps
+                    query={{
+                        ns: "ymaps" // для векторной карты
+                    }}
+                >
                 <RouterProvider router={router}/>
+                </YMaps>
             </div>
     );
 }

@@ -1,9 +1,11 @@
 .center {
   text-align: center;
 }
-.margin_tb_10{
+
+.margin_tb_10 {
   margin: 10px 0;
 }
+
 .name {
   min-height: 68px;
   font-style: normal;
@@ -28,22 +30,32 @@
   background: #FFFFFF;
   box-shadow: 0 0 20px rgba(255, 226, 255, 0.65);
   border-radius: 25px;
+
   &:hover {
     box-shadow: 0px 0px 20px rgba(255, 153, 255, 0.65);
     cursor: pointer;
   }
 }
-.flexCenter{
+
+.fullCard {
+  display: flex;
+  width: 1070px;
+  height: 490px;
+}
+
+.flexCenter {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.text{
+
+.text {
   font-style: normal;
   font-weight: 300;
   font-size: 20px;
   line-height: 140%;
   color: #4F4E4E;
+
   li {
     margin-left: 25px;
     position: relative;
@@ -72,7 +84,7 @@
   z-index: 10;
 
   &::after {
-    z-index:-2;
+    z-index: -2;
     position: absolute;
     display: block;
     content: "";
@@ -81,11 +93,10 @@
     background: rgba(255, 226, 255, 0.5);
     filter: blur(10px);
     border-radius: 50%;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
   }
 }
-
 
 .circle {
   width: 16px;
@@ -129,16 +140,19 @@
   }
 
 }
+
 .serviceImage {
   border-radius: 50px 0 0 50px;
 }
-.modalCard{
+
+.modalCard {
   padding: 40px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.modalName{
+
+.modalName {
   font-weight: 600;
   font-size: 30px;
   line-height: 140%;
@@ -160,6 +174,7 @@
   font-size: 20px;
   line-height: 140%;
   color: #4F4E4E;
+
   li {
     margin: 10px 0 10px 25px;
     position: relative;
@@ -208,9 +223,11 @@
   color: #FFFFFF;
 
   &:hover {
-    background: #5D3274;
+    background: #9e8dff;
   }
+
   &:active {
-    background: #5D3274;
+    background: #9e8dff;
+    opacity: 0.8;
   }
 }

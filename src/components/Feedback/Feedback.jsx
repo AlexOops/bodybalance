@@ -1,6 +1,6 @@
 import s from './Feedback.module.scss'
-import customers from "../../../../assets/customers.png";
-import doubleQuotes from "../../../../assets/double-quotes.svg";
+import customers from "../../assets/customers.png";
+import doubleQuotes from "../../assets/double-quotes.svg";
 
 export const Feedback = ({name, text, author, profession}) => {
     return (

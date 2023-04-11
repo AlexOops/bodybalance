@@ -5,12 +5,23 @@
   margin: 50px auto;
 }
 
+.login {
+  padding: 80px 110px;
+  width: 100%;
+}
+
 .title {
-  text-align: center;
-  font-weight: bold;
-  margin: 0 0 30px 0 !important;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 140%;
+  color: #4F4E4E;
+  text-transform: inherit;
+  margin: 0 0 40px 0;
+  //text-decoration: ;
 }
 
 .field {
   margin-bottom: 20px !important;
+
 }

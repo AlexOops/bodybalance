@@ -4,17 +4,19 @@ import {Outlet, useLocation} from "react-router-dom";
 import {Slider} from "../Slider/Slider";
 import {PopularServices} from "../PopularServices/PopularServices";
 import {TeamDoctor} from "../TeamDoctor/TeamDoctor";
-import {Feedback} from "../Feedback/Feedback";
+import {Feedback} from "../../../Feedback/Feedback";
 import {Partners} from "../Partners/Partners";
-import s from "../Feedback/Feedback.module.scss";
-import {ArrowLeft} from "../../Arrow/ArrowLeft";
-import {ArrowRight} from "../../Arrow/ArrowRight";
+import s from "../../../Feedback/Feedback.module.scss";
+import {ArrowLeft} from "../../../Arrow/ArrowLeft";
+import {ArrowRight} from "../../../Arrow/ArrowRight";
+import Modal from "../../../Modal/Modal"
 
 export const Main = () => {
     const location = useLocation()
     return (
         <>
             <Header/>
+            <Modal/>
             {location.pathname === '/' ?
                 <>
                     <Slider/>

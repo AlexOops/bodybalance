@@ -5,8 +5,8 @@ import telephone from "../../assets/telephone.svg";
 import location from "../../assets/location.svg";
 import telegram from "../../assets/telegram.svg";
 
-import {MapYandex} from "./Map/MapYandex";
-import Select from "./Select/Select"
+import {MapYandex} from "../../components/Contacts/Map/MapYandex";
+import Select from "../../components/Contacts/Select/Select"
 
 
 export const Contacts = () => {

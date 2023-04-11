@@ -4,17 +4,33 @@ import '../../index.scss'
 import {Navigate} from "../Navigate/Navigate";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {logout, selectIsAuth} from "../../redux/slices/auth";
+import {clickRegistration, isRegistration, logout, selectIsAuth} from "../../redux/slices/auth";
+import {active, openModal} from "../../redux/slices/modal";
+import Modal from "../Modal/Modal";
+import {Login} from "../../pages/Login/Login";
+import {useState} from "react";
+import {Registration} from "../../pages/Registration";
 
 export const Header = () => {
     const dispatch = useDispatch();
     const isAuth = useSelector(selectIsAuth);
+    const isReg = useSelector(isRegistration);
 
     const onClickLogout = () => {
         if(window.confirm("Вы действительно хотите выйти?")){
             dispatch(logout()); //обнулили данные в state auth
             window.localStorage.removeItem('token'); //удалили токен из localStorage
         }
+    }
+
+    const onClickLogin = () => {
+        //контент логина в модальном окне
+        dispatch(openModal(<Login/>));
+    }
+
+    const onClickRegister = () => {
+        //контент регистрации в модальном окне
+        dispatch(openModal(<Registration/>));
     }
 
     return (
@@ -26,15 +42,15 @@ export const Header = () => {
                     </Link>
                     <Navigate/>
                     <div className={s.login}>
+
                         {isAuth ? (
                             <button onClick={onClickLogout} className={`${s.singUp} ${s.button}`}>Выход</button>
                         ) : (<>
-                            <Link to="/login">
-                            <button className={`${s.singUp} ${s.button}`}>Вход</button>
-                            </Link>
-                            <Link to="/register">
-                            <button className={`${s.singOut} ${s.button}`}>Регистрация</button>
-                            </Link>
+
+                            <button className={`${s.singUp} ${s.button}`} onClick={onClickLogin}>Вход</button>
+
+                            <button className={`${s.singOut} ${s.button}`} onClick={onClickRegister}>Регистрация</button>
+
                         </>)}
 
                     </div>

@@ -1,0 +1,173 @@
+.header {
+  padding-top: 80px;
+
+  .title {
+    font-size: 60px;
+    font-weight: 500;
+    padding-bottom: 30px;
+  }
+
+  .text {
+    font-weight: 300;
+    font-size: 24px;
+    width: 680px;
+    text-align: justify;
+  }
+
+  margin-bottom: 100px;
+}
+
+.services {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-bottom: 100px;
+
+  //TODO ДУБЛИРОВАНИЕ КОДА В 4х местах
+
+  .servicesTitleWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 100px;
+  }
+
+  .servicesTitle {
+    margin-top: 110px;
+    min-width: 248px;
+    position: relative;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 47px;
+    text-transform: uppercase;
+    /* main_text */
+    color: #4F4E4E;
+    padding: 0 250px;
+
+    &:before {
+      content: "";
+      display: block;
+      width: 220px;
+      height: 6px;
+      background: #F0D3FF;
+      border-radius: 55px;
+      position: absolute;
+      text-align: center;
+      top: calc(50% - 3px);
+      left: 0;
+    }
+
+    &:after {
+      content: "";
+      display: block;
+      width: 220px;
+      height: 6px;
+      background: #F0D3FF;
+      border-radius: 55px;
+      position: absolute;
+      top: calc(50% - 3px);
+      right: 0;
+      text-align: center;
+    }
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  padding: 30px 30px 0 30px;
+  gap: 20px;
+  width: 410px;
+  height: 550px;
+  background: #FFFFFF;
+  box-shadow: 0 0 20px rgba(255, 226, 255, 0.65);
+  border-radius: 25px;
+
+  &:hover {
+    box-shadow: 0px 0px 20px rgba(255, 153, 255, 0.65);
+    cursor: pointer;
+  }
+
+  .center {
+    text-align: center;
+    margin: 0 auto;
+    padding-bottom: 20px;
+  }
+
+  .title {
+    padding-top: 20px;
+  }
+
+  .circle {
+    width: 16px;
+    height: 16px;
+    background-color: #D78DFF;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+
+  .direction {
+    display: flex;
+  }
+}
+
+.modal {
+  display: flex;
+  width: 1070px;
+  height: 490px;
+
+  &Image {
+    border-radius: 50px 0 0 50px;
+  }
+
+  &Title {
+    font-weight: 600;
+    font-size: 30px;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+  }
+
+  &Content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 40px;
+  }
+
+  &Description {
+    font-weight: 300;
+    font-size: 20px;
+    padding-bottom: 20px;
+  }
+
+  &Caption{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    color: #4F4E4E;
+    padding-bottom: 10px;
+  }
+
+  &Points {
+    &Text {
+      position: relative;
+      margin: 10px 0 10px 25px;
+
+      &::before {
+        display: block;
+        content: "";
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        left: -25px;
+        top: 6px;
+        border-radius: 50%;
+        background: #D78DFF;
+      }
+    }
+  }
+}
+
