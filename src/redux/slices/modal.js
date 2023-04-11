@@ -2,33 +2,47 @@ import {createSlice} from '@reduxjs/toolkit';
 import {PayloadAction} from "@reduxjs/toolkit";
 
 const initialState = {
-    active: false,
-    body: null // Компонент внутрь модального окна
+    modals: {
+        modalLogin: {
+            active: false,
+        },
+        modalService: {
+            active: false,
+        },
+        modalRegister: {
+            active: false,
+        },
+    }
+
+    // active: false,
+    // body: null // Компонент внутрь модального окна
 };
 
 const modalSlice = createSlice({
     name: 'modal',
     initialState,
     reducers:{
-        openModal: (state, action: PayloadAction<JSX.Element>) => {
-            state.active = true;
-            state.body = action.payload;
+        openModal: (state, action) => {
+            console.log(action.payload);
+            state.modals[action.payload].active = true;
         },
-        closeModal: (state) => {
-            state.active = false;
-            state.body = null;
+        closeModal: (state, action) => {
+            state.modals[action.payload].active = false;
+            // state.body = null;
         },
-        // active: (state, action) => {
-        //     state.active = action.payload;
-        // }
+        active: (state, action) => {
+            state.active = action.payload;
+        }
     },
     extraReducers: {
     }
 });
 
+export const getModalByType = type => (state) => state.modal.modals[type].active;
+
 export const modalReducer = modalSlice.reducer;
-export const selectIsActive = (state) => Boolean(state.modal.active);
-export const selectModalBody = (state) => (state.modal.body);
+// export const selectIsActive = (state, type) => Boolean(state.modal.modals[type]);
+// export const selectModalBody = (state) => (state.modal.body);
 
 //вытаскиваем экшены из слайса
 export const {active, openModal, closeModal} = modalSlice.actions;

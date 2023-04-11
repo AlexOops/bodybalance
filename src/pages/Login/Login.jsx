@@ -6,11 +6,11 @@ import TextField from "@mui/material/TextField";
 import {useForm} from 'react-hook-form';
 
 import styles from "./Login.module.scss";
-import {closeModal, openModal} from "../../redux/slices/modal";
-import {Registration} from "../Registration";
+import {openModal} from "../../redux/slices/modal";
 
 export const Login = () => {
     const isAuth = useSelector(selectIsAuth);
+    const typeModalRegistration = 'modalRegister';
 
     const dispatch = useDispatch();
     const {register, handleSubmit, formState: {errors, isValid}} = useForm({
@@ -19,6 +19,10 @@ export const Login = () => {
             password: "",
         }
     });
+
+    const clickRegistration = () => {
+        dispatch(openModal(typeModalRegistration));
+    }
 
     const onSubmit = async (values) => {
         const data = await dispatch(fetchAuth(values));
@@ -33,7 +37,7 @@ export const Login = () => {
     };
 
     if(isAuth){
-        dispatch(closeModal());
+        // dispatch(closeModal());
     }
 
     return (
@@ -62,7 +66,7 @@ export const Login = () => {
                         {...register('password', {required: 'Введите пароль'})}
                         fullWidth
                     />
-                    <div>Нет аккаунта? <span onClick={()=>dispatch(openModal(<Registration/>))}>Зарегистрируйтесь!</span></div>
+                    <div>Нет аккаунта? <span onClick={clickRegistration}>Зарегистрируйтесь!</span></div>
                     <Button type="submit" disabled={!isValid} size="large" variant="contained" fullWidth>
                         Войти
                     </Button>
