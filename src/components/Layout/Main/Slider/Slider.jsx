@@ -26,21 +26,25 @@ export const Slider = () => {
     const ref = useRef(null)
 
 
+
+
     useEffect(() => {
         setOffset(ref.current.clientWidth)
-        console.log(offset)
+
     }, [offset])
 
     useEffect(() => {
+        console.log(width)
+        console.log(offset)
         if (width > 0) {
             setWidth(maxLength)
         } else if (width < maxLength) {
             setWidth(0)
         }
-        // const timeout = setInterval(() => setWidth(prevState => prevState - offset), 1000)
-        // return() => {
-        //     clearInterval(timeout)
-        // }
+        const timeout = setInterval(() => setWidth(prevState => prevState - offset), 4000)
+        return() => {
+            clearInterval(timeout)
+        }
     }, [width, offset, maxLength])
 
     return (
@@ -48,12 +52,12 @@ export const Slider = () => {
             <div className={'container-color container-carousel container-slider'}>
                 <img className={s.sliderImg} src={sliderImg} alt=""/>
                 <ArrowLeft offset={offset} width={width} setWidth={setWidth}/>
-                <div className={`${s.contain} container`} style={{
-                    transform: `translateX(${width}px)`,
-                }} >
+                <div className={`${s.contain} container`}  >
                     {Object.values(slider).map((el) => {
                         return (
-                            <div ref={ref} key={nanoid()} className={s.slider} >
+                            <div className={s.slider} ref={ref} key={nanoid()} style={{
+                                transform: `translateX(${width}px)`,
+                            }}>
                                 <h1 className={s.sliderName}>{el.name}</h1>
                                 <p className={s.sliderText}>{el.text}</p>
                                 <button className={s.signUp}>Записаться</button>
@@ -75,3 +79,4 @@ export const Slider = () => {
         </>
     )
 }
+
