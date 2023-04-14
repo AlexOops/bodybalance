@@ -5,7 +5,7 @@ import {Card} from "../../components/Card/Card";
 import {AppointmentForm} from "../../components/AppointmentForm/AppointmentForm";
 import {useEffect, useState} from "react";
 import React from "react";
-import {active, openModal} from "../../redux/slices/modal";
+import {openModal} from "../../redux/slices/modal";
 import Modal from "../../components/Modal/Modal";
 
 export const Services = () => {
