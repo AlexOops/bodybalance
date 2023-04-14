@@ -4,11 +4,10 @@ import '../../index.scss'
 import {Navigate} from "../Navigate/Navigate";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {clickRegistration, isRegistration, logout, selectIsAuth} from "../../redux/slices/auth";
-import {active, closeModal, getModalByType, openModal} from "../../redux/slices/modal";
+import {logout, selectIsAuth} from "../../redux/slices/auth";
+import {openModal} from "../../redux/slices/modal";
 import Modal from "../Modal/Modal";
 import {Login} from "../../pages/Login/Login";
-import {useState} from "react";
 import {Registration} from "../../pages/Registration";
 
 export const Header = () => {

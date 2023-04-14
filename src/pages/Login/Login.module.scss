@@ -1,13 +1,14 @@
-.root {
-  width: 400px;
-  padding: 50px;
-  border: 1px solid #dedede;
-  margin: 50px auto;
-}
+//.root {
+//  width: 400px;
+//  padding: 50px;
+//  border: 1px solid #dedede;
+//  margin: 50px auto;
+//}
 
 .login {
   padding: 80px 110px;
-  width: 100%;
+  width: 850px;
+  height: 478px;
 }
 
 .title {
@@ -23,5 +24,61 @@
 
 .field {
   margin-bottom: 20px !important;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px 30px;
+  gap: 12px;
+  //width: 100%;
 
+  /* white */
+
+  background: #FFFFFF;
+  /* pink */
+
+  border: 1.5px solid #D78DFF;
+  border-radius: 40px;
+}
+
+.register {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.button, .disabledButton {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 20px 30px;
+  gap: 10px;
+
+  max-width: 120px;
+  height: 64px;
+
+  /* pink */
+
+  border-radius: 40px;
+  /* text */
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  border: none;
+  color: #FFFFFF;
+
+}
+
+.button {
+  background: #D78DFF;
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #9e8dff;
+  }
+  &:active{
+    opacity: 0.9;
+  }
+}
+.disabledButton {
+  background: #AEAEAE;
 }

@@ -1,12 +1,12 @@
-import React, {useState} from "react";
+import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchAuth, selectIsAuth,} from "../../redux/slices/auth";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
+import '../../index.scss'
 import {useForm} from 'react-hook-form';
 
 import styles from "./Login.module.scss";
 import {openModal} from "../../redux/slices/modal";
+import {Input} from "@mui/material";
 
 export const Login = () => {
     const isAuth = useSelector(selectIsAuth);
@@ -47,8 +47,9 @@ export const Login = () => {
                     Вход
                 </h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <TextField
-
+                    <Input
+                        disableUnderline={true}
+                        placeholder='Введите E-mail'
                         classes={{ root: styles.field }}
                         // label="E-Mail"
                         type="email"
@@ -57,7 +58,9 @@ export const Login = () => {
                         {...register('email', {required: 'Укажите почту'})}
                         fullWidth
                     />
-                    <TextField
+                    <Input
+                        disableUnderline={true}
+                        placeholder='Введите пароль'
                         classes={{ root: styles.field }}
                         // label="Пароль"
                         type="password"
@@ -66,10 +69,13 @@ export const Login = () => {
                         {...register('password', {required: 'Введите пароль'})}
                         fullWidth
                     />
-                    <div>Нет аккаунта? <span onClick={clickRegistration}>Зарегистрируйтесь!</span></div>
-                    <Button type="submit" disabled={!isValid} size="large" variant="contained" fullWidth>
-                        Войти
-                    </Button>
+
+                    <div className={styles.register}>
+                        <div>Нет аккаунта? <span onClick={clickRegistration}>Зарегистрируйтесь!</span></div>
+                        <button type="submit" disabled={!isValid} className={styles.button}>
+                            Войти
+                        </button>
+                    </div>
                 </form>
             </div>
         </>
