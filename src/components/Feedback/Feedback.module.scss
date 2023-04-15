@@ -38,4 +38,8 @@
 
 span {
   color: #D78DFF;
+  &:hover {
+    color: #9e8dff;
+    cursor: pointer;
+  }
 }

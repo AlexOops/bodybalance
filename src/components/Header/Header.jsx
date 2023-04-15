@@ -8,7 +8,7 @@ import {logout, selectIsAuth} from "../../redux/slices/auth";
 import {openModal} from "../../redux/slices/modal";
 import Modal from "../Modal/Modal";
 import {Login} from "../../pages/Login/Login";
-import {Registration} from "../../pages/Registration";
+import {Registration} from "../../pages/Registration/Registration";
 
 export const Header = () => {
     const dispatch = useDispatch();

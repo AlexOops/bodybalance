@@ -11,6 +11,12 @@
   height: 478px;
 }
 
+.circles {
+  position: absolute;
+  top: 68px;
+  left: 30px;
+}
+
 .title {
   font-style: normal;
   font-weight: 600;
@@ -21,8 +27,12 @@
   margin: 0 0 40px 0;
   //text-decoration: ;
 }
+.fieldRow {
+  position: relative;
+}
 
 .field {
+  position: relative;
   margin-bottom: 20px !important;
   display: flex;
   flex-direction: row;
@@ -38,12 +48,16 @@
 
   border: 1.5px solid #D78DFF;
   border-radius: 40px;
+  input {
+    padding: 0;
+  }
 }
 
 .register {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 .button, .disabledButton {
@@ -81,4 +95,10 @@
 }
 .disabledButton {
   background: #AEAEAE;
+}
+.error {
+  color: coral;
+  position: absolute;
+  bottom: 3px;
+  right: 30px;
 }
