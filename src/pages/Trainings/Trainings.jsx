@@ -11,7 +11,7 @@ export const Trainings = () => {
         {
             img: training_1,
             name: "Упражнения для восстановления подвижности голеностопного сустава",
-            url: "http://localhost:3000/training"
+            url: "http://localhost:3000/training/ankle"
         },
         {
             img: training_1,

@@ -10,7 +10,6 @@ import s from "../../../Feedback/Feedback.module.scss";
 import {ArrowLeft} from "../../../Arrow/ArrowLeft";
 import {ArrowRight} from "../../../Arrow/ArrowRight";
 
-
 export const Main = () => {
     const location = useLocation()
     return (

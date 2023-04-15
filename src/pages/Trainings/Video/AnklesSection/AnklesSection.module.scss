@@ -1,0 +1,85 @@
+.ankles_content {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  padding-bottom: 80px;
+
+  &_description {
+    padding: 0 0 0 50px;
+    width: 750px;
+  }
+
+  &_title {
+    font-weight: 500;
+    font-size: 30px;
+    padding-bottom: 20px;
+  }
+
+  &_text {
+    text-align: justify;
+  }
+}
+
+.header {
+  padding-top: 80px;
+  height: 400px;
+
+  .title {
+    font-size: 60px;
+    font-weight: 500;
+  }
+
+  .text {
+    padding-top: 30px;
+    font-weight: 300;
+    font-size: 24px;
+    width: 710px;
+    text-align: justify;
+  }
+}
+
+.servicesTitleWrap {
+  padding: 50px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.servicesTitle {
+  min-width: 248px;
+  position: relative;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 47px;
+  text-transform: uppercase;
+  /* main_text */
+  color: #4F4E4E;
+  padding: 50px 0px;
+
+  &:before {
+    content: "";
+    display: block;
+    width: 220px;
+    height: 6px;
+    background: #F0D3FF;
+    border-radius: 55px;
+    position: absolute;
+    text-align: center;
+    top: calc(50% - 3px);
+    left: -250px;
+  }
+
+  &:after {
+    content: "";
+    display: block;
+    width: 220px;
+    height: 6px;
+    background: #F0D3FF;
+    border-radius: 55px;
+    position: absolute;
+    top: calc(50% - 3px);
+    right: -250px;
+    text-align: center;
+  }
+}
