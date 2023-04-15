@@ -78,7 +78,7 @@ export const Login = () => {
                             // label="Пароль"
                             type="password"
                             error={Boolean(errors.password?.message)} //подсвечиваем красным если true
-                            helperText={errors.password?.message}
+                            // helperText={errors.password?.message}
                             {...register('password', {required: 'Введите пароль'})}
                             fullWidth
                         />

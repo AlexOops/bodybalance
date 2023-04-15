@@ -5,6 +5,13 @@
 //  margin: 50px auto;
 //}
 
+@-webkit-keyframes autofill {
+  to {
+    color: inherit;
+    background: transparent;
+  }
+}
+
 .login {
   padding: 80px 110px;
   width: 850px;
@@ -48,8 +55,14 @@
 
   border: 1.5px solid #D78DFF;
   border-radius: 40px;
+
+
   input {
     padding: 0;
+  }
+  input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
   }
 }
 
@@ -93,12 +106,14 @@
     opacity: 0.9;
   }
 }
-.disabledButton {
-  background: #AEAEAE;
-}
+
 .error {
   color: coral;
   position: absolute;
-  bottom: 3px;
+  bottom: 23px;
   right: 30px;
 }
+
+
+
+

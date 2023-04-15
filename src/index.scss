@@ -83,3 +83,11 @@ a {
   border-radius: 50%;
   z-index: -1;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5500s ease-in-out 0s;
+  //-webkit-text-fill-color: #AEAEAE !important;
+}
