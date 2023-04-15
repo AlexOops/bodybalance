@@ -1,10 +1,13 @@
 import {createBrowserRouter} from "react-router-dom";
 import {Main} from "./components/Layout/Main/Main/Main";
 import {Contacts} from "./pages/Contacts/Contacts";
-import {OnlineRehabilitation} from "./pages/OnlineRehabilitation/OnlineRehabilitation";
 import {Services} from "./pages/Services/Services";
 import {Trainings} from "./pages/Trainings/Trainings";
+import {Login} from "./pages/Login/Login";
+import {Registration} from "./pages/Registration";
 import {Specialists} from "./pages/Specialists/Specialists";
+import {OnlineRehabilitation} from "./pages/OnlineRehabilitation/OnlineRehabilitation";
+import AnklesSection from "./pages/Trainings/Video/AnklesSection/AnklesSection";
 
 export const router = createBrowserRouter([
     {
@@ -31,7 +34,18 @@ export const router = createBrowserRouter([
                 path: "/training",
                 element: <Trainings/>,
             },
-
+            {
+                path: "/login",
+                element: <Login/>,
+            },
+            {
+                path: "/register",
+                element: <Registration/>,
+            },
+            {
+                path: "/training/ankle",
+                element: <AnklesSection/>,
+            },
         ]
     },
 ]);
