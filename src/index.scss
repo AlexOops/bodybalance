@@ -60,3 +60,34 @@ a {
   color: #D78DFF;
 }
 
+.circleFirst {
+  position: absolute;
+  width: 346px;
+  height: 335px;
+  border-radius: 50%;
+  left: 3px;
+  top: 39px;
+  background: rgba(237, 207, 253, 0.2);
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+  z-index: -2;
+}
+
+.circleSecond {
+  position: absolute;
+  width: 192px;
+  height: 190px;
+  left: 210px;
+  top: 0px;
+  background: rgba(237, 207, 253, 0.2);
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5500s ease-in-out 0s;
+  //-webkit-text-fill-color: #AEAEAE !important;
+}

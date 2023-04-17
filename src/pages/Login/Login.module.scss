@@ -1,13 +1,27 @@
-.root {
-  width: 400px;
-  padding: 50px;
-  border: 1px solid #dedede;
-  margin: 50px auto;
+//.root {
+//  width: 400px;
+//  padding: 50px;
+//  border: 1px solid #dedede;
+//  margin: 50px auto;
+//}
+
+@-webkit-keyframes autofill {
+  to {
+    color: inherit;
+    background: transparent;
+  }
 }
 
 .login {
   padding: 80px 110px;
-  width: 100%;
+  width: 850px;
+  height: 478px;
+}
+
+.circles {
+  position: absolute;
+  top: 68px;
+  left: 30px;
 }
 
 .title {
@@ -20,8 +34,82 @@
   margin: 0 0 40px 0;
   //text-decoration: ;
 }
+.fieldRow {
+  position: relative;
+}
 
 .field {
+  position: relative;
   margin-bottom: 20px !important;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px 30px;
+  gap: 12px;
+  //width: 100%;
 
+  /* white */
+
+  background: #FFFFFF;
+  /* pink */
+
+  border: 1.5px solid #D78DFF;
+  border-radius: 40px;
+
+
+  input {
+    padding: 0;
+  }
+  input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+  }
+}
+
+.register {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button, .disabledButton {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 20px 30px;
+  gap: 10px;
+
+  max-width: 120px;
+  height: 64px;
+
+  /* pink */
+
+  border-radius: 40px;
+  /* text */
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  border: none;
+  color: #FFFFFF;
+
+}
+
+.button {
+  background: #D78DFF;
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #9e8dff;
+  }
+  &:active{
+    opacity: 0.9;
+  }
+}
+
+.error {
+  color: coral;
+  position: absolute;
+  bottom: 23px;
+  right: 30px;
 }
