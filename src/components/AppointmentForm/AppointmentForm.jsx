@@ -1,10 +1,12 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import s from './AppointmentForm.module.scss';
 import {Form, Formik, Field} from 'formik';
 
 import {CalendarPicker} from "./DataPicker/CalendarPicker";
 import ServicesSelectItem from "./ServicesSelectItem";
 import * as Yup from 'yup';
+import {useDispatch, useSelector} from "react-redux";
+import {selectedService, setSelectedService} from "../../redux/slices/services";
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 const SignupSchema = Yup.object().shape({
@@ -44,11 +46,21 @@ export const AppointmentForm = ({services, name}) => {
     // const [value, setValue] = useState(dayjs('2022-04-17T15:30'));
     const [workTimes, setWorkTimes] = useState([]);
     const [workDate, setWorkDate] = useState('');
-    const [headerValue, setHeaderValue] = useState('Выберите услугу');
-    const [isOpen, setOpen] = useState(false);
 
-    //активный компонент по dataset (отмечать активный, если меню не сворачиваем при выборе)
+    const [isOpen, setOpen] = useState(false);//Развернуть селект
+
+    const selected = useSelector(selectedService);
+    const dispatch = useDispatch();
+
+    //активный компонент по dataset (чтобы отмечать активный, если меню не сворачиваем при выборе)
     const [active, setActive] = useState(null);
+
+    //Посетитель выбрал услугу через карточку
+    useEffect( () => {
+        if(selected !== null){
+            setActive(selected.id); //подсветить выбранную услугу в списке при разворачивании.
+        }
+    }, []);
 
     const handleOpen = () => {
         setOpen((prevOpen) => !prevOpen);
@@ -56,7 +68,7 @@ export const AppointmentForm = ({services, name}) => {
     const onClickItem = (e, value) => {
         setActive(e.target.dataset.index);
         setOpen(false);
-        setHeaderValue(value);
+        dispatch(setSelectedService({name: value, id:e.target.dataset.index})); //храним выбранную услугу в стейте
     };
 
     //получим все рабочие даты в массив
@@ -82,8 +94,9 @@ export const AppointmentForm = ({services, name}) => {
             <h2 className={s.name}>{name}</h2>
             <div className={s.form}>
                 <Formik
+                    enableReinitialize
                     initialValues={{
-                        serviceId: '',
+                        serviceId: (selected !== null) ? selected.id : '',
                         firstName: '',
                         secondName: '',
                         email: '',
@@ -116,7 +129,9 @@ export const AppointmentForm = ({services, name}) => {
                             <div className={s.selectRow}>
                                 <div className={s.select}>
                                     {(errors.serviceId&&touched.serviceId) && <div className={s.error}>{errors.serviceId}</div>}
-                                <div onClick={handleOpen} className={`${s.selectHeader} ${(isOpen)? s.open : s.close}`}>{headerValue}</div>
+                                <div onClick={handleOpen} className={`${s.selectHeader} ${(isOpen)? s.open : s.close}`}>
+                                    {(selected===null) ? 'Выберите услугу' : selected.name}
+                                </div>
 
                                     <div className={isOpen ? s.selectContainer : `${s.selectContainer} ${s.closeContainer}`}>
                                         {services.map((service, key) =>

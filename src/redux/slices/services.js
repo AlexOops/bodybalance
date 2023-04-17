@@ -23,14 +23,20 @@ export const fetchServicesByRating = createAsyncThunk('services/fetchServicesByR
 const initialState = {
     services: {
       items: [],
-      status: 'loading'
+      status: 'loading',
+      selectedService: null, //{name:"" , id:"" }
     },
 };
 
 const servicesSlice = createSlice({
     name: 'services',
     initialState,
-    reducers: {},
+    reducers: {
+        setSelectedService: (state, action) => {
+            console.log('actionSetSelected', action.payload);
+            state.services.selectedService = action.payload;
+        },
+    },
     extraReducers: {
         [fetchServices.pending]: (state) => {
             state.services.items = [];
@@ -60,4 +66,8 @@ const servicesSlice = createSlice({
     },
 });
 
+export const selectedService = (state)=> state.services.services.selectedService;
 export const servicesReducer = servicesSlice.reducer;
+
+//экшены
+export const {setSelectedService} = servicesSlice.actions;

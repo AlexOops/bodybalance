@@ -3,6 +3,10 @@ import s from "./Card.module.scss";
 import ReactMarkdown from "react-markdown";
 import {CardSkeleton} from "./CardSkeleton";
 import card_img from "../../assets/rectangle33.jpg";
+import {useDispatch} from "react-redux";
+import {setSelectedService} from "../../redux/slices/services";
+import {closeModal} from "../../redux/slices/modal";
+import {useRef} from "react";
 export const Card = ({
     id,
     price,
@@ -13,7 +17,17 @@ export const Card = ({
     imageUrl,
     isLoading,
     isFull,
+    handleAction
 }) => {
+
+    const dispatch = useDispatch();
+    const handleSelectService = () => {
+        dispatch(setSelectedService({id: id, name:name}));
+        dispatch(closeModal('modalService'));
+        handleAction();
+    }
+
+
    if (isLoading) {
         return <CardSkeleton/>
     }
@@ -34,7 +48,7 @@ export const Card = ({
 
                <div className={s.flexSB}>
                    <div className={s.price}>{price}</div>
-                   <button className={s.button} type ="submit">Записаться </button>
+                   <button className={s.button} onClick={handleSelectService} type ="submit">Записаться </button>
                </div>
            </div>
        </div>
