@@ -1,11 +1,11 @@
 import '../../../../index.scss'
 import s from './Slider.module.scss'
-import {ArrowRight} from "../../../Arrow/ArrowRight";
-import {ArrowLeft} from "../../../Arrow/ArrowLeft";
 import {Dots} from "./Dots/Dots";
 import sliderImg from '../../../../assets/vectorpaint.svg'
 import {useEffect, useRef, useState} from "react";
 import {nanoid} from "nanoid";
+import {ArrowRight} from "../../../Arrow/ArrowRight";
+import {ArrowLeft} from "../../../Arrow/ArrowLeft";
 
 // пока статика на получение с сервера переписать
 const slider = [
@@ -26,11 +26,8 @@ export const Slider = () => {
     const ref = useRef(null)
 
 
-
-
     useEffect(() => {
         setOffset(ref.current.clientWidth)
-
     }, [offset])
 
     useEffect(() => {
@@ -79,4 +76,3 @@ export const Slider = () => {
         </>
     )
 }
-

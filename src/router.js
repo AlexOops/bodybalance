@@ -8,11 +8,13 @@ import {Registration} from "./pages/Registration/Registration";
 import {Specialists} from "./pages/Specialists/Specialists";
 import {OnlineRehabilitation} from "./pages/OnlineRehabilitation/OnlineRehabilitation";
 import AnklesSection from "./pages/Trainings/Video/AnklesSection/AnklesSection";
+import {ErrorPage} from "./pages/404/ErrorPage";
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <Main />,
+        element: <Main/>,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: "/contacts",

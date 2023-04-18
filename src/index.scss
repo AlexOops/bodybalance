@@ -52,6 +52,16 @@ p {
   flex-direction: column;
 }
 
+.activeSlide {
+  transform: translateX(0);
+}
+.lastSlide {
+  transform: translateX(-100%);
+}
+.nextSlide {
+  transform: translateX(100%);
+}
+
 a {
   text-decoration: none;
 }
