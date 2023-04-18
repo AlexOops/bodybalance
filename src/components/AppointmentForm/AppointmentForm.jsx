@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, {Fragment, useState} from "react";
 import s from './AppointmentForm.module.scss';
 import {Form, Formik, Field} from 'formik';
 
 import {CalendarPicker} from "./DataPicker/CalendarPicker";
-import ServicesSelectItem from "./ServicesSelectItem";
 import * as Yup from 'yup';
 import {useDispatch, useSelector} from "react-redux";
 import {selectedService, setSelectedService} from "../../redux/slices/services";
@@ -47,6 +46,7 @@ export const AppointmentForm = ({services, name}) => {
     const [workTimes, setWorkTimes] = useState([]);
     const [workDate, setWorkDate] = useState('');
 
+    const [headerValue, setHeaderValue] = useState('Выберите услугу');
     const [isOpen, setOpen] = useState(false);//Развернуть селект
 
     const selected = useSelector(selectedService);
@@ -55,20 +55,15 @@ export const AppointmentForm = ({services, name}) => {
     //активный компонент по dataset (чтобы отмечать активный, если меню не сворачиваем при выборе)
     const [active, setActive] = useState(null);
 
-    //Посетитель выбрал услугу через карточку
-    useEffect( () => {
-        if(selected !== null){
-            setActive(selected.id); //подсветить выбранную услугу в списке при разворачивании.
-        }
-    }, []);
-
     const handleOpen = () => {
         setOpen((prevOpen) => !prevOpen);
     };
     const onClickItem = (e, value) => {
         setActive(e.target.dataset.index);
         setOpen(false);
-        dispatch(setSelectedService({name: value, id:e.target.dataset.index})); //храним выбранную услугу в стейте
+        setHeaderValue(value);
+        dispatch(setSelectedService(null));//обнулить выбор из карточки для выбора из селекта, так как разделили управление ( выбор по checked или выбор по клику из Card)
+        // dispatch(setSelectedService({name: value, id:e.target.dataset.index})); //храним выбранную услугу в стейте
     };
 
     //получим все рабочие даты в массив
@@ -94,9 +89,11 @@ export const AppointmentForm = ({services, name}) => {
             <h2 className={s.name}>{name}</h2>
             <div className={s.form}>
                 <Formik
-                    enableReinitialize
+
+                    // enableReinitialize
                     initialValues={{
-                        serviceId: (selected !== null) ? selected.id : '',
+                        // serviceId: (selected !== null) ? selected.id : '',
+                        serviceId: '',
                         firstName: '',
                         secondName: '',
                         email: '',
@@ -106,6 +103,7 @@ export const AppointmentForm = ({services, name}) => {
                         // picked: '',
                     }}
                     validationSchema={SignupSchema}
+
                     // validate={values => {
                     //     const errors = {};
                     //     if (!values.email){
@@ -117,32 +115,72 @@ export const AppointmentForm = ({services, name}) => {
                     //     }
                     //     return errors;
                     // }}
-                    onSubmit={(values, {setSubmitting}) => {
+
+                    onSubmit={(values, actions) => {
+                        if(selected!==null) {
+                            console.log(actions);
+                            actions.setFieldValue('serviceId', selected.id); //если выбрали услугу из карточки, то берем значение из стейта.
+                        }
+
                         setTimeout(()=> {
+
                             alert(JSON.stringify(values, null, 2));
-                            setSubmitting(false);
+                            actions.setSubmitting(false);
                         }, 400);
                     }}
                 >
-                    {({isSubmitting, values, errors, touched    }) => (
+                    {({isSubmitting, values, errors, touched  , setFieldValue  }) => (
                         <Form>
                             <div className={s.selectRow}>
                                 <div className={s.select}>
                                     {(errors.serviceId&&touched.serviceId) && <div className={s.error}>{errors.serviceId}</div>}
                                 <div onClick={handleOpen} className={`${s.selectHeader} ${(isOpen)? s.open : s.close}`}>
-                                    {(selected===null) ? 'Выберите услугу' : selected.name}
+                                    {(selected===null) ? headerValue : selected.name}
                                 </div>
 
                                     <div className={isOpen ? s.selectContainer : `${s.selectContainer} ${s.closeContainer}`}>
-                                        {services.map((service, key) =>
-                                            <ServicesSelectItem
-                                                service={service}
-                                                key={key}
-                                                onClickItem={(e)=>onClickItem( e, service.name )}
-                                                active={active}
-                                            />
-                                        )}
+                                        <Field
+                                            name="serviceId"
+
+                                            render={({ field }) => (
+                                                <>
+                                                    {services.map((service, key) =>
+                                                    <Fragment key={key}>
+                                                        <input type="radio"
+                                                               className={s.selectInput}
+                                                               id={service._id}
+                                                               {...field}
+                                                                value={service._id}
+                                                               // value={service.name}
+
+                                                        />
+                                                        <label
+                                                            key={`label${service._id}`}
+                                                            className={`${s.selectLabel} ${service._id === active ? s.active : ''}`}
+                                                            data-index={service._id}
+                                                            htmlFor={service._id}
+                                                            onClick={(e) => onClickItem(e, service.name)}
+
+                                                        >
+                                                            {service.name}
+                                                        </label>
+                                                    </Fragment>
+                                                        )}
+                                                </>
+                                            )}
+                                        />
+
+
+                                        {/*{services.map((service, key) =>*/}
+                                        {/*    <ServicesSelectItem*/}
+                                        {/*        service={service}*/}
+                                        {/*        key={key}*/}
+                                        {/*        onClickItem={(e)=>onClickItem( e, service.name )}*/}
+                                        {/*        active={(selected===null) ? active : selected.id} //если есть выбранный элемент в стейте, то выделяем его в стиле, иначе собственный выбор формы по клику.*/}
+                                        {/*    />*/}
+                                        {/*)}*/}
                                     </div>
+
                                 </div>
                             </div>
                             <div className={s.flexRowContainer}>
