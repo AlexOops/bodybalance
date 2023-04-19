@@ -93,49 +93,20 @@ useEffect(() =>{
 
                                     <div className={isOpen ? s.selectContainer : `${s.selectContainer} ${s.closeContainer}`}>
 
-                                        <Field
-                                            name="service" >
+                                            {services.map((service, key) =>
 
-                                            {({ field }) => (
-                                                <>
-                                                    {services.map((service, key) =>
-                                                    <Fragment key={key}>
-                                                        <input type="radio"
-                                                               className={s.selectInput}
-                                                               id={service._id}
-                                                               {...field}
-                                                                value={service._id}
-                                                               // value={service.name}
-
-                                                        />
-
-                                                        <label
-                                                            key={`label${service._id}`}
-                                                            className={`${s.selectLabel} ${service._id === selected.id ? s.active : ''}`}
-                                                            data-index={service._id}
-                                                            htmlFor={service._id}
-                                                            onClick={(e) => {
-                                                                setFieldValue('serviceId', service.id);
-                                                                onClickItem(e, service.id, service.name)
-                                                            }}
-                                                        >
-                                                            {service.name}
-                                                        </label>
-                                                    </Fragment>
-                                                        )}
-                                                </>
+                                                <div key={service.id}
+                                                    // className={s.selectInput}
+                                                    className={`${s.selectLabel} ${service._id === selected.id ? s.active : ''}`}
+                                                    // data-index={service._id}
+                                                    onClick={(e) => {
+                                                        setFieldValue('serviceId', service.id);
+                                                        onClickItem(e, service.id, service.name)
+                                                    }}
+                                                >
+                                                    {service.name}
+                                                </div>
                                             )}
-                                        </Field>
-
-
-                                        {/*{services.map((service, key) =>*/}
-                                        {/*    <ServicesSelectItem*/}
-                                        {/*        service={service}*/}
-                                        {/*        key={key}*/}
-                                        {/*        onClickItem={(e)=>onClickItem( e, service.name )}*/}
-                                        {/*        active={(selected===null) ? active : selected.id} //если есть выбранный элемент в стейте, то выделяем его в стиле, иначе собственный выбор формы по клику.*/}
-                                        {/*    />*/}
-                                        {/*)}*/}
                                     </div>
 
                                 </div>
