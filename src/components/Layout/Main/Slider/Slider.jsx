@@ -31,8 +31,6 @@ export const Slider = () => {
     }, [offset])
 
     useEffect(() => {
-        console.log(width)
-        console.log(offset)
         if (width > 0) {
             setWidth(maxLength)
         } else if (width < maxLength) {

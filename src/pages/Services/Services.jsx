@@ -1,14 +1,15 @@
 import {useDispatch, useSelector} from 'react-redux';
-import {fetchServices} from "../../redux/slices/services";
+import {fetchServices, selectedService} from "../../redux/slices/services";
 import s from './Services.module.scss';
 import {Card} from "../../components/Card/Card";
 import {AppointmentForm} from "../../components/AppointmentForm/AppointmentForm";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import React from "react";
 import {openModal} from "../../redux/slices/modal";
 import Modal from "../../components/Modal/Modal";
 
 export const Services = () => {
+
     const dispatch = useDispatch();
     const {services} = useSelector( state => state.services);
     const [service, setService] = useState({});
@@ -18,17 +19,24 @@ export const Services = () => {
     // const isServicesLoading = true; // проверить скелетон
 
     // const modalActive = useSelector(selectIsActive);
+    const scrollToRef = useRef();
 
     const setModal = (event, obj) => {
         setService(obj);
-        // dispatch(active(true));
         dispatch(openModal('modalService'));
+    }
+
+    const cardAction = () => {
+        scrollToRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     useEffect(() => {
         dispatch(fetchServices());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
+
+
+
 
     return (
         <>
@@ -67,7 +75,7 @@ export const Services = () => {
                 </div>
             </div>
         </div>
-            <div className="container"><AppointmentForm name={'Быстрая запись'} services={services.items}/></div>
+            <div className="container" ref={scrollToRef}><AppointmentForm name={'Быстрая запись'} services={services.items}/></div>
             <Modal type='modalService'>
                 <Card
                     isFull={true}
@@ -76,6 +84,7 @@ export const Services = () => {
                     name={service.name}
                     description={service.description}
                     text={service.text}
+                    handleAction={cardAction}
                 />
             </Modal>
         </>
