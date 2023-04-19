@@ -17,14 +17,14 @@ export const Card = ({
     imageUrl,
     isLoading,
     isFull,
-    handleAction
+    handleAction,
 }) => {
 
     const dispatch = useDispatch();
     const handleSelectService = () => {
         dispatch(setSelectedService({id: id, name:name}));
         dispatch(closeModal('modalService'));
-        handleAction();
+        handleAction(); //действие в родительском компоненте.
     }
 
 

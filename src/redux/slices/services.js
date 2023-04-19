@@ -24,7 +24,10 @@ const initialState = {
     services: {
       items: [],
       status: 'loading',
-      selectedService: null, //{name:"" , id:"" }
+      selectedService: {
+          name: null ,
+          id: null
+      }
     },
 };
 
