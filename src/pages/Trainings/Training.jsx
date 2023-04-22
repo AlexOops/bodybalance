@@ -1,45 +1,28 @@
-import React from "react";
-import s from "./Trainings.module.scss";
+import React, {useEffect} from "react";
+import s from "./Training.module.scss";
 import "../../index.scss";
 import play_item from "../../assets/play_item.svg";
 import training_1 from "../../assets/training_1.png"
 import {Feedback} from "../../components/Feedback/Feedback";
 import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchTraining, setDescription, setName} from "../../redux/slices/training";
 
-export const Trainings = () => {
-    const trainingList = [
-        {
-            img: training_1,
-            name: "Упражнения для восстановления подвижности голеностопного сустава",
-            url: "http://localhost:3000/training/ankle"
-        },
-        {
-            img: training_1,
-            name: "Упражнения для восстановления подвижности голеностопного сустава",
-            url: "http://localhost:3000/training"
-        },
-        {
-            img: training_1,
-            name: "Упражнения для восстановления подвижности голеностопного сустава",
-            url: "http://localhost:3000/training"
-        },
-        {
-            img: training_1,
-            name: "Упражнения для восстановления подвижности голеностопного сустава",
-            url: "http://localhost:3000/training"
-        },
-        {
-            img: training_1,
-            name: "Упражнения для восстановления подвижности голеностопного сустава",
-            url: "http://localhost:3000/training"
-        },
-        {
-            img: training_1,
-            name: "Упражнения для восстановления подвижности голеностопного сустава",
-            url: "http://localhost:3000/training"
-        },
-    ]
+export const Training = () => {
+    const dispatch = useDispatch();
+    const data = useSelector((state) => state.training.training.items);
 
+    useEffect(() => {
+        dispatch(fetchTraining());
+    }, [dispatch])
+
+    const handleClick = (name, description) => {
+        dispatch(setName(name));
+        dispatch(setDescription(description));
+
+        localStorage.setItem('name', name);
+        localStorage.setItem('description', description);
+    }
 
     return (
         <>
@@ -67,11 +50,14 @@ export const Trainings = () => {
 
                         <ul className={s.training_list}>
                             {
-                                trainingList.map((item, idx) => {
+                                data.map((item, idx) => {
                                     return (
-                                        <Link to={item.url} key={idx} >
+                                        <Link to={`/training/${item._id}`}
+                                              key={idx}
+                                              onClick={() => handleClick(item.name, item.description)}
+                                        >
                                             <li className={s.training_item}>
-                                                <img src={item.img} alt="trn1"/>
+                                                <img src={training_1} alt="trn1"/>
                                                 <div className={s.training_item_wrp}>
                                                     <p className={s.training_item_text}>
                                                         {item.name}
