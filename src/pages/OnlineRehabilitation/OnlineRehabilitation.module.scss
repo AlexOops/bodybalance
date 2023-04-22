@@ -87,7 +87,7 @@
   border-radius: 25px;
 
   &:hover {
-    box-shadow: 0px 0px 20px rgba(255, 153, 255, 0.65);
+    box-shadow: 0 0 20px rgba(255, 153, 255, 0.65);
     cursor: pointer;
   }
 
@@ -98,7 +98,7 @@
   }
 
   .title {
-    padding-top: 20px;
+    padding: 30px 0;
   }
 
   .circle {
@@ -106,68 +106,11 @@
     height: 16px;
     background-color: #D78DFF;
     border-radius: 50%;
-    margin-right: 15px;
+    margin: 5px 10px 5px 5px;
   }
 
   .direction {
     display: flex;
+    height: 40px;
   }
 }
-
-.modal {
-  display: flex;
-  width: 1070px;
-  height: 490px;
-
-  &Image {
-    border-radius: 50px 0 0 50px;
-  }
-
-  &Title {
-    font-weight: 600;
-    font-size: 30px;
-    text-transform: uppercase;
-    padding-bottom: 10px;
-  }
-
-  &Content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 40px;
-  }
-
-  &Description {
-    font-weight: 300;
-    font-size: 20px;
-    padding-bottom: 20px;
-  }
-
-  &Caption{
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    color: #4F4E4E;
-    padding-bottom: 10px;
-  }
-
-  &Points {
-    &Text {
-      position: relative;
-      margin: 10px 0 10px 25px;
-
-      &::before {
-        display: block;
-        content: "";
-        position: absolute;
-        width: 16px;
-        height: 16px;
-        left: -25px;
-        top: 6px;
-        border-radius: 50%;
-        background: #D78DFF;
-      }
-    }
-  }
-}
-

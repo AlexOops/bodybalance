@@ -1,88 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import s from "./OnlineRehabilitation.module.scss"
 import Recommendation from "../../components/Recommendation/Recommendation";
-import {AppointmentForm} from "../../components/AppointmentForm/AppointmentForm";
 import service1 from "../../assets/img-service.png"
-import card_img from "../../assets/rectangle33.jpg"
 import {useDispatch, useSelector} from "react-redux";
-import {openModal} from "../../redux/slices/modal";
+import {fetchOnlineServices} from "../../redux/slices/onlineRehabilitation"
+import {Card} from "../../components/Card/Card";
 
 export const OnlineRehabilitation = () => {
 
-    const onlineServiceList = [
-        {
-            name: "Онлайн-консультация",
-            description: "Составление индивидуального комплекса терапевтических упражнений для выполнения в домашних условиях",
-            treatment: [
-                {
-                    name: "От боли в спине",
-                },
-                {
-                    name: "Восстановление после травме",
-                },
-                {
-                    name: "Восстановление после операции",
-                },
+    const dispatch = useDispatch();
+    const onlineServiceList = useSelector((state) => state.onlineServices.onlineServices.items);
 
-            ]
-        },
-        {
-            name: "Индивидуальная",
-            description: "Составление индивидуального комплекса терапевтических упражнений для выполнения в домашних условиях",
-            treatment: [
-                {
-                    name: "От боли в спине",
-                },
-                {
-                    name: "Восстановление после травме",
-                },
-                {
-                    name: "Восстановление после операции",
-                },
+    const isOnlineServiceListLoading = onlineServiceList.status === 'loading';
 
-            ]
-        },
-        {
-            name: "Со специалистом",
-            description: "Составление индивидуального комплекса терапевтических упражнений для выполнения в домашних условиях",
-            treatment: [
-                {
-                    name: "От боли в спине",
-                },
-                {
-                    name: "Восстановление после травме",
-                },
-                {
-                    name: "Восстановление после операции",
-                },
-
-            ]
-        }
-    ]
-
-    const {services} = useSelector(state => state.services);
-    const dispatch = useDispatch()
-
-    const setModal = (event, item) => {
-
-        dispatch(openModal(
-            <div className={s.modal}>
-                <img className={s.modalImage} src={card_img} alt=""/>
-                <div className={s.modalContent}>
-                    <p className={s.modalTitle}>{item.name}</p>
-                    <p className={s.modalDescription}>{item.description}</p>
-                    <p className={s.modalCaption}>Данный комплекс отличнно подойдет при:</p>
-                    {item.treatment.map((treatment, idx) => {
-                        return (
-                            <div className={s.modalPoints} key={idx}>
-                                <p className={s.modalPointsText} key={idx}>{treatment.name}</p>
-                            </div>
-                        )
-                    })}
-                </div>
-            </div>
-        ));
-    }
+    useEffect(() => {
+        dispatch(fetchOnlineServices());
+    }, [dispatch]);
 
     return (
         <div>
@@ -112,41 +45,44 @@ export const OnlineRehabilitation = () => {
                             <h2 className={s.servicesTitle}>Онлайн-программы</h2>
                         </div>
                         {
-                            onlineServiceList.map((item, idx) => {
-                                return (
-                                    <div className={s.card} key={idx} onClick={(event) => setModal(event, item)}>
-                                        <div className={s.center}>
-                                            <img src={service1} width={180} height={180} alt=""/>
-                                            <h3 className={s.title}>
-                                                {item.name}
-                                            </h3>
-                                        </div>
+                            (isOnlineServiceListLoading ? [...Array(3)] : onlineServiceList)?.map((item, idx) => {
+                                    return (isOnlineServiceListLoading
+                                        ? (<div className={s.card} key={idx}>
+                                                <Card key={idx} isLoading={true}/>
+                                            </div>
+                                        )
+                                        : (
+                                            <div className={s.card} key={idx}>
+                                                <div className={s.center}>
+                                                    <img src={service1} width={180} height={180} alt=""/>
+                                                    <h3 className={s.title}>
+                                                        {item.name}
+                                                    </h3>
+                                                    {
+                                                        item.treatment.map((item, idx) => {
+                                                            return (
+                                                                <div key={idx}>
+                                                                    <div className={s.direction} key={idx}>
+                                                                        <div className={s.circle}></div>
+                                                                        <p>
+                                                                            {item}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        })
+                                                    }
 
-                                        {item.treatment.map((treatment, idx) => {
-                                            return (
-                                                <div className={s.direction} key={idx}>
-                                                    <div className={s.circle}></div>
-                                                    <p key={idx}>
-                                                        {treatment.name}
-                                                    </p>
                                                 </div>
-                                            )
-                                        })}
-                                    </div>
-                                )
-                            })
+                                            </div>
+                                        ))
+                                }
+                            )
                         }
+
                     </div>
                 </div>
             </div>
-
-            <div className="container">
-                <AppointmentForm
-                    name={'Быстрая запись'}
-                    services={services.items}
-                />
-            </div>
-
         </div>
     );
-};
+}

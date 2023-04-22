@@ -2,13 +2,13 @@ import {createBrowserRouter} from "react-router-dom";
 import {Main} from "./components/Layout/Main/Main/Main";
 import {Contacts} from "./pages/Contacts/Contacts";
 import {Services} from "./pages/Services/Services";
-import {Trainings} from "./pages/Trainings/Trainings";
+import {Training} from "./pages/Trainings/Training";
 import {Login} from "./pages/Login/Login";
 import {Registration} from "./pages/Registration/Registration";
 import {Specialists} from "./pages/Specialists/Specialists";
 import {OnlineRehabilitation} from "./pages/OnlineRehabilitation/OnlineRehabilitation";
-import AnklesSection from "./pages/Trainings/Video/AnklesSection/AnklesSection";
 import {ErrorPage} from "./pages/404/ErrorPage";
+import {Videos} from "./pages/Trainings/Videos/Videos";
 
 export const router = createBrowserRouter([
     {
@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
                 element: <Contacts/>,
             },
             {
-                path: "/online_rehabilitation",
+                path: "/online-rehabilitation",
                 element: <OnlineRehabilitation/>,
             },
             {
@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/training",
-                element: <Trainings/>,
+                element: <Training/>,
             },
             {
                 path: "/login",
@@ -45,8 +45,8 @@ export const router = createBrowserRouter([
                 element: <Registration/>,
             },
             {
-                path: "/training/ankle",
-                element: <AnklesSection/>,
+                path: "/training/:id",
+                element: <Videos/>,
             },
         ]
     },
