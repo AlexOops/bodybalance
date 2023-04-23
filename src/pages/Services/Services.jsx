@@ -10,25 +10,6 @@ import {openModal} from "../../redux/slices/modal";
 import Modal from "../../components/Modal/Modal";
 import * as Yup from "yup";
 
-
-const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
-const SignupSchema = Yup.object().shape({
-    firstName: Yup.string()
-        .min(3, 'Не менее трех символов')
-        // .max(50, 'Too Long!')
-        .required('Укажите имя'),
-    secondName: Yup.string()
-        .min(3, 'Не менее трех символов')
-        // .max(50, 'Too Long!')
-        .required('Укажите фамилию'),
-    email: Yup.string().email('Некорректный email').required('Введите e-mail'),
-    phone: Yup.string().matches(phoneRegExp, 'Некорректный номер телефона'),
-    text: Yup.string().max(500, 'Пожалуйста, введите сообщение не более 500 символов'),
-    datetime: Yup.string().required('Выберите дату и время'),
-    serviceId: Yup.string().required('Выберите Услугу'),
-
-});
-
 export const Services = () => {
     const dispatch = useDispatch();
     const {services} = useSelector( state => state.services);
@@ -93,44 +74,17 @@ export const Services = () => {
         </div>
             <div className="container" ref={scrollToRef}>
 
-                <Formik
-                    validateOnBlur={false}
-                    // enableReinitialize
-                    initialValues={{
-                        // serviceId: (selected !== null) ? selected.id : '',
-                        serviceId: '',
-                        firstName: '',
-                        secondName: '',
-                        email: '',
-                        phone: '',
-                        datetime: '',
-                        text: '',
-                        // picked: '',
-                    }}
-                    validationSchema={SignupSchema}
 
-                    onSubmit={(values, actions) => {
-                            // actions.setFieldValue('serviceId', selected.id); //если выбрали услугу из карточки, то берем значение из стейта.
-
-                        setTimeout(()=> {
-
-                            alert(JSON.stringify(values, null, 2));
-                            actions.setSubmitting(false);
-                        }, 400);
-                    }}
-                >
-                    {({isSubmitting, values, errors, touched  , setFieldValue  }) => (
-                        <AppointmentForm isSubmitting={isSubmitting}
-                                         values={values}
-                                         errors={errors}
-                                         touched={touched}
-                                         setFieldValue={setFieldValue}
+                        <AppointmentForm
+                                         // isSubmitting={isSubmitting}
+                                         // values={values}
+                                         // errors={errors}
+                                         // touched={touched}
+                                         // setFieldValue={setFieldValue}
                                          name={'Быстрая запись'}
                                          services={services.items}
                         />
-                    )}
 
-                </Formik>
                 </div>
             <Modal type='modalService'>
                 <Card
