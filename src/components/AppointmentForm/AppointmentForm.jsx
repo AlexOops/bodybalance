@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectedService, setSelectedService} from "../../redux/slices/services";
 import {TextField} from "@mui/material";
 import ServiceIdInput from "./ServiceIdInput";
+import axios from "../../axios";
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 const SignupSchema = Yup.object().shape({
@@ -111,10 +112,25 @@ export const AppointmentForm = ({services, name,
             }}
             validationSchema={SignupSchema}
 
-            onSubmit={(values, actions) => {
+            onSubmit = {async (values, actions) => {
                 // actions.setFieldValue('serviceId', selected.id); //если выбрали услугу из карточки, то берем значение из стейта.
+                try {
+                    const {data} = await axios.post('/customers', {
+                    firstName: values.firstName,
+                    secondName: values.secondName,
+                    email: values.email,
+                    phone: values.phone,
+                });
+                    //получили id нового покупателя.
+                    const _id = data._id;
+                    console.log(data);
 
-                setTimeout(()=> {
+                } catch(err) {
+                    console.warn(err);
+                    alert('Ошибка при создании покупателя');
+                }
+
+                setTimeout(() => {
 
                     alert(JSON.stringify(values, null, 2));
                     actions.setSubmitting(false);
@@ -209,7 +225,7 @@ export const AppointmentForm = ({services, name,
                                         name="datetime"
 
                                     > {workTimes.map((time, key) =>
-                                        <option key={key} value={`${workDate} ${time}`}>{time}</option>
+                                        <option key={key} value={`${workDate}T${time}:00`}>{time}</option>
                                     )}
                                     </Field>
                                 </div>
