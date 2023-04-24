@@ -115,19 +115,32 @@ export const AppointmentForm = ({services, name,
             onSubmit = {async (values, actions) => {
                 // actions.setFieldValue('serviceId', selected.id); //если выбрали услугу из карточки, то берем значение из стейта.
                 try {
-                    const {data} = await axios.post('/customers', {
-                    firstName: values.firstName,
-                    secondName: values.secondName,
-                    email: values.email,
-                    phone: values.phone,
-                });
-                    //получили id нового покупателя.
-                    const _id = data._id;
-                    console.log(data);
+                     await axios.get('/customer/byemail/?email=' + values.email)
+                        .then(async (res) => {
+                            let customerId;
+                            if (res.data === null) {
+                                const {data} = await axios.post('/customers', {
+                                    firstName: values.firstName,
+                                    secondName: values.secondName,
+                                    email: values.email,
+                                    phone: values.phone,
+                                });
+                                //получили id нового покупателя.
+                                customerId = data._id;
+                            } else {
+                                customerId = res.data._id;
+                            }
+                            await axios.post('/appointments', {
+                                service: values.serviceId,
+                                customer: customerId,
+                                employer: '640dbd31331a6169da66299e', // нужно внедрить поле сотрудника в форму
+                                dateTime: values.datetime,
+                            }).then(res => console.log(res)).catch(err => console.log(err))
+                        });
 
                 } catch(err) {
                     console.warn(err);
-                    alert('Ошибка при создании покупателя');
+                    alert('Ошибка при создании записи');
                 }
 
                 setTimeout(() => {
