@@ -9,6 +9,8 @@ import {selectedService, setSelectedService} from "../../redux/slices/services";
 import {TextField} from "@mui/material";
 import ServiceIdInput from "./ServiceIdInput";
 import axios from "../../axios";
+import Modal from "../Modal/Modal";
+import {openModal} from "../../redux/slices/modal";
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 const SignupSchema = Yup.object().shape({
@@ -59,7 +61,6 @@ export const AppointmentForm = ({services, name,
 
     const [headerValue, setHeaderValue] = useState('Выберите услугу');
     const [isOpen, setOpen] = useState(false);//Развернуть селект
-
     const dispatch = useDispatch();
 
     //активный компонент по dataset (чтобы отмечать активный, если меню не сворачиваем при выборе)
@@ -102,6 +103,7 @@ export const AppointmentForm = ({services, name,
             initialValues={{
                 // serviceId: (selected !== null) ? selected.id : '',
                 serviceId: '',
+                employer: '640dbd31331a6169da66299e',
                 firstName: '',
                 secondName: '',
                 email: '',
@@ -115,6 +117,7 @@ export const AppointmentForm = ({services, name,
             onSubmit = {async (values, actions) => {
                 // actions.setFieldValue('serviceId', selected.id); //если выбрали услугу из карточки, то берем значение из стейта.
                 try {
+                    //ищем клиента в базе по почте, если не найден, создаем нового.
                      await axios.get('/customer/byemail/?email=' + values.email)
                         .then(async (res) => {
                             let customerId;
@@ -130,12 +133,21 @@ export const AppointmentForm = ({services, name,
                             } else {
                                 customerId = res.data._id;
                             }
-                            await axios.post('/appointments', {
+                            await axios.post('/appointments', { //создаем запись на прием неавторизованного пользователя с текущими контактными данными.
+                                firstName: values.firstName,
+                                secondName: values.secondName,
+                                email: values.email,
+                                phone: values.phone,
                                 service: values.serviceId,
                                 customer: customerId,
-                                employer: '640dbd31331a6169da66299e', // нужно внедрить поле сотрудника в форму
+                                employer: values.employer, // нужно внедрить поле сотрудника в форму
                                 dateTime: values.datetime,
-                            }).then(res => console.log(res)).catch(err => console.log(err))
+                            })
+                                .then(res => {
+                                    console.log(res);
+                                    dispatch(openModal('modalMessage'));
+                                })
+                                .catch(err => console.log("Не удалась запись на прием", err))
                         });
 
                 } catch(err) {
@@ -144,8 +156,7 @@ export const AppointmentForm = ({services, name,
                 }
 
                 setTimeout(() => {
-
-                    alert(JSON.stringify(values, null, 2));
+                    console.log(JSON.stringify(values, null, 2));
                     actions.setSubmitting(false);
                 }, 400);
             }}
@@ -250,6 +261,11 @@ export const AppointmentForm = ({services, name,
                                     <button className={s.button} type="submit" disabled={isSubmitting}>Записаться
                                     </button>
                                 </div>
+                                <Modal type={'modalMessage'}>
+                                    <div className={s.feedback}>{values.firstName} {values.secondName}, Вы записаны на прием на {values.datetime.replace('T', ' ')} <br/>
+                                        Ожидайте телефонного звонка в ближайшее время для подтверждения записи
+                                    </div>
+                                </Modal>
                             </Form>
                         </div>
                     </div>

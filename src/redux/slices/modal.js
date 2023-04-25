@@ -12,6 +12,9 @@ const initialState = {
         modalRegister: {
             active: false,
         },
+        modalMessage: {
+            active: false,
+        },
     }
 
     // active: false,

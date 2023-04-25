@@ -10,7 +10,6 @@ export const fetchCustomers = createAsyncThunk('customers/fetchCustomers', async
     return staticData;
 });
 
-
 const initialState = {
     customers: {
       items: [],
