@@ -14,6 +14,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchServices} from "../../redux/slices/services";
 import {nanoid} from "nanoid";
 import Recommendation from "../../components/Recommendation/Recommendation";
+import {fetchEmployers} from "../../redux/slices/employers";
 
 const arrDoc = [
     {
@@ -42,10 +43,12 @@ const sertific = [{img: sertificate}, {img: sertificate}, {img: sertificate}, {i
 export const Specialists = () => {
     const dispatch = useDispatch();
     const {services} = useSelector(state => state.services);
+    const {employers} = useSelector(state => state.employers);
 
 
     React.useEffect(() => {
         dispatch(fetchServices());
+        dispatch(fetchEmployers());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -79,10 +82,10 @@ export const Specialists = () => {
                         </div>
                         <ArrowLeft/>
                         <div className={`${s.positionDoc} container`}>
-                            {arrDoc.map(person => {
+                            {employers.items.map(person => {
                                 return <div key={nanoid()} className={s.cardDoctor}>
-                                    <img src={person.img} alt="doc"/>
-                                    <p className={s.name}>{person.name}</p>
+                                    <img src={`http://localhost:4444${person.imageUrl}`} alt="doc"/>
+                                    <p className={s.name}>{person.user.fullName}</p>
                                     <p className={s.profession}>{person.profession}</p>
                                 </div>
                             })}
