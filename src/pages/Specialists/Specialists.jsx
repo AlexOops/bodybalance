@@ -96,9 +96,10 @@ export const Specialists = () => {
                 </div>
             </div>
             <div className="container">
-                <AppointmentForm
+                <AppointmentForm isSpecialist={true}
                     name={'Быстрая запись к специалисту'}
                     services={services.items}
+                    employers={employers.items}
                 />
             </div>
             <div className="container-color">

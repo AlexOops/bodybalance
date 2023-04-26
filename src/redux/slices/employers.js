@@ -27,7 +27,8 @@ const employersSlice = createSlice({
     initialState,
     reducers: {
         setSelectedEmployer: (state, action) => {
-            state.employers.selectedService = action.payload;
+            console.log('setEmployer', action.payload);
+            state.employers.selectedEmployer = action.payload;
         },
     },
     extraReducers: {
@@ -46,7 +47,7 @@ const employersSlice = createSlice({
     },
 });
 
-export const selectedService = (state)=> state.employers.employers.selectedEmployer;
+export const selectedEmployer = (state)=> state.employers.employers.selectedEmployer;
 export const employersReducer = employersSlice.reducer;
 
 //экшены
