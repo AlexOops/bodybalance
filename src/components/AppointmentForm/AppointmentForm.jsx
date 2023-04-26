@@ -107,7 +107,7 @@ export const AppointmentForm = ({
             initialValues={{
                 // serviceId: (selected !== null) ? selected.id : '',
                 serviceId: isSpecialist ? '64480825e556a337db3fb841' : '',
-                employer: '640dbd31331a6169da66299e',
+                employer: '640dbd31331a6169da66299e', //сотрудник принимающий по записи на прием.
                 firstName: '',
                 secondName: '',
                 email: '',
