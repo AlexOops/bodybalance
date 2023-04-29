@@ -9,11 +9,16 @@ import logo from '../../assets/logo-white.svg'
 import {ArrowLeft} from "../../components/Arrow/ArrowLeft";
 import {ArrowRight} from "../../components/Arrow/ArrowRight";
 import {AppointmentForm} from "../../components/AppointmentForm/AppointmentForm";
-import React from "react";
+import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchServices} from "../../redux/slices/services";
 import {nanoid} from "nanoid";
 import Recommendation from "../../components/Recommendation/Recommendation";
+import {fetchEmployers} from "../../redux/slices/employers";
+import Modal from "../../components/Modal/Modal"
+import {Card} from "../../components/Card/Card";
+import {openModal} from "../../redux/slices/modal";
+import {Employer} from "../../components/Employer/Employer";
 
 const arrDoc = [
     {
@@ -42,13 +47,21 @@ const sertific = [{img: sertificate}, {img: sertificate}, {img: sertificate}, {i
 export const Specialists = () => {
     const dispatch = useDispatch();
     const {services} = useSelector(state => state.services);
+    const {employers} = useSelector(state => state.employers);
+    const [card, setCard] = useState({});
+
+    const openFullCard = (employer) => {
+        setCard(employer);
+        dispatch(openModal('modalService'));
+    }
 
 
     React.useEffect(() => {
         dispatch(fetchServices());
+        dispatch(fetchEmployers());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
+    console.log(card);
     return (
         <>
             <div className="container-color">
@@ -79,23 +92,35 @@ export const Specialists = () => {
                         </div>
                         <ArrowLeft/>
                         <div className={`${s.positionDoc} container`}>
-                            {arrDoc.map(person => {
-                                return <div key={nanoid()} className={s.cardDoctor}>
-                                    <img src={person.img} alt="doc"/>
-                                    <p className={s.name}>{person.name}</p>
-                                    <p className={s.profession}>{person.profession}</p>
-                                </div>
+                            {employers.items.map((person,key) => {
+                                return <div key={`employer${key}`} className={s.cardDoctor} onClick={()=>openFullCard(person)}>
+                                            <img src={`http://localhost:4444${person.imageUrl}`} alt="doc"/>
+                                            <p className={s.name}>{person.user.fullName}</p>
+                                            <p className={s.profession}>{person.profession}</p>
+                                        </div>
                             })}
-
                         </div>
                         <ArrowRight/>
+                        <Modal type={'modalService'}>
+                            {card &&
+                                <Employer isFull={true}
+                                          id={card._id}
+                                          imageUrl={(card.imageUrl) ?`http://localhost:4444${card.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                                          name={card.user?.fullName}
+                                          profession={card.profession}
+                                          description={card.description}
+                                          text={card.text}
+                                          certificates={card.certificates}
+                                />}
+                        </Modal>
                     </div>
                 </div>
             </div>
             <div className="container">
-                <AppointmentForm
+                <AppointmentForm isSpecialist={true}
                     name={'Быстрая запись к специалисту'}
                     services={services.items}
+                    employers={employers.items}
                 />
             </div>
             <div className="container-color">

@@ -1,22 +1,22 @@
 import {useDispatch, useSelector} from 'react-redux';
-import {fetchServices, selectedService} from "../../redux/slices/services";
+import {fetchServices, selectedService, setSelectedService} from "../../redux/slices/services";
 import s from './Services.module.scss';
 import {Card} from "../../components/Card/Card";
+import {Form, Formik, Field, useFormikContext} from 'formik';
 import {AppointmentForm} from "../../components/AppointmentForm/AppointmentForm";
 import {useEffect, useRef, useState} from "react";
 import React from "react";
 import {openModal} from "../../redux/slices/modal";
 import Modal from "../../components/Modal/Modal";
+import * as Yup from "yup";
 
 export const Services = () => {
-
     const dispatch = useDispatch();
     const {services} = useSelector( state => state.services);
     const [service, setService] = useState({});
     // const {date, time} = useSelector( state => state.datepicker);
 
     const isServicesLoading = services.status === 'loading'; // boolean
-    // const isServicesLoading = true; // проверить скелетон
 
     // const modalActive = useSelector(selectIsActive);
     const scrollToRef = useRef();
@@ -34,9 +34,6 @@ export const Services = () => {
         dispatch(fetchServices());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
-
-
-
 
     return (
         <>
@@ -75,7 +72,20 @@ export const Services = () => {
                 </div>
             </div>
         </div>
-            <div className="container" ref={scrollToRef}><AppointmentForm name={'Быстрая запись'} services={services.items}/></div>
+            <div className="container" ref={scrollToRef}>
+
+
+                        <AppointmentForm
+                                         // isSubmitting={isSubmitting}
+                                         // values={values}
+                                         // errors={errors}
+                                         // touched={touched}
+                                         // setFieldValue={setFieldValue}
+                                         name={'Быстрая запись'}
+                                         services={services.items}
+                        />
+
+                </div>
             <Modal type='modalService'>
                 <Card
                     isFull={true}
