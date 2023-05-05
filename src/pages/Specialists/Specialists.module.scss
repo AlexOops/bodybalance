@@ -73,25 +73,13 @@
 }
 
 .positionDoc {
+  position: relative;
   display: flex;
   justify-content: space-between;
   margin-top: 40px;
+  margin-bottom: 80px;
 }
 
-.cardDoctor {
-  width: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #FFFFFF;
-  box-shadow: 0 0 20px rgba(255, 226, 255, 0.65);
-  border-radius: 20px;
-  margin-bottom: 80px;
-  &:hover{
-    box-shadow: 0 0 8px 4px #D78DFF;
-  }
-}
 
 .name {
   font-weight: 500;
@@ -99,10 +87,17 @@
   margin: 30px 0 10px 0;
 }
 
-.profession {
-  margin-bottom: 30px;
+.cardRow {
+  width: 24%;
 }
 
-.magrin {
+.modalGallery {
+  width: 600px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.margin {
   height: 40px;
 }

@@ -2,11 +2,10 @@ import React from 'react';
 import s from "./Employer.module.scss";
 import ReactMarkdown from "react-markdown";
 import {EmployerSkeleton} from "./EmployerSkeleton";
-import card_img from "../../assets/rectangle33.jpg";
 import {useDispatch} from "react-redux";
 import {setSelectedEmployer} from "../../redux/slices/employers";
 import {closeModal} from "../../redux/slices/modal";
-import {useRef} from "react";
+
 export const Employer = ({
     id,
     name,
@@ -18,34 +17,46 @@ export const Employer = ({
     isLoading,
     isFull,
     handleAction,
+    openImageFromParent
 }) => {
 
     const dispatch = useDispatch();
+
     const handleSelectService = () => {
-        dispatch(setSelectedEmployer({id: id, name:name}));
+        dispatch(setSelectedEmployer({id: id, name:name + '-' + profession}));
         dispatch(closeModal('modalService'));
         handleAction(); //действие в родительском компоненте.
     }
 
-
    if (isLoading) {
         return <EmployerSkeleton/>
     }
+
+
    if (isFull) {
        return <div className={s.fullCard}>
+
            <div className={s.leftBox}>
-               <img className={s.employerImage} src={imageUrl} alt=""/>
-               <div className={s.certificates}>{certificates?.map((doc,key) =>
-                   <img key={"certificate"+key} className={s.certificateItem} src={`http://localhost:4444${doc}`} alt="сертификат"/>
-               )}</div>
+               <img className={s.employerImageFull} src={imageUrl} alt=""/>
+
+               <div className={s.certificates}>{certificates?.map((doc, key) =>
+                   <img key={"certificate" + key}
+                        className={s.certificateItem}
+                        src={`http://localhost:4444${doc}`}
+                        alt="сертификат"
+                        onClick={() => openImageFromParent(doc)}
+                   />
+               )}
+               </div>
+
            </div>
 
-           <div className={s.modalCard}>
+           <div className={s.fullCardDescription}>
                <div>
-                   <h3 className={s.modalName}>
+                   <h3 className={s.employerTitleFull}>
                        {name}
                    </h3>
-                   <h4>{profession}</h4>
+                   <div className={s.professionFull}>{profession}</div>
                    <div className={s.margin_tb_10}>
                        <ReactMarkdown>{description}</ReactMarkdown>
                    </div>
@@ -61,21 +72,11 @@ export const Employer = ({
    }
 
     return (
-       <>
-           <div className={s.card}>
-               <div className={s.flexCenter}>
-                   <div className={`${s.img} ${s.center}`}>
-                       <img src={imageUrl} alt=""/>
-                   </div>
-
-                   <h3 className={s.name}>
-                       {name}
-                   </h3>
-               </div>
-
+           <div key={`employer${id}`} className={s.cardDoctor} >
+               <img src={imageUrl} alt="doc" className={s.cardImage}/>
+               <h2 className={s.employerTitle}>{name}</h2>
+               <p className={s.profession}>{profession}</p>
            </div>
 
-
-       </>
     );
 };
