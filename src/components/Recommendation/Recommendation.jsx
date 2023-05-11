@@ -3,7 +3,7 @@ import s from "./Recommendation.module.scss"
 import logo from "../../assets/logo-white.svg";
 import doctor from "../../assets/doctor.png";
 
-const Recommendation = ({name, profession, title, text, button}) => {
+const Recommendation = ({name, profession, title, text, button, clickHandle}) => {
     return (
         <div className={s.position}>
             <div className={s.left}>
@@ -17,7 +17,7 @@ const Recommendation = ({name, profession, title, text, button}) => {
             <div className={s.right}>
                 <h2 className={s.nameSection}>{title}</h2>
                 <p className={s.descriptionSpecialist}>{text}</p>
-                <button className={s.button}>{button}</button>
+                <button className={s.button} onClick={clickHandle}>{button}</button>
             </div>
         </div>
     );

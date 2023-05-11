@@ -15,6 +15,9 @@ const initialState = {
         modalMessage: {
             active: false,
         },
+        modalGallery: {
+            active: false,
+        }
     }
 
     // active: false,
