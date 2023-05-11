@@ -1,24 +1,37 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import s from "./OnlineRehabilitation.module.scss"
-import Recommendation from "../../components/Recommendation/Recommendation";
-import service1 from "../../assets/img-service.png"
 import {useDispatch, useSelector} from "react-redux";
+import {openModal} from "../../redux/slices/modal";
 import {fetchOnlineServices} from "../../redux/slices/onlineRehabilitation"
 import {Card} from "../../components/Card/Card";
+import Modal from "../../components/Modal/Modal";
+import Recommendation from "../../components/Recommendation/Recommendation";
+import {AppointmentForm} from "../../components/AppointmentForm/AppointmentForm";
+
 
 export const OnlineRehabilitation = () => {
 
     const dispatch = useDispatch();
-    const onlineServiceList = useSelector((state) => state.onlineServices.onlineServices.items);
-
+    const onlineServiceList = useSelector((state) => state.onlineServices.onlineServices);
     const isOnlineServiceListLoading = onlineServiceList.status === 'loading';
+    const [service, setService] = useState({});
+
+    const scrollToRef = useRef();
+    const cardAction = () => {
+        scrollToRef.current.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+
+    const setModal = (event, obj) => {
+        setService(obj);
+        dispatch(openModal('modalService'));
+    }
 
     useEffect(() => {
         dispatch(fetchOnlineServices());
     }, [dispatch]);
 
     return (
-        <div>
+        <>
             <div className={'container-color'}>
                 <div className={'container'}>
                     <div className={s.header}>
@@ -44,45 +57,46 @@ export const OnlineRehabilitation = () => {
                         <div className={s.servicesTitleWrap}>
                             <h2 className={s.servicesTitle}>Онлайн-программы</h2>
                         </div>
-                        {
-                            (isOnlineServiceListLoading ? [...Array(3)] : onlineServiceList)?.map((item, idx) => {
-                                    return (isOnlineServiceListLoading
-                                        ? (<div className={s.card} key={idx}>
-                                                <Card key={idx} isLoading={true}/>
-                                            </div>
-                                        )
-                                        : (
-                                            <div className={s.card} key={idx}>
-                                                <div className={s.center}>
-                                                    <img src={service1} width={180} height={180} alt=""/>
-                                                    <h3 className={s.title}>
-                                                        {item.name}
-                                                    </h3>
-                                                    {
-                                                        item.treatment.map((item, idx) => {
-                                                            return (
-                                                                <div key={idx}>
-                                                                    <div className={s.direction} key={idx}>
-                                                                        <div className={s.circle}></div>
-                                                                        <p>
-                                                                            {item}
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                            )
-                                                        })
-                                                    }
-
-                                                </div>
-                                            </div>
-                                        ))
-                                }
-                            )
-                        }
-
+                        {(isOnlineServiceListLoading ? [...Array(3)] : onlineServiceList.items)?.map((item, idx) =>
+                            isOnlineServiceListLoading
+                                ? (<div className={s.card} key={idx}>
+                                        <Card key={idx} isLoading={true}/>
+                                    </div>
+                                )
+                                : (
+                                    <div key={idx} onClick={(event) => setModal(event, item)}>
+                                        <Card
+                                            id={item._id}
+                                            price={item.price}
+                                            name={item.name}
+                                            description={item.description}
+                                            text={item.text}
+                                            imageUrl={(item.imageUrl) ? `http://localhost:4444${item.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                                        />
+                                    </div>
+                                )
+                        )}
                     </div>
                 </div>
             </div>
-        </div>
+
+            <div className="container" ref={scrollToRef}>
+                <AppointmentForm
+                    name={'Быстрая запись'}
+                    services={onlineServiceList.items}
+                />
+            </div>
+
+            <Modal type='modalService'>
+                <Card
+                    isFull={true}
+                    id={service._id}
+                    name={service.name}
+                    description={service.description}
+                    text={service.text}
+                    handleAction={cardAction}
+                />
+            </Modal>
+        </>
     );
 }
