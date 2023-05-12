@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {useState} from "react";
 import s from './AppointmentForm.module.scss';
 import {Form, Formik, Field} from 'formik';
 
@@ -6,7 +6,6 @@ import {CalendarPicker} from "./DataPicker/CalendarPicker";
 import * as Yup from 'yup';
 import {useDispatch, useSelector} from "react-redux";
 import {selectedService, setSelectedService} from "../../redux/slices/services";
-import {TextField} from "@mui/material";
 import ServiceIdInput from "./ServiceIdInput";
 import axios from "../../axios";
 import Modal from "../Modal/Modal";
@@ -184,18 +183,19 @@ export const AppointmentForm = ({
                                             }
                                         </div>
 
-                                        { !isSpecialist ?
+                                        {!isSpecialist ?
                                             <>
                                                 <ServiceIdInput setFieldValue={setFieldValue}/>
                                                 {(errors.serviceId && touched.serviceId) &&
                                                     <div className={s.error}>{errors.serviceId}</div>}
 
 
-                                                    <div className={isOpen ? s.selectContainer : `${s.selectContainer} ${s.closeContainer}`}>
+                                                <div
+                                                    className={isOpen ? s.selectContainer : `${s.selectContainer} ${s.closeContainer}`}>
 
                                                     {services.map((service, key) =>
 
-                                                        <div key={service.id}
+                                                        <div key={service._id}
                                                             // className={s.selectInput}
                                                              className={`${s.selectLabel} ${service._id === selected.id ? s.active : ''}`}
                                                             // data-index={service._id}
@@ -208,14 +208,15 @@ export const AppointmentForm = ({
                                                         </div>
                                                     )}
                                                 </div>
-                                            </>:
+                                            </> :
                                             <>
                                                 <EmployerIdInput setFieldValue={setFieldValue}/>
                                                 {(errors.employer && touched.employer) &&
                                                     <div className={s.error}>{errors.employer}</div>}
 
 
-                                                <div className={isOpen ? s.selectContainer : `${s.selectContainer} ${s.closeContainer}`}>
+                                                <div
+                                                    className={isOpen ? s.selectContainer : `${s.selectContainer} ${s.closeContainer}`}>
 
                                                     {employers.map((employer, key) =>
 
@@ -227,7 +228,7 @@ export const AppointmentForm = ({
                                                              onClick={(e) => {
 
                                                                  setFieldValue('employer', employer.user._id);
-                                                                 onClickItem(e, employer.user._id, employer.user.fullName+" - "+employer.profession);
+                                                                 onClickItem(e, employer.user._id, employer.user.fullName + " - " + employer.profession);
                                                              }}
                                                         >
                                                             {employer.user.fullName} - {employer.profession}

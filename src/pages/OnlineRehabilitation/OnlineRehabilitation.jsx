@@ -59,7 +59,7 @@ export const OnlineRehabilitation = () => {
                         </div>
                         {(isOnlineServiceListLoading ? [...Array(3)] : onlineServiceList.items)?.map((item, idx) =>
                             isOnlineServiceListLoading
-                                ? (<div className={s.card} key={idx}>
+                                ? (<div key={idx}>
                                         <Card key={idx} isLoading={true}/>
                                     </div>
                                 )
