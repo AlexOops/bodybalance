@@ -9,7 +9,8 @@ export const Videos = () => {
 
     const {id} = useParams();
     const dispatch = useDispatch();
-    const videos = useSelector((state) => state.training.videos.items);
+    const videos = useSelector((state) => state.training.videos);
+    const isVideosLoading = videos.status === 'loading'
 
     const {name, description} = useSelector((state) => state.training.training);
 
@@ -21,7 +22,7 @@ export const Videos = () => {
             dispatch(setDescription(localStorage.getItem('description')));
         }
 
-    }, [dispatch, id])
+    }, [description, dispatch, id, name])
 
     return (
         <>
@@ -37,20 +38,26 @@ export const Videos = () => {
                     <h2 className={s.servicesTitle}>Комплекс упражнений для голеностопного сустава</h2>
                 </div>
 
-                {
-                    videos.map((item, idx) => {
-                        return (<div className={s.ankles_content} key={idx}>
-                            <div className={s.ankles_content_description}>
-                                <p className={s.ankles_content_title}>{item.title}</p>
-                                <p className={s.ankles_content_text}>{item.description}</p>
+                {(isVideosLoading ? [...Array(3)] : videos.items).map((item, idx) =>
+
+                    isVideosLoading
+                        ? (
+                            <div className={s.ankles_content} key={idx}>
+                                <div className={s.ankles_content_description}></div>
                             </div>
+                        )
+                        :
+                        (
+                            <div className={s.ankles_content} key={idx}>
+                                <div className={s.ankles_content_description}>
+                                    <p className={s.ankles_content_title}>{item.title}</p>
+                                    <p className={s.ankles_content_text}>{item.description}</p>
+                                </div>
 
-                            <Video url={item.videoUrl}/>
-
-                        </div>)
-                    })
-                }
-
+                                <Video url={item.videoUrl}/>
+                            </div>
+                        )
+                )}
             </div>
         </>
     );

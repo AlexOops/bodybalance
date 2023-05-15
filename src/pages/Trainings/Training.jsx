@@ -9,12 +9,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchTraining, setDescription, setName} from "../../redux/slices/training";
 
 export const Training = () => {
-    const dispatch = useDispatch();
-    const data = useSelector((state) => state.training.training.items);
 
-    useEffect(() => {
-        dispatch(fetchTraining());
-    }, [dispatch])
+    const dispatch = useDispatch();
+    const trainings = useSelector((state) => state.training.training);
+    const isTrainingsLoading = trainings.status === 'loading';
 
     const handleClick = (name, description) => {
         dispatch(setName(name));
@@ -23,6 +21,10 @@ export const Training = () => {
         localStorage.setItem('name', name);
         localStorage.setItem('description', description);
     }
+
+    useEffect(() => {
+        dispatch(fetchTraining());
+    }, [dispatch])
 
     return (
         <>
@@ -49,30 +51,37 @@ export const Training = () => {
                         </div>
 
                         <ul className={s.training_list}>
-                            {
-                                data.map((item, idx) => {
-                                    return (
-                                        <Link to={`/training/${item._id}`}
-                                              key={idx}
-                                              onClick={() => handleClick(item.name, item.description)}
-                                        >
-                                            <li className={s.training_item}>
+                            {(isTrainingsLoading ? [...Array(3)] : trainings.items).map((item, idx) =>
+                                isTrainingsLoading
+                                    ? (<div className={s.training_item} key={idx}>
                                                 <img src={training_1} alt="trn1"/>
                                                 <div className={s.training_item_wrp}>
-                                                    <p className={s.training_item_text}>
-                                                        {item.name}
-                                                    </p>
                                                     <img src={play_item}
                                                          className={s.training_item_img}
                                                          alt="play"
                                                          width={36}
                                                          height={36}/>
                                                 </div>
-                                            </li>
+                                        </div>
+                                    )
+                                    : (<Link to={`/training/${item._id}`}
+                                             key={idx}
+                                             onClick={() => handleClick(item.name, item.description)}
+                                        >
+                                            <div className={s.training_item}     key={idx}>
+                                                <img src={training_1} alt="trn1"/>
+                                                <div className={s.training_item_wrp}>
+                                                    <p className={s.training_item_text}>{item.name}</p>
+                                                    <img src={play_item}
+                                                         className={s.training_item_img}
+                                                         alt="play"
+                                                         width={36}
+                                                         height={36}/>
+                                                </div>
+                                            </div>
                                         </Link>
                                     )
-                                })
-                            }
+                            )}
                         </ul>
                     </div>
                 </div>
