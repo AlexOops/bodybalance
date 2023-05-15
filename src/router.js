@@ -1,5 +1,6 @@
 import {createBrowserRouter} from "react-router-dom";
-import {Main} from "./components/Layout/Main/Main/Main";
+import {LayoutPage} from "./components/Layout/LayoutPage";
+import {Main as Test}  from "./pages/Main/Main";
 import {Contacts} from "./pages/Contacts/Contacts";
 import {Services} from "./pages/Services/Services";
 import {Training} from "./pages/Trainings/Training";
@@ -18,9 +19,13 @@ import {SettingsAdmin} from "./pages/admin/settings/SettingsAdmin";
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <Main/>,
+        element: <LayoutPage/>,
         errorElement: <ErrorPage/>,
         children: [
+            {
+                path: "/",
+                element: <Test/>,
+            },
             {
                 path: "/contacts",
                 element: <Contacts/>,
