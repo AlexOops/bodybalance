@@ -72,12 +72,12 @@ export const Specialists = () => {
 
                 </div>
                 <div className={'container-carousel'}>
-                    <div className={'container'}>
+                        <div className={'flexRelative'}>
                         <div className={s.servicesTitleWrap}>
                             <h2 className={s.servicesTitle} ref={scrollToEmployersRef}>Наша команда</h2>
                         </div>
 
-                        <div className={`${s.positionDoc} container`}>
+                        <div className={`${s.positionDoc}`}>
                             <ArrowLeft/>
                             {employers.items.map((person, key) => {
                                 return <div className={s.cardRow} onClick={() => openFullCard(person)} key={'employer'+person._id}>

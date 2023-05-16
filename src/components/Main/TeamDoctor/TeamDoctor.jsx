@@ -1,7 +1,7 @@
 import s from './TeamDoctor.module.scss'
-import doctor_one from "../../../../assets/doctor_1.png";
-import doctor_two from "../../../../assets/doctor_2.png";
-import doctor_three from "../../../../assets/doctor_3.png";
+import doctor_one from "../../../assets/doctor_1.png";
+import doctor_two from "../../../assets/doctor_2.png";
+import doctor_three from "../../../assets/doctor_3.png";
 
 export const TeamDoctor = () => {
     return (

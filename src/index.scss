@@ -45,6 +45,7 @@ p {
   margin: 0 auto;
 }
 
+
 .container-color {
   background: linear-gradient(79.76deg, #FAF4F9 0%, #FEFEFE 100%);
 }
@@ -53,6 +54,8 @@ p {
   display: flex;
   align-items: center;
   position: relative;
+  padding: 0 7%;
+  justify-content: center;
 }
 
 .container-slider {

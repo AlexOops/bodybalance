@@ -1,11 +1,11 @@
-import '../../../../index.scss'
+import '../../../index.scss'
 import s from './Slider.module.scss'
 import {Dots} from "./Dots/Dots";
-import sliderImg from '../../../../assets/vectorpaint.svg'
+import sliderImg from '../../../assets/vectorpaint.svg'
 import {useEffect, useRef, useState} from "react";
 import {nanoid} from "nanoid";
-import {ArrowRight} from "../../../Arrow/ArrowRight";
-import {ArrowLeft} from "../../../Arrow/ArrowLeft";
+import {ArrowRight} from "../../Arrow/ArrowRight";
+import {ArrowLeft} from "../../Arrow/ArrowLeft";
 
 // пока статика на получение с сервера переписать
 const slider = [
@@ -46,8 +46,9 @@ export const Slider = () => {
         <>
             <div className={'container-color container-carousel container-slider'}>
                 <img className={s.sliderImg} src={sliderImg} alt=""/>
-                <ArrowLeft offset={offset} width={width} setWidth={setWidth}/>
+
                 <div className={`${s.contain} container`}  >
+                    <ArrowLeft offset={offset} width={width} setWidth={setWidth}/>
                     {Object.values(slider).map((el) => {
                         return (
                             <div className={s.slider} ref={ref} key={nanoid()} style={{
@@ -60,6 +61,7 @@ export const Slider = () => {
 
                         )
                     })}
+                    <ArrowRight offset={offset} width={width} setWidth={setWidth}/>
                 </div>
                 <div className={s.dots}>
                     {[...Array(slider.length)].map((el, index) =>
@@ -69,7 +71,7 @@ export const Slider = () => {
                             key={nanoid()}
                         />)}
                 </div>
-                <ArrowRight offset={offset} width={width} setWidth={setWidth}/>
+
             </div>
         </>
     )
