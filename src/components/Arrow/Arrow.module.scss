@@ -1,12 +1,6 @@
 .arrowBackground {
   position: absolute;
-  width: 64px;
-  height: 64px;
-  background: #D78DFF;
-  border-radius: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
 
   &:hover {
     cursor: pointer;
@@ -14,6 +8,13 @@
 }
 
 .arrow {
+  width: 64px;
+  height: 64px;
+
+  border-radius: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 22px;
   color: #fff;
   background-color: #D78DFF;

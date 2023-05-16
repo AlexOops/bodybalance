@@ -8,8 +8,13 @@ export const ArrowRight = ({setWidth, offset, width}) => {
     }
 
     return (
-        <div onClick={handleClick} className={ `${s.arrowBackground} ${s.arrowPositionRight}`}>
-            <button className={`${s.arrow}`}><img className={s.size} src={arrow} alt=""/> </button>
+        <div style={{display:"inline-block"}}>
+        <button
+            className={`${s.arrow} ${s.arrowPositionRight}`}
+            onClick={handleClick}
+        >
+            <img className={s.size} src={arrow} alt=""/>
+        </button>
         </div>
     )
 }
