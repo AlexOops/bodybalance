@@ -4,11 +4,12 @@ import {TeamDoctor} from "../../components/Main/TeamDoctor/TeamDoctor";
 import s from "../../components/Feedback/Feedback.module.scss";
 import {Feedback} from "../../components/Feedback/Feedback";
 import {Partners} from "../../components/Main/Partners/Partners";
+import {Slider2} from "../../components/Slider2/Slider2";
 
 export const Main = () => {
     return (
         <>
-            <Slider/>
+            <Slider2/>
             <PopularServices/>
             <TeamDoctor/>
             <div className={s.wrapper}>
