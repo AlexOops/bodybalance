@@ -12,6 +12,7 @@ import {fetchEmployers} from "../../redux/slices/employers";
 import Modal from "../../components/Modal/Modal"
 import {openModal} from "../../redux/slices/modal";
 import {Employer} from "../../components/Employer/Employer";
+import Carousel from "../../components/Carousel/Carousel";
 
 const certificates = [{img: sertificate}, {img: sertificate}, {img: sertificate}, {img: sertificate}]
 
@@ -32,13 +33,13 @@ export const Specialists = () => {
     }
 
     const scrollToEmployers = () => {
-        scrollToEmployersRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        scrollToEmployersRef.current.scrollIntoView({behavior: 'smooth', block: 'start'});
     }
 
     const scrollToRef = useRef();
     const scrollToEmployersRef = useRef();
     const clickCardButton = () => {
-        scrollToRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        scrollToRef.current.scrollIntoView({behavior: 'smooth', block: 'start'});
     }
 
     React.useEffect(() => {
@@ -72,7 +73,7 @@ export const Specialists = () => {
 
                 </div>
                 <div className={'container-carousel'}>
-                        <div className={'flexRelative'}>
+                    <div className={'flexRelative'}>
                         <div className={s.servicesTitleWrap}>
                             <h2 className={s.servicesTitle} ref={scrollToEmployersRef}>Наша команда</h2>
                         </div>
@@ -80,7 +81,8 @@ export const Specialists = () => {
                         <div className={`${s.positionDoc}`}>
                             <ArrowLeft/>
                             {employers.items.map((person, key) => {
-                                return <div className={s.cardRow} onClick={() => openFullCard(person)} key={'employer'+person._id}>
+                                return <div className={s.cardRow} onClick={() => openFullCard(person)}
+                                            key={'employer' + person._id}>
                                     <Employer
                                         id={person._id}
                                         imageUrl={(person.imageUrl) ? `http://localhost:4444${person.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
@@ -100,7 +102,7 @@ export const Specialists = () => {
                             {card &&
                                 <Employer isFull={true}
                                           id={card._id}
-                                          imageUrl={(card.imageUrl) ?`http://localhost:4444${card.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                                          imageUrl={(card.imageUrl) ? `http://localhost:4444${card.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
                                           name={card.user?.fullName}
                                           profession={card.profession}
                                           description={card.description}
@@ -118,11 +120,11 @@ export const Specialists = () => {
                     </div>
                 </div>
             </div>
-            <div className="container"  ref={scrollToRef}>
+            <div className="container" ref={scrollToRef}>
                 <AppointmentForm isSpecialist={true}
-                    name={'Быстрая запись к специалисту'}
-                    services={services.items}
-                    employers={employers.items}
+                                 name={'Быстрая запись к специалисту'}
+                                 services={services.items}
+                                 employers={employers.items}
                 />
             </div>
             <div className="container-color">
@@ -136,6 +138,14 @@ export const Specialists = () => {
                     </div>
                     <ArrowRight/>
                 </div>
+                <div style={{maxWidth: 1200, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}>
+                    <Carousel>
+                        <img src="https://via.placeholder.com/1600x300" alt="placeholder" />
+                        <img src="https://via.placeholder.com/1600x300" alt="placeholder" />
+                        <img src="https://via.placeholder.com/1600x300" alt="placeholder" />
+                    </Carousel>
+                </div>
+
 
             </div>
         </>
