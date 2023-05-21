@@ -8,15 +8,13 @@ export const Feedback = ({name, text, author, profession}) => {
     return (
 
             <div className={'flexRelative'}>
-
                     <h2 className={s.section}>{name}</h2>
                     <div className={s.direction}>
                         <ArrowLeft width={64}/>
-                        <div className={s.feedback}>
+                        <div className={`${s.feedback} container`}>
                             <div className={s.img}>
                                 <img src={customers} alt=""/>
                             </div>
-
                             <div>
                                 <div className={s.line}/>
                                 <img className={s.quotes} src={doubleQuotes} alt=""/>

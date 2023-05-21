@@ -37,7 +37,7 @@ export const Slider = () => {
             setWidth(0)
         }
         const timeout = setInterval(() => setWidth(prevState => prevState - offset), 4000)
-        return() => {
+        return () => {
             clearInterval(timeout)
         }
     }, [width, offset, maxLength])
@@ -46,32 +46,35 @@ export const Slider = () => {
         <>
             <div className={'container-color container-carousel container-slider'}>
                 <img className={s.sliderImg} src={sliderImg} alt=""/>
-
-                <div className={`${s.contain} container`}  >
+                <div className={s.containerPosition}>
                     <ArrowLeft offset={offset} width={width} setWidth={setWidth}/>
-                    {Object.values(slider).map((el) => {
-                        return (
-                            <div className={s.slider} ref={ref} key={nanoid()} style={{
-                                transform: `translateX(${width}px)`,
-                            }}>
-                                <h1 className={s.sliderName}>{el.name}</h1>
-                                <p className={s.sliderText}>{el.text}</p>
-                                <button className={s.signUp}>Записаться</button>
-                            </div>
-
-                        )
-                    })}
+                   <div style={{margin: '0 60px'}}>
+                       <div className="container">
+                           <div className={`${s.contain}`}>
+                               {Object.values(slider).map((el) => {
+                                   return (
+                                       <div className={s.slider} ref={ref} key={nanoid()} style={{
+                                           transform: `translateX(${width}px)`,
+                                       }}>
+                                           <h1 className={s.sliderName}>{el.name}</h1>
+                                           <p className={s.sliderText}>{el.text}</p>
+                                           <button className={s.signUp}>Записаться</button>
+                                       </div>
+                                   )
+                               })}
+                           </div>
+                       </div>
+                       <div className={s.dots}>
+                           {[...Array(slider.length)].map((el, index) =>
+                               <Dots
+                                   index={index}
+                                   offset={offset} width={width} setWidth={setWidth}
+                                   key={nanoid()}
+                               />)}
+                       </div>
+                   </div>
                     <ArrowRight offset={offset} width={width} setWidth={setWidth}/>
                 </div>
-                <div className={s.dots}>
-                    {[...Array(slider.length)].map((el, index) =>
-                        <Dots
-                            index={index}
-                            offset={offset} width={width} setWidth={setWidth}
-                            key={nanoid()}
-                        />)}
-                </div>
-
             </div>
         </>
     )

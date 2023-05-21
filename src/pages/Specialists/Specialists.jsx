@@ -72,7 +72,7 @@ export const Specialists = () => {
 
                 </div>
                 <div className={'container-carousel'}>
-                        <div className={'flexRelative'}>
+                    <div className={'flexRelative'}>
                         <div className={s.servicesTitleWrap}>
                             <h2 className={s.servicesTitle} ref={scrollToEmployersRef}>Наша команда</h2>
                         </div>
@@ -120,9 +120,9 @@ export const Specialists = () => {
             </div>
             <div className="container"  ref={scrollToRef}>
                 <AppointmentForm isSpecialist={true}
-                    name={'Быстрая запись к специалисту'}
-                    services={services.items}
-                    employers={employers.items}
+                                 name={'Быстрая запись к специалисту'}
+                                 services={services.items}
+                                 employers={employers.items}
                 />
             </div>
             <div className="container-color">

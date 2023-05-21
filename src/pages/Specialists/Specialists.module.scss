@@ -76,8 +76,7 @@
   position: relative;
   display: flex;
   justify-content: space-between;
-  margin-top: 40px;
-  margin-bottom: 80px;
+  margin: 40px 60px 80px;
   align-items: center;
 }
 
@@ -88,9 +87,6 @@
   margin: 30px 0 10px 0;
 }
 
-.cardRow {
-  width: 20%;
-}
 
 .modalGallery {
   width: 600px;

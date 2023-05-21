@@ -4,14 +4,17 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 0 15px;
+  margin-left: 15px;
+  @media only screen and (max-device-width: 767px) {
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }
 
 .menuItems {
   font-size: 20px;
   line-height: 24px;
-  margin-right: 30px;
-  height: 26px;
+  margin-right: 26px;
   white-space: nowrap;
   margin-bottom: 1px;
   &:hover {
@@ -19,8 +22,17 @@
     color: #9e8dff;
     border-bottom: 1px solid #D78DFF;
   }
+  @media screen and (max-width: 1290px) and (min-width: 1024px) {
+    font-size: 16px;
+  }
+  @media screen and (max-device-width: 767px) {
+    transition: transform 0.3s cubic-bezier(1, 0.5, 0, 1);
+  }
 }
 
 .nav {
   display: flex;
+  @media only screen and (max-device-width: 767px) {
+    height: 48%;
+  }
 }
