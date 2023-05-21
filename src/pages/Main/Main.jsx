@@ -1,4 +1,3 @@
-import {Slider} from "../../components/Main/Slider/Slider";
 import {PopularServices} from "../../components/Main/PopularServices/PopularServices";
 import {TeamDoctor} from "../../components/Main/TeamDoctor/TeamDoctor";
 import s from "../../components/Feedback/Feedback.module.scss";
@@ -19,7 +18,6 @@ export const Main = () => {
                                   author={'Рикардо Милос - '}
                                   profession={'профессиональный танцор'}
                         />
-
 
                 </div>
             </div>
