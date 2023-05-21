@@ -14,7 +14,7 @@ import {openModal} from "../../redux/slices/modal";
 import {Employer} from "../../components/Employer/Employer";
 import Carousel from "../../components/Carousel/Carousel";
 
-const certificates = [{img: sertificate}, {img: sertificate}, {img: sertificate}, {img: sertificate}]
+const certificates = [{img: sertificate}, {img: sertificate}, {img: sertificate}, {img: sertificate}, {img: sertificate}]
 
 export const Specialists = () => {
     const dispatch = useDispatch();
@@ -79,7 +79,7 @@ export const Specialists = () => {
                         </div>
 
                         <div className={`${s.positionDoc}`}>
-                            <ArrowLeft/>
+                            <Carousel show={4}>
                             {employers.items.map((person, key) => {
                                 return <div className={s.cardRow} onClick={() => openFullCard(person)}
                                             key={'employer' + person._id}>
@@ -95,7 +95,7 @@ export const Specialists = () => {
                                     />
                                 </div>
                             })}
-                            <ArrowRight/>
+                            </Carousel>
                         </div>
 
                         <Modal type={'modalService'}>
@@ -131,19 +131,21 @@ export const Specialists = () => {
                 <div className={s.servicesTitleWrap}>
                     <h2 className={s.servicesTitle}>Сертификаты наших специалистов</h2>
                 </div>
-                <div className={'container-carousel'}>
-                    <ArrowLeft/>
-                    <div className={`container ${s.positionDoc}`}>
-                        {certificates.map(el => <div key={nanoid()}><img src={el.img} alt=""/></div>)}
+                <div className={'container-carousel container-slider'}>
+                    <div style={{marginTop: 64}}>
+
+                        <Carousel show={4}>
+
+                            {/*<img src="https://via.placeholder.com/1600x300" alt="placeholder" />*/}
+                            {certificates.map(el =>
+                                <div>
+                                    <div style={{padding: 8}} key={nanoid()}>
+                                        <img src={el.img} alt="" style={{width: '100%'}}/>
+                                    </div>
+                                </div>
+                            )}
+                        </Carousel>
                     </div>
-                    <ArrowRight/>
-                </div>
-                <div style={{maxWidth: 1200, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}>
-                    <Carousel>
-                        <img src="https://via.placeholder.com/1600x300" alt="placeholder" />
-                        <img src="https://via.placeholder.com/1600x300" alt="placeholder" />
-                        <img src="https://via.placeholder.com/1600x300" alt="placeholder" />
-                    </Carousel>
                 </div>
 
 

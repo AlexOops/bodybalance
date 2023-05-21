@@ -1,8 +1,6 @@
 import '../../index.scss'
 import s from './Slider2.module.scss'
-import {Dots} from "./Dots/Dots";
 import sliderImg from '../../assets/vectorpaint.svg'
-import {useEffect, useRef, useState} from "react";
 import {nanoid} from "nanoid";
 import Carousel from "../Carousel/Carousel";
 
