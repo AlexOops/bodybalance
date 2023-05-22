@@ -2,11 +2,88 @@
   display: flex;
   justify-content: space-between;
   padding-top: 50px;
+  @media only screen and (max-device-width: 767px) {
+    padding-top: 25px;
+    justify-content: space-around;
+  }
 }
 
 .logo {
   width: 125px;
   height: 105px;
+  @media screen and (max-width: 1290px) {
+    width: 85px;
+    height: 85px;
+  }
+}
+
+.toggleInput {
+  display: none;
+}
+
+.checkLabel {
+  flex-direction: column;
+}
+
+@media only screen and (max-device-width: 767px) {
+  .toggle {
+    z-index: 3;
+    height: 3px;
+    padding: 8px 0;
+    cursor: pointer;
+    border-radius: 50%;
+    display: inline-block;
+    width: auto;
+    margin: 0 auto;
+    transition: all .15s ease;
+  }
+
+  .bar {
+    display: block;
+    height: 3px;
+    width: 50px;
+    background: #D78DFF;
+    margin: 5px auto;
+    transition: all .2s ease;
+  }
+
+  .toggleInput:checked ~ span:nth-of-type(1) {
+    transform:translateY(13.5px) rotateZ(50deg);
+  }
+
+
+  .toggleInput:checked ~ span:nth-of-type(2) {
+    width: 0;
+  }
+
+  .toggleInput:checked ~ span:nth-of-type(3) {
+    transform: translateY(-12px) rotateZ(133deg);
+  }
+}
+
+
+.burger {
+  display: flex;
+  @media only screen and (max-device-width: 767px) {
+    display: none;
+    justify-content: start;
+    width: 100%;
+    background-color: white;
+    height: 100%;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    flex-direction: column-reverse;
+    z-index: 2;
+  }
+}
+
+.toggle {
+  display: none;
+  @media only screen and (max-device-width: 767px) {
+    margin: 0;
+    display: block;
+  }
 }
 
 
@@ -15,7 +92,10 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-
+  @media only screen and (max-device-width: 767px) {
+    margin: 110px 0 40px 0;
+    justify-content: space-evenly;
+  }
 }
 
 .button {
@@ -24,11 +104,17 @@
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
+
   &:hover {
     cursor: pointer;
     color: #fff;
     background-color: #9e8dff;
     border: 2px solid #9e8dff;
+  }
+
+  @media screen and (max-width: 1290px) and (min-width: 1024px) {
+    padding: 7px 12px;
+    font-size: 16px;
   }
 }
 
@@ -37,12 +123,24 @@
   margin-right: 10px;
   background: none;
   color: #D78DFF;
-
 }
 
 .singOut {
   border: 2px solid #D78DFF;
   background: #D78DFF;
   color: #fff;
-
 }
+
+.border {
+  display: none;
+  @media only screen and (max-device-width: 767px) {
+    display: block;
+    width: 55%;
+    height: 2px;
+    background-color: #D78DFF;
+    margin-bottom: 40px;
+  }
+}
+
+
+

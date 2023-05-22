@@ -12,6 +12,7 @@ import Modal from "../Modal/Modal";
 import {openModal} from "../../redux/slices/modal";
 import {selectedEmployer, setSelectedEmployer} from "../../redux/slices/employers";
 import EmployerIdInput from "./EmployerIdInput";
+import {nanoid} from "nanoid";
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 const SignupSchema = Yup.object().shape({
@@ -195,7 +196,7 @@ export const AppointmentForm = ({
 
                                                     {services.map((service, key) =>
 
-                                                        <div key={service._id}
+                                                        <div key={`emp_${key}_${service._id}`}
                                                             // className={s.selectInput}
                                                              className={`${s.selectLabel} ${service._id === selected.id ? s.active : ''}`}
                                                             // data-index={service._id}
@@ -220,7 +221,7 @@ export const AppointmentForm = ({
 
                                                     {employers.map((employer, key) =>
 
-                                                        <div key={employer.user._id}
+                                                        <div key={`${key}_${employer.user._id}`}
                                                             // className={s.selectInput}
 
                                                              className={`${s.selectLabel} ${employer.user._id === selectedSpecialist.id ? s.active : ''}`}
@@ -288,7 +289,7 @@ export const AppointmentForm = ({
                                         name="datetime"
 
                                     > {workTimes.map((time, key) =>
-                                        <option key={key} value={`${workDate}T${time}:00`}>{time}</option>
+                                        <option key={nanoid()} value={`${workDate}T${time}:00`}>{time}</option>
                                     )}
                                     </Field>
                                 </div>

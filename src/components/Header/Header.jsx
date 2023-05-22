@@ -9,30 +9,42 @@ import {openModal} from "../../redux/slices/modal";
 import Modal from "../Modal/Modal";
 import {Login} from "../../pages/Login/Login";
 import {Registration} from "../../pages/Registration/Registration";
+import {useState} from "react";
 
 export const Header = () => {
     const dispatch = useDispatch();
     const isAuth = useSelector(selectIsAuth);
 
+    const [visible, setVisible] = useState(false)
+
+
+    const handleVisible = () => {
+        setVisible(!visible)
+    }
+
     const typeModalLogin = 'modalLogin'
     const typeModalRegistration = 'modalRegister'
 
     const onClickLogout = () => {
-        if(window.confirm("Вы действительно хотите выйти?")){
+
+        if (window.confirm("Вы действительно хотите выйти?")) {
             dispatch(logout()); //обнулили данные в state auth
             window.localStorage.removeItem('token'); //удалили токен из localStorage
         }
     }
 
     const onClickLogin = () => {
+
         //контент логина в модальном окне
         dispatch(openModal(typeModalLogin));
     }
 
     const onClickRegister = () => {
+
         //контент регистрации в модальном окне
         dispatch(openModal(typeModalRegistration));
     }
+
 
     return (
         <div className={'container-color'}>
@@ -41,23 +53,37 @@ export const Header = () => {
                     <Link to={'/'}>
                         <img className={s.logo} src={logo} alt="logo"/>
                     </Link>
-                    <Navigate/>
-
-
-                    <div className={s.login}>
-
-                        {isAuth ? (
-                            <button onClick={onClickLogout} className={`${s.singUp} ${s.button}`}>Выход</button>
-                        ) : (<>
-
-                            <button className={`${s.singUp} ${s.button}`} onClick={onClickLogin}>Вход</button>
-
-                            <button className={`${s.singOut} ${s.button}`} onClick={onClickRegister}>Регистрация</button>
-                            <Modal type={typeModalLogin}><Login/></Modal>
-                            <Modal type={typeModalRegistration}><Registration/></Modal>
-
-                        </>)}
-
+                    <div
+                        onClick={()=> handleVisible()}
+                        className={s.toggle}>
+                        {visible && <span></span>}
+                        <label className={s.checkLabel} htmlFor="check">
+                            <input
+                                type="checkbox"
+                                // onChange={handleVisible}
+                                // checked={visible}
+                                value=''
+                                className={s.toggleInput}
+                            />
+                            <span className={s.bar}></span>
+                            <span className={s.bar}></span>
+                            <span className={s.bar}></span>
+                        </label>
+                    </div>
+                    <div style={visible ? {display: 'flex'} : undefined} className={s.burger}>
+                        <Navigate setVisible={setVisible}/>
+                        <div className={s.border}/>
+                        <div className={s.login}>
+                            {isAuth ? (
+                                <button onClick={onClickLogout} className={`${s.singUp} ${s.button}`}>Выход</button>
+                            ) : (<>
+                                <button className={`${s.singUp} ${s.button}`} onClick={onClickLogin}>Вход</button>
+                                <button className={`${s.singOut} ${s.button}`} onClick={onClickRegister}>Регистрация
+                                </button>
+                                <Modal type={typeModalLogin}><Login/></Modal>
+                                <Modal type={typeModalRegistration}><Registration/></Modal>
+                            </>)}
+                        </div>
                     </div>
                 </div>
             </div>

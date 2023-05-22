@@ -12,8 +12,9 @@ import {fetchEmployers} from "../../redux/slices/employers";
 import Modal from "../../components/Modal/Modal"
 import {openModal} from "../../redux/slices/modal";
 import {Employer} from "../../components/Employer/Employer";
+import Carousel from "../../components/Carousel/Carousel";
 
-const certificates = [{img: sertificate}, {img: sertificate}, {img: sertificate}, {img: sertificate}]
+const certificates = [{img: sertificate}, {img: sertificate}, {img: sertificate}, {img: sertificate}, {img: sertificate}]
 
 export const Specialists = () => {
     const dispatch = useDispatch();
@@ -32,13 +33,13 @@ export const Specialists = () => {
     }
 
     const scrollToEmployers = () => {
-        scrollToEmployersRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        scrollToEmployersRef.current.scrollIntoView({behavior: 'smooth', block: 'start'});
     }
 
     const scrollToRef = useRef();
     const scrollToEmployersRef = useRef();
     const clickCardButton = () => {
-        scrollToRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        scrollToRef.current.scrollIntoView({behavior: 'smooth', block: 'start'});
     }
 
     React.useEffect(() => {
@@ -46,6 +47,7 @@ export const Specialists = () => {
         dispatch(fetchEmployers());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
 
     return (
         <>
@@ -72,15 +74,17 @@ export const Specialists = () => {
 
                 </div>
                 <div className={'container-carousel'}>
-                        <div className={'flexRelative'}>
+                    <div className={'flexRelative'}>
                         <div className={s.servicesTitleWrap}>
                             <h2 className={s.servicesTitle} ref={scrollToEmployersRef}>Наша команда</h2>
                         </div>
 
                         <div className={`${s.positionDoc}`}>
-                            <ArrowLeft/>
+                            <Carousel show={4}>
                             {employers.items.map((person, key) => {
-                                return <div className={s.cardRow} onClick={() => openFullCard(person)} key={'employer'+person._id}>
+                                console.log(111, person);
+                                return <div className={s.cardRow} onClick={() => openFullCard(person)}
+                                            key={'employer' + person._id}>
                                     <Employer
                                         id={person._id}
                                         imageUrl={(person.imageUrl) ? `http://localhost:4444${person.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
@@ -93,14 +97,14 @@ export const Specialists = () => {
                                     />
                                 </div>
                             })}
-                            <ArrowRight/>
+                            </Carousel>
                         </div>
 
                         <Modal type={'modalService'}>
                             {card &&
                                 <Employer isFull={true}
                                           id={card._id}
-                                          imageUrl={(card.imageUrl) ?`http://localhost:4444${card.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                                          imageUrl={(card.imageUrl) ? `http://localhost:4444${card.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
                                           name={card.user?.fullName}
                                           profession={card.profession}
                                           description={card.description}
@@ -118,24 +122,34 @@ export const Specialists = () => {
                     </div>
                 </div>
             </div>
-            <div className="container"  ref={scrollToRef}>
+            <div className="container" ref={scrollToRef}>
                 <AppointmentForm isSpecialist={true}
-                    name={'Быстрая запись к специалисту'}
-                    services={services.items}
-                    employers={employers.items}
+                                 name={'Быстрая запись к специалисту'}
+                                 services={services.items}
+                                 employers={employers.items}
                 />
             </div>
             <div className="container-color">
                 <div className={s.servicesTitleWrap}>
                     <h2 className={s.servicesTitle}>Сертификаты наших специалистов</h2>
                 </div>
-                <div className={'container-carousel'}>
-                    <ArrowLeft/>
-                    <div className={`container ${s.positionDoc}`}>
-                        {certificates.map(el => <div key={nanoid()}><img src={el.img} alt=""/></div>)}
+                <div className={'container-carousel container-slider'}>
+                    <div style={{marginTop: 64}}>
+
+                        <Carousel show={4}>
+
+                            {/*<img src="https://via.placeholder.com/1600x300" alt="placeholder" />*/}
+                            {certificates.map(el =>
+                                <div key={nanoid()}>
+                                    <div style={{padding: 8}}>
+                                        <img src={el.img} alt="" style={{width: '100%'}}/>
+                                    </div>
+                                </div>
+                            )}
+                        </Carousel>
                     </div>
-                    <ArrowRight/>
                 </div>
+
 
             </div>
         </>

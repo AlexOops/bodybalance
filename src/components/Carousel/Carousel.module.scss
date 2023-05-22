@@ -1,0 +1,88 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.wrapper {
+  display: flex;
+  width: 100%;
+  position: relative;
+  padding: 0 7%;
+}
+.contentWrapper {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  display: flex;
+  transition: all 250ms linear;
+  -ms-overflow-style: none;  /* hide scrollbar in IE and Edge */
+  scrollbar-width: none;  /* hide scrollbar in Firefox */
+}
+
+/* hide scrollbar in webkit browser */
+.content::-webkit-scrollbar, .content::-webkit-scrollbar {
+  display: none;
+}
+
+.content > * {
+  width: 100%;
+  flex-shrink: 0;
+  flex-grow: 1;
+}
+
+
+.content.num2 > * {
+  width: 50%;
+}
+
+.content.num3 > * {
+  width: calc(100% / 3);
+}
+
+.content.num4 > * {
+  width: calc(100% / 4);
+}
+
+
+.leftArrow, .rightArrow {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #D78DFF;
+  //border: 1px solid #ddd;
+  border: none;
+}
+.leftArrow {
+  left: 24px;
+}
+.rightArrow {
+  right: 24px;
+}
+.dots {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+.dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #F0D3FF;
+  margin-right: 10px;
+  border: none;
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+.dotActive {
+  background: #5D3274;
+}

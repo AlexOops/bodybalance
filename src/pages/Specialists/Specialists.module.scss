@@ -76,8 +76,7 @@
   position: relative;
   display: flex;
   justify-content: space-between;
-  margin-top: 40px;
-  margin-bottom: 80px;
+  margin: 40px 60px 80px;
   align-items: center;
 }
 
@@ -90,6 +89,7 @@
 
 .cardRow {
   width: 20%;
+  padding: 10px;
 }
 
 .modalGallery {
@@ -101,4 +101,7 @@
 
 .margin {
   height: 40px;
+}
+.certificates {
+  padding: 0 20px ;
 }
