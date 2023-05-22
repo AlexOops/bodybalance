@@ -48,6 +48,7 @@ export const Specialists = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+
     return (
         <>
             <div className="container-color">
@@ -81,6 +82,7 @@ export const Specialists = () => {
                         <div className={`${s.positionDoc}`}>
                             <Carousel show={4}>
                             {employers.items.map((person, key) => {
+                                console.log(111, person);
                                 return <div className={s.cardRow} onClick={() => openFullCard(person)}
                                             key={'employer' + person._id}>
                                     <Employer
@@ -138,8 +140,8 @@ export const Specialists = () => {
 
                             {/*<img src="https://via.placeholder.com/1600x300" alt="placeholder" />*/}
                             {certificates.map(el =>
-                                <div>
-                                    <div style={{padding: 8}} key={nanoid()}>
+                                <div key={nanoid()}>
+                                    <div style={{padding: 8}}>
                                         <img src={el.img} alt="" style={{width: '100%'}}/>
                                     </div>
                                 </div>
