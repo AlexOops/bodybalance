@@ -1,7 +1,5 @@
 import s from './Specialists.module.scss'
 import sertificate from '../../assets/sertificate.png'
-import {ArrowLeft} from "../../components/Arrow/ArrowLeft";
-import {ArrowRight} from "../../components/Arrow/ArrowRight";
 import {AppointmentForm} from "../../components/AppointmentForm/AppointmentForm";
 import React, {useState, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
@@ -82,7 +80,6 @@ export const Specialists = () => {
                         <div className={`${s.positionDoc}`}>
                             <Carousel show={4}>
                             {employers.items.map((person, key) => {
-                                console.log(111, person);
                                 return <div className={s.cardRow} onClick={() => openFullCard(person)}
                                             key={'employer' + person._id}>
                                     <Employer

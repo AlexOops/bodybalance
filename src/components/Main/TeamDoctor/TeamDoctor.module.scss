@@ -1,50 +1,62 @@
 .wrapper {
-  height: 690px;
+  max-height: 690px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-top: 80px;
+  @media screen and (max-width: 849px) {
+    flex-direction: column;
+    align-items: center
+  }
 }
 
 .img {
   position: relative;
-  width: 50%;
+  width: 48%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
 }
 
-.one {
-  position: absolute;
-  width: 261px;
-  height: 261px;
-  left: 61.5px;
-  top: 0;
-}
-
-.two {
-  width: 208.03px;
-  height: 208.03px;
-  position: absolute;
-  top: 131px;
-  left: 348px;
-}
 
 .three {
   width: 410px;
   height: 410px;
-  position: absolute;
-  top: 281px;
+  @media screen and (max-width: 1100px) and (min-width: 850px) {
+    margin-left: 30px;
+    width: 350px;
+    height: 350px;
+  }
+  @media screen and (max-width: 849px) {
+    width: 250px;
+    height: 250px;
+  }
 }
 
 .description {
-  width: 50%;
+  width: 48%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  @media screen and (max-width: 849px) {
+    width: 80%;
+    align-items: center;
+  }
+
 }
 .name {
   text-align: left;
-  width: 500px;
+  max-width: 500px;
+  @media screen and (max-width: 849px) {
+    text-align: center;
+  }
+  @media screen and (max-width: 420px) and (min-width: 320px) {
+   font-size: 26px;
+  }
 }
 .text {
+  width: 99%;
   margin: 10px 0 30px 0;
 }
 
@@ -58,6 +70,10 @@
   line-height: 24px;
   color: #FFFFFF;
   border: none;
+  @media screen and (max-width: 420px) and (min-width: 320px) {
+    max-width: 310px;
+    font-size: 18px;
+  }
   &:hover {
     cursor: pointer;
   }

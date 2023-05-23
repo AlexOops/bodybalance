@@ -1,9 +1,8 @@
 .position {
   position: relative;
-
-}
-.services {
-  height: 654px
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .space {
@@ -16,6 +15,34 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: flex-start;
-  padding: 0px;
+  padding: 0;
   gap: 30px;
+  justify-content: center;
+
+  @media screen and (max-width: 1289px) and (min-width: 850px){
+    justify-content: flex-start;
+  }
 }
+
+.btn {
+  margin-top: 30px;
+  border: 2px solid #D78DFF;
+  background: none;
+  color: #D78DFF;
+  padding: 20px 30px;
+  border-radius: 40px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  width: 410px;
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #9e8dff;
+    border: 2px solid #9e8dff;
+  }
+
+}
+
+
+

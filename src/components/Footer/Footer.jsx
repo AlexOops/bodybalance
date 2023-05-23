@@ -18,12 +18,12 @@ export const Footer = () => {
                 <div className={s.footer}>
                     <div className={s.img}>
                         <div className={s.logo}><img src={logo} alt=""/></div>
-                        <div className={s.socialNetwork}>
-                            <img src={twitter} alt="twitter"/>
-                            <img src={instagram} alt="instagram"/>
-                            <img src={vk} alt="vk"/>
-                            <img src={telegram} alt="telegram"/>
-                        </div>
+                        {/*<div className={s.socialNetwork}>*/}
+                        {/*    <img src={twitter} alt="twitter"/>*/}
+                        {/*    <img src={instagram} alt="instagram"/>*/}
+                        {/*    <img src={vk} alt="vk"/>*/}
+                        {/*    <img src={telegram} alt="telegram"/>*/}
+                        {/*</div>*/}
                     </div>
                     <div className={s.menu}>
                         <ul className={s.menuList}>
