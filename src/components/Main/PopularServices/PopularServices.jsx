@@ -42,11 +42,11 @@ export const PopularServices = () => {
 
     return (
     <>
-        <div className='container-carousel'>
+
             {/*<ArrowLeft setCount={setCount}/>*/}
             <div className='container'>
                 <div className={s.position}>
-                    <div className={s.services}>
+
                         <h2 className={s.space}>популярные услуги</h2>
                         {/*<div className={s.cards}>*/}
                         {/*    {filterService.map((obj, index) =>*/}
@@ -73,10 +73,10 @@ export const PopularServices = () => {
                                             imageUrl={(obj.imageUrl) ? `http://localhost:4444${obj.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
                                     />
                             )}
-                        </div>
-                    </div>
                 </div>
+                    <button className={s.btn}>Все услуги</button>
             </div>
+
             {/*<ArrowRight setCount={setCount}/>*/}
         </div>
     </>

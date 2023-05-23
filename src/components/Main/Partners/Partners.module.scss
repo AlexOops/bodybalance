@@ -2,6 +2,15 @@
   display: flex;
   justify-content: space-around;
   height: 260px;
+  @media screen and (max-width: 1024px) {
+    flex-wrap: wrap;
+  }
+  @media screen and (max-width: 700px) {
+    margin: 30px 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
 .img {

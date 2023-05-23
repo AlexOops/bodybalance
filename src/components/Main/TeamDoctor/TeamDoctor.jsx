@@ -1,6 +1,4 @@
 import s from './TeamDoctor.module.scss'
-import doctor_one from "../../../assets/doctor_1.png";
-import doctor_two from "../../../assets/doctor_2.png";
 import doctor_three from "../../../assets/doctor_3.png";
 
 export const TeamDoctor = () => {
@@ -8,8 +6,6 @@ export const TeamDoctor = () => {
         <div className='container'>
             <div className={s.wrapper}>
                 <div className={s.img}>
-                    <img className={s.one} src={doctor_one} alt=""/>
-                    <img className={s.two} src={doctor_two} alt=""/>
                     <img className={s.three} src={doctor_three} alt=""/>
                 </div>
                 <div className={s.description}>

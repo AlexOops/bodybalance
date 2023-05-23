@@ -1,6 +1,6 @@
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   padding-top: 50px;
   @media screen and (max-width: 1000px) {
     padding-top: 25px;
@@ -83,6 +83,7 @@
   @media screen and (max-width: 889px) {
     margin: 0;
     display: block;
+    z-index: 12;
   }
 }
 

@@ -22,18 +22,28 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  //align-items: center;
   padding: 30px;
   gap: 20px;
   width: 410px;
-  min-height: 550px;
+  max-height: 550px;
   background: #FFFFFF;
   box-shadow: 0 0 20px rgba(255, 226, 255, 0.65);
   border-radius: 25px;
 
   &:hover {
-    box-shadow: 0px 0px 20px rgba(255, 153, 255, 0.65);
+    box-shadow: 0 0 20px rgba(255, 153, 255, 0.65);
     cursor: pointer;
+  }
+
+  @media screen and (max-width: 1289px) and (min-width: 850px) {
+    width: 45%;
+
+    &:nth-child(odd) {
+      margin-left: 50px;
+    }
+  }
+  @media screen and (max-width: 849px) {
+    width: 80%;
   }
 }
 

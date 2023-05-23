@@ -6,31 +6,42 @@ const Carousel = ({children, show = 1}) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [length, setLength] = useState(0);
 
+
     useEffect(() => {
         setLength(children.length);
     }, [children]);
 
     useEffect(() => {
-        if (currentIndex >= length) {
-            setCurrentIndex(0)
-        } else if (currentIndex < 0) {
-            setCurrentIndex(children.length - 1)
+        if (show === 1) {
+            if (currentIndex >= length) {
+                setCurrentIndex(0)
+            }
+            const timeout = setInterval(() => {
+                setCurrentIndex(prevState => prevState + 1)
+            }, 5000)
+            return () => {
+                clearInterval(timeout)
+            }
         }
-        const timeout = setInterval(() => {
-            setCurrentIndex(prevState => prevState + 1)
-        }, 2200)
-        return () => {
-            clearInterval(timeout)
-        }
+
     }, [currentIndex, children.length, length])
 
+
     const next = () => {
-        setCurrentIndex(prevState => prevState + 1);
+        if (currentIndex < (length - show)) {
+            setCurrentIndex(prevState => prevState + 1);
+        } else if (currentIndex >= length) {
+            setCurrentIndex(0)
+        }
     };
 
     const prev = () => {
-        setCurrentIndex(prevState => prevState - 1)
-    }
+        if (currentIndex > 0) {
+            setCurrentIndex(prevState => prevState - 1);
+        } else if (currentIndex < 0) {
+            setCurrentIndex(children.length - 1)
+        }
+    };
 
     const clickDot = (index) => {
         setCurrentIndex(index);

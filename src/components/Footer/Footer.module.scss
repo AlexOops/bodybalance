@@ -3,15 +3,26 @@
   align-items: center;
   justify-content: space-between;
   height: 307px;
-
+  @media screen and (max-width: 1350px) {
+    margin: 0 30px;
+  }
+  @media screen and (max-width: 560px) {
+    flex-direction: column;
+  }
 }
 
 .img {
   height: 147px;
+  @media screen and (max-width: 560px) {
+    margin-top: 30px;
+  }
 }
 
 .menu {
   height: 147px;
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
 }
 .menuList{
   display: flex;
@@ -28,6 +39,9 @@
   margin-bottom: 13.2px;
   display: flex;
   align-items: center;
+  @media screen and (max-width: 420px)  and (min-width: 320px){
+    font-size: 14px;
+  }
 }
 
 .contacts {

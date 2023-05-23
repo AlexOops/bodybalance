@@ -1,11 +1,13 @@
 .container {
   width: 100%;
+  max-width: 1540px;
   display: flex;
   flex-direction: column;
 }
 .wrapper {
   display: flex;
   width: 100%;
+  max-width: 1540px;
   position: relative;
   padding: 0 7%;
 }
