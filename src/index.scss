@@ -48,11 +48,8 @@ p {
   width: 1290px;
   margin: 0 auto;
   position: relative;
-  @media screen and (max-width: 1290px) and (min-width: 1024px) {
+  @media screen and (max-width: 1290px) {
     width: 1000px;
-  }
-  @media screen and (max-width: 767px)  {
-    width: auto;
   }
 }
 

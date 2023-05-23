@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   padding-top: 50px;
-  @media only screen and (max-device-width: 767px) {
+  @media screen and (max-width: 1000px) {
     padding-top: 25px;
     justify-content: space-around;
   }
@@ -25,7 +25,7 @@
   flex-direction: column;
 }
 
-@media only screen and (max-device-width: 767px) {
+@media screen and (max-width: 889px) {
   .toggle {
     z-index: 3;
     height: 3px;
@@ -64,7 +64,7 @@
 
 .burger {
   display: flex;
-  @media only screen and (max-device-width: 767px) {
+  @media screen and (max-width: 889px) {
     display: none;
     justify-content: start;
     width: 100%;
@@ -74,13 +74,13 @@
     position: fixed;
     top: 0;
     flex-direction: column-reverse;
-    z-index: 2;
+    z-index: 11;
   }
 }
 
 .toggle {
   display: none;
-  @media only screen and (max-device-width: 767px) {
+  @media screen and (max-width: 889px) {
     margin: 0;
     display: block;
   }
@@ -92,7 +92,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  @media only screen and (max-device-width: 767px) {
+  @media screen and (max-width: 889px) {
     margin: 110px 0 40px 0;
     justify-content: space-evenly;
   }
@@ -116,6 +116,10 @@
     padding: 7px 12px;
     font-size: 16px;
   }
+  @media screen and (max-width: 1023px) and (min-width: 890px) {
+    padding: 5px 10px;
+    font-size: 14px;
+  }
 }
 
 .singUp {
@@ -133,7 +137,7 @@
 
 .border {
   display: none;
-  @media only screen and (max-device-width: 767px) {
+  @media screen and (max-width: 889px) and (min-width: 320px) {
     display: block;
     width: 55%;
     height: 2px;

@@ -60,8 +60,8 @@ export const Header = () => {
                         <label className={s.checkLabel} htmlFor="check">
                             <input
                                 type="checkbox"
-                                // onChange={handleVisible}
-                                // checked={visible}
+                                onChange={handleVisible}
+                                checked={visible}
                                 value=''
                                 className={s.toggleInput}
                             />
