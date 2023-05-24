@@ -1,0 +1,31 @@
+.positionFlex {
+  display: flex;
+  align-items: center;
+}
+
+.selectedDate {
+  margin-left: 35%;
+}
+
+.time {
+  height: 120px;
+  background-color: blue;
+  color: white;
+}
+
+.timeColor {
+  height: 120px;
+  background-color: red;
+  color: white;
+}
+
+.dateFlex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.today {
+  border: 1px solid red;
+  cursor: pointer;
+  margin-left: 250px;
+}
