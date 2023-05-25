@@ -15,6 +15,7 @@ import {EmailAdmin} from "./pages/admin/email/EmailAdmin";
 import {PatientsAdmin} from "./pages/admin/patients/PatientsAdmin";
 import {SpecialistsAdmin} from "./pages/admin/specialists/SpecialistsAdmin";
 import {SettingsAdmin} from "./pages/admin/settings/SettingsAdmin";
+import {Records} from "./pages/admin/Records/Records";
 
 export const router = createBrowserRouter([
     {
@@ -67,6 +68,10 @@ export const router = createBrowserRouter([
             {
                 path: "/admin/email",
                 element: <EmailAdmin/>,
+            },
+            {
+                path: "/admin/records",
+                element: <Records/>,
             },
             {
                 path: "/admin/patients",

@@ -37,12 +37,14 @@ export const Training = () => {
                     </div>
                 </div>
             </div>
+            <div className="container">
             <Feedback
                 name={"Почему важно делать упражнения ежедневно ?"}
                 text={"Также как перспективное планирование, в своём классическом представлении, допускает внедрение системы обучения кадров, соответствующей насущным потребностям."}
                 author={"Дмитрий Бочарников - "}
                 profession={"Невролог-реабилитолог"}
             />
+            </div>
             <div className={'container-color'}>
                 <div className={'container'}>
                     <div className={s.training}>

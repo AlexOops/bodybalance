@@ -125,3 +125,28 @@ input:-webkit-autofill:active {
   transition: background-color 5500s ease-in-out 0s;
   //-webkit-text-fill-color: #AEAEAE !important;
 }
+
+
+.react-datepicker {
+ height: 280px;
+}
+.react-datepicker__month-container {
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.react-datepicker__header {
+  height: 135px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #D78DFF !important;
+}
+.react-datepicker__day--selected {
+  background-color: #9e8dff !important;
+}
+.react-datepicker__day {
+  font-size: 16px;
+}
