@@ -12,7 +12,7 @@ import {ErrorPage} from "./pages/404/ErrorPage";
 import {Videos} from "./pages/Trainings/Videos/Videos";
 import {Admin} from "./pages/admin/Admin";
 import {EmailAdmin} from "./pages/admin/email/EmailAdmin";
-import {PatientsAdmin} from "./pages/admin/patients/PatientsAdmin";
+import {Customers} from "./pages/admin/Customers/Customers";
 import {SpecialistsAdmin} from "./pages/admin/specialists/SpecialistsAdmin";
 import {SettingsAdmin} from "./pages/admin/settings/SettingsAdmin";
 import {Records} from "./pages/admin/Records/Records";
@@ -74,8 +74,8 @@ export const router = createBrowserRouter([
                 element: <Records/>,
             },
             {
-                path: "/admin/patients",
-                element: <PatientsAdmin/>,
+                path: "/admin/customers",
+                element: <Customers/>,
             },
             {
                 path: "/admin/specialists",

@@ -40,7 +40,7 @@ export const Registration = () => {
     }
 
     const onSubmit = async (values) => {
-        values.fullName = values.firstName+values.select;
+        values.fullName = values.firstName + ' ' + values.secondName;
         const data = await dispatch(fetchRegister(values));
 
         if(!data.payload){

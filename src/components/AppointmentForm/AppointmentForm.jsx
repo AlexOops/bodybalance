@@ -119,31 +119,32 @@ export const AppointmentForm = ({
             validationSchema={SignupSchema}
 
             onSubmit={async (values, actions) => {
+
                 // actions.setFieldValue('serviceId', selected.id); //если выбрали услугу из карточки, то берем значение из стейта.
                 try {
                     //ищем клиента в базе по почте, если не найден, создаем нового.
-                    await axios.get('/customer/byemail/?email=' + values.email)
-                        .then(async (res) => {
-                            let customerId;
-                            if (res.data === null) {
-                                const {data} = await axios.post('/customers', {
-                                    firstName: values.firstName,
-                                    secondName: values.secondName,
-                                    email: values.email,
-                                    phone: values.phone,
-                                });
-                                //получили id нового покупателя.
-                                customerId = data._id;
-                            } else {
-                                customerId = res.data._id;
-                            }
+                    // await axios.get('/customer/byemail/?email=' + values.email)
+                    //     .then(async (res) => {
+                    //         let customerId;
+                    //         if (res.data === null) {
+                    //             const {data} = await axios.post('/customers', {
+                    //                 firstName: values.firstName,
+                    //                 secondName: values.secondName,
+                    //                 email: values.email,
+                    //                 phone: values.phone,
+                    //             });
+                    //             //получили id нового покупателя.
+                    //             customerId = data._id;
+                    //         } else {
+                    //             customerId = res.data._id;
+                    //         }
                             await axios.post('/appointments', { //создаем запись на прием неавторизованного пользователя с текущими контактными данными.
                                 firstName: values.firstName,
                                 secondName: values.secondName,
                                 email: values.email,
                                 phone: values.phone,
                                 service: values.serviceId,
-                                customer: customerId,
+                                // customer: customerId,
                                 employer: values.employer, // нужно внедрить поле сотрудника в форму
                                 dateTime: values.datetime,
                             })
@@ -152,7 +153,7 @@ export const AppointmentForm = ({
                                     dispatch(openModal('modalMessage'));
                                 })
                                 .catch(err => console.log("Не удалась запись на прием", err))
-                        });
+                        // });
 
                 } catch (err) {
                     console.warn(err);
