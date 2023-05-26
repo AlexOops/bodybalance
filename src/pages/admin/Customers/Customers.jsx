@@ -18,7 +18,7 @@ export const Customers = () => {
         dispatch(fetchCustomers())
     }, []);
 
-    const getDataDistanceStr = (date) => {
+    const getDataDistanceStr = (date) => { //прошло время с даты регистрации
         const dateStr = date;
         const str = formatDistance(
             new Date(dateStr),
