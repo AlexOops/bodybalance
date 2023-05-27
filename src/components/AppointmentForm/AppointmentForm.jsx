@@ -25,7 +25,7 @@ const SignupSchema = Yup.object().shape({
         // .max(50, 'Too Long!')
         .required('Укажите фамилию'),
     email: Yup.string().email('Некорректный email').required('Введите e-mail'),
-    phone: Yup.string().matches(phoneRegExp, 'Некорректный номер телефона'),
+    phone: Yup.string().required('Укажите контактный номер').matches(phoneRegExp, 'Некорректный номер телефона'),
     text: Yup.string().max(500, 'Пожалуйста, введите сообщение не более 500 символов'),
     datetime: Yup.string().required('Выберите дату и время'),
     serviceId: Yup.string().required('Выберите Услугу'),
@@ -40,19 +40,20 @@ export const AppointmentForm = ({
 
     const selected = useSelector(selectedService);
     const selectedSpecialist = useSelector(selectedEmployer);
+    const {data: authUser} = useSelector(state => state.auth); //получим id авторизованного покупателя
 
     //Быстрая запись
     const workDates = [
         {
-            date: "2023-04-30",
+            date: "2023-05-30",
             time: ["11:00", "13:00", "14:00"],
         },
         {
-            date: "2023-04-25",
+            date: "2023-05-25",
             time: ["14:00", "15:00"],
         },
         {
-            date: "2023-04-29",
+            date: "2023-05-29",
             time: ["14:00", "15:00"],
         },
     ];
@@ -65,18 +66,12 @@ export const AppointmentForm = ({
     const [isOpen, setOpen] = useState(false);//Развернуть селект
     const dispatch = useDispatch();
 
-    //активный компонент по dataset (чтобы отмечать активный, если меню не сворачиваем при выборе)
-    // const [active, setActive] = useState(null);
-
     const handleOpen = () => {
         setOpen((prevOpen) => !prevOpen);
     };
 
     const onClickItem = (e, id, name) => {
-        // setActive(e.target.dataset.index);
         setOpen(false);
-        // dispatch(setSelectedService(null));//обнулить выбор из карточки для выбора из селекта, так как разделили управление
-        // // ( выбор по checked или выбор по клику из Card)
         !isSpecialist
             ? dispatch(setSelectedService({name: name, id: id}))
             : dispatch(setSelectedEmployer({name: name, id: id})); //поместим выбранную услугу в стейт
@@ -122,51 +117,36 @@ export const AppointmentForm = ({
 
                 // actions.setFieldValue('serviceId', selected.id); //если выбрали услугу из карточки, то берем значение из стейта.
                 try {
-                    //ищем клиента в базе по почте, если не найден, создаем нового.
-                    // await axios.get('/customer/byemail/?email=' + values.email)
-                    //     .then(async (res) => {
-                    //         let customerId;
-                    //         if (res.data === null) {
-                    //             const {data} = await axios.post('/customers', {
-                    //                 firstName: values.firstName,
-                    //                 secondName: values.secondName,
-                    //                 email: values.email,
-                    //                 phone: values.phone,
-                    //             });
-                    //             //получили id нового покупателя.
-                    //             customerId = data._id;
-                    //         } else {
-                    //             customerId = res.data._id;
-                    //         }
-                            await axios.post('/appointments', { //создаем запись на прием неавторизованного пользователя с текущими контактными данными.
-                                firstName: values.firstName,
-                                secondName: values.secondName,
-                                email: values.email,
-                                phone: values.phone,
-                                service: values.serviceId,
-                                // customer: customerId,
-                                employer: values.employer, // нужно внедрить поле сотрудника в форму
-                                dateTime: values.datetime,
-                            })
-                                .then(res => {
-                                    console.log(res);
-                                    dispatch(openModal('modalMessage'));
-                                })
-                                .catch(err => console.log("Не удалась запись на прием", err))
-                        // });
+                    let postData = {
+                        firstName: values.firstName,
+                        secondName: values.secondName,
+                        email: values.email,
+                        phone: values.phone,
+                        service: values.serviceId,
+                        employer: values.employer, // (по умолчанию) если сотрудников одной услуги несколько, то нужно будет отображать их в форме// идея хранить в базе сотрудника у услуги.
+                        dateTime: values.datetime,
+                    };
+                    if (authUser){
+                        postData = {...postData, customer: authUser._id};
+                    }
+                    if (values.text) {
+                        postData = {...postData, text: values.text};
+                    }
+                    await axios.post('/appointments', postData)
+                        .then(res => {
+                            // actions.setSubmitting(false);
+                            dispatch(openModal('modalMessage'));
+                        })
+                        .catch(err => console.log("Не удалась запись на прием", err))
+
 
                 } catch (err) {
                     console.warn(err);
                     alert('Ошибка при создании записи');
                 }
-
-                setTimeout(() => {
-                    console.log(JSON.stringify(values, null, 2));
-                    actions.setSubmitting(false);
-                }, 400);
             }}
         >
-            {({isSubmitting, values, errors, touched, setFieldValue}) => {
+            {({isSubmitting, values, errors, touched, setFieldValue, resetForm, setSubmitting}) => {
 
                 return (
 
@@ -298,7 +278,10 @@ export const AppointmentForm = ({
                                     {(errors.datetime && touched.datetime) &&
                                         <div className={s.error}>{errors.datetime}</div>}
                                 </div>
-                                <div className={s.flexEnd}>
+                                <div className={s.flexSBetween}>
+                                    <button type='button' className={s.clearButton} onClick={()=>{
+                                        resetForm();
+                                    }}>Очистить данные</button>
                                     <button className={s.button} type="submit" disabled={isSubmitting}>Записаться
                                     </button>
                                 </div>
