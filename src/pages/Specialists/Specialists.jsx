@@ -22,6 +22,7 @@ export const Specialists = () => {
     const [certificateUrl, setCertificateUrl] = useState('');
 
     const openFullCard = (employer) => {
+        console.log(employer);
         setCard(employer);
         dispatch(openModal('modalService'));
     }
@@ -84,12 +85,12 @@ export const Specialists = () => {
                                             key={'employer' + person._id}>
                                     <Employer
                                         id={person._id}
-                                        imageUrl={(person.imageUrl) ? `http://localhost:4444${person.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
-                                        name={person.user?.fullName}
-                                        profession={person.profession}
-                                        description={person.description}
-                                        text={person.text}
-                                        certificates={person.certificates}
+                                        imageUrl={(person.employer.imageUrl) ? `http://localhost:4444${person.employer.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                                        name={person.fullName}
+                                        profession={person.employer.profession}
+                                        description={person.employer.description}
+                                        text={person.employer.text}
+                                        certificates={person.employer.certificates}
                                         openImageFromParent={openEmployerCertificate}
                                     />
                                 </div>
@@ -98,15 +99,15 @@ export const Specialists = () => {
                         </div>
 
                         <Modal type={'modalService'}>
-                            {card &&
+                            {card.employer &&
                                 <Employer isFull={true}
                                           id={card._id}
-                                          imageUrl={(card.imageUrl) ? `http://localhost:4444${card.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
-                                          name={card.user?.fullName}
-                                          profession={card.profession}
-                                          description={card.description}
-                                          text={card.text}
-                                          certificates={card.certificates}
+                                          imageUrl={(card.employer.imageUrl) ? `http://localhost:4444${card.employer.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                                          name={card.fullName}
+                                          profession={card.employer.profession}
+                                          description={card.employer.description}
+                                          text={card.employer.text}
+                                          certificates={card.employer.certificates}
                                           handleAction={clickCardButton}
                                           openImageFromParent={openEmployerCertificate}
                                 />}

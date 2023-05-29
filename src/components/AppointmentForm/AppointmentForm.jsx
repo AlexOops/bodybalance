@@ -102,7 +102,7 @@ export const AppointmentForm = ({
             initialValues={{
                 // serviceId: (selected !== null) ? selected.id : '',
                 serviceId: isSpecialist ? '64480825e556a337db3fb841' : '',
-                employer: '640dbd31331a6169da66299e', //сотрудник принимающий по записи на прием.
+                employer: '6447fcd874f077e18de6dfa1', //сотрудник принимающий по записи на прием.
                 firstName: '',
                 secondName: '',
                 email: '',
@@ -202,18 +202,18 @@ export const AppointmentForm = ({
 
                                                     {employers.map((employer, key) =>
 
-                                                        <div key={`${key}_${employer.user._id}`}
+                                                        <div key={`${key}_${employer._id}`}
                                                             // className={s.selectInput}
 
-                                                             className={`${s.selectLabel} ${employer.user._id === selectedSpecialist.id ? s.active : ''}`}
+                                                             className={`${s.selectLabel} ${employer._id === selectedSpecialist.id ? s.active : ''}`}
                                                             // data-index={service._id}
                                                              onClick={(e) => {
 
-                                                                 setFieldValue('employer', employer.user._id);
-                                                                 onClickItem(e, employer.user._id, employer.user.fullName + " - " + employer.profession);
+                                                                 setFieldValue('employer', employer._id);
+                                                                 onClickItem(e, employer._id, employer.fullName + " - " + employer.employer.profession);
                                                              }}
                                                         >
-                                                            {employer.user.fullName} - {employer.profession}
+                                                            {employer.fullName} - {employer.employer.profession}
                                                         </div>
                                                     )}
                                                 </div>
