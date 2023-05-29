@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import s from './AppointmentForm.module.scss';
 import {Form, Formik, Field} from 'formik';
 
@@ -41,22 +41,28 @@ export const AppointmentForm = ({
     const selected = useSelector(selectedService);
     const selectedSpecialist = useSelector(selectedEmployer);
     const {data: authUser} = useSelector(state => state.auth); //получим id авторизованного покупателя
+    const [workDates, setWorkDates] = useState([]);
+    const [dates, setDates] = useState([]);
 
-    //Быстрая запись
-    const workDates = [
-        {
-            date: "2023-05-30",
-            time: ["11:00", "13:00", "14:00"],
-        },
-        {
-            date: "2023-05-25",
-            time: ["14:00", "15:00"],
-        },
-        {
-            date: "2023-05-29",
-            time: ["14:00", "15:00"],
-        },
-    ];
+    let arrData = [];
+
+
+    // //Быстрая запись
+    // const workDates = [
+    //     {
+    //         date: "2023-05-30",
+    //         time: ["11:00", "13:00", "14:00"],
+    //     },
+    //     {
+    //         date: "2023-05-25",
+    //         time: ["14:00", "15:00"],
+    //     },
+    //     {
+    //         date: "2023-05-29",
+    //         time: ["14:00", "15:00"],
+    //     },
+    // ];
+
 
     // const [value, setValue] = useState(dayjs('2022-04-17T15:30'));
 
@@ -78,18 +84,39 @@ export const AppointmentForm = ({
         console.log('selectedSpecialist', selectedSpecialist);
     };
 
+    useMemo( () => {
+        if (selectedSpecialist.id!==null){
+            axios.get(`/worktime/employer/${selectedSpecialist.id}`).then(
+                (res) => {
+                    setWorkDates(res.data);
+                    arrData = res.data.map((item)=>item.split("T")[0]);
+                    setDates(arrData);
+                    setWorkTimes([]);
+                }
+            ).catch( (err) => {
+                console.log(err);
+            });
+        }
+    }, [selectedSpecialist.id]);
+
     //получим все рабочие даты в массив
-    const workDatesArr = workDates.map((obj) => obj.date);
+    // const workDatesArr = workDates.map((obj) => obj.date);
 
     const getWorkTimes = (date) => { //отобразим список времени приема для даты.
         if (date) {
-            workDates.map((obj) => {
-                if (obj.date === date.format('YYYY-MM-DD')) {
-                    setWorkDate(obj.date);
-                    setWorkTimes(obj.time);
-                }
-                return obj
+            const arrData = workDates.filter((obj) => {
+                return (obj.slice(0,10) === date.format('YYYY-MM-DD'))
             });
+            setWorkDate(date.format('YYYY-MM-DD'));
+            setWorkTimes(arrData.map(obj => obj.slice(11,16)))
+
+            // workDates.map((obj) => {
+            //     if (obj === date.format('YYYY-MM-DD')) {
+            //         setWorkDate(obj);
+            //         setWorkTimes(obj.time);
+            //     }
+            //     return obj
+            // });
         } else {
             console.log('Дата не выбрана');
         }
@@ -259,7 +286,10 @@ export const AppointmentForm = ({
                                 </div>
 
                                 {/*Календарь*/}
-                                <CalendarPicker id="datetime" workDatesArr={workDatesArr} getWorkTimes={getWorkTimes}
+                                <CalendarPicker id="datetime"
+                                                // workDatesArr={workDatesArr}
+                                                workDatesArr={dates}
+                                                getWorkTimes={getWorkTimes}
                                                 placeholderText={'Дата и время приема'}/>
                                 {/*Часы приема*/}
                                 <div className={(!workTimes || (workTimes.length === 0)) ? s.hidden : s.time}>
