@@ -22,7 +22,6 @@ export const Specialists = () => {
     const [certificateUrl, setCertificateUrl] = useState('');
 
     const openFullCard = (employer) => {
-        console.log(employer);
         setCard(employer);
         dispatch(openModal('modalService'));
     }

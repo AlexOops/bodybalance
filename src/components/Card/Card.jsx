@@ -7,6 +7,7 @@ import {useDispatch} from "react-redux";
 import {setSelectedService} from "../../redux/slices/services";
 import {closeModal} from "../../redux/slices/modal";
 import {useRef} from "react";
+import {setSelectedEmployer} from "../../redux/slices/employers";
 export const Card = ({
     id,
     price,
@@ -18,12 +19,15 @@ export const Card = ({
     isLoading,
     isFull,
     handleAction,
+    employer,
 }) => {
+
 
     const dispatch = useDispatch();
     const handleSelectService = () => {
         dispatch(setSelectedService({id: id, name:name}));
         dispatch(closeModal('modalService'));
+        (employer) ? dispatch(setSelectedEmployer({id: employer._id, name: employer.fullName})) : console.log('У услуги еще нет сотрудника')
         handleAction(); //действие в родительском компоненте.
     }
 

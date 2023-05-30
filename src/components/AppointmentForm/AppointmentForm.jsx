@@ -13,6 +13,7 @@ import {openModal} from "../../redux/slices/modal";
 import {selectedEmployer, setSelectedEmployer} from "../../redux/slices/employers";
 import EmployerIdInput from "./EmployerIdInput";
 import {nanoid} from "nanoid";
+// import dayjs from "dayjs";
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 const SignupSchema = Yup.object().shape({
@@ -32,7 +33,6 @@ const SignupSchema = Yup.object().shape({
 
 });
 
-
 export const AppointmentForm = ({
                                     services, name, isSpecialist, employers
                                     // isSubmitting, errors, values, setFieldValue, touched
@@ -41,33 +41,14 @@ export const AppointmentForm = ({
     const selected = useSelector(selectedService);
     const selectedSpecialist = useSelector(selectedEmployer);
     const {data: authUser} = useSelector(state => state.auth); //получим id авторизованного покупателя
-    const [workDates, setWorkDates] = useState([]);
-    const [dates, setDates] = useState([]);
-
-    let arrData = [];
+    const [workDates, setWorkDates] = useState([]); // храним полученые рабочие даты специалиста.
 
 
-    // //Быстрая запись
-    // const workDates = [
-    //     {
-    //         date: "2023-05-30",
-    //         time: ["11:00", "13:00", "14:00"],
-    //     },
-    //     {
-    //         date: "2023-05-25",
-    //         time: ["14:00", "15:00"],
-    //     },
-    //     {
-    //         date: "2023-05-29",
-    //         time: ["14:00", "15:00"],
-    //     },
-    // ];
+    //  const [value, setValue] = useState(dayjs('2023-05-28T08:00:00.000+00:00')); //пример работы day.js
+    // console.log(value);
 
-
-    // const [value, setValue] = useState(dayjs('2022-04-17T15:30'));
-
-    const [workTimes, setWorkTimes] = useState([]);
-    const [workDate, setWorkDate] = useState('');
+    const [workTimes, setWorkTimes] = useState([]); //список доступного времени
+    const [workDate, setWorkDate] = useState(''); // дата выбранная пикером
 
     const [isOpen, setOpen] = useState(false);//Развернуть селект
     const dispatch = useDispatch();
@@ -76,26 +57,31 @@ export const AppointmentForm = ({
         setOpen((prevOpen) => !prevOpen);
     };
 
-    const onClickItem = (e, id, name) => {
+    const onClickItem = (e, id, name, employer) => {
         setOpen(false);
-        !isSpecialist
-            ? dispatch(setSelectedService({name: name, id: id}))
-            : dispatch(setSelectedEmployer({name: name, id: id})); //поместим выбранную услугу в стейт
+        if (!isSpecialist) {
+            dispatch(setSelectedService({name: name, id: id}));
+            (employer) ? dispatch(setSelectedEmployer({name: employer.fullName, id: employer._id})) : console.log("Нет данных сотрудника по услуге");
+        } else {
+            dispatch(setSelectedEmployer({name: name, id: id})); //поместим выбранную услугу в стейт
+        }
         console.log('selectedSpecialist', selectedSpecialist);
     };
 
-    useMemo( () => {
-        if (selectedSpecialist.id!==null){
-            axios.get(`/worktime/employer/${selectedSpecialist.id}`).then(
-                (res) => {
-                    setWorkDates(res.data);
-                    arrData = res.data.map((item)=>item.split("T")[0]);
-                    setDates(arrData);
-                    setWorkTimes([]);
-                }
-            ).catch( (err) => {
-                console.log(err);
-            });
+
+    useEffect( () => {
+        setWorkDate('');
+        setWorkTimes([]);
+        const fetchDataByEmployer =  async () => {
+            try {
+               await axios.get(`/worktime/employer/${selectedSpecialist.id}`)
+                   .then(res => {
+                       setWorkDates(res.data);
+                   });
+            } catch(err){console.log(err)}
+        }
+        if (selectedSpecialist.id !== null){
+           fetchDataByEmployer().then();
         }
     }, [selectedSpecialist.id]);
 
@@ -109,14 +95,6 @@ export const AppointmentForm = ({
             });
             setWorkDate(date.format('YYYY-MM-DD'));
             setWorkTimes(arrData.map(obj => obj.slice(11,16)))
-
-            // workDates.map((obj) => {
-            //     if (obj === date.format('YYYY-MM-DD')) {
-            //         setWorkDate(obj);
-            //         setWorkTimes(obj.time);
-            //     }
-            //     return obj
-            // });
         } else {
             console.log('Дата не выбрана');
         }
@@ -141,7 +119,6 @@ export const AppointmentForm = ({
             validationSchema={SignupSchema}
 
             onSubmit={async (values, actions) => {
-
                 // actions.setFieldValue('serviceId', selected.id); //если выбрали услугу из карточки, то берем значение из стейта.
                 try {
                     let postData = {
@@ -203,14 +180,13 @@ export const AppointmentForm = ({
                                                     className={isOpen ? s.selectContainer : `${s.selectContainer} ${s.closeContainer}`}>
 
                                                     {services.map((service, key) =>
-
                                                         <div key={`emp_${key}_${service._id}`}
                                                             // className={s.selectInput}
                                                              className={`${s.selectLabel} ${service._id === selected.id ? s.active : ''}`}
                                                             // data-index={service._id}
                                                              onClick={(e) => {
                                                                  setFieldValue('serviceId', service.id);
-                                                                 onClickItem(e, service.id, service.name)
+                                                                 onClickItem(e, service.id, service.name, service.employer);
                                                              }}
                                                         >
                                                             {service.name}
@@ -228,14 +204,11 @@ export const AppointmentForm = ({
                                                     className={isOpen ? s.selectContainer : `${s.selectContainer} ${s.closeContainer}`}>
 
                                                     {employers.map((employer, key) =>
-
                                                         <div key={`${key}_${employer._id}`}
                                                             // className={s.selectInput}
-
                                                              className={`${s.selectLabel} ${employer._id === selectedSpecialist.id ? s.active : ''}`}
                                                             // data-index={service._id}
                                                              onClick={(e) => {
-
                                                                  setFieldValue('employer', employer._id);
                                                                  onClickItem(e, employer._id, employer.fullName + " - " + employer.employer.profession);
                                                              }}
@@ -287,8 +260,9 @@ export const AppointmentForm = ({
 
                                 {/*Календарь*/}
                                 <CalendarPicker id="datetime"
+                                                selected={workDate}
                                                 // workDatesArr={workDatesArr}
-                                                workDatesArr={dates}
+                                                workDatesArr={workDates.map( el => el.slice(0, 10))}
                                                 getWorkTimes={getWorkTimes}
                                                 placeholderText={'Дата и время приема'}/>
                                 {/*Часы приема*/}
