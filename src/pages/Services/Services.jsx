@@ -57,7 +57,10 @@ export const Services = () => {
                             </div>
                         )
                         : (
-                        <div className={s.margin} key={obj._id} onClick={(event)=>setModal(event, obj)}>
+                        <div className={s.margin} key={obj._id} onClick={(event)=> {
+                            console.log(obj.employer);
+                            setModal(event, obj)
+                        }}>
                             <Card
                                 id={obj._id}
                                 price={obj.price}
@@ -88,6 +91,7 @@ export const Services = () => {
                 </div>
             <Modal type='modalService'>
                 <Card
+                    employer={service.employer}
                     isFull={true}
                     id={service._id}
                     price={service.price}

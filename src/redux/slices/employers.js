@@ -3,7 +3,7 @@ import axios from "../../axios";
 import staticData from "../staticData";
 
 export const fetchEmployers = createAsyncThunk('employers/fetchEmployers', async () => {
-    const {data} = await axios.get('/employers');
+    const {data} = await axios.get('/employers/auth');
     if(Array.isArray(data) && data.length > 0){
         return data;
     }

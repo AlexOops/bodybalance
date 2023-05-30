@@ -4,7 +4,7 @@ import {DemoContainer} from "@mui/x-date-pickers/internals/demo";
 import {LocalizationProvider, MobileDatePicker, ruRU} from "@mui/x-date-pickers";
 import s from './CalendarPicker.module.scss';
 
-export const CalendarPicker = ({workDatesArr, getWorkTimes}) => { //получает массив дат, делает только их активными, отдает выбранную дату в функцию getWorkTimes
+export const CalendarPicker = ({workDatesArr, getWorkTimes, selected}) => { //получает массив дат, делает только их активными, отдает выбранную дату в функцию getWorkTimes
 
 
     //отобразим в календаре только рабочие даты
