@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;800;900&display=swap');
 
+//mixin
+@import "./styles/mixins";
+
+//variables
+@import "./styles/variables";
+
+
 * {
   font-family: Rubik;
   color: #4F4E4E;
@@ -79,9 +86,11 @@ p {
 .activeSlide {
   transform: translateX(0);
 }
+
 .lastSlide {
   transform: translateX(-100%);
 }
+
 .nextSlide {
   transform: translateX(100%);
 }
@@ -128,8 +137,9 @@ input:-webkit-autofill:active {
 
 
 .react-datepicker {
- height: 280px;
+  height: 280px;
 }
+
 .react-datepicker__month-container {
   height: 280px;
   display: flex;
@@ -144,9 +154,11 @@ input:-webkit-autofill:active {
   justify-content: center;
   background-color: #D78DFF !important;
 }
+
 .react-datepicker__day--selected {
   background-color: #9e8dff !important;
 }
+
 .react-datepicker__day {
   font-size: 16px;
 }

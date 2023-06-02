@@ -1,0 +1,51 @@
+@import "src/styles/mixins";
+
+.container {
+  display: flex;
+  height: 100vh;
+
+  .sidebar {
+    width: 300px;
+
+    .logo {
+      width: 300px;
+      height: 230px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menuList {
+      font-size: 18px;
+      font-weight: 400;
+
+      &__item {
+        padding-left: 30px;
+        height: 43px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 6px;
+
+        &::before {
+          content: '';
+          width: 20px;
+          height: 20px;
+          background: #4F4E4E;
+          margin-right: 12px;
+        }
+      }
+    }
+  }
+}
+
+// контентная часть
+.content {
+  @include background-lightpink;
+  width: 100%;
+}
+
+.active {
+  display: flex;
+  @include gradient-pink-white;
+  align-items: center;
+}

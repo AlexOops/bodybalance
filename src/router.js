@@ -17,6 +17,14 @@ import {SpecialistsAdmin} from "./pages/admin/specialists/SpecialistsAdmin";
 import {SettingsAdmin} from "./pages/admin/settings/SettingsAdmin";
 import {Records} from "./pages/admin/Records/Records";
 
+//profile
+import {ProfileMain} from "./pages/Profile/ProfileMain/ProfileMain";
+import {ProfileLayout, ProfileLoyout} from "./pages/Profile/ProfileLayout";
+import {Appointments as ProfileAppointments} from "./pages/Profile/Appointments/Appointments";
+import {Trainings as ProfileTrainings} from "./pages/Profile/Trainings/Trainings";
+import {Specialists as ProfileSpecialists} from "./pages/Profile/Specialists/Specialists";
+import {Recommendations} from "./pages/Profile/Recommendations/Recommendations";
+
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -85,6 +93,32 @@ export const router = createBrowserRouter([
                 path: "/admin/settings",
                 element: <SettingsAdmin/>,
             },
+        ]
+    },
+    {
+        path: "/profile",
+        element:  <ProfileLayout/>,
+        children: [
+            {
+                path: "/profile",
+                element: <ProfileMain/>
+            },
+            {
+                path: "/profile/appointments",
+                element: <ProfileAppointments/>
+            },
+            {
+                path: "/profile/trainings",
+                element: <ProfileTrainings/>
+            },
+            {
+                path: "/profile/specialists",
+                element: <ProfileSpecialists/>
+            },
+            {
+                path: "/profile/recommendations",
+                element: <Recommendations/>
+            }
         ]
     }
 ]);
