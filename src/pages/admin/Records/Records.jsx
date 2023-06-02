@@ -3,27 +3,36 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {nanoid} from "nanoid";
 import s from './Records.module.scss'
-import {setDate, setDay, setHours, setMinutes} from "date-fns";
+import {setDate, setDay, setHours, setISODay, setMinutes} from "date-fns";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchAppointmentsByEmployer} from "../../../redux/slices/appointments";
+import dayjs from "dayjs";
+import {fetchEmployers} from "../../../redux/slices/employers";
 
 const numberDays = [0, 1, 2, 3, 4, 5, 6]
 const dateNow = new Date()
 export const Records = () => {
+    const [startDate, setStartDate] = useState(new Date()); //обнулить часы
+    const [days, setDays] = useState([]);
+    const [employerId, setEmployerId] = useState('6447fcd874f077e18de6dfa1');
+    const {appointments} = useSelector(state => state.appointments);
+    const dispatch = useDispatch();
+    const {employers} = useSelector(state => state.employers);
 
-
-    const [startDate, setStartDate] = useState(new Date());
-    const [days, setDays] = useState([])
 
     useEffect(() => {
-        setStartDate(new Date())
-    }, [])
+        dispatch(fetchEmployers());
+        dispatch(fetchAppointmentsByEmployer(employerId));
+    }, [employerId]);
+
 
     useEffect(() => {
-        const today = startDate.getDay()
+        const today = startDate.getDay();
         const monday = startDate.getDate()-today
         setDays(numberDays.map((day) => setDate(startDate, monday+day)))
     },[startDate])
 
-    const setTime = (e) => {
+    const setTime = (e) => { //при клике на время
         setStartDate(setHours(setMinutes(startDate, 0), +e.target.value))
     }
     const prevWeek = () => {
@@ -37,10 +46,15 @@ export const Records = () => {
         setStartDate(dateNow)
     }
 
-
-
     return (
-        <>
+        <div className={s.appointments}>
+            <div className={s.employers}>
+                <span>Выбрать сотрудника:</span>
+                {employers.items.map(emp => <div key={nanoid()} onClick={()=> setEmployerId(emp._id)}>
+                    {emp.fullName} - {emp.employer.profession}
+                </div>)}
+            </div>
+
             <div className={s.positionFlex}>
                 <div className={s.datePicker}>
                     <DatePicker
@@ -59,19 +73,32 @@ export const Records = () => {
                 <button onClick={nextWeek}>вперед</button>
             </div>
             <div>
-                {[...Array(12)].map((el, index) =>
-                    <Fragment key = {nanoid()}>
+                {[...Array(12)].map((el, timeIndex) =>
+                    <Fragment key={nanoid()}>
                         <button
-                            value={index+9}
-                            // className={arr[0] === index+9 ? s.timeColor : s.time}
-                            // className={arr.map(el => el === index ? s.time : s.timeColor)}
-                            onClick={(e) => setTime(e)} >
-                            {`${index+9}:00`}
+                            value={timeIndex + 9}
+                            // className={arr[0] === timeIndex+9 ? s.timeColor : s.time}
+                            // className={arr.map(el => el === timeIndex ? s.time : s.timeColor)}
+                            onClick={(e) => setTime(e)}>
+                            {`${timeIndex + 9}:00`}
                         </button>
+                        <div className={s.row}>
+                            {
+                                days.map((day, dayIndex) => {
+
+                                    return <div className={s.cell} key={nanoid()}>
+
+                                        {(typeof appointments.items[day.toLocaleDateString('ru-RU') + `, ${timeIndex + 9}:00:00`] !== 'undefined') &&
+                                            appointments.items[day.toLocaleDateString('ru-RU') + `, ${timeIndex + 9}:00:00`].firstName
+                                        }
+                                    </div>
+                                })
+                            }
+                        </div>
                         <hr/>
                     </Fragment>
                 )}
             </div>
-        </>
+        </div>
     );
 }

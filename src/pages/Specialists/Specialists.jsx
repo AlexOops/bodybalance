@@ -14,6 +14,8 @@ import Carousel from "../../components/Carousel/Carousel";
 
 const certificates = [{img: sertificate}, {img: sertificate}, {img: sertificate}, {img: sertificate}, {img: sertificate}]
 
+
+
 export const Specialists = () => {
     const dispatch = useDispatch();
     const {services} = useSelector(state => state.services);
