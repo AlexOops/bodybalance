@@ -22,8 +22,6 @@ import {ProfileMain} from "./pages/Profile/ProfileMain/ProfileMain";
 import {ProfileLayout} from "./pages/Profile/ProfileLayout";
 import {Appointments as ProfileAppointments} from "./pages/Profile/Appointments/Appointments";
 import {Training as ProfileTraining} from "./pages/Profile/Training/Training";
-import {Specialists as ProfileSpecialists} from "./pages/Profile/Specialists/Specialists";
-import {Recommendations} from "./pages/Profile/Recommendations/Recommendations";
 
 export const router = createBrowserRouter([
     {
@@ -72,6 +70,7 @@ export const router = createBrowserRouter([
     {
         path: "/admin",
         element: <Admin/>,
+        errorElement: <ErrorPage/>,
         children: [
             {
                 path: "/admin/email",
@@ -98,6 +97,7 @@ export const router = createBrowserRouter([
     {
         path: "/profile",
         element:  <ProfileLayout/>,
+        errorElement: <ErrorPage/>,
         children: [
             {
                 path: "/profile",
@@ -111,14 +111,14 @@ export const router = createBrowserRouter([
                 path: "/profile/training",
                 element: <ProfileTraining/>
             },
-            {
-                path: "/profile/specialists",
-                element: <ProfileSpecialists/>
-            },
-            {
-                path: "/profile/recommendations",
-                element: <Recommendations/>
-            }
+            // {
+            //     path: "/profile/specialists",
+            //     element: <ProfileSpecialists/>
+            // },
+            // {
+            //     path: "/profile/recommendations",
+            //     element: <Recommendations/>
+            // }
         ]
     }
 ]);

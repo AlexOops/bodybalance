@@ -28,16 +28,16 @@ export const ProfileLayout = () => {
                             Мои записи
                         </li>
                     </NavLink>
-                    <NavLink to='/profile/specialists'>
-                        <li className={location.pathname === '/profile/specialists' ? `${s.active} ${s.menuList__item}` : `${s.menuList__item}`}>
-                            Специалисты
-                        </li>
-                    </NavLink>
-                    <NavLink to='/profile/recommendations'>
-                        <li className={location.pathname === '/profile/recommendations' ? `${s.active} ${s.menuList__item}` : `${s.menuList__item}`}>
-                            Ремондации по лечению
-                        </li>
-                    </NavLink>
+                    {/*<NavLink to='/profile/specialists'>*/}
+                    {/*    <li className={location.pathname === '/profile/specialists' ? `${s.active} ${s.menuList__item}` : `${s.menuList__item}`}>*/}
+                    {/*        Специалисты*/}
+                    {/*    </li>*/}
+                    {/*</NavLink>*/}
+                    {/*<NavLink to='/profile/recommendations'>*/}
+                    {/*    <li className={location.pathname === '/profile/recommendations' ? `${s.active} ${s.menuList__item}` : `${s.menuList__item}`}>*/}
+                    {/*        Ремондации по лечению*/}
+                    {/*    </li>*/}
+                    {/*</NavLink>*/}
                 </ul>
             </aside>
 
