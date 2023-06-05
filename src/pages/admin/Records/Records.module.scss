@@ -1,6 +1,11 @@
 .appointments {
   padding: 20px;
 }
+.employers {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
 .positionFlex {
   display: flex;
   align-items: center;

@@ -3,10 +3,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {nanoid} from "nanoid";
 import s from './Records.module.scss'
-import {setDate, setDay, setHours, setISODay, setMinutes} from "date-fns";
+import {setDate, setDay, setHours, setMinutes} from "date-fns";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchAppointmentsByEmployer} from "../../../redux/slices/appointments";
-import dayjs from "dayjs";
+
 import {fetchEmployers} from "../../../redux/slices/employers";
 
 const numberDays = [0, 1, 2, 3, 4, 5, 6]
@@ -14,21 +14,43 @@ const dateNow = new Date()
 export const Records = () => {
     const [startDate, setStartDate] = useState(new Date()); //обнулить часы
     const [days, setDays] = useState([]);
-    const [employerId, setEmployerId] = useState('6447fcd874f077e18de6dfa1');
+    const [employerId, setEmployerId] = useState(''); //Сотрудник для вывода его календаря
     const {appointments} = useSelector(state => state.appointments);
     const dispatch = useDispatch();
     const {employers} = useSelector(state => state.employers);
+    const [selectedDates, setSelectedDates] = useState([]);
+    // const [appointmentsWithIndex, setAppointmentsWitIndex] = useState([]);// проиндексировать appointments по дате или фетчим по дате и заполняем от 00:00 до 24:00 в ответе
+
+    useEffect(()=> {
+        dispatch(fetchEmployers());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    useEffect(()=> {
+        if(employers.items[0]) {
+         setEmployerId(employers.items[0]._id);
+         // eslint-disable-next-line react-hooks/exhaustive-deps
+        }
+    }, [employers])
+
+    useEffect(() => {
+        if(employerId){
+            dispatch(fetchAppointmentsByEmployer(employerId));
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }
+    }, [employerId, dispatch]);
 
 
     useEffect(() => {
-        dispatch(fetchEmployers());
-        dispatch(fetchAppointmentsByEmployer(employerId));
-    }, [employerId]);
+        let selDates = [];
+        appointments.items.map(el => selDates.push(new Date(el.dateTime)));
+        setSelectedDates(selDates);
+    }, [appointments])
 
 
     useEffect(() => {
         const today = startDate.getDay();
-        const monday = startDate.getDate()-today
+        const monday = startDate.getDate() - today;
         setDays(numberDays.map((day) => setDate(startDate, monday+day)))
     },[startDate])
 
@@ -39,12 +61,13 @@ export const Records = () => {
         setStartDate(setDay(startDate, startDate.getDay()-7))
     }
     const nextWeek = () => {
-        setStartDate(setDay(startDate, startDate.getDay()+7))
+        setStartDate(setDay(startDate, startDate.getDay()+7));
     }
 
     const setToday = () => {
         setStartDate(dateNow)
     }
+
 
     return (
         <div className={s.appointments}>
@@ -61,7 +84,9 @@ export const Records = () => {
                         selected={startDate}
                         inline
                         showWeekPicker
-                        onChange={(date) => setStartDate(date)}/>
+                        onChange={(date) => setStartDate(date)}
+                        highlightDates={selectedDates}//выделили даты с записями
+                    />
 
                 </div>
                 <p className={s.today} onClick={setToday}>вернуться на сегодня {dateNow.toLocaleDateString('ru-RU')}</p>
@@ -87,10 +112,22 @@ export const Records = () => {
                                 days.map((day, dayIndex) => {
 
                                     return <div className={s.cell} key={nanoid()}>
+                                        {/*{(typeof appointments.items[day.toLocaleDateString('ru-RU') + `, ${timeIndex + 9}:00:00`] !== 'undefined') &&*/}
+                                        {/*    appointments.items[day.toLocaleDateString('ru-RU') + `, ${timeIndex + 9}:00:00`].firstName*/}
+                                        {/*}*/}
+                                        {appointments.items.filter(el => {
+                                               return ((new Date(el.dateTime).toLocaleString('ru-RU')).replace('09:', '9:')
+                                                    ===
+                                                    (day.toLocaleDateString('ru-RU') + `, ${timeIndex + 9}:00:00`)
+                                                )
+                                            }
+                                        )
+                                            .map(filteredName => (
+                                            <li key={nanoid()}>
+                                                {filteredName.firstName}
+                                            </li>
+                                        ))}
 
-                                        {(typeof appointments.items[day.toLocaleDateString('ru-RU') + `, ${timeIndex + 9}:00:00`] !== 'undefined') &&
-                                            appointments.items[day.toLocaleDateString('ru-RU') + `, ${timeIndex + 9}:00:00`].firstName
-                                        }
                                     </div>
                                 })
                             }
