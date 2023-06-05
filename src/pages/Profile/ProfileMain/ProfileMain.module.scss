@@ -1,0 +1,134 @@
+@import "../../../styles/mixins";
+
+.title {
+  font-weight: 400;
+  font-size: 40px;
+  margin: 30px 0 75px 40px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0 0 0;
+
+  .healthСard {
+    &__title {
+      text-transform: uppercase;
+      padding: 20px 0 25px 0;
+    }
+
+    width: 460px;
+    height: 750px;
+    border-radius: 20px;
+    @include box-shadow-pink;
+    @include flex-column-center-start;
+
+    &__wrp {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+    }
+
+    &__img {
+      width: 150px;
+      border-radius: 15px;
+      padding-bottom: 5px;
+    }
+
+    &__name {
+      padding: 10px 0;
+      font-weight: 500;
+      font-size: 25px;
+    }
+
+    &__phone {
+      padding: 10px 0;
+    }
+  }
+
+  .content {
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .recommendations {
+      display: flex;
+      justify-content: space-between;
+
+      .trainings {
+        &__titile {
+          text-transform: uppercase;
+          font-weight: 500;
+        }
+
+        width: 290px;
+        height: 200px;
+        font-size: 20px;
+        border-radius: 20px;
+
+        @include box-shadow-pink;
+        @include flex-column-center-center;
+
+        span {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 50px;
+          height: 50px;
+          font-size: 30px;
+          border-radius: 50%;
+          border: 1px solid #d78dff;
+          margin: 15px 0;
+        }
+      }
+
+      .mySpecialist {
+        padding-top: 15px;
+        width: 270px;
+        height: 200px;
+        @include box-shadow-pink;
+        border-radius: 20px;
+        @include flex-column-center-start ;
+
+        &__img {
+          padding-top: 10px;
+          width: 80px;
+          border-radius: 15px;
+          padding-bottom: 5px;
+        }
+      }
+
+      .healthNote {
+        width: 400px;
+        height: 200px;
+        border-radius: 20px;
+
+        @include box-shadow-pink;
+        @include flex-column-center-center;
+
+        &__list {
+          padding-top: 10px;
+
+          &__item {
+            padding-bottom: 10px;
+            color: #9747FF;
+            list-style-type: circle;
+          }
+        }
+      }
+    }
+
+    .appointments {
+      width: 1000px;
+      height: 530px;
+      @include box-shadow-pink;
+      border-radius: 20px;
+
+      &__title {
+        text-transform: uppercase;
+        padding: 10px 0 0 25px;
+      }
+    }
+  }
+}

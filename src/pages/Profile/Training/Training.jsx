@@ -1,9 +1,13 @@
 import React from 'react';
 
-export const Trainings = () => {
+export const Training = () => {
+
+
+
     return (
         <div>
             Мои тренировки
+
         </div>
     );
 };

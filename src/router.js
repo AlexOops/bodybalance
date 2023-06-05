@@ -19,9 +19,9 @@ import {Records} from "./pages/admin/Records/Records";
 
 //profile
 import {ProfileMain} from "./pages/Profile/ProfileMain/ProfileMain";
-import {ProfileLayout, ProfileLoyout} from "./pages/Profile/ProfileLayout";
+import {ProfileLayout} from "./pages/Profile/ProfileLayout";
 import {Appointments as ProfileAppointments} from "./pages/Profile/Appointments/Appointments";
-import {Trainings as ProfileTrainings} from "./pages/Profile/Trainings/Trainings";
+import {Training as ProfileTraining} from "./pages/Profile/Training/Training";
 import {Specialists as ProfileSpecialists} from "./pages/Profile/Specialists/Specialists";
 import {Recommendations} from "./pages/Profile/Recommendations/Recommendations";
 
@@ -108,8 +108,8 @@ export const router = createBrowserRouter([
                 element: <ProfileAppointments/>
             },
             {
-                path: "/profile/trainings",
-                element: <ProfileTrainings/>
+                path: "/profile/training",
+                element: <ProfileTraining/>
             },
             {
                 path: "/profile/specialists",

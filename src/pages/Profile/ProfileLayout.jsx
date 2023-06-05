@@ -1,6 +1,6 @@
 import React from 'react';
-import s from './ProfileLayout.module.scss'
 import {Link, NavLink, Outlet, useLocation} from "react-router-dom";
+import s from './ProfileLayout.module.scss'
 import logo from "../../assets/logo.svg";
 
 export const ProfileLayout = () => {
@@ -18,8 +18,8 @@ export const ProfileLayout = () => {
                             Главная
                         </li>
                     </NavLink>
-                    <NavLink to='/profile/trainings'>
-                        <li className={location.pathname === '/profile/trainings' ? `${s.active} ${s.menuList__item}` : `${s.menuList__item}`}>
+                    <NavLink to='/profile/training'>
+                        <li className={location.pathname === '/profile/training' ? `${s.active} ${s.menuList__item}` : `${s.menuList__item}`}>
                             Мои тренировки
                         </li>
                     </NavLink>
