@@ -1,19 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import s from "./ProfileMain.module.scss";
+import {useSelector} from "react-redux";
 
 export const ProfileMain = () => {
+    const user = useSelector(state => state.auth.data);
+
     return (
         <>
             <h1 className={s.title}>Главная</h1>
 
             <div className={s.container}>
                 <div className={s.healthСard}>
-                    <p  className={s.healthСard__title}>Карточка пациента</p>
-                    <img className={s.healthСard__img} src="https://mui.com/static/images/avatar/1.jpg" alt="customer"/>
-                    <p className={s.healthСard__name}>Natalya Liam</p>
+                    <p className={s.healthСard__title}>Карточка пациента</p>
+                    <img className={s.healthСard__img} src={user.avatarUrl} alt="customer"/>
+                    <p className={s.healthСard__name}>{user.fullName}</p>
                     <div className={s.healthСard__wrp}>
-                        <p className={s.healthСard__email}><span>Почта: </span>78789789@mail.ru</p>
-                        <p className={s.healthСard__phone}><span>Номер телефона: </span>+79595959554</p>
+                        <p className={s.healthСard__email}><span>Почта: </span>{user.email}</p>
+                        <p className={s.healthСard__phone}>
+                            <span>Номер телефона: </span>{(user.customer) && user.customer.phone}</p>
                         <p className={s.healthСard__birth}><span>Дата рождения: </span>8 марта</p>
                     </div>
                 </div>

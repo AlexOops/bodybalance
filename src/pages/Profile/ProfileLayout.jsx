@@ -6,15 +6,13 @@ import {useSelector} from "react-redux";
 import {selectIsAuth} from "../../redux/slices/auth";
 
 export const ProfileLayout = () => {
+
     const location = useLocation();
+    const isAuth = useSelector(selectIsAuth);
 
-    // const isAuth = useSelector(selectIsAuth);
-
-    // if (!isAuth) {
-    //     console.log(isAuth)
-    //     return <Navigate replace to="/"/>;
-    // } else {
-
+    if (!isAuth) {
+        return <Navigate replace to="/"/>;
+    } else {
         return (
             <div className={s.container}>
                 <aside className={s.sidebar}>
@@ -55,7 +53,5 @@ export const ProfileLayout = () => {
                 </div>
             </div>
         );
-
-    // }
-
+    }
 };

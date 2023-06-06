@@ -35,6 +35,11 @@
   font-size: 20px;
   line-height: 24px;
   width: 410px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   &:hover {
     cursor: pointer;
     color: #fff;

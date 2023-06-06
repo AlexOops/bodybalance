@@ -3,6 +3,7 @@ import {Card} from "../../Card/Card";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchServicesByRating} from "../../../redux/slices/services";
 import {useEffect} from "react";
+import {Link} from "react-router-dom";
 
 export const PopularServices = () => {
     const dispatch = useDispatch();
@@ -13,6 +14,12 @@ export const PopularServices = () => {
         dispatch(fetchServicesByRating());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0
+        });
+    }
 
     // сервисы
     // const [count, setCount] = useState(0)
@@ -74,7 +81,7 @@ export const PopularServices = () => {
                                     />
                             )}
                 </div>
-                    <button className={s.btn}>Все услуги</button>
+                    <Link to={"/services"} onClick={scrollToTop} className={s.btn}>Все услуги</Link>
             </div>
 
             {/*<ArrowRight setCount={setCount}/>*/}

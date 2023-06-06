@@ -2,23 +2,23 @@ import logo from '../../assets/logo.svg'
 import s from './Header.module.scss'
 import '../../index.scss'
 import {Navigate} from "../Navigate/Navigate";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {selectIsAuth} from "../../redux/slices/auth";
+import {selectIsAuth, logout} from "../../redux/slices/auth";
 import {openModal} from "../../redux/slices/modal";
 import Modal from "../Modal/Modal";
 import {Login} from "../../pages/Login/Login";
 import {Registration} from "../../pages/Registration/Registration";
 import React, {useState} from "react";
-import logout from "../../assets/logout.svg";
+import exit from "../../assets/exit.svg";
 
 export const Header = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const isAuth = useSelector(selectIsAuth);
     const user = useSelector(state => state.auth.data);
 
-    const [visible, setVisible] = useState(false)
-
+    const [visible, setVisible] = useState(false);
 
     const handleVisible = () => {
         setVisible(!visible)
@@ -47,6 +47,9 @@ export const Header = () => {
         dispatch(openModal(typeModalRegistration));
     }
 
+    const handleToProfile = () => {
+        navigate("/profile")
+    }
 
     return (
         <div className={'container-color'}>
@@ -77,20 +80,24 @@ export const Header = () => {
                         <div className={s.border}/>
                         <div className={s.login}>
                             {isAuth ? (
+
                                 <div className={s.profile__wrp}>
 
-                                    <img className={s.profile__img} src={user.avatarUrl} alt=""/>
+                                    <img className={s.profile__img}
+                                         onClick={handleToProfile}
+                                         src={user.avatarUrl} alt="avatar"/>
                                     <div className={s.profile}>
-                                        <p>{user.fullName}</p>
-                                        <span>{user.role}</span>
+                                        <p className={s.profile__name}
+                                           onClick={handleToProfile}
+                                        >{user.fullName}</p>
+                                        <span className={s.profile__role}>{user.role}</span>
                                     </div>
 
                                     <img className={s.profile__logout}
                                          onClick={onClickLogout}
-                                         src={logout}
+                                         src={exit}
                                          alt="logout"
                                     />
-
                                 </div>
 
                             ) : (<>
@@ -105,6 +112,5 @@ export const Header = () => {
                 </div>
             </div>
         </div>
-
     )
 }
