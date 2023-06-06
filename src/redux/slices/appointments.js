@@ -8,8 +8,17 @@ export const fetchAppointments = createAsyncThunk('appointments/fetchAppointment
 });
 
 export const fetchAppointmentsByEmployer = createAsyncThunk('appointments/fetchAppointmentsByEmployer', async (params) => {
-    // let dataWithTimeIndex = [];
-   const {data} = await axios.get('/appointments/employer/' + params)
+   const {data} = await axios.get('/appointments/employer/' + params);
+   let indApp = {};
+   data.map(el => {
+       let dateTime = new Date(el.dateTime)
+       let day = (dateTime).toLocaleDateString('ru-Ru')
+       let time = (dateTime).toLocaleTimeString('ru-Ru');
+       let timeEl = {[time]: el}
+       indApp[day] = timeEl;
+
+   });
+
        // .catch((err)=> console.log(err)).then(res => {
         // res.data.map(el => {
         //     let idx = (new Date(el.dateTime).toLocaleString('ru-RU')).replace('09:', '9:'); //28.05.2023, 11:00:00 //TODO поменять на странице календаря, тут убрать 09
@@ -17,7 +26,8 @@ export const fetchAppointmentsByEmployer = createAsyncThunk('appointments/fetchA
         // })
         // console.log(dataWithTimeIndex);
         // return dataWithTimeIndex;
-        return data;
+    console.log(indApp)
+        return {data: data, indexAppointments: indApp};
     // });
 
 });
@@ -25,6 +35,7 @@ export const fetchAppointmentsByEmployer = createAsyncThunk('appointments/fetchA
 
 const initialState = {
     appointments: {
+      indAppointments : {},
       items: [],
       status: 'loading',
     },
@@ -54,7 +65,8 @@ const appointmentsSlice = createSlice({
             state.appointments.status = 'loading';
         },
         [fetchAppointmentsByEmployer.fulfilled]: (state, action) => {
-            state.appointments.items = action.payload;
+            state.appointments.items = action.payload.data;
+            state.appointments.indAppointments = action.payload.indexAppointments;
             state.appointments.status = 'loaded';
         },
         [fetchAppointmentsByEmployer.rejected]: (state) => {
