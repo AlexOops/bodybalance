@@ -1,0 +1,29 @@
+@mixin gradient-pink-white {
+  background: linear-gradient(79.76deg, #EDCCFF 0%, #FEFEFE 100%);
+}
+
+@mixin box-shadow-pink {
+  box-shadow: 0 0 15px rgba(248, 179, 248, 0.65), 0 0 15px rgba(255, 226, 255, 0.65);
+}
+
+
+//flex-box
+
+@mixin flex-column-center-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-column-center-start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+
+
+@mixin background-lightpink {
+  background-color: #FFFCFF;
+}

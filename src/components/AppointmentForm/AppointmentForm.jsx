@@ -61,7 +61,10 @@ export const AppointmentForm = ({
         setOpen(false);
         if (!isSpecialist) {
             dispatch(setSelectedService({name: name, id: id}));
-            (employer) ? dispatch(setSelectedEmployer({name: employer.fullName, id: employer._id})) : console.log("Нет данных сотрудника по услуге");
+            (employer) ? dispatch(setSelectedEmployer({
+                name: employer.fullName,
+                id: employer._id
+            })) : console.log("Нет данных сотрудника по услуге");
         } else {
             dispatch(setSelectedEmployer({name: name, id: id})); //поместим выбранную услугу в стейт
         }
@@ -69,19 +72,21 @@ export const AppointmentForm = ({
     };
 
 
-    useEffect( () => {
+    useEffect(() => {
         setWorkDate('');
         setWorkTimes([]);
-        const fetchDataByEmployer =  async () => {
+        const fetchDataByEmployer = async () => {
             try {
-               await axios.get(`/worktime/employer/${selectedSpecialist.id}`)
-                   .then(res => {
-                       setWorkDates(res.data);
-                   });
-            } catch(err){console.log(err)}
+                await axios.get(`/worktime/employer/${selectedSpecialist.id}`)
+                    .then(res => {
+                        setWorkDates(res.data);
+                    });
+            } catch (err) {
+                console.log(err)
+            }
         }
-        if (selectedSpecialist.id !== null){
-           fetchDataByEmployer().then();
+        if (selectedSpecialist.id !== null) {
+            fetchDataByEmployer().then();
         }
     }, [selectedSpecialist.id]);
 
@@ -91,10 +96,10 @@ export const AppointmentForm = ({
     const getWorkTimes = (date) => { //отобразим список времени приема для даты.
         if (date) {
             const arrData = workDates.filter((obj) => {
-                return (obj.slice(0,10) === date.format('YYYY-MM-DD'))
+                return (obj.slice(0, 10) === date.format('YYYY-MM-DD'))
             });
             setWorkDate(date.format('YYYY-MM-DD'));
-            setWorkTimes(arrData.map(obj => obj.slice(11,16)))
+            setWorkTimes(arrData.map(obj => obj.slice(11, 16)))
         } else {
             console.log('Дата не выбрана');
         }
@@ -130,7 +135,7 @@ export const AppointmentForm = ({
                         employer: values.employer, // (по умолчанию) если сотрудников одной услуги несколько, то нужно будет отображать их в форме// идея хранить в базе сотрудника у услуги.
                         dateTime: values.datetime,
                     };
-                    if (authUser){
+                    if (authUser) {
                         postData = {...postData, customer: authUser._id};
                     }
                     if (values.text) {
@@ -261,13 +266,14 @@ export const AppointmentForm = ({
                                 {/*Календарь*/}
                                 <CalendarPicker id="datetime"
                                                 selected={workDate}
-                                                // workDatesArr={workDatesArr}
-                                                workDatesArr={workDates.map( el => el.slice(0, 10))}
+
+                                    // workDatesArr={workDatesArr}
+                                                workDatesArr={workDates.map(el => el.slice(0, 10))}
                                                 getWorkTimes={getWorkTimes}
                                                 placeholderText={'Дата и время приема'}/>
                                 {/*Часы приема*/}
                                 <div className={(!workTimes || (workTimes.length === 0)) ? s.hidden : s.time}>
-                                    <h3 className={s.timeTittle}>Доступные даты</h3>
+                                    <h3 className={s.timeTittle}>Доступное время</h3>
                                     <Field
                                         component="select"
                                         id="time"
@@ -283,9 +289,10 @@ export const AppointmentForm = ({
                                         <div className={s.error}>{errors.datetime}</div>}
                                 </div>
                                 <div className={s.flexSBetween}>
-                                    <button type='button' className={s.clearButton} onClick={()=>{
+                                    <button type='button' className={s.clearButton} onClick={() => {
                                         resetForm();
-                                    }}>Очистить данные</button>
+                                    }}>Очистить данные
+                                    </button>
                                     <button className={s.button} type="submit" disabled={isSubmitting}>Записаться
                                     </button>
                                 </div>

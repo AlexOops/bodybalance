@@ -2,21 +2,23 @@ import logo from '../../assets/logo.svg'
 import s from './Header.module.scss'
 import '../../index.scss'
 import {Navigate} from "../Navigate/Navigate";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {logout, selectIsAuth} from "../../redux/slices/auth";
+import {selectIsAuth, logout} from "../../redux/slices/auth";
 import {openModal} from "../../redux/slices/modal";
 import Modal from "../Modal/Modal";
 import {Login} from "../../pages/Login/Login";
 import {Registration} from "../../pages/Registration/Registration";
-import {useState} from "react";
+import React, {useState} from "react";
+import exit from "../../assets/exit.svg";
 
 export const Header = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const isAuth = useSelector(selectIsAuth);
+    const user = useSelector(state => state.auth.data);
 
-    const [visible, setVisible] = useState(false)
-
+    const [visible, setVisible] = useState(false);
 
     const handleVisible = () => {
         setVisible(!visible)
@@ -45,6 +47,9 @@ export const Header = () => {
         dispatch(openModal(typeModalRegistration));
     }
 
+    const handleToProfile = () => {
+        navigate("/profile")
+    }
 
     return (
         <div className={'container-color'}>
@@ -54,7 +59,7 @@ export const Header = () => {
                         <img className={s.logo} src={logo} alt="logo"/>
                     </Link>
                     <div
-                        onClick={()=> handleVisible()}
+                        onClick={() => handleVisible()}
                         className={s.toggle}>
                         {visible && <span></span>}
                         <label className={s.checkLabel} htmlFor="check">
@@ -75,7 +80,26 @@ export const Header = () => {
                         <div className={s.border}/>
                         <div className={s.login}>
                             {isAuth ? (
-                                <button onClick={onClickLogout} className={`${s.singUp} ${s.button}`}>Выход</button>
+
+                                <div className={s.profile__wrp}>
+
+                                    <img className={s.profile__img}
+                                         onClick={handleToProfile}
+                                         src={user.avatarUrl} alt="avatar"/>
+                                    <div className={s.profile}>
+                                        <p className={s.profile__name}
+                                           onClick={handleToProfile}
+                                        >{user.fullName}</p>
+                                        <span className={s.profile__role}>{user.role}</span>
+                                    </div>
+
+                                    <img className={s.profile__logout}
+                                         onClick={onClickLogout}
+                                         src={exit}
+                                         alt="logout"
+                                    />
+                                </div>
+
                             ) : (<>
                                 <button className={`${s.singUp} ${s.button}`} onClick={onClickLogin}>Вход</button>
                                 <button className={`${s.singOut} ${s.button}`} onClick={onClickRegister}>Регистрация
@@ -88,6 +112,5 @@ export const Header = () => {
                 </div>
             </div>
         </div>
-
     )
 }

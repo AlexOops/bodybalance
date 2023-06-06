@@ -70,6 +70,11 @@
   line-height: 24px;
   color: #FFFFFF;
   border: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   @media screen and (max-width: 420px) and (min-width: 320px) {
     max-width: 310px;
     font-size: 18px;
