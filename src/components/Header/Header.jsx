@@ -4,16 +4,18 @@ import '../../index.scss'
 import {Navigate} from "../Navigate/Navigate";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {logout, selectIsAuth} from "../../redux/slices/auth";
+import {selectIsAuth} from "../../redux/slices/auth";
 import {openModal} from "../../redux/slices/modal";
 import Modal from "../Modal/Modal";
 import {Login} from "../../pages/Login/Login";
 import {Registration} from "../../pages/Registration/Registration";
-import {useState} from "react";
+import React, {useState} from "react";
+import logout from "../../assets/logout.svg";
 
 export const Header = () => {
     const dispatch = useDispatch();
     const isAuth = useSelector(selectIsAuth);
+    const user = useSelector(state => state.auth.data);
 
     const [visible, setVisible] = useState(false)
 
@@ -54,7 +56,7 @@ export const Header = () => {
                         <img className={s.logo} src={logo} alt="logo"/>
                     </Link>
                     <div
-                        onClick={()=> handleVisible()}
+                        onClick={() => handleVisible()}
                         className={s.toggle}>
                         {visible && <span></span>}
                         <label className={s.checkLabel} htmlFor="check">
@@ -75,7 +77,22 @@ export const Header = () => {
                         <div className={s.border}/>
                         <div className={s.login}>
                             {isAuth ? (
-                                <button onClick={onClickLogout} className={`${s.singUp} ${s.button}`}>Выход</button>
+                                <div className={s.profile__wrp}>
+
+                                    <img className={s.profile__img} src={user.avatarUrl} alt=""/>
+                                    <div className={s.profile}>
+                                        <p>{user.fullName}</p>
+                                        <span>{user.role}</span>
+                                    </div>
+
+                                    <img className={s.profile__logout}
+                                         onClick={onClickLogout}
+                                         src={logout}
+                                         alt="logout"
+                                    />
+
+                                </div>
+
                             ) : (<>
                                 <button className={`${s.singUp} ${s.button}`} onClick={onClickLogin}>Вход</button>
                                 <button className={`${s.singOut} ${s.button}`} onClick={onClickRegister}>Регистрация
