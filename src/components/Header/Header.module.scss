@@ -123,38 +123,8 @@
   }
 }
 
-.profile__wrp {
-  margin-right: 10px;
-  width: 307px;
-  height: 107px;
-  box-shadow: 0 0 20px rgba(255, 226, 255, 0.65);
-  border-radius: 16px;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-
-  .profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    &__name {
-      cursor: pointer;
-    }
-
-    &__img {
-      width: 80px;
-      height: 80px;
-      border-radius: 20px;
-      cursor: pointer;
-    }
-
-    &__logout {
-      cursor: pointer;
-    }
-  }
-}
+//------
 
 .singUp {
   border: 2px solid #D78DFF;
@@ -180,5 +150,6 @@
   }
 }
 
-
-
+.profileBlock {
+  padding-left: 35px;
+}

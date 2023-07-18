@@ -4,36 +4,37 @@ import '../../index.scss'
 import {Navigate} from "../Navigate/Navigate";
 import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {selectIsAuth, logout} from "../../redux/slices/auth";
+import {selectIsAuth} from "../../redux/slices/auth";
 import {openModal} from "../../redux/slices/modal";
 import Modal from "../Modal/Modal";
 import {Login} from "../../pages/Login/Login";
 import {Registration} from "../../pages/Registration/Registration";
 import React, {useState} from "react";
-import exit from "../../assets/exit.svg";
+import ProfileBlock from "../ProfileBlock/ProfileBlock";
 
 export const Header = () => {
+
+    const isAuth = useSelector(selectIsAuth);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const isAuth = useSelector(selectIsAuth);
     const user = useSelector(state => state.auth.data);
 
     const [visible, setVisible] = useState(false);
+
+    const typeModalLogin = 'modalLogin'
+    const typeModalRegistration = 'modalRegister'
 
     const handleVisible = () => {
         setVisible(!visible)
     }
 
-    const typeModalLogin = 'modalLogin'
-    const typeModalRegistration = 'modalRegister'
-
-    const onClickLogout = () => {
-
-        if (window.confirm("Вы действительно хотите выйти?")) {
-            dispatch(logout()); //обнулили данные в state auth
-            window.localStorage.removeItem('token'); //удалили токен из localStorage
+    const handleNavigateToProfile = () => {
+        if (user.role === 'admin') {
+            navigate('/admin');
+        } else {
+            navigate('/profile');
         }
-    }
+    };
 
     const onClickLogin = () => {
 
@@ -45,10 +46,6 @@ export const Header = () => {
 
         //контент регистрации в модальном окне
         dispatch(openModal(typeModalRegistration));
-    }
-
-    const handleToProfile = () => {
-        navigate("/profile")
     }
 
     return (
@@ -79,34 +76,23 @@ export const Header = () => {
                         <Navigate setVisible={setVisible}/>
                         <div className={s.border}/>
                         <div className={s.login}>
+
                             {isAuth ? (
 
-                                <div className={s.profile__wrp}>
-
-                                    <img className={s.profile__img}
-                                         onClick={handleToProfile}
-                                         src={user.avatarUrl} alt="avatar"/>
-                                    <div className={s.profile}>
-                                        <p className={s.profile__name}
-                                           onClick={handleToProfile}
-                                        >{user.fullName}</p>
-                                        <span className={s.profile__role}>{user.role}</span>
-                                    </div>
-
-                                    <img className={s.profile__logout}
-                                         onClick={onClickLogout}
-                                         src={exit}
-                                         alt="logout"
-                                    />
+                                <div className={s.profileBlock}>
+                                    <ProfileBlock handleNavigate={handleNavigateToProfile}
+                                                  redirectLabel={"Перейти в личный кабинет"}/>
                                 </div>
 
-                            ) : (<>
-                                <button className={`${s.singUp} ${s.button}`} onClick={onClickLogin}>Вход</button>
-                                <button className={`${s.singOut} ${s.button}`} onClick={onClickRegister}>Регистрация
-                                </button>
-                                <Modal type={typeModalLogin}><Login/></Modal>
-                                <Modal type={typeModalRegistration}><Registration/></Modal>
-                            </>)}
+                            ) : (
+
+                                <div className={s.profileBlock}>
+                                    <button className={`${s.singUp} ${s.button}`} onClick={onClickLogin}>Вход</button>
+                                    <button className={`${s.singOut} ${s.button}`} onClick={onClickRegister}>Регистрация
+                                    </button>
+                                    <Modal type={typeModalLogin}><Login/></Modal>
+                                    <Modal type={typeModalRegistration}><Registration/></Modal>
+                                </div>)}
                         </div>
                     </div>
                 </div>
