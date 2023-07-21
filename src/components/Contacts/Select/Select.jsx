@@ -1,49 +1,76 @@
-import s from "./Select.module.scss";
 import "../../../index.scss";
-import {useState} from "react";
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchConsultationTopics} from "../../../redux/slices/contacts";
 
-const Select = () => {
-    const options = [
-        {value: "Выберите тему:"},
-        {value: "Обратная связь"},
-        {value: "Определиться с услугой"},
-        {value: "Консультация"},
-    ];
+import ReactSelect from 'react-select';
 
-    const [open, setOpen] = useState(false);
+export const Select = ({ selectedOption, setSelectedOption }) => {
 
-    const [value, setValue] = useState(String);
+    const dispatch = useDispatch();
+    const {consultationTopics} = useSelector((state) => state.consultationTopics);
 
-    const onElementClicked = (item) => {
-        const option = item.toString();
-        setValue(option);
-    }
+    useEffect(() => {
+        dispatch(fetchConsultationTopics());
+    }, [dispatch]);
 
-    const onSelected = () => {
-        setOpen((prevOpen) => !prevOpen);
-    }
+    const selectOptions = consultationTopics.items.map((topic) => ({
+        label: topic.name,
+        value: topic._id
+    }));
 
-    return (
-        <div className={s.selectWrapper}>
-            <div onClick={() => onSelected()}    //переделать
-                 className={s.select}>{value ? value : "Выберите тему:"}</div>
-            {
-                open &&
-                <div className={s.option}>
-                    {
-                        options.map((item, idx) => {
-                            return <div onClick={() => {
-                                        onElementClicked(item.value)
-                                        onSelected()    // переделать
-                                        }}
-                                        key={idx}
-                                        className={s.optionItem}>{item.value}</div>
-                        })
-                    }
-                </div>
-            }
+    const customStyles = {
+        control: (provided, state) => ({
+            ...provided,
+            border: '1px solid #d89ff6',
+            boxShadow: state.isFocused ? '0 4px 4px rgb(216, 159, 246)' : 'none',
+            borderRadius: '40px',
+            padding: '20px',
+            marginBottom: '20px',
+            outline: 'none',
+            cursor: 'pointer',
+        }),
+        placeholder: (provided) => ({
+            ...provided,
+            color: '#AEAEAE',
+            fontSize: '20px',
+        }),
+        menu: (provided) => ({
+            ...provided,
+            borderRadius: '40px',
+            marginTop: '-7px'
+        }),
+        singleValue: (provided) => ({
+            ...provided,
+            fontSize: '20px',
+            color: '#636363',
+        })
+    };
+
+    const customOptionComponent = ({innerProps, label}) => (
+        <div {...innerProps} style={{
+            color: '#636363',
+            fontSize: '20px',
+            padding: '20px',
+            cursor: 'pointer'
+        }}>
+            {label}
         </div>
     );
-};
 
-export default Select;
+    return (
+        <>
+            <ReactSelect
+                placeholder={'Выберите тему: '}
+                defaultValue={selectedOption}
+                onChange={setSelectedOption}
+                options={selectOptions}
+                value={selectedOption}
+                styles={customStyles}
+                components={{
+                    Option: customOptionComponent,
+                }}
+            />
+        </>
+    );
+};

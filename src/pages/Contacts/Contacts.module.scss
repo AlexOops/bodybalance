@@ -1,7 +1,10 @@
 .header {
-  padding-top: 80px;
-  width: 410px;
-  height: 348px;
+  padding: 80px 15px 100px 15px;
+  max-width: 410px;
+
+  @media screen and (max-width: 1000px) {
+    padding: 60px 15px;
+  }
 
   .title {
     font-size: 60px;
@@ -15,106 +18,108 @@
 }
 
 .content {
-  width: 1290px;
+  max-width: 1290px;
   margin: 0 auto;
-  padding: 80px 0;
+  padding: 80px 15px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
 
-  .contacts {
-    width: 520px;
-
-    &Title {
-      font-size: 40px;
-      font-weight: 500;
-      padding-bottom: 40px;
-    }
-
-    .contactList {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-
-      &Item {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        &:nth-child(n-2) {
-          padding-bottom: 20px;
-        }
-      }
-
-      &Text {
-        padding-left: 30px;
-        font-weight: 400;
-        font-size: 20px;
-      }
-    }
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    padding: 60px 15px;
   }
+}
 
-  .form {
-    width: 630px;
-    height: 533px;
+.contacts {
+  width: 520px;
+}
 
-    &Item {
-      outline: none;
-      padding-left: 30px;
-      border: 1px solid #D78DFF;
-      border-radius: 40px;
-      width: 630px;
-      height: 66px;
-      font-weight: 400;
-      font-size: 20px;
+.contactsTitle {
+  font-size: 40px;
+  font-weight: 500;
+  padding-bottom: 30px;
+}
 
-      &:focus {
-        border: 1px solid #D78DFF;
-        box-shadow: 0 4px 4px rgb(216, 159, 246);
-      }
+.contactList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 
-      &:nth-child(-n+3) {
-        width: 305px;
-      }
-
-      &:nth-child(n-2) {
-        margin-bottom: 20px;
-      }
-
-      &:nth-child(3n) {
-        margin-left: 20px;
-      }
-    }
-
-    &Message {
-      width: 630px;
-      height: 190px;
-
-      &:focus {
-        border: 1px solid #D78DFF;
-      }
-    }
+  @media screen and (max-width: 768px) {
+    padding-bottom: 30px;
   }
+}
 
-  // надо вынести кнопку, дублирование кода
-  .button {
-    border: 2px solid #D78DFF;
-    background: #D78DFF;
+.contactListItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 15px;
+}
+
+.contactListText {
+  padding-left: 30px;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.form {
+  width: 630px;
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (max-width: 680px) {
+    width: 100%;
+    justify-content: stretch;
+  }
+}
+
+.formItem {
+  outline: none;
+  font-size: 20px;
+  font-weight: 400;
+  border: 1px solid #D78DFF;
+  display: flex;
+  padding: 20px 30px;
+  align-items: center;
+  border-radius: 40px;
+  margin-bottom: 20px;
+
+  &:focus {
+    border: 1px solid #D78DFF;
+    box-shadow: 0 4px 4px rgb(216, 159, 246);
+  }
+}
+
+.formMessage {
+  padding: 30px;
+  resize: none;
+  height: 190px;
+
+  &:focus {
+    border: 1px solid #D78DFF;
+  }
+}
+
+
+// надо вынести кнопку, дублирование кода
+.button {
+  border: 2px solid #D78DFF;
+  background: #D78DFF;
+  color: #fff;
+  padding: 20px 30px;
+  border-radius: 40px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+
+  &:hover {
+    cursor: pointer;
     color: #fff;
-    padding: 20px 30px;
-    border-radius: 40px;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-
-    &:hover {
-      cursor: pointer;
-      color: #fff;
-      background-color: #9e8dff;
-      border: 2px solid #9e8dff;
-    }
+    background-color: #9e8dff;
+    border: 2px solid #9e8dff;
   }
-
 }
 
 ::placeholder {
@@ -123,3 +128,23 @@
   color: #AEAEAE;
 }
 
+//нужно вынести, это общий для модального окна
+.feedback {
+  font-size: 24px;
+  padding: 60px 150px;
+  color: #4f4e4e;
+
+  @media screen and (max-width: 1000px){
+    padding: 30px 100px;
+  }
+
+  @media screen and (max-width: 768px){
+    font-size: 20px;
+    padding: 20px 80px;
+  }
+
+  @media screen and (max-width: 480px){
+    font-size: 18px;
+    padding: 20px 80px;
+  }
+}

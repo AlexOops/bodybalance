@@ -1,11 +1,14 @@
 import axios from "../../axios";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import staticData from "../staticData";
 
 export const fetchOnlineServices = createAsyncThunk('/online-rehabilitation/fetchOnlineServices', async () => {
     const {data} = await axios.get('/online-rehabilitation');
     if (Array.isArray(data) && data.length > 0) {
         return data;
     }
+
+    return staticData;
 })
 
 const initialState = {

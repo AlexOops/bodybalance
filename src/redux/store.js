@@ -6,6 +6,7 @@ import {onlineServicesReducer} from "./slices/onlineRehabilitation";
 import {trainingReducer} from "./slices/training";
 import {employersReducer} from "./slices/employers";
 import {customersReducer} from "./slices/customers";
+import {consultationTopicsReducer} from "./slices/contacts";
 
 const store = configureStore({
     reducer: {
@@ -15,9 +16,9 @@ const store = configureStore({
         auth: authReducer,
         modal: modalReducer,
         onlineServices: onlineServicesReducer,
-        training: trainingReducer
+        training: trainingReducer,
+        consultationTopics: consultationTopicsReducer
     },
-
 });
 
 export default store;
