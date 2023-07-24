@@ -1,134 +1,140 @@
-@import "../../../styles/mixins";
-
 .title {
   font-weight: 400;
   font-size: 40px;
-  margin: 30px 0 75px 40px;
+  padding: 30px 0 100px 40px;
 }
 
 .container {
   display: flex;
-  justify-content: space-around;
-  margin: 20px 0 0 0;
+  justify-content: center;
+  max-width: 1600px;
+}
 
-  .healthСard {
-    &__title {
-      text-transform: uppercase;
-      padding: 20px 0 25px 0;
-    }
+.healthId {
+  padding: 40px 80px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(248, 179, 248, 0.65), 0 0 15px rgba(255, 226, 255, 0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  margin: 0 20px 0 40px;
+}
 
-    width: 460px;
-    height: 750px;
-    border-radius: 20px;
-    @include box-shadow-pink;
-    @include flex-column-center-start;
+.healthIdTitle {
+  text-transform: uppercase;
+  padding: 20px 0 25px 0;
+}
 
-    &__wrp {
-      display: flex;
-      flex-direction: column;
-      align-items: start;
-    }
 
-    &__img {
-      width: 150px;
-      border-radius: 15px;
-      padding-bottom: 5px;
-    }
+.healthIdWrp {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
 
-    &__name {
-      padding: 10px 0;
-      font-weight: 500;
-      font-size: 25px;
-    }
+.healthIdImg {
+  width: 150px;
+  border-radius: 15px;
+  padding-bottom: 5px;
+}
 
-    &__phone {
-      padding: 10px 0;
-    }
-  }
+.healthIdName {
+  padding: 10px 0;
+  font-weight: 500;
+  font-size: 25px;
+}
 
-  .content {
-    max-width: 1000px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.healthIdEmail {
 
-    .recommendations {
-      display: flex;
-      justify-content: space-between;
+}
 
-      .trainings {
-        &__titile {
-          text-transform: uppercase;
-          font-weight: 500;
-        }
+.healthIdPhone {
+  padding: 10px 0;
+}
 
-        width: 290px;
-        height: 200px;
-        font-size: 20px;
-        border-radius: 20px;
+.healthIdBirth {
 
-        @include box-shadow-pink;
-        @include flex-column-center-center;
+}
 
-        span {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 50px;
-          height: 50px;
-          font-size: 30px;
-          border-radius: 50%;
-          border: 1px solid #d78dff;
-          margin: 15px 0;
-        }
-      }
+.content {
+  max-width: 1600px;
+  display: flex;
+  flex-direction: column;
 
-      .mySpecialist {
-        padding-top: 15px;
-        width: 270px;
-        height: 200px;
-        @include box-shadow-pink;
-        border-radius: 20px;
-        @include flex-column-center-start ;
+}
 
-        &__img {
-          padding-top: 10px;
-          width: 80px;
-          border-radius: 15px;
-          padding-bottom: 5px;
-        }
-      }
+.recommendations {
+  display: flex;
+  justify-content: space-between;
+}
 
-      .healthNote {
-        width: 400px;
-        height: 200px;
-        border-radius: 20px;
+.training {
+  width: 290px;
+  height: 200px;
+  font-size: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(248, 179, 248, 0.65), 0 0 15px rgba(255, 226, 255, 0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-        @include box-shadow-pink;
-        @include flex-column-center-center;
+.trainingTittle {
+  text-transform: uppercase;
+  font-weight: 500;
+}
 
-        &__list {
-          padding-top: 10px;
+.mySpecialist {
+  padding: 15px;
+  width: 270px;
+  height: 200px;
+  box-shadow: 0 0 15px rgba(248, 179, 248, 0.65), 0 0 15px rgba(255, 226, 255, 0.65);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-          &__item {
-            padding-bottom: 10px;
-            color: #9747FF;
-            list-style-type: circle;
-          }
-        }
-      }
-    }
+.mySpecialistImg {
+  padding-top: 10px;
+  width: 80px;
+  border-radius: 15px;
+  padding-bottom: 5px;
+}
 
-    .appointments {
-      width: 1000px;
-      height: 530px;
-      @include box-shadow-pink;
-      border-radius: 20px;
+.healthNote {
+  width: 400px;
+  height: 200px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(248, 179, 248, 0.65), 0 0 15px rgba(255, 226, 255, 0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-      &__title {
-        text-transform: uppercase;
-        padding: 10px 0 0 25px;
-      }
-    }
-  }
+.healthNoteList {
+  padding-top: 10px;
+}
+
+.healthNoteItem {
+  padding-bottom: 10px;
+  color: #9747FF;
+  list-style-type: circle;
+}
+
+
+.appointment {
+  margin-top: 20px;
+  width: 1000px;
+  box-shadow: 0 0 15px rgba(248, 179, 248, 0.65), 0 0 15px rgba(255, 226, 255, 0.65);
+  border-radius: 20px;
+}
+
+.appointmentTitle {
+  text-transform: uppercase;
+  padding: 25px;
 }

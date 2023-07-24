@@ -19,9 +19,6 @@ export const Navigate = ({setVisible}) => {
                     <NavLink onClick={() => setVisible(false)} to='/online-rehabilitation'>Онлайн-реабилитация</NavLink>
                 </li>
                 <li className={s.menuItems}>
-                    <NavLink onClick={() => setVisible(false)} to='/training'>Тренировки</NavLink>
-                </li>
-                <li className={s.menuItems}>
                     <NavLink onClick={() => setVisible(false)} to='/contacts'>Контакты</NavLink>
                 </li>
             </ul>

@@ -3,13 +3,11 @@ import {LayoutPage} from "./components/Layout/LayoutPage";
 import {Main as Test}  from "./pages/Main/Main";
 import {Contacts} from "./pages/Contacts/Contacts";
 import {Services} from "./pages/Services/Services";
-import {Training} from "./pages/Trainings/Training";
 import {Login} from "./pages/Login/Login";
 import {Registration} from "./pages/Registration/Registration";
 import {Specialists} from "./pages/Specialists/Specialists";
 import {OnlineRehabilitation} from "./pages/OnlineRehabilitation/OnlineRehabilitation";
 import {ErrorPage} from "./pages/404/ErrorPage";
-import {Videos} from "./pages/Trainings/Videos/Videos";
 import {Admin} from "./pages/admin/Admin";
 import {EmailAdmin} from "./pages/admin/email/EmailAdmin";
 import {Customers} from "./pages/admin/Customers/Customers";
@@ -22,6 +20,7 @@ import {ProfileMain} from "./pages/Profile/ProfileMain/ProfileMain";
 import {ProfileLayout} from "./pages/Profile/ProfileLayout";
 import {Appointments as ProfileAppointments} from "./pages/Profile/Appointments/Appointments";
 import {Training as ProfileTraining} from "./pages/Profile/Training/Training";
+import {TrainingVideo} from "./pages/Profile/Training/TrainingVideo/TrainingVideo";
 
 export const router = createBrowserRouter([
     {
@@ -50,21 +49,13 @@ export const router = createBrowserRouter([
                 element: <Specialists/>,
             },
             {
-                path: "/training",
-                element: <Training/>,
-            },
-            {
                 path: "/login",
                 element: <Login/>,
             },
             {
                 path: "/register",
                 element: <Registration/>,
-            },
-            {
-                path: "/training/:id",
-                element: <Videos/>,
-            },
+            }
         ]
     },
     {
@@ -110,6 +101,10 @@ export const router = createBrowserRouter([
             {
                 path: "/profile/training",
                 element: <ProfileTraining/>
+            },
+            {
+                path: "/profile/training/:id",
+                element: <TrainingVideo/>,
             },
             // {
             //     path: "/profile/specialists",

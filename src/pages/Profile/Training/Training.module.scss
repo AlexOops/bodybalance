@@ -1,18 +1,16 @@
-@import "../../../styles/mixins";
-
-.container {
-  @include flex-column-center-center;
-}
-
 .title {
-  margin: 30px 0 75px 40px;;
   font-weight: 400;
   font-size: 40px;
+  padding: 30px 0 100px 40px
 }
 
 .content {
-  width: 1700px;
-  height: 445px;
-  @include box-shadow-pink;
-  border-radius: 20px;
+  padding: 40px;
+}
+
+.text {
+  text-align: center;
+  font-weight: 300;
+  font-size: 20px;
+  padding-bottom: 40px;
 }

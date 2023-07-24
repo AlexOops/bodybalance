@@ -1,0 +1,41 @@
+//БЛОК С АВТОРИЗОВАННЫМ ПОЛЬЗОВАТЕЛЕМ
+.profileWrp {
+  padding: 15px 20px 10px 20px;
+  box-shadow: 0 0 20px rgba(255, 226, 255, 0.65);
+  border-radius: 16px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profileImg {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+}
+
+.profileLogout {
+  cursor: pointer;
+  padding-left: 5px;
+}
+
+.linkToProfile {
+  width: 150px;
+  padding-top: 10px;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+  color: #d78dff;
+}
+
+.profileRole {
+  padding-top: 4px;
+  font-size: 10px;
+}

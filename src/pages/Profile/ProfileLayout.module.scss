@@ -1,51 +1,59 @@
-@import "src/styles/mixins";
-
 .container {
-  display: flex;
   height: 100vh;
+  background-color: #FFFCFF;
+}
 
-  .sidebar {
-    width: 300px;
+.containerProfile {
+  position: relative;
+  display: flex;
+  max-width: 1750px;
+}
 
-    .logo {
-      width: 300px;
-      height: 230px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+// инфо о залогиненном профиле
+.profileBlock {
+  position: absolute;
+  right: 0;
+  top: 20px;
+}
 
-    .menuList {
-      font-size: 18px;
-      font-weight: 400;
+.sidebar {
+  width: 300px;
+  background-color: #FFFFFF;
+  height: 100vh;
+}
 
-      &__item {
-        padding-left: 30px;
-        height: 43px;
-        display: flex;
-        align-items: center;
-        margin-bottom: 6px;
+.logo {
+  width: 300px;
+  height: 230px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-        &::before {
-          content: '';
-          width: 20px;
-          height: 20px;
-          background: #4F4E4E;
-          margin-right: 12px;
-        }
-      }
-    }
+.menuList {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.menuList__item {
+  padding-left: 30px;
+  height: 43px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+
+  &::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: #4F4E4E;
+    margin-right: 12px;
   }
 }
 
-// контентная часть
-.content {
-  @include background-lightpink;
-  width: 100%;
-}
 
 .active {
   display: flex;
-  @include gradient-pink-white;
+  background: linear-gradient(79.76deg, #EDCCFF 0%, #FEFEFE 100%);
   align-items: center;
 }
