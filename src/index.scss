@@ -8,7 +8,7 @@
 
 
 * {
-  font-family: Rubik;
+  font-family: Rubik, serif;
   color: #4F4E4E;
   margin: 0;
   padding: 0;
@@ -120,7 +120,7 @@ a {
   width: 192px;
   height: 190px;
   left: 210px;
-  top: 0px;
+  top: 0;
   background: rgba(237, 207, 253, 0.2);
   transform: matrix(-1, 0, 0, 1, 0, 0);
   border-radius: 50%;
@@ -162,3 +162,40 @@ input:-webkit-autofill:active {
 .react-datepicker__day {
   font-size: 16px;
 }
+
+
+// ДЛЯ PHONE INPUT
+
+.PhoneInput {
+  border: 1px solid #D78DFF;
+  border-radius: 40px;
+  padding: 20px 30px;
+  margin-bottom: 20px;
+}
+
+.PhoneInputInput {
+  outline: none;
+  font-size: 20px;
+  font-weight: 400;
+  border: none;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  color: #636363;
+}
+
+.PhoneInputCountryIcon--border {
+  margin-right: 5px;
+}
+
+.PhoneInputCountrySelectArrow {
+  color: #d89ff6;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.PhoneInput--focus {
+  box-shadow: 0 4px 4px rgb(216, 159, 246) !important;
+}
+
+// REACTSELECT

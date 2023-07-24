@@ -26,30 +26,30 @@ export const Training = () => {
 
     return (
         <>
-            <ul className={s.training__list}>
+            <ul className={s.trainingList}>
                 {(isTrainingsLoading ? [...Array(3)] : trainings.items).map((item, idx) =>
                     isTrainingsLoading
-                        ? (<div className={s.training__item} key={idx}>
+                        ? (<div className={s.trainingItem} key={idx}>
                                 <img src={training_1} alt="trn1"/>
-                                <div className={s.training__item__wrp}>
+                                <div className={s.trainingItemWrp}>
                                     <img src={play_item}
-                                         className={s.training__item__img}
+                                         className={s.trainingItemImg}
                                          alt="play"
                                          width={36}
                                          height={36}/>
                                 </div>
                             </div>
                         )
-                        : (<Link to={`/training/${item._id}`}
+                        : (<Link to={`/profile/training/${item._id}`}
                                  key={idx}
                                  onClick={() => handleClick(item.name, item.description)}
                             >
-                                <div className={s.training__item} key={idx}>
+                                <div className={s.trainingItem} key={idx}>
                                     <img src={training_1} alt="trn1"/>
-                                    <div className={s.training__item__wrp}>
-                                        <p className={s.training__item__text}>{item.name}</p>
+                                    <div className={s.trainingItemWrp}>
+                                        <p className={s.trainingItemText}>{item.name}</p>
                                         <img src={play_item}
-                                             className={s.training__item__img}
+                                             className={s.trainingItemImg}
                                              alt="play"
                                              width={36}
                                              height={36}/>
