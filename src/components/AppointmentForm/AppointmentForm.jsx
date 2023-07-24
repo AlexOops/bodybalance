@@ -13,7 +13,7 @@ import {openModal} from "../../redux/slices/modal";
 import {selectedEmployer, setSelectedEmployer} from "../../redux/slices/employers";
 import EmployerIdInput from "./EmployerIdInput";
 import {nanoid} from "nanoid";
-// import dayjs from "dayjs";
+import dayjs from "dayjs";
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 const SignupSchema = Yup.object().shape({

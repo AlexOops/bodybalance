@@ -15,7 +15,7 @@ import {EmailAdmin} from "./pages/admin/email/EmailAdmin";
 import {Customers} from "./pages/admin/Customers/Customers";
 import {SpecialistsAdmin} from "./pages/admin/specialists/SpecialistsAdmin";
 import {SettingsAdmin} from "./pages/admin/settings/SettingsAdmin";
-import {Records} from "./pages/admin/Records/Records";
+import {Appointments} from "./pages/admin/Appointments/Appointments";
 
 //profile
 import {ProfileMain} from "./pages/Profile/ProfileMain/ProfileMain";
@@ -78,7 +78,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/admin/records",
-                element: <Records/>,
+                element: <Appointments/>,
             },
             {
                 path: "/admin/customers",
