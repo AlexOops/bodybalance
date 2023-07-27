@@ -8,6 +8,7 @@ import {employersReducer} from "./slices/employers";
 import {customersReducer} from "./slices/customers";
 import {consultationTopicsReducer} from "./slices/contacts";
 import {appointmentsReducer} from "./slices/appointments";
+import {consultationRecordsReducer} from "./slices/consultations";
 
 const store = configureStore({
     reducer: {
@@ -18,7 +19,8 @@ const store = configureStore({
         modal: modalReducer,
         onlineServices: onlineServicesReducer,
         training: trainingReducer,
-        consultationTopics: consultationTopicsReducer
+        consultationTopics: consultationTopicsReducer,
+        consultationRecords: consultationRecordsReducer,
         appointments: appointmentsReducer,
     },
 });

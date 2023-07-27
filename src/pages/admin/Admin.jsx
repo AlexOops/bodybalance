@@ -1,49 +1,63 @@
 import s from './Admin.module.scss'
 import logo from '../../assets/logo.svg'
-import {Link, NavLink, Outlet, useLocation} from "react-router-dom";
-import {AdminMain} from "./AdminMain/AdminMain";
+import {Link, NavLink, Outlet, useLocation, useNavigate} from "react-router-dom";
+import React from "react";
+import ProfileBlock from "../../components/ProfileBlock/ProfileBlock";
+import {useSelector} from "react-redux";
+import {selectIsAuth} from "../../redux/slices/auth";
 
 export const Admin = () => {
-    const location = useLocation()
 
-    return (
-        <div className={s.position}>
-            <aside className={s.sidebar}>
-                <div className={s.logo}>
-                    <Link to={'/admin/'}><img src={logo} alt="logo"/></Link>
+    const location = useLocation();
+    const isAuth = useSelector(selectIsAuth);
+    const navigate = useNavigate();
+
+    const handleNavigateToHome = () => {
+        navigate('/');
+    };
+
+    if (isAuth) {
+        return (
+            <div className={s.container}>
+                <div className={s.containerAdmin}>
+                    <aside className={s.sidebar}>
+                        <div className={s.logo}>
+                            <Link to={'/admin'}><img src={logo} alt="logo"/></Link>
+                        </div>
+                        <ul className={s.menuList}>
+                            <NavLink to='/admin'>
+                                <li className={location.pathname === '/admin' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>Главная</li>
+                            </NavLink>
+                            <NavLink to='/admin/records'>
+                                <li className={location.pathname === '/admin/records' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>Записи</li>
+                            </NavLink>
+                            <NavLink to='/admin/consultations'>
+                                <li className={location.pathname === '/admin/Consultations' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>Заявки
+                                    на консультации
+                                </li>
+                            </NavLink>
+                            <NavLink to='/admin/customers'>
+                                <li className={location.pathname === '/admin/customers' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>Пациенты</li>
+                            </NavLink>
+                            <NavLink to='/admin/specialists'>
+                                <li className={location.pathname === '/admin/specialists' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>Специалисты</li>
+                            </NavLink>
+                        </ul>
+                    </aside>
+
+                    <div className={s.content}>
+
+                        <div className={s.adminBlock}>
+                            <ProfileBlock
+                                handleNavigate={handleNavigateToHome}
+                                redirectLabel={"Вернуться на сайт"}/>
+                        </div>
+
+                        <Outlet/>
+
+                    </div>
                 </div>
-                <ul className={s.list}>
-                    <NavLink to='/admin/'>
-                        <li className={location.pathname === '/admin/' ? `${s.active} ${s.listItems}` : `${s.listItems}`}>Главная</li>
-                    </NavLink>
-                    <NavLink to='/admin/records'>
-                        <li className={location.pathname === '/admin/records' ? `${s.active} ${s.listItems}` : `${s.listItems}`}>Записи</li>
-                    </NavLink>
-                    <NavLink to='/admin/email'>
-                        <li className={location.pathname === '/admin/email' ? `${s.active} ${s.listItems}` : `${s.listItems}`}>Почта</li>
-                    </NavLink>
-                    <NavLink to='/admin/customers'>
-                        <li className={location.pathname === '/admin/customers' ? `${s.active} ${s.listItems}` : `${s.listItems}`}>Пациенты</li>
-                    </NavLink>
-                    <NavLink to='/admin/specialists'>
-                        <li className={location.pathname === '/admin/specialists' ? `${s.active} ${s.listItems}` : `${s.listItems}`}>Специалисты</li>
-                    </NavLink>
-                </ul>
-                <div className={s.line}/>
-                <ul className={s.list}>
-                    <NavLink to='/admin/settings'>
-                        <li className={location.pathname === '/admin/settings' ? `${s.active} ${s.listItems}` : `${s.listItems}`}>Настройки</li>
-                    </NavLink>
-                    <NavLink to='/admin/specialists'>
-                        <li className={location.pathname === '/admin/specialists' ? `${s.active} ${s.listItems}` : `${s.listItems}`}>Специалисты</li>
-                    </NavLink>
-                </ul>
-            </aside>
-            <div className={s.color}>
-                {location.pathname === '/admin/' ? <AdminMain/> : <Outlet/>}
             </div>
-        </div>
-
-
-    )
+        );
+    }
 }

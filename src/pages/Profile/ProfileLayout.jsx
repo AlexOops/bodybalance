@@ -26,31 +26,25 @@ export const ProfileLayout = () => {
                         </div>
                         <ul className={s.menuList}>
                             <NavLink to='/profile'>
-                                <li className={location.pathname === '/profile' ? `${s.active} ${s.menuList__item}` : `${s.menuList__item}`}>
+                                <li className={location.pathname === '/profile' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>
                                     Главная
                                 </li>
                             </NavLink>
                             <NavLink to='/profile/training'>
-                                <li className={location.pathname === '/profile/training' ? `${s.active} ${s.menuList__item}` : `${s.menuList__item}`}>
+                                <li className={location.pathname === '/profile/training' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>
                                     Мои тренировки
                                 </li>
                             </NavLink>
                             <NavLink to='/profile/appointments'>
-                                <li className={location.pathname === '/profile/appointments' ? `${s.active} ${s.menuList__item}` : `${s.menuList__item}`}>
+                                <li className={location.pathname === '/profile/appointments' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>
                                     Мои записи
                                 </li>
                             </NavLink>
-                            {/*<NavLink to='/profile/specialists'>*/}
-                            {/*    <li className={location.pathname === '/profile/specialists' ? `${s.active} ${s.menuList__item}` : `${s.menuList__item}`}>*/}
-                            {/*        Специалисты*/}
-                            {/*    </li>*/}
-                            {/*</NavLink>*/}
-                            {/*<NavLink to='/profile/recommendations'>*/}
-                            {/*    <li className={location.pathname === '/profile/recommendations' ? `${s.active} ${s.menuList__item}` : `${s.menuList__item}`}>*/}
-                            {/*        Ремондации по лечению*/}
-                            {/*    </li>*/}
-                            {/*</NavLink>*/}
                         </ul>
+
+                    </aside>
+
+                    <div className={s.content}>
 
                         <div className={s.profileBlock}>
                             <ProfileBlock
@@ -58,10 +52,8 @@ export const ProfileLayout = () => {
                                 redirectLabel={"Вернуться на сайт"}/>
                         </div>
 
-                    </aside>
-
-                    <div className={s.content}>
                         <Outlet/>
+
                     </div>
                 </div>
             </div>

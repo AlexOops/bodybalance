@@ -9,7 +9,7 @@ import {Specialists} from "./pages/Specialists/Specialists";
 import {OnlineRehabilitation} from "./pages/OnlineRehabilitation/OnlineRehabilitation";
 import {ErrorPage} from "./pages/404/ErrorPage";
 import {Admin} from "./pages/admin/Admin";
-import {EmailAdmin} from "./pages/admin/email/EmailAdmin";
+import {Consultations} from "./pages/admin/Consultations/Consultations";
 import {Customers} from "./pages/admin/Customers/Customers";
 import {SpecialistsAdmin} from "./pages/admin/specialists/SpecialistsAdmin";
 import {SettingsAdmin} from "./pages/admin/settings/SettingsAdmin";
@@ -21,6 +21,7 @@ import {ProfileLayout} from "./pages/Profile/ProfileLayout";
 import {Appointments as ProfileAppointments} from "./pages/Profile/Appointments/Appointments";
 import {Training as ProfileTraining} from "./pages/Profile/Training/Training";
 import {TrainingVideo} from "./pages/Profile/Training/TrainingVideo/TrainingVideo";
+import {AdminMain} from "./pages/admin/AdminMain/AdminMain";
 
 export const router = createBrowserRouter([
     {
@@ -64,8 +65,12 @@ export const router = createBrowserRouter([
         errorElement: <ErrorPage/>,
         children: [
             {
-                path: "/admin/email",
-                element: <EmailAdmin/>,
+                path: "/admin",
+                element: <AdminMain/>
+            },
+            {
+                path: "/admin/Consultations",
+                element: <Consultations/>,
             },
             {
                 path: "/admin/records",
@@ -106,14 +111,6 @@ export const router = createBrowserRouter([
                 path: "/profile/training/:id",
                 element: <TrainingVideo/>,
             },
-            // {
-            //     path: "/profile/specialists",
-            //     element: <ProfileSpecialists/>
-            // },
-            // {
-            //     path: "/profile/recommendations",
-            //     element: <Recommendations/>
-            // }
         ]
     }
 ]);

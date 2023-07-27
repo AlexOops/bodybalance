@@ -1,38 +1,52 @@
+.container {
+  height: 100vh;
+  background-color: #FFFCFF;
+}
+
+.containerAdmin {
+  display: flex;
+}
+
+.content {
+  position: relative;
+  max-width: 1500px;
+  width: 100%;
+  height: 100vh;
+}
+
+
+// инфо о залогиненном профиле
+.adminBlock {
+  position: absolute;
+  right: 0;
+  top: 20px;
+}
+
 .sidebar {
   width: 300px;
+  background-color: #FFFFFF;
+  height: 100vh;
 }
 
-.line {
-  background: linear-gradient(79.76deg, #EDCCFF 0%, #FEFEFE 100%), #D78DFF;
+.logo {
   width: 300px;
-  height: 1px;
-  margin: 30px 0 30px 0;
-}
-
-.active {
+  height: 230px;
   display: flex;
-  background: linear-gradient(79.76deg, #EDCCFF 0%, #FEFEFE 100%);
-  height: 43px;
   align-items: center;
+  justify-content: center;
 }
 
-.listItems {
-  font-weight: 400;
+.menuList {
   font-size: 18px;
-  line-height: 130%;
-  color: #4F4E4E;
-  margin-bottom: 16px;
+  font-weight: 400;
+}
+
+.menuListItem {
   padding-left: 30px;
   height: 43px;
   display: flex;
   align-items: center;
-
-  &:hover {
-    display: flex;
-    color: #9e8dff;
-    height: 43px;
-    align-items: center;
-  }
+  margin-bottom: 6px;
 
   &::before {
     content: '';
@@ -43,27 +57,9 @@
   }
 }
 
-.logo {
+
+.active {
   display: flex;
-  justify-content: center;
-  margin: 40px 0 85px 0;
-}
-
-.list {
-  //margin-left: 30px;
-}
-
-.position {
-  display: flex;
-}
-
-.img {
-  width: 20px;
-  height: 20px;
-  background: #4F4E4E
-}
-
-.color {
-  background: #FFFCFF;
-  width: 100%;
+  background: linear-gradient(79.76deg, #EDCCFF 0%, #FEFEFE 100%);
+  align-items: center;
 }
