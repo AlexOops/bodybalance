@@ -1,0 +1,51 @@
+.title {
+  font-weight: 400;
+  font-size: 40px;
+  padding: 30px 0 100px 40px
+}
+
+.consultations {
+
+}
+
+.consultation {
+  display: flex;
+  border-radius: 40px;
+  border: 1px solid #d89ff6;
+  margin: 0 10px 10px 10px;
+}
+
+.consultationItem {
+  display: flex;
+  padding: 10px 0 10px 10px;
+  min-width: 210px;
+  font-size: 16px;
+
+  &:not(&:first-child) {
+    border-left: 1px solid #d89ff6;
+  }
+}
+
+.status {
+  justify-content: center;
+}
+
+.consultationSelect {
+
+}
+
+.openOption {
+  color: blue; /* Установите цвет для опции "Открыто" */
+}
+
+.inProgressOption {
+  color: green; /* Установите цвет для опции "В работе" */
+}
+
+.completedOption {
+  color: purple; /* Установите цвет для опции "Завершено" */
+}
+
+.canceledOption {
+  color: red; /* Установите цвет для опции "Отменено" */
+}

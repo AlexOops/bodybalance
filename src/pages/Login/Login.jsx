@@ -60,7 +60,7 @@ export const Login = () => {
                             disableUnderline={true}
                             placeholder='Введите E-mail'
                             classes={{ root: styles.field }}
-                            // label="E-Mail"
+                            // label="E-Consultations"
                             type="email"
                             error={Boolean(errors.email?.message)} //подсвечиваем красным если true
                             // helperText={errors.email?.message}

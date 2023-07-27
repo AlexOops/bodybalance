@@ -7,7 +7,7 @@ export const ProfileMain = () => {
 
     return (
         <>
-            <h1 className={s.title}>Главная</h1>
+            <h4 className={s.title}>Главная</h4>
 
             <div className={s.container}>
                 <div className={s.healthId}>
