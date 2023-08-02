@@ -1,14 +1,12 @@
 import {useDispatch, useSelector} from 'react-redux';
-import {fetchServices, selectedService, setSelectedService} from "../../redux/slices/services";
+import {fetchServices} from "../../redux/slices/services";
 import s from './Services.module.scss';
 import {Card} from "../../components/Card/Card";
-import {Form, Formik, Field, useFormikContext} from 'formik';
 import {AppointmentForm} from "../../components/AppointmentForm/AppointmentForm";
 import {useEffect, useRef, useState} from "react";
 import React from "react";
 import {openModal} from "../../redux/slices/modal";
 import Modal from "../../components/Modal/Modal";
-import * as Yup from "yup";
 
 export const Services = () => {
     const dispatch = useDispatch();
@@ -58,7 +56,6 @@ export const Services = () => {
                         )
                         : (
                         <div className={s.margin} key={obj._id} onClick={(event)=> {
-                            console.log(obj.employer);
                             setModal(event, obj)
                         }}>
                             <Card

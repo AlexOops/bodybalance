@@ -1,0 +1,71 @@
+.card {
+  padding: 30px 60px 40px 60px;
+}
+
+.healthIdTitle {
+  font-size: 24px;
+  padding-bottom: 20px;
+}
+
+.healthIdImg {
+  width: 150px;
+  padding-bottom: 10px;
+}
+
+.healthIdName {
+  font-size: 18px;
+  font-weight: 500;
+  padding-bottom: 5px;
+}
+
+.healthIdEmail {
+  span {
+    padding-right: 10px
+  }
+}
+
+.healthIdWrp {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+}
+
+.recommendations {
+  border: 1px solid #D78DFF;
+  border-radius: 10px;
+  resize: none;
+  margin: 10px 0;
+  padding: 10px;
+  outline: none;
+}
+
+span {
+  padding-right: 10px
+}
+
+.button {
+  cursor: pointer;
+  padding: 10px 20px;
+  margin-top: 10px;
+
+  /* pink */
+
+  background: #D78DFF;
+  border: none;
+  border-radius: 40px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+
+  color: #FFFFFF;
+
+  &:hover {
+    background: #9e8dff;
+  }
+
+  &:active {
+    background: #9e8dff;
+    opacity: 0.8;
+  }
+}
