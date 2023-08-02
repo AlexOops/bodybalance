@@ -9,6 +9,7 @@ import {customersReducer} from "./slices/customers";
 import {consultationTopicsReducer} from "./slices/contacts";
 import {appointmentsReducer} from "./slices/appointments";
 import {consultationRecordsReducer} from "./slices/consultations";
+import {patientsCardReducer} from "./slices/patientCard";
 
 const store = configureStore({
     reducer: {
@@ -22,6 +23,7 @@ const store = configureStore({
         consultationTopics: consultationTopicsReducer,
         consultationRecords: consultationRecordsReducer,
         appointments: appointmentsReducer,
+        patients: patientsCardReducer
     },
 });
 
