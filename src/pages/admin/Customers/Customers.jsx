@@ -113,7 +113,7 @@ export const Customers = () => {
                             {Array.isArray(patients.items) && patients.items.some((item) => item.userId === customer._id) ? (
                                 <button className={s.button} onClick={(event) => handleOpenCard(event, customer)}>Открыть карточку</button>
                             ) : (
-                                <button className={s.button} onClick={(event) => handleCreateCard(customer)}>Создать карточку</button>
+                                <button className={s.button} onClick={() => handleCreateCard(customer)}>Создать карточку</button>
                             )}
                         </div>
                     )

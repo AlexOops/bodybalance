@@ -1,9 +1,44 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import s from "./ProfileMain.module.scss";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchPatientCards} from "../../../redux/slices/patientCard";
+import {fetchEmployers} from "../../../redux/slices/employers";
+import {fetchTraining} from "../../../redux/slices/training";
+import {logout} from "../../../redux/slices/auth";
+import {fetchCustomers} from "../../../redux/slices/customers";
 
 export const ProfileMain = () => {
+    const dispatch = useDispatch();
+
     const user = useSelector(state => state.auth.data);
+    const {patients} = useSelector(state => state.patients);
+    const {employers} = useSelector(state => state.employers);
+    const {training: videoCatalog} = useSelector(state => state.training);
+    const {customers} = useSelector(state => state.customers);
+
+    useEffect(() => {
+        dispatch(fetchPatientCards())
+        dispatch(fetchEmployers());
+        dispatch(fetchTraining());
+        dispatch(fetchCustomers())
+    }, [dispatch]);
+
+    // Карточка пациента
+    const patientData = patients.items.find((patient) => patient.userId === user._id);
+
+    //ВРАЧ
+    const attendingDoctor = patientData && patientData.employerId
+        ? employers.items.find((employer) => employer._id === patientData.employerId)
+        : null;
+
+    //Видео, возможно расширение
+    const trainingCatalog = patientData && patientData.catalogVideoId
+        ? videoCatalog.items.find((catalog) => catalog._id === patientData.catalogVideoId)
+        : null;
+
+    const QuantityTrainingVideo = trainingCatalog ? trainingCatalog.videos.length : 0;
+
+    const customer = customers.items.find((customer) => customer._id.toString() === user.customer);
 
     return (
         <>
@@ -25,33 +60,46 @@ export const ProfileMain = () => {
                     <div className={s.recommendations}>
 
                         <div className={s.training}>
-                            <p className={s.trainingTittle}>Тернировки</p>
-                            <span> 5 </span> видео не просмотрено
+                            {QuantityTrainingVideo !== 0 ? (
+                                <>
+                                    <p className={s.subTitle}>Тренировки</p>
+                                    <span>{QuantityTrainingVideo}</span> видео необходимо посмотреть
+                                </>
+                            ) : (
+                                <>
+                                    <span>Раздел с тренировками пока закрыт!</span>
+                                </>
+                            )}
+
                         </div>
 
                         <div className={s.mySpecialist}>
-                            <p>МОЙ ВРАЧ</p>
-                            <img className={s.mySpecialistImg} src="https://mui.com/static/images/avatar/2.jpg"
-                                 alt="specialist"/>
-                            <p>АЛЕКСЕЙ МАКАРОВ</p>
+                            {attendingDoctor ? (
+                                <>
+                                    <p className={s.subTitle}>МОЙ ВРАЧ</p>
+                                    <img className={s.mySpecialistImg} src={attendingDoctor.avatarUrl} alt="doc"/>
+                                    <p>{attendingDoctor.fullName}</p>
+                                </>
+                            ) : (
+                                <>
+                                    <span>Лечащий врач не указан</span>
+                                </>
+                            )}
                         </div>
 
                         <div className={s.healthNote}>
-                            <p>РЕКОМЕНДАЦИИ ПО ЛЕЧЕНИЮ</p>
-                            <ul className={s.healthNoteList}>
-                                <li className={s.healthNoteItem}>
-                                    Ежедневные видео тренировки
-                                </li>
-                                <li className={s.healthNoteItem}>
-                                    Прием витаминов группы B
-                                </li>
-                                <li className={s.healthNoteItem}>
-                                    Прогулки на свежем воздухе
-                                </li>
-                                <li className={s.healthNoteItem}>
-                                    Осмотр у врача через 2 недели
-                                </li>
-                            </ul>
+
+                            <div className={s.healthNoteItem}>
+                                {patientData ? (
+                                    <div className={s.healthNoteList}>
+                                        <p className={s.subTitle}>РЕКОМЕНДАЦИИ ПО ЛЕЧЕНИЮ</p>
+                                        <p>{patientData.recommendations ? patientData.recommendations : "Врач еще не указал рекомендации по лечению!"}</p>
+                                    </div>
+                                ) : (
+                                    <span>Рекомендации по лечению еще не указаны!</span>
+                                )}
+
+                            </div>
                         </div>
                     </div>
                     <div className={s.appointment}>
