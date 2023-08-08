@@ -11,7 +11,7 @@
 }
 
 .healthId {
-  padding: 40px 80px;
+  padding: 40px 20px;
   border-radius: 20px;
   box-shadow: 0 0 15px rgba(248, 179, 248, 0.65), 0 0 15px rgba(255, 226, 255, 0.65);
   display: flex;
@@ -23,7 +23,8 @@
 
 .healthIdTitle {
   text-transform: uppercase;
-  padding: 20px 0 25px 0;
+  font-weight: 400;
+  padding-bottom: 25px;
 }
 
 
@@ -37,23 +38,55 @@
   width: 150px;
   border-radius: 15px;
   padding-bottom: 5px;
+  margin-bottom: 20px;
 }
 
-.healthIdName {
-  padding: 10px 0;
-  font-weight: 500;
-  font-size: 25px;
+.label {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: #D78DFF;
+  font-weight: 400;
+  text-transform: uppercase;
 }
 
-.healthIdPhone {
-  padding: 10px 0;
+.input {
+  font-size: 20px;
+  border: 1px solid #D78DFF;
+  border-radius: 40px;
+  padding: 10px 20px;
+  margin-top: 3px;
+  margin-bottom: 15px;
+  outline: none;
+
+  &:focus {
+    box-shadow: 0 4px 4px rgb(229, 196, 248);
+  }
+}
+
+.button {
+  margin-top: 20px;
+  width: 100% ;
+  border: 1px solid #D78DFF;
+  background: #D78DFF;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 40px;
+  font-weight: 400;
+  font-size: 20px;
+
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #9e8dff;
+    border: 1px solid #9e8dff;
+  }
 }
 
 .content {
   max-width: 1600px;
   display: flex;
   flex-direction: column;
-
 }
 
 .recommendations {
