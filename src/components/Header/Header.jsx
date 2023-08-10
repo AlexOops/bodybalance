@@ -10,7 +10,7 @@ import Modal from "../Modal/Modal";
 import {Login} from "../../pages/Login/Login";
 import {Registration} from "../../pages/Registration/Registration";
 import React, {useState} from "react";
-import ProfileBlock from "../ProfileBlock/ProfileBlock";
+import ProfileBlock from "../Profile/ProfileBlock/ProfileBlock";
 
 export const Header = () => {
 

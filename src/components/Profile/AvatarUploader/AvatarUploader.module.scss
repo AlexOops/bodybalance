@@ -1,0 +1,63 @@
+.uploadElems {
+  padding-bottom: 20px;
+}
+
+.inputFile {
+  width: 84px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 40px;
+  padding: 4px;
+}
+
+.inputFile::file-selector-button {
+  cursor: pointer;
+}
+
+.button {
+  margin-left: 5px;
+  cursor: pointer;
+  border: 1px solid #D78DFF;
+  background: none;
+  border-radius: 40px;
+  padding: 5px 10px;
+  font-size: 12px;
+
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #9e8dff;
+    border: 1px solid #9e8dff;
+  }
+}
+
+.inputFileWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.inputFileWrapper input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.customButtonText {
+  background-color: #D78DFF;
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 300;
+  border-radius: 40px;
+  cursor: pointer;
+}
+
+.inputFileWrapper .customButtonText:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #9e8dff;
+}

@@ -5,14 +5,24 @@ import s from "./Training.module.scss";
 import training_1 from "../../assets/training_1.png";
 import play_item from "../../assets/play_item.svg";
 import {Link} from "react-router-dom";
+import {fetchPatientCards} from "../../redux/slices/patientCard";
 
 export const Training = () => {
 
     const dispatch = useDispatch();
-    const trainings = useSelector((state) => state.training.training);
-    const isTrainingsLoading = trainings.status === 'loading';
+
+    const user = useSelector(state => state.auth.data);
+    const {patients} = useSelector(state => state.patients);
+    const {training: videoCatalog} = useSelector(state => state.training);
+
+    const patientData = patients.items.find((patient) => patient.userId === user._id);
+
+    const trainingCatalog = patientData && patientData.catalogVideoId
+        ? videoCatalog.items.find((catalog) => catalog._id === patientData.catalogVideoId)
+        : null;
 
     useEffect(() => {
+        dispatch(fetchPatientCards())
         dispatch(fetchTraining());
     }, [dispatch])
 
@@ -25,40 +35,29 @@ export const Training = () => {
     }
 
     return (
-        <>
-            <ul className={s.trainingList}>
-                {(isTrainingsLoading ? [...Array(3)] : trainings.items).map((item, idx) =>
-                    isTrainingsLoading
-                        ? (<div className={s.trainingItem} key={idx}>
-                                <img src={training_1} alt="trn1"/>
-                                <div className={s.trainingItemWrp}>
-                                    <img src={play_item}
-                                         className={s.trainingItemImg}
-                                         alt="play"
-                                         width={36}
-                                         height={36}/>
-                                </div>
+        <div className={s.trainingList}>
+
+            {trainingCatalog ?
+                (
+                    <Link to={`/profile/training/${patientData.catalogVideoId}`}
+                          onClick={() => handleClick(trainingCatalog.name, trainingCatalog.description)}
+                    >
+                        <div className={s.trainingItem}>
+                            <img src={training_1} alt="trn1"/>
+                            <div className={s.trainingItemWrp}>
+                                <p className={s.trainingItemText}>{trainingCatalog.name}</p>
+                                <img src={play_item}
+                                     className={s.trainingItemImg}
+                                     alt="play"
+                                     width={36}
+                                     height={36}/>
                             </div>
-                        )
-                        : (<Link to={`/profile/training/${item._id}`}
-                                 key={idx}
-                                 onClick={() => handleClick(item.name, item.description)}
-                            >
-                                <div className={s.trainingItem} key={idx}>
-                                    <img src={training_1} alt="trn1"/>
-                                    <div className={s.trainingItemWrp}>
-                                        <p className={s.trainingItemText}>{item.name}</p>
-                                        <img src={play_item}
-                                             className={s.trainingItemImg}
-                                             alt="play"
-                                             width={36}
-                                             height={36}/>
-                                    </div>
-                                </div>
-                            </Link>
-                        )
-                )}
-            </ul>
-        </>
+                        </div>
+                    </Link>
+                ) : (
+                    <span className={s.message}>Раздел к тренировкам закрыт!</span>
+                )
+            }
+        </div>
     );
 };

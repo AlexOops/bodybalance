@@ -23,7 +23,7 @@ const store = configureStore({
         consultationTopics: consultationTopicsReducer,
         consultationRecords: consultationRecordsReducer,
         appointments: appointmentsReducer,
-        patients: patientsCardReducer
+        patients: patientsCardReducer,
     },
 });
 
