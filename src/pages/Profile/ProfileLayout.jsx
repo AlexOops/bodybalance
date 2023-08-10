@@ -4,7 +4,7 @@ import s from './ProfileLayout.module.scss'
 import logo from "../../assets/logo.svg";
 import {useSelector} from "react-redux";
 import {selectIsAuth} from "../../redux/slices/auth";
-import ProfileBlock from "../../components/ProfileBlock/ProfileBlock";
+import ProfileBlock from "../../components/Profile/ProfileBlock/ProfileBlock";
 
 export const ProfileLayout = () => {
 

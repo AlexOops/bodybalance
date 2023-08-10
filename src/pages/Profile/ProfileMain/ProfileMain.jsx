@@ -4,9 +4,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchPatientCards} from "../../../redux/slices/patientCard";
 import {fetchEmployers} from "../../../redux/slices/employers";
 import {fetchTraining} from "../../../redux/slices/training";
-import {fetchCustomerList, fetchCustomers} from "../../../redux/slices/customers";
+import {fetchCustomerList} from "../../../redux/slices/customers";
 import PhoneInput from "react-phone-number-input";
 import axios from "../../../axios";
+import validator from 'validator'
+import {AvatarUploader} from "../../../components/Profile/AvatarUploader/AvatarUploader";
 
 export const ProfileMain = () => {
     const dispatch = useDispatch();
@@ -17,7 +19,8 @@ export const ProfileMain = () => {
     const {training: videoCatalog} = useSelector(state => state.training);
     const {customers} = useSelector(state => state.customers);
 
-    const customer = customers.list.find((customer) => customer.userId._id === user._id);
+    //НАХОДИМ КАСТОМЕРА
+    const customer = customers.list.find((customer) => customer.userId && customer.userId._id === user._id);
 
     useEffect(() => {
         dispatch(fetchPatientCards())
@@ -27,7 +30,7 @@ export const ProfileMain = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if(customer) {
+        if (customer) {
             setPhone(customer.phone)
             setDateOfBirth(customer.dateOfBirth)
         }
@@ -47,11 +50,12 @@ export const ProfileMain = () => {
         : null;
     const QuantityTrainingVideo = trainingCatalog ? trainingCatalog.videos.length : 0;
 
+    // ДАННЫЕ С ПОЛЕЙ ВВОДА
     const [userId, serUserId] = useState(user._id);
-    const [fullName, setFullName] = useState(user.fullName);
-    const [dateOfBirth, setDateOfBirth] = useState('');
-    const [email, setEmail] = useState(user.email);
-    const [phone, setPhone] = useState('');
+    const [fullName, setFullName] = useState(customer ? customer.fullName : user.fullName);
+    const [dateOfBirth, setDateOfBirth] = useState(customer ? customer.dateOfBirth : '');
+    const [email, setEmail] = useState(customer ? customer.email : user.email);
+    const [phone, setPhone] = useState(customer ? customer.phone : '');
 
     const updateCustomer = async (data) => {
         try {
@@ -77,7 +81,7 @@ export const ProfileMain = () => {
         e.preventDefault();
 
         // Для проверки на существование, либо обновляем, либо создаем
-        const isExistingCustomer = customers.items.find((customer) => customer.userId === user._id);
+        const isExistingCustomer = customers.list.find((customer) => customer.userId && customer.userId._id === user._id);
 
         const dataToSendInToCustomer = {
             userId,
@@ -93,9 +97,28 @@ export const ProfileMain = () => {
         } else {
             const newCustomer = await createCustomer(dataToSendInToCustomer);
             console.log("Пользователь содан:", newCustomer)
-
         }
     }
+
+    //ВАЛИДАЦИЯ ДАТЫ
+    const [errorMessage, setErrorMessage] = useState('')
+
+    const validateDate = (value) => {
+
+        if (validator.isDate(value)) {
+            setErrorMessage('Валидный формат даты :)');
+        } else {
+            setErrorMessage('Введите валидную дату! ГОД-МЕСЯЦ-ЧИСЛО');
+        }
+        return setDateOfBirth(value);
+    }
+
+    // АВАТАРКА
+    const [avatarUrl, setAvatarUrl] = useState(user.avatarUrl);
+
+    const handleAvatarUpdate = (updatedAvatarUrl) => {
+        setAvatarUrl(updatedAvatarUrl);
+    };
 
     return (
         <>
@@ -105,7 +128,9 @@ export const ProfileMain = () => {
                 <div className={s.healthId}>
                     <p className={s.healthIdTitle}>Моя карточка</p>
 
-                    <img className={s.healthIdImg} src={user.avatarUrl} alt="customer"/>
+                    <img className={s.healthIdImg} src={`http://localhost:4444${avatarUrl}`} alt="customer" />
+
+                    <AvatarUploader user={user} onAvatarUpdate={handleAvatarUpdate} />
 
                     <form onSubmit={handleSubmit}>
 
@@ -120,14 +145,16 @@ export const ProfileMain = () => {
                             />
                         </label>
 
+
                         <label htmlFor="dateOfBirth"
                                className={s.label}>
                             Дата рождения:
                             <input type="text"
+                                   placeholder={"1995-12-12"}
                                    className={s.input}
                                    name={'dateOfBirth'}
                                    value={dateOfBirth}
-                                   onChange={(e) => setDateOfBirth(e.target.value)}
+                                   onChange={(e) => validateDate(e.target.value)}
                             />
                         </label>
 
@@ -154,6 +181,8 @@ export const ProfileMain = () => {
                                 onChange={(value) => setPhone(value)}
                             />
                         </label>
+
+                        <p className={s.error}>{errorMessage}</p>
 
                         <button type={"submit"} className={s.button}>Сохранить</button>
                     </form>

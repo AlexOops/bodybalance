@@ -2,7 +2,7 @@ import s from './Admin.module.scss'
 import logo from '../../assets/logo.svg'
 import {Link, NavLink, Outlet, useLocation, useNavigate} from "react-router-dom";
 import React from "react";
-import ProfileBlock from "../../components/ProfileBlock/ProfileBlock";
+import ProfileBlock from "../../components/Profile/ProfileBlock/ProfileBlock";
 import {useSelector} from "react-redux";
 import {selectIsAuth} from "../../redux/slices/auth";
 

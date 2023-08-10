@@ -12,7 +12,6 @@ export const fetchCustomers = createAsyncThunk('customers/fetchCustomers', async
 
 export const fetchCustomerList = createAsyncThunk('customers/fetchCustomerList', async () => {
     const {data} = await axios.get('/profile');
-    console.log(data)
     return data;
 });
 
