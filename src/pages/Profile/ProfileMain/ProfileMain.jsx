@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import s from "./ProfileMain.module.scss";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchPatientCards} from "../../../redux/slices/patientCard";
+import {fetchPatientCards, updateUploadedAvatarUrl} from "../../../redux/slices/patientCard";
 import {fetchEmployers} from "../../../redux/slices/employers";
 import {fetchTraining} from "../../../redux/slices/training";
 import {fetchCustomerList} from "../../../redux/slices/customers";
@@ -9,6 +9,7 @@ import PhoneInput from "react-phone-number-input";
 import axios from "../../../axios";
 import validator from 'validator'
 import {AvatarUploader} from "../../../components/Profile/AvatarUploader/AvatarUploader";
+import CustomAvatar from "../../../components/Profile/CustomAvatar/CustomAvatar";
 
 export const ProfileMain = () => {
     const dispatch = useDispatch();
@@ -114,11 +115,11 @@ export const ProfileMain = () => {
     }
 
     // АВАТАРКА
-    const [avatarUrl, setAvatarUrl] = useState(user.avatarUrl);
-
     const handleAvatarUpdate = (updatedAvatarUrl) => {
-        setAvatarUrl(updatedAvatarUrl);
+        dispatch(updateUploadedAvatarUrl(updatedAvatarUrl));
     };
+
+    const uploadedAvatarUrl = useSelector((state) => state.patients.uploadedAvatarUrl);
 
     return (
         <>
@@ -128,9 +129,11 @@ export const ProfileMain = () => {
                 <div className={s.healthId}>
                     <p className={s.healthIdTitle}>Моя карточка</p>
 
-                    <img className={s.healthIdImg} src={`http://localhost:4444${avatarUrl}`} alt="customer" />
+                    <div className={s.avatar}>
+                        <CustomAvatar avatarUrl={uploadedAvatarUrl || user.avatarUrl} fullName={user.fullName} size={'150px'}/>
+                    </div>
 
-                    <AvatarUploader user={user} onAvatarUpdate={handleAvatarUpdate} />
+                    <AvatarUploader user={user} onAvatarUpdate={handleAvatarUpdate}/>
 
                     <form onSubmit={handleSubmit}>
 
@@ -144,7 +147,6 @@ export const ProfileMain = () => {
                                    onChange={(e) => setFullName(e.target.value)}
                             />
                         </label>
-
 
                         <label htmlFor="dateOfBirth"
                                className={s.label}>
