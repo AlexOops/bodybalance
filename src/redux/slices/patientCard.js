@@ -15,6 +15,7 @@ const initialState = {
     },
 
     newPatient: {},
+    uploadedAvatarUrl: '',
 }
 
 const patientsSlice = createSlice({
@@ -26,6 +27,10 @@ const patientsSlice = createSlice({
             const {userId, patientCard} = action.payload
 
             state.newPatient[userId] = patientCard
+        },
+
+        updateUploadedAvatarUrl: (state, action) => {
+            state.uploadedAvatarUrl = action.payload;
         }
     },
     extraReducers: {
@@ -44,5 +49,5 @@ const patientsSlice = createSlice({
     }
 })
 
-export const {setPatientCard} = patientsSlice.actions;
+export const {setPatientCard, updateUploadedAvatarUrl} = patientsSlice.actions;
 export const patientsCardReducer = patientsSlice.reducer;

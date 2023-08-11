@@ -26,6 +26,7 @@ export const AvatarUploader = ({ onAvatarUpdate }) => {
             const updatedAvatarUrl = response.data.avatarUrl;
 
             onAvatarUpdate(updatedAvatarUrl);
+
         } catch (e) {
             console.error('Не удалось загрузить аватарку', e);
         }
@@ -33,8 +34,6 @@ export const AvatarUploader = ({ onAvatarUpdate }) => {
 
     return (
         <div className={s.uploadElems}>
-            {/*<input  className={s.inputFile} placeholder={'Выберите файл'} type="file" accept="image/*" onChange={handleImageChange} />*/}
-
             <div className={s.inputFileWrapper}>
                 <input type="file" accept="image/*" className={s.inputFile}  onChange={handleImageChange}/>
                 <span className={s.customButtonText}>Выберите файл</span>
