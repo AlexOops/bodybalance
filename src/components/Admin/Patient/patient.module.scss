@@ -13,12 +13,14 @@
 }
 
 .healthIdName {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 500;
   padding-bottom: 5px;
+  padding-top: 10px;
 }
 
 .healthIdEmail {
+  padding-top: 10px;
   span {
     padding-right: 10px
   }
@@ -27,7 +29,6 @@
 .healthIdWrp {
   display: flex;
   flex-direction: column;
-  padding-top: 10px;
 }
 
 .recommendations {
@@ -37,31 +38,26 @@
   margin: 10px 0;
   padding: 10px;
   outline: none;
+  min-width: 300px;
+  min-height: 200px;
 }
 
-.button {
-  cursor: pointer;
-  padding: 10px 20px;
-  margin-top: 10px;
+.healthIdPhone {
+  padding-top: 10px;
+}
 
-  /* pink */
+.healthIdBirth {
+  padding-top: 10px;
+}
 
-  background: #D78DFF;
-  border: none;
-  border-radius: 40px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 24px;
+.label {
+  color: #D78DFF;
+  padding-top: 10px;
+}
 
-  color: #FFFFFF;
-
-  &:hover {
-    background: #9e8dff;
-  }
-
-  &:active {
-    background: #9e8dff;
-    opacity: 0.8;
-  }
+.labelTrening {
+  padding-top: 5px;
+}
+.labelRecommendations {
+  padding-top: 5px;
 }

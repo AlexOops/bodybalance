@@ -5,6 +5,7 @@ import s from './patient.module.scss';
 import {fetchEmployers} from "../../../redux/slices/employers";
 import {fetchTraining} from "../../../redux/slices/training";
 import axios from "../../../axios";
+import CustomAvatar from "../../Profile/CustomAvatar/CustomAvatar";
 
 export const Patient = ({patientCard, customer, employer, catalogVideo}) => {
 
@@ -96,20 +97,25 @@ export const Patient = ({patientCard, customer, employer, catalogVideo}) => {
             {label}
         </div>
     );
+    console.log(customer)
 
     return (
         <>
             <div className={s.card}>
-                <div className={s.healthIdTitle}>Карточка пациента</div>
-                <img className={s.healthIdImg} src={customer.avatarUrl} alt="customer"/>
+                <h3 className={s.healthIdTitle}>Карточка пациента</h3>
+                <CustomAvatar avatarUrl={customer.avatarUrl} fullName={customer.fullName} size={'150px'}/>
                 <div className={s.healthIdName}>{customer.fullName}</div>
                 <div className={s.healthIdEmail}><span>Почта: </span>{customer.email}</div>
-                <div className={s.healthIdPhone}>
-                    <span>Номер телефона: </span>{(customer.customer) && customer.customer.phone}</div>
-                <div className={s.healthIdBirth}><span>Дата рождения: </span>8 марта</div>
+
+               {customer.customerData.map(customer =>
+                <>
+                    <div className={s.healthIdPhone}><span>Номер телефона: </span> {customer.phone}</div>
+                    <div className={s.healthIdBirth}><span>Дата рождения: </span>{customer.dateOfBirth}</div>
+                </>)}
 
                 <div className={s.healthIdWrp}>
 
+                    <label className={s.label}>Лечащий врач: </label>
                     <Select
                         placeholder={'Выберите врача...'}
                         styles={customStyles}
@@ -124,6 +130,7 @@ export const Patient = ({patientCard, customer, employer, catalogVideo}) => {
                         value={selectedEmployer}
                     />
 
+                    <label className={`${s.label} ${s.labelTrening}`}>Раздел с тренировками: </label>
                     <Select
                         placeholder={'Выберите каталог...'}
                         styles={customStyles}
@@ -138,6 +145,7 @@ export const Patient = ({patientCard, customer, employer, catalogVideo}) => {
                         value={selectedVideoCatalog}
                     />
 
+                    <label className={`${s.label} ${s.labelRecommendations}`}>Рекоммендации по лечению: </label>
                     <textarea className={s.recommendations}
                               value={selectedRecommendations}
                               onChange={(e) => setSelectedRecommendations(e.target.value)}

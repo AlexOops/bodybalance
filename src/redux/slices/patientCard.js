@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "../../axios";
 
 export const fetchPatientCards = createAsyncThunk('/customers/fetchPatientCards', async () => {
-    const {data} = await axios.get('/admin/customers');
+    const {data} = await axios.get('/admin/patientCards');
     if (Array.isArray(data) && data.length > 0) {
         return data;
     }
