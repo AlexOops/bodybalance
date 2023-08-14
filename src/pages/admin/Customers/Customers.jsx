@@ -10,7 +10,6 @@ import {Patient} from "../../../components/Admin/Patient/Patient";
 import {fetchEmployers} from "../../../redux/slices/employers";
 import {fetchTraining} from "../../../redux/slices/training";
 import CustomAvatar from "../../../components/Profile/CustomAvatar/CustomAvatar";
-import search from "../../../assets/search.svg"
 import {SearchBar} from "../../../components/Admin/SearchBar/SearchBar";
 
 export const Customers = () => {
