@@ -4,6 +4,7 @@
   padding: 50px;
 }
 
+
 .customerCard {
   display: flex;
   flex-direction: column;
@@ -24,13 +25,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.avatarUrl {
-  width: 105px;
-  height: 105px;
-  border-radius: 26px;
-  margin: 0 0 14px 0;
 }
 
 .title {
@@ -74,16 +68,9 @@
 }
 
 .createdData {
-  font-style: normal;
   font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  /* or 143% */
-
+  font-size: 13px;
   text-align: center;
-
-  /* Grey-01 */
-
   color: #A5A5A5;
 }
 
@@ -96,9 +83,6 @@
   cursor: pointer;
   padding: 10px 20px;
   margin-top: 10px;
-
-  /* pink */
-
   background: #D78DFF;
   border: none;
   border-radius: 40px;

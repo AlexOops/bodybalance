@@ -20,7 +20,7 @@ export const ProfileMain = () => {
     const {training: videoCatalog} = useSelector(state => state.training);
     const {customers} = useSelector(state => state.customers);
 
-    //НАХОДИМ КАСТОМЕРА
+    //НАХОДИМ КАСТОМЕРА - LIST
     const customer = customers.list.find((customer) => customer.userId && customer.userId._id === user._id);
 
     useEffect(() => {

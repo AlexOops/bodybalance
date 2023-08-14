@@ -1,0 +1,40 @@
+
+.searchBlock {
+  display: flex;
+  align-items: center;
+  padding: 50px 0 0 50px;
+}
+
+.search {
+  display: flex;
+  width: 400px;
+  padding: 18px 30px;
+  font-size: 18px;
+  align-items: center;
+  border-radius: 40px;
+  background: #FFF;
+  box-shadow: 0 0 20px 0 rgba(255, 226, 255, 0.65);
+  border: none;
+  outline: none;
+  margin-right: 20px;
+}
+
+.button {
+  cursor: pointer;
+  padding: 18px 30px;
+  background: #D78DFF;
+  border: none;
+  border-radius: 40px;
+  font-weight: 400;
+  font-size: 18px;
+  color: #FFFFFF;
+
+  &:hover {
+    background: #9e8dff;
+  }
+
+  &:active {
+    background: #9e8dff;
+    opacity: 0.8;
+  }
+}
