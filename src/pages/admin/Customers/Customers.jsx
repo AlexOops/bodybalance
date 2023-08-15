@@ -98,7 +98,7 @@ export const Customers = () => {
 
             <div className={s.customers}>
 
-                {isCustomersLoading ? 'Загрузка списка клиентов ...'
+                {isCustomersLoading ? 'Загрузка списка пациентов ...'
 
                     : customers.items.filter((customer) =>
                         customer.fullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -107,9 +107,9 @@ export const Customers = () => {
                             data.phone.includes(searchQuery)
                         )
                     )
-                        .map((customer, key) =>
+                        .map((customer, idx) =>
 
-                            <div className={s.customerCard} key={key}>
+                            <div className={s.customerCard} key={idx}>
 
                                 <div className={s.profile}>
 
@@ -117,7 +117,7 @@ export const Customers = () => {
                                                   fullName={customer.fullName}
                                                   size={'100px'}/>
 
-                                    <h2 className={s.title}>{customer.fullName}</h2>
+                                    <div className={s.fullName}>{customer.fullName}</div>
                                 </div>
                                 <div className={s.contacts}>
                                     <div className={s.email}>{customer.email}</div>
