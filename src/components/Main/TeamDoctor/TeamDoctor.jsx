@@ -18,7 +18,7 @@ export const TeamDoctor = () => {
                 <div className={s.description}>
                     <h2 className={s.name}>Команда профессиональных врачей</h2>
                     <p className={s.text}>Разнообразный и богатый опыт говорит нам, что экономическая повестка сегодняшнего дня однозначно определяет каждого участника как способного принимать собственные решения касаемо глубокомысленных рассуждений.</p>
-                    <Link to={"/specialists"}  onClick={scrollToTop} className={s.button}>Посмотреть всех специалистов</Link>
+                    <Link to={"/Specialists"}  onClick={scrollToTop} className={s.button}>Посмотреть всех специалистов</Link>
                 </div>
             </div>
         </div>

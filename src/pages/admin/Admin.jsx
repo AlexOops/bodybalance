@@ -40,7 +40,7 @@ export const Admin = () => {
                                 <li className={location.pathname === '/admin/customers' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>Пациенты</li>
                             </NavLink>
                             <NavLink to='/admin/specialists'>
-                                <li className={location.pathname === '/admin/specialists' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>Специалисты</li>
+                                <li className={location.pathname === '/admin/Specialists' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>Специалисты</li>
                             </NavLink>
                         </ul>
                     </aside>

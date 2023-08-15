@@ -11,7 +11,7 @@ import {ErrorPage} from "./pages/404/ErrorPage";
 import {Admin} from "./pages/admin/Admin";
 import {Consultations} from "./pages/admin/Consultations/Consultations";
 import {Customers} from "./pages/admin/Customers/Customers";
-import {SpecialistsAdmin} from "./pages/admin/specialists/SpecialistsAdmin";
+import {Specialists as SpecialistsAdmin} from "./pages/admin/Specialists/Specialists";
 import {SettingsAdmin} from "./pages/admin/settings/SettingsAdmin";
 import {Appointments} from "./pages/admin/Appointments/Appointments";
 
@@ -46,7 +46,7 @@ export const router = createBrowserRouter([
                 element: <Services/>,
             },
             {
-                path: "/specialists",
+                path: "/Specialists",
                 element: <Specialists/>,
             },
             {
@@ -81,7 +81,7 @@ export const router = createBrowserRouter([
                 element: <Customers/>,
             },
             {
-                path: "/admin/specialists",
+                path: "/admin/Specialists",
                 element: <SpecialistsAdmin/>,
             },
             {
