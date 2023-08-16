@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {fetchCustomers} from "../../../redux/slices/customers";
 import s from './Customers.module.scss';
 import Modal from "../../../components/Modal/Modal";
@@ -11,6 +11,7 @@ import {fetchEmployers} from "../../../redux/slices/employers";
 import {fetchTraining} from "../../../redux/slices/training";
 import CustomAvatar from "../../../components/Profile/CustomAvatar/CustomAvatar";
 import {SearchBar} from "../../../components/Admin/SearchBar/SearchBar";
+import {CreatePatient} from "../../../components/Admin/CreatePatient/CreatePatient";
 
 export const Customers = () => {
 
@@ -58,7 +59,7 @@ export const Customers = () => {
         setSelectedPatient(patients.items.find((item) => item.userId === customer._id));
         setSelectedCustomer(customer);
 
-        dispatch(openModal('modalService'));
+        dispatch(openModal('modalCustomer'));
     }
 
     //ЗАПРОС НА КАРТОЧКУ ПАЦИЕНТА
@@ -74,7 +75,7 @@ export const Customers = () => {
 
             // СДЕЛАТЬ СОСТОЯНИЕ ДЛЯ ХРАНЕНИЯ КАРТОЧКИ ЦЕЛИКОМ, ЧТОБЫ БЕЗ ПЕРЕЗАГРУЗКИ РАБОТАЛО
 
-            dispatch(openModal('modalService'));
+            dispatch(openModal('modalCustomer'));
 
             dispatch(fetchPatientCards());
             setSelectedPatient(null); // Сброс данных
@@ -90,11 +91,30 @@ export const Customers = () => {
         setSearchQuery(query);
     };
 
+    //СОЗДАНИЕ НОВОГО ПАЦИЕНТА
+
+    const handleOpenModalForAddNewUser = (e) => {
+        e.preventDefault();
+
+        dispatch(openModal('modalNewCustomer'));
+    }
+
     return (
         <div>
             <h4>Пациенты</h4>
 
-            <SearchBar onSearchChange={handleSearchChange}/>
+            <div className={s.controlBar}>
+                <SearchBar onSearchChange={handleSearchChange}/>
+
+                <button className={`${s.button} ${s.buttonAdd}`} onClick={(e) => handleOpenModalForAddNewUser(e)}>
+                    + Добавить нового пациента
+                </button>
+
+                <Modal type={"modalNewCustomer"}>
+                    <CreatePatient/>
+                </Modal>
+
+            </div>
 
             <div className={s.customers}>
 
@@ -148,7 +168,7 @@ export const Customers = () => {
                         )
                 }
 
-                <Modal type='modalService'>
+                <Modal type='modalCustomer'>
                     {selectedPatient && selectedCustomer ?
                         <Patient
                             patientCard={selectedPatient}

@@ -16,6 +16,12 @@ const initialState = {
         },
         modalGallery: {
             active: false,
+        },
+        modalCustomer: {
+            active: false,
+        },
+        modalNewCustomer: {
+            active: false,
         }
     }
 
