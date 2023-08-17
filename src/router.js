@@ -22,6 +22,7 @@ import {Appointments as ProfileAppointments} from "./pages/Profile/Appointments/
 import {Training as ProfileTraining} from "./pages/Profile/Training/Training";
 import {TrainingVideo} from "./pages/Profile/Training/TrainingVideo/TrainingVideo";
 import {AdminMain} from "./pages/admin/AdminMain/AdminMain";
+import {ResetPassword} from "./pages/ResetPassword/ResetPassword";
 
 export const router = createBrowserRouter([
     {
@@ -112,5 +113,10 @@ export const router = createBrowserRouter([
                 element: <TrainingVideo/>,
             },
         ]
+    },
+    {
+        path: "/reset-password/:token",
+        element: <ResetPassword/>,
+        errorElement: <ErrorPage/>,
     }
 ]);
