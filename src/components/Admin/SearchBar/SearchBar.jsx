@@ -10,15 +10,11 @@ export const SearchBar = ({onSearchChange}) => {
     }
 
     return (
-        <div className={s.searchBlock}>
             <input
                 className={s.search}
                 type="text"
                 placeholder="Поиск пациента"
                 value={searchQuery}
                 onChange={handleSearchChange}/>
-
-            <button className={s.button}> + Добавить нового пациента</button>
-        </div>
     );
 }

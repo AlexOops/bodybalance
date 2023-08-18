@@ -1,9 +1,4 @@
-
-.searchBlock {
-  display: flex;
-  align-items: center;
-  padding: 50px 0 0 40px;
-}
+.searchBlock {}
 
 .search {
   display: flex;
@@ -17,24 +12,4 @@
   border: none;
   outline: none;
   margin-right: 20px;
-}
-
-.button {
-  cursor: pointer;
-  padding: 18px 30px;
-  background: #D78DFF;
-  border: none;
-  border-radius: 40px;
-  font-weight: 400;
-  font-size: 18px;
-  color: #FFFFFF;
-
-  &:hover {
-    background: #9e8dff;
-  }
-
-  &:active {
-    background: #9e8dff;
-    opacity: 0.8;
-  }
 }

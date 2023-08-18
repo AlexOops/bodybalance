@@ -1,0 +1,66 @@
+.newCustomer {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+
+  padding: 60px 50px 50px;
+}
+
+.request {
+  font-size: 18px;
+  color: #D78DFF;
+}
+
+.error {
+  padding-top: 15px;
+  color: red;
+}
+
+.success {
+  color: green;
+  padding-top: 15px;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  outline: none;
+  font-size: 20px;
+  border: 1px solid #D78DFF;
+  padding: 20px 30px;
+  border-radius: 40px;
+
+  margin-top: 10px;
+
+  &:focus {
+    border: 1px solid #D78DFF;
+    box-shadow: 0 4px 4px rgb(216, 159, 246);
+  }
+}
+
+.button {
+  cursor: pointer;
+  padding: 20px 30px;
+  background: #D78DFF;
+  border: none;
+  border-radius: 40px;
+  font-size: 20px;
+  margin-top: 20px;
+  color: #FFFFFF;
+
+  &:hover {
+    background: #9e8dff;
+  }
+
+  &:active {
+    background: #9e8dff;
+    opacity: 0.8;
+  }
+}
+
+.error {
+
+}
