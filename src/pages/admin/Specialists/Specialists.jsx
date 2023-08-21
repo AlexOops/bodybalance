@@ -27,7 +27,7 @@ export const Specialists = () => {
                             <div className={s.card} key={idx}>
                                 <CustomAvatar avatarUrl={employer.avatarUrl} fullName={employer.fullName} size={'100px'}/>
                                 <div className={s.fullName}>{employer.fullName}</div>
-                                <div className={s.profession}>{employer.employer.profession}</div>
+                                <div className={s.profession}>{employer.employer && employer.employer.profession}</div>
                                 <div className={s.email}>{employer.email}</div>
                             </div>
                         )
