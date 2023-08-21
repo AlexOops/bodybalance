@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useEffect, useState} from "react";
 import s from './AppointmentForm.module.scss';
 import {Form, Formik, Field} from 'formik';
 
@@ -13,7 +13,6 @@ import {openModal} from "../../redux/slices/modal";
 import {selectedEmployer, setSelectedEmployer} from "../../redux/slices/employers";
 import EmployerIdInput from "./EmployerIdInput";
 import {nanoid} from "nanoid";
-import dayjs from "dayjs";
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 const SignupSchema = Yup.object().shape({
@@ -215,10 +214,10 @@ export const AppointmentForm = ({
                                                             // data-index={service._id}
                                                              onClick={(e) => {
                                                                  setFieldValue('employer', employer._id);
-                                                                 onClickItem(e, employer._id, employer.fullName + " - " + employer.employer.profession);
+                                                                 onClickItem(e, employer._id, employer.fullName + " - " + employer.employer && employer.employer.profession);
                                                              }}
                                                         >
-                                                            {employer.fullName} - {employer.employer.profession}
+                                                            {employer.fullName} - {employer.employer && employer.employer.profession}
                                                         </div>
                                                     )}
                                                 </div>

@@ -14,8 +14,6 @@ import Carousel from "../../components/Carousel/Carousel";
 
 const certificates = [{img: sertificate}, {img: sertificate}, {img: sertificate}, {img: sertificate}, {img: sertificate}]
 
-
-
 export const Specialists = () => {
     const dispatch = useDispatch();
     const {services} = useSelector(state => state.services);
@@ -27,6 +25,7 @@ export const Specialists = () => {
         setCard(employer);
         dispatch(openModal('modalService'));
     }
+
     const openEmployerCertificate = (doc) => {
         setCertificateUrl(doc);
         dispatch(openModal('modalGallery'));
@@ -45,8 +44,7 @@ export const Specialists = () => {
     React.useEffect(() => {
         dispatch(fetchServices());
         dispatch(fetchEmployers());
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [dispatch]);
 
 
     return (
@@ -81,21 +79,24 @@ export const Specialists = () => {
 
                         <div className={`${s.positionDoc}`}>
                             <Carousel show={4}>
-                            {employers.items.map((person, key) => {
-                                return <div className={s.cardRow} onClick={() => openFullCard(person)}
-                                            key={'employer' + person._id}>
-                                    <Employer
-                                        id={person._id}
-                                        imageUrl={(person.employer.imageUrl) ? `http://localhost:4444${person.employer.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
-                                        name={person.fullName}
-                                        profession={person.employer.profession}
-                                        description={person.employer.description}
-                                        text={person.employer.text}
-                                        certificates={person.employer.certificates}
-                                        openImageFromParent={openEmployerCertificate}
-                                    />
-                                </div>
-                            })}
+                                {employers.items.map((person, key) => {
+                                    return <div className={s.cardRow} onClick={() => openFullCard(person)}
+                                                key={'employer' + person._id}>
+
+                                        {card.employer && (
+                                            <Employer
+                                                id={person._id}
+                                                imageUrl={(person.employer.imageUrl) ? `http://localhost:4444${person.employer.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                                                name={person.fullName}
+                                                profession={person.employer && person.employer.profession}
+                                                description={person.employer.description}
+                                                text={person.employer.text}
+                                                certificates={person.employer.certificates}
+                                                openImageFromParent={openEmployerCertificate}
+                                            />
+                                        )}
+                                    </div>
+                                })}
                             </Carousel>
                         </div>
 
@@ -103,8 +104,9 @@ export const Specialists = () => {
                             {card.employer &&
                                 <Employer isFull={true}
                                           id={card._id}
-                                          imageUrl={(card.employer.imageUrl) ? `http://localhost:4444${card.employer.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
-                                          name={card.fullName}
+                                          imageUrl={card.employer.imageUrl ?
+                                              `http://localhost:4444${card.employer.imageUrl}` :
+                                              'http://localhost:4444/uploads/default_service.png'} name={card.fullName}
                                           profession={card.employer.profession}
                                           description={card.employer.description}
                                           text={card.employer.text}
@@ -136,8 +138,6 @@ export const Specialists = () => {
                     <div style={{marginTop: 64}}>
 
                         <Carousel show={4}>
-
-                            {/*<img src="https://via.placeholder.com/1600x300" alt="placeholder" />*/}
                             {certificates.map(el =>
                                 <div key={nanoid()}>
                                     <div style={{padding: 8}}>
@@ -148,8 +148,6 @@ export const Specialists = () => {
                         </Carousel>
                     </div>
                 </div>
-
-
             </div>
         </>
     )

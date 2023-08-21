@@ -22,6 +22,7 @@ export const Customers = () => {
     const {training: videoCatalog} = useSelector(state => state.training);
     const {patients} = useSelector(state => state.patients); //newPatient
     const [message, setMessage] = useState('');
+    const [idRemoveCustomer, setIdRemoveCustomer] = useState('');
 
     useEffect(() => {
         dispatch(fetchPatientCards())
@@ -99,24 +100,19 @@ export const Customers = () => {
         dispatch(openModal('modalNewCustomer'));
     }
 
-
-    //Удаление пациента (не user)
-
-    const [idRemoveCustomer, setIdRemoveCustomer] = useState('');
-
+    //Удаление пациента user (не customer)
     const handleSubmitToRemove = (customer) => {
-
         setIdRemoveCustomer(customer._id)
-
+        setMessage('');
         dispatch(openModal('modalMessage'));
     }
 
     const handleRemoveCustomer = async (id) => {
-        console.log("Removing customer with id:", id);
         const response = await axios.delete(`/admin/customers/removeCustomer/${id}`);
 
         if (response.data.success) {
             setMessage('Пациент успешно удален!');
+            dispatch(fetchCustomers());
         } else {
             setMessage('Произошла ошибка при удалении пациента');
         }
@@ -200,7 +196,9 @@ export const Customers = () => {
                     {
                         message
                             ?
-                            message
+                            <div className={s.message}>
+                                {message}
+                            </div>
                             :
                             <div className={s.confirm}>
                                 Вы уверены, что хотите удалить пользователя ?

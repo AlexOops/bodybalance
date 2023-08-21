@@ -118,6 +118,7 @@
 
 .remove {
   cursor: pointer;
+
   &::before, &::after {
     position: absolute;
 
@@ -147,5 +148,12 @@
 }
 
 .confirm {
-  padding: 30px;
+  padding: 50px 70px 40px 70px;
+
+  display: flex;
+  flex-direction: column;
+
+  button {
+    margin-top: 15px;
+  }
 }
