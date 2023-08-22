@@ -22,6 +22,9 @@ const initialState = {
         },
         modalNewCustomer: {
             active: false,
+        },
+        modalNewEmployer: {
+            active: false,
         }
     }
 

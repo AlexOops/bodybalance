@@ -17,6 +17,8 @@
   flex-direction: column;
   align-items: center;
 
+  position: relative;
+
   &:hover {
     box-shadow: 0 0 20px 0 rgba(255, 226, 255, 0.65),
     0 0 20px 0 rgba(255, 153, 255, 0.65);
@@ -113,4 +115,15 @@
   align-items: center;
   padding-left: 40px;
   padding-top: 40px;
+}
+
+.confirm {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 70px;
+  font-size: 18px;
+
+  button {
+    margin-top: 20px;
+  }
 }

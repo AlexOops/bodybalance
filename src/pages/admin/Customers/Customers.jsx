@@ -21,6 +21,8 @@ export const Customers = () => {
     const {employers} = useSelector(state => state.employers);
     const {training: videoCatalog} = useSelector(state => state.training);
     const {patients} = useSelector(state => state.patients); //newPatient
+    const [message, setMessage] = useState('');
+    const [idRemoveCustomer, setIdRemoveCustomer] = useState('');
 
     useEffect(() => {
         dispatch(fetchPatientCards())
@@ -92,11 +94,28 @@ export const Customers = () => {
     };
 
     //СОЗДАНИЕ НОВОГО ПАЦИЕНТА
-
     const handleOpenModalForAddNewUser = (e) => {
         e.preventDefault();
 
         dispatch(openModal('modalNewCustomer'));
+    }
+
+    //Удаление пациента user (не customer)
+    const handleSubmitToRemove = (customer) => {
+        setIdRemoveCustomer(customer._id)
+        setMessage('');
+        dispatch(openModal('modalMessage'));
+    }
+
+    const handleRemoveCustomer = async (id) => {
+        const response = await axios.delete(`/admin/customers/removeCustomer/${id}`);
+
+        if (response.data.success) {
+            setMessage('Пациент успешно удален!');
+            dispatch(fetchCustomers());
+        } else {
+            setMessage('Произошла ошибка при удалении пациента');
+        }
     }
 
     return (
@@ -130,6 +149,10 @@ export const Customers = () => {
                         .map((customer, idx) =>
 
                             <div className={s.customerCard} key={idx}>
+
+                                <div className="remove"
+                                     onClick={() => handleSubmitToRemove(customer)}>
+                                </div>
 
                                 <div className={s.profile}>
 
@@ -167,6 +190,28 @@ export const Customers = () => {
                             </div>
                         )
                 }
+
+                <Modal type={"modalMessage"}>
+
+                    {
+                        message
+                            ?
+                            <div className={s.message}>
+                                {message}
+                            </div>
+                            :
+                            <div className={s.confirm}>
+                                Вы уверены, что хотите удалить пользователя ?
+                                <button
+                                    className={s.button}
+                                    onClick={() => handleRemoveCustomer(idRemoveCustomer)}>
+                                    Удалить
+                                </button>
+                            </div>
+                    }
+
+                </Modal>
+
 
                 <Modal type='modalCustomer'>
                     {selectedPatient && selectedCustomer ?

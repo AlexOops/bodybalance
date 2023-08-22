@@ -7,7 +7,7 @@
 }
 
 .card {
-  width: 240px;
+  width: 300px;
   padding: 30px;
   border-radius: 20px;
   background: #FFF;
@@ -15,8 +15,10 @@
   0 0 20px 0 rgba(255, 153, 255, 0.35);
 
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
+
+  position: relative;
 
   &:hover {
     box-shadow: 0 0 20px 0 rgba(255, 226, 255, 0.65),
@@ -36,9 +38,54 @@
 
 .email {
   padding-top: 5px;
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+
+  &::before {
+    content: url("../../../assets/iconEmail.svg");
+    margin-right: 10px;
+  }
+}
+
+.phone {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+
+  &::before {
+    content: url("../../../assets/iconPhone.svg");
+    margin-right: 5px;
+  }
 }
 
 .profession {
   padding-top: 15px;
+  padding-bottom: 5px;
   color: #D78DFF;
+}
+
+.controlBar {
+  padding-top: 50px;
+  padding-left: 40px;
+}
+
+.button {
+  cursor: pointer;
+  padding: 15px 20px;
+  background: #D78DFF;
+  border: none;
+  border-radius: 40px;
+  font-weight: 400;
+  font-size: 18px;
+  color: #FFFFFF;
+
+  &:hover {
+    background: #9e8dff;
+  }
+
+  &:active {
+    background: #9e8dff;
+    opacity: 0.8;
+  }
 }
