@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useEffect, useState} from "react";
 import s from './AppointmentForm.module.scss';
 import {Form, Formik, Field} from 'formik';
 
@@ -13,7 +13,6 @@ import {openModal} from "../../redux/slices/modal";
 import {selectedEmployer, setSelectedEmployer} from "../../redux/slices/employers";
 import EmployerIdInput from "./EmployerIdInput";
 import {nanoid} from "nanoid";
-import dayjs from "dayjs";
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 const SignupSchema = Yup.object().shape({
@@ -123,7 +122,7 @@ export const AppointmentForm = ({
             }}
             validationSchema={SignupSchema}
 
-            onSubmit={async (values, actions) => {
+            onSubmit={async (values) => {
                 // actions.setFieldValue('serviceId', selected.id); //если выбрали услугу из карточки, то берем значение из стейта.
                 try {
                     let postData = {
@@ -279,7 +278,7 @@ export const AppointmentForm = ({
                                         id="time"
                                         name="datetime"
 
-                                    > {workTimes.map((time, key) =>
+                                    > {workTimes.map((time) =>
                                         <option key={nanoid()} value={`${workDate}T${time}:00`}>{time}</option>
                                     )}
                                     </Field>

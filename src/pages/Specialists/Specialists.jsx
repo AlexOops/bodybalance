@@ -11,7 +11,6 @@ import Modal from "../../components/Modal/Modal"
 import {openModal} from "../../redux/slices/modal";
 import {Employer} from "../../components/Employer/Employer";
 import Carousel from "../../components/Carousel/Carousel";
-import CustomAvatar from "../../components/Profile/CustomAvatar/CustomAvatar";
 
 const certificates = [{img: sertificate}, {img: sertificate}, {img: sertificate}, {img: sertificate}, {img: sertificate}]
 

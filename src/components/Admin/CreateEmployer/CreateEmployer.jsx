@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 import s from "./CreateEmployer.module.scss";
 import PhoneInput, {isValidPhoneNumber} from "react-phone-number-input";
