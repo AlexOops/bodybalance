@@ -216,10 +216,10 @@ export const AppointmentForm = ({
                                                             // data-index={service._id}
                                                              onClick={(e) => {
                                                                  setFieldValue('employer', employer._id);
-                                                                 onClickItem(e, employer._id, employer.fullName + " - " + employer.employer.profession);
+                                                                 onClickItem(e, employer._id, employer.fullName + " - " + employer.employer && employer.employer.profession);
                                                              }}
                                                         >
-                                                            {employer.fullName} - {employer.employer.profession}
+                                                            {employer.fullName} - {employer.employer && employer.employer.profession}
                                                         </div>
                                                     )}
                                                 </div>

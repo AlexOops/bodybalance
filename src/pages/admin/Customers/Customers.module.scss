@@ -22,7 +22,6 @@
   &:hover {
     box-shadow: 0 0 20px 0 rgba(255, 226, 255, 0.65),
     0 0 20px 0 rgba(255, 153, 255, 0.65);
-    cursor: pointer;
   }
 }
 
@@ -118,12 +117,13 @@
 }
 
 .confirm {
+  padding: 50px 70px 40px 70px;
+  font-size: 18px;
+  
   display: flex;
   flex-direction: column;
-  padding: 50px 70px;
-  font-size: 18px;
 
   button {
-    margin-top: 20px;
+    margin-top: 15px;
   }
 }

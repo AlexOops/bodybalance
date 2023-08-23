@@ -104,6 +104,7 @@ export const Specialists = () => {
                             {card.employer &&
                                 <Employer isFull={true}
                                           id={card._id}
+
                                           imageUrl={card.avatarUrl ?
                                               `http://localhost:4444${card.avatarUrl}` :
                                               'http://localhost:4444/uploads/default_service.png'} name={card.fullName}
