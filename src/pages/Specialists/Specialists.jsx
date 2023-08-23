@@ -87,12 +87,12 @@ export const Specialists = () => {
 
                                             <Employer
                                                 id={employer._id}
-                                                imageUrl={(employer.user.avatarUrl) ? `http://localhost:4444${employer.user.avatarUrl}` : `http://localhost:4444/uploads/default_service.png`}
-                                                name={employer.user.fullName}
-                                                profession={employer.profession}
-                                                description={employer.description}
-                                                achievements={employer.achievements}
-                                                certificates={employer.certificates}
+                                                imageUrl={(employer.avatarUrl) ? `http://localhost:4444${employer.avatarUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                                                name={employer.fullName}
+                                                profession={employer.employer.profession}
+                                                description={employer.employer.description}
+                                                achievements={employer.employer.achievements}
+                                                certificates={employer.employer.certificates}
                                                 openImageFromParent={openEmployerCertificate}
                                             />
                                     </div>
@@ -101,16 +101,16 @@ export const Specialists = () => {
                         </div>
 
                         <Modal type={'modalService'}>
-                            {card.user &&
+                            {card.employer &&
                                 <Employer isFull={true}
                                           id={card._id}
-                                          imageUrl={card.user.avatarUrl ?
-                                              `http://localhost:4444${card.user.avatarUrl}` :
-                                              'http://localhost:4444/uploads/default_service.png'} name={card.user.fullName}
-                                          profession={card.profession}
-                                          description={card.description}
-                                          achievements={card.achievements}
-                                          certificates={card.certificates}
+                                          imageUrl={card.avatarUrl ?
+                                              `http://localhost:4444${card.avatarUrl}` :
+                                              'http://localhost:4444/uploads/default_service.png'} name={card.fullName}
+                                          profession={card.employer.profession}
+                                          description={card.employer.description}
+                                          achievements={card.employer.achievements}
+                                          certificates={card.employer.certificates}
                                           handleAction={clickCardButton}
                                           openImageFromParent={openEmployerCertificate}
                                 />}

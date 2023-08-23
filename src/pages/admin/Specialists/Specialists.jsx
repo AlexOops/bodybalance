@@ -66,15 +66,15 @@ export const Specialists = () => {
                             <div className={s.card} key={idx}>
 
                                 <div className="remove"
-                                     onClick={() => handleSubmitToRemove(employer.user._id)}>
+                                     onClick={() => handleSubmitToRemove(employer._id)}>
                                 </div>
 
-                                <CustomAvatar avatarUrl={employer.user && employer.user.avatarUrl}
-                                              fullName={employer.user && employer.user.fullName} size={'100px'}/>
-                                <div className={s.fullName}>{employer.user && employer.user.fullName}</div>
-                                <div className={s.profession}>{employer.profession}</div>
-                                <div className={s.phone}>{employer.phone}</div>
-                                <div className={s.email}>{employer.user.email}</div>
+                                <CustomAvatar avatarUrl={employer.employer && employer.avatarUrl}
+                                              fullName={employer.fullName} size={'100px'}/>
+                                <div className={s.fullName}>{employer.fullName}</div>
+                                <div className={s.profession}>{employer.employer.profession}</div>
+                                <div className={s.phone}>{employer.employer.phone}</div>
+                                <div className={s.email}>{employer.email}</div>
 
                             </div>
                         )

@@ -76,6 +76,8 @@ export const AppointmentForm = ({
         setWorkTimes([]);
         const fetchDataByEmployer = async () => {
             try {
+
+                console.log(selectedSpecialist.id)
                 await axios.get(`/worktime/employer/${selectedSpecialist.id}`)
                     .then(res => {
                         setWorkDates(res.data);
@@ -210,14 +212,14 @@ export const AppointmentForm = ({
                                                     {employers.map((employer, key) =>
                                                         <div key={`${key}_${employer._id}`}
                                                             // className={s.selectInput}
-                                                             className={`${s.selectLabel} ${employer.user._id === selectedSpecialist._id ? s.active : ''}`}
+                                                             className={`${s.selectLabel} ${employer._id === selectedSpecialist._id ? s.active : ''}`}
                                                             // data-index={service._id}
                                                              onClick={(e) => {
-                                                                 setFieldValue('employer', employer.user._id);
-                                                                 onClickItem(e, employer.user._id, employer.user.fullName + " - " + employer.profession);
+                                                                 setFieldValue('employer', employer._id);
+                                                                 onClickItem(e, employer._id, employer.fullName + " - " + employer.employer.profession);
                                                              }}
                                                         >
-                                                            {employer.user.fullName} - {employer.profession}
+                                                            {employer.fullName} - {employer.employer.profession}
                                                         </div>
                                                     )}
                                                 </div>
