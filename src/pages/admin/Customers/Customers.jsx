@@ -150,7 +150,8 @@ export const Customers = () => {
 
                             <div className={s.customerCard} key={idx}>
 
-                                <div className={s.remove}
+
+                                <div className="remove"
                                      onClick={() => handleSubmitToRemove(customer)}>
                                 </div>
 

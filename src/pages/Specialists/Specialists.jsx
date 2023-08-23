@@ -1,7 +1,7 @@
 import s from './Specialists.module.scss'
 import sertificate from '../../assets/sertificate.png'
 import {AppointmentForm} from "../../components/AppointmentForm/AppointmentForm";
-import React, {useState, useRef} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchServices} from "../../redux/slices/services";
 import {nanoid} from "nanoid";
@@ -20,6 +20,8 @@ export const Specialists = () => {
     const {employers} = useSelector(state => state.employers);
     const [card, setCard] = useState({});
     const [certificateUrl, setCertificateUrl] = useState('');
+
+    console.log(employers)
 
     const openFullCard = (employer) => {
         setCard(employer);
@@ -41,11 +43,10 @@ export const Specialists = () => {
         scrollToRef.current.scrollIntoView({behavior: 'smooth', block: 'start'});
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(fetchServices());
         dispatch(fetchEmployers());
     }, [dispatch]);
-
 
     return (
         <>
@@ -79,22 +80,21 @@ export const Specialists = () => {
 
                         <div className={`${s.positionDoc}`}>
                             <Carousel show={4}>
-                                {employers.items.map((person, key) => {
-                                    return <div className={s.cardRow} onClick={() => openFullCard(person)}
-                                                key={'employer' + person._id}>
+                                {employers.items.map((employer, idx) => {
+                                    return <div className={s.cardRow}
+                                                key={idx}
+                                                onClick={() => openFullCard(employer)}>
 
-                                        {card.employer && (
                                             <Employer
-                                                id={person._id}
-                                                imageUrl={(person.employer.imageUrl) ? `http://localhost:4444${person.employer.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
-                                                name={person.fullName}
-                                                profession={person.employer && person.employer.profession}
-                                                description={person.employer.description}
-                                                text={person.employer.text}
-                                                certificates={person.employer.certificates}
+                                                id={employer._id}
+                                                imageUrl={(employer.avatarUrl) ? `http://localhost:4444${employer.avatarUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                                                name={employer.fullName}
+                                                profession={employer.employer.profession}
+                                                description={employer.employer.description}
+                                                achievements={employer.employer.achievements}
+                                                certificates={employer.employer.certificates}
                                                 openImageFromParent={openEmployerCertificate}
                                             />
-                                        )}
                                     </div>
                                 })}
                             </Carousel>
@@ -104,12 +104,13 @@ export const Specialists = () => {
                             {card.employer &&
                                 <Employer isFull={true}
                                           id={card._id}
-                                          imageUrl={card.employer.imageUrl ?
-                                              `http://localhost:4444${card.employer.imageUrl}` :
+
+                                          imageUrl={card.avatarUrl ?
+                                              `http://localhost:4444${card.avatarUrl}` :
                                               'http://localhost:4444/uploads/default_service.png'} name={card.fullName}
                                           profession={card.employer.profession}
                                           description={card.employer.description}
-                                          text={card.employer.text}
+                                          achievements={card.employer.achievements}
                                           certificates={card.employer.certificates}
                                           handleAction={clickCardButton}
                                           openImageFromParent={openEmployerCertificate}

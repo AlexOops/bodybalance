@@ -1,24 +1,19 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from "../../axios";
-import staticData from "../staticData";
 
 export const fetchEmployers = createAsyncThunk('employers/fetchEmployers', async () => {
-    const {data} = await axios.get('/employers/auth');
-    if(Array.isArray(data) && data.length > 0){
-        return data;
-    }
-    return staticData;
+    const {data} = await axios.get('/employers');
+    return data;
 });
-
 
 const initialState = {
     employers: {
-      items: [],
-      status: 'loading',
-      selectedEmployer: {
-          name: null ,
-          id: null
-      }
+        items: [],
+        status: 'loading',
+        selectedEmployer: {
+            name: null,
+            id: null
+        }
     },
 };
 
@@ -47,7 +42,7 @@ const employersSlice = createSlice({
     },
 });
 
-export const selectedEmployer = (state)=> state.employers.employers.selectedEmployer;
+export const selectedEmployer = (state) => state.employers.employers.selectedEmployer;
 export const employersReducer = employersSlice.reducer;
 
 //экшены

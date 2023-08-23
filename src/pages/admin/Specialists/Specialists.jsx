@@ -1,8 +1,12 @@
 import s from './Specialists.module.scss';
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchEmployers} from "../../../redux/slices/employers";
 import CustomAvatar from "../../../components/Profile/CustomAvatar/CustomAvatar";
+import {openModal} from "../../../redux/slices/modal";
+import Modal from "../../../components/Modal/Modal";
+import {CreateEmployer} from "../../../components/Admin/CreateEmployer/CreateEmployer";
+import axios from "../../../axios";
 
 export const Specialists = () => {
 
@@ -10,13 +14,48 @@ export const Specialists = () => {
     const {employers} = useSelector(state => state.employers);
     const isEmployersLoading = employers.status === 'loading';
 
+    const [message, setMessage] = useState('');
+
+    console.log(employers)
+
     useEffect(() => {
         dispatch(fetchEmployers())
     }, [dispatch]);
 
+    //СОЗДАНИЕ НОВОГО СПЕЦИАЛИСТА
+    const handleOpenModalForAddNewUser = (e) => {
+        e.preventDefault();
+
+        dispatch(openModal('modalNewEmployer'));
+    }
+
+    // УДАЛЕНИЕ СПЕЦИАЛИСТА
+    const handleSubmitToRemove = async (id) => {
+        const response = await axios.delete(`/admin/specialists/removeEmployer/${id}`);
+
+        if (response.data.success) {
+            setMessage('Специалист успешно удален!');
+            dispatch(fetchEmployers());
+        } else {
+            setMessage('Произошла ошибка при удалении специалиста');
+        }
+    }
+
     return (
         <div>
             <h4>Специалисты</h4>
+
+            <div className={s.controlBar}>
+                <button className={s.button} onClick={(e) => handleOpenModalForAddNewUser(e)}>
+                    Добавить нового специалиста
+                </button>
+
+
+                <Modal type={'modalNewEmployer'}>
+                    <CreateEmployer/>
+                </Modal>
+
+            </div>
 
             <div className={s.container}>
                 {
@@ -25,10 +64,18 @@ export const Specialists = () => {
                         : employers.items.map((employer, idx) =>
 
                             <div className={s.card} key={idx}>
-                                <CustomAvatar avatarUrl={employer.avatarUrl} fullName={employer.fullName} size={'100px'}/>
+
+                                <div className="remove"
+                                     onClick={() => handleSubmitToRemove(employer._id)}>
+                                </div>
+
+                                <CustomAvatar avatarUrl={employer.employer && employer.avatarUrl}
+                                              fullName={employer.fullName} size={'100px'}/>
                                 <div className={s.fullName}>{employer.fullName}</div>
                                 <div className={s.profession}>{employer.employer && employer.employer.profession}</div>
+                                <div className={s.phone}>{employer.employer.phone}</div>
                                 <div className={s.email}>{employer.email}</div>
+
                             </div>
                         )
                 }

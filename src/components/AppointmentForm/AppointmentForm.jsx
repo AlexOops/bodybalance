@@ -76,6 +76,8 @@ export const AppointmentForm = ({
         setWorkTimes([]);
         const fetchDataByEmployer = async () => {
             try {
+
+                console.log(selectedSpecialist.id)
                 await axios.get(`/worktime/employer/${selectedSpecialist.id}`)
                     .then(res => {
                         setWorkDates(res.data);
@@ -122,7 +124,7 @@ export const AppointmentForm = ({
             }}
             validationSchema={SignupSchema}
 
-            onSubmit={async (values, actions) => {
+            onSubmit={async (values) => {
                 // actions.setFieldValue('serviceId', selected.id); //если выбрали услугу из карточки, то берем значение из стейта.
                 try {
                     let postData = {
@@ -210,7 +212,7 @@ export const AppointmentForm = ({
                                                     {employers.map((employer, key) =>
                                                         <div key={`${key}_${employer._id}`}
                                                             // className={s.selectInput}
-                                                             className={`${s.selectLabel} ${employer._id === selectedSpecialist.id ? s.active : ''}`}
+                                                             className={`${s.selectLabel} ${employer._id === selectedSpecialist._id ? s.active : ''}`}
                                                             // data-index={service._id}
                                                              onClick={(e) => {
                                                                  setFieldValue('employer', employer._id);
@@ -278,7 +280,7 @@ export const AppointmentForm = ({
                                         id="time"
                                         name="datetime"
 
-                                    > {workTimes.map((time, key) =>
+                                    > {workTimes.map((time) =>
                                         <option key={nanoid()} value={`${workDate}T${time}:00`}>{time}</option>
                                     )}
                                     </Field>

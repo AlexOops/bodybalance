@@ -116,40 +116,10 @@
   padding-top: 40px;
 }
 
-.remove {
-  cursor: pointer;
-
-  &::before, &::after {
-    position: absolute;
-
-    content: "";
-    right: 12px;
-    top: 20px;
-    width: 20px;
-    height: 4px;
-    background: #D78DFF;
-    border-radius: 40px;
-  }
-
-  &:before {
-    transform: rotate(-45deg);
-  }
-
-  &:after {
-    transform: rotate(45deg);
-  }
-
-  &:hover {
-    &::before,
-    &::after {
-      background: #9747FF;
-    }
-  }
-}
-
 .confirm {
   padding: 50px 70px 40px 70px;
-
+  font-size: 18px;
+  
   display: flex;
   flex-direction: column;
 
