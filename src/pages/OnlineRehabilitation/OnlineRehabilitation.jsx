@@ -84,6 +84,7 @@ export const OnlineRehabilitation = () => {
                 <AppointmentForm
                     name={'Быстрая запись'}
                     services={onlineServiceList.items}
+                    source_name={'rehabilitation'}
                 />
             </div>
 
