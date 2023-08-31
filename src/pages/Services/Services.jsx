@@ -83,6 +83,7 @@ export const Services = () => {
                                          // setFieldValue={setFieldValue}
                                          name={'Быстрая запись'}
                                          services={services.items}
+                                         source_name={'services'}
                         />
 
                 </div>
