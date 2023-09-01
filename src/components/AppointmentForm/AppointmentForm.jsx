@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import s from './AppointmentForm.module.scss';
 import {Form, Formik, Field} from 'formik';
 
@@ -15,20 +15,33 @@ import Phone from "./Phone";
 
 
 const SignupSchema = Yup.object().shape({
-    firstName: Yup.string()
-        .min(3, 'Не менее трех символов')
-        // .max(50, 'Too Long!')
-        .required('Укажите имя'),
-    secondName: Yup.string()
-        .min(3, 'Не менее трех символов')
-        // .max(50, 'Too Long!')
-        .required('Укажите фамилию'),
-    email: Yup.string().email('Некорректный email').required('Введите e-mail'),
-    phone: Yup.string().required('Укажите контактный номер'),
-    text: Yup.string().max(500, 'Пожалуйста, введите сообщение не более 500 символов'),
-    // serviceId: Yup.string().required('Выберите Услугу'),
+        firstName: Yup.string()
+            .min(3, 'Не менее трех символов')
+            // .max(50, 'Too Long!')
+            .required('Укажите имя'),
+        secondName: Yup.string()
+            .min(3, 'Не менее трех символов')
+            // .max(50, 'Too Long!')
+            .required('Укажите фамилию'),
+        email: Yup.string().email('Некорректный email').required('Введите e-mail'),
+        phone: Yup.string().required('Укажите контактный номер'),
+        text: Yup.string().max(500, 'Пожалуйста, введите сообщение не более 500 символов'),
+        // serviceId: Yup.string().required('Выберите Услугу'),
+        // Делаем поле обязательным на фронте для страницы услуги или специалисты соответственно
+        serviceId: Yup.string().when("employer", {
+            is: employer => employer === undefined,
+            then: () => Yup.string().required("Выберите услугу"),
+            // otherwise: Yup.string()
+        }),
+        employer: Yup.string().when("serviceId", {
+            is: serviceId => serviceId === undefined,
+            then: () => Yup.string().required("Выберите специалиста"),
+            // otherwise: ()=>Yup.string()
+        })
 
-});
+    },
+    [["serviceId", "employer"]]
+);
 
 export const AppointmentForm = ({
                                     services, name, isSpecialist, employers, source_name
@@ -55,12 +68,19 @@ export const AppointmentForm = ({
         }
     };
 
+
+    useEffect(() => {
+        dispatch(setSelectedEmployer({name: null, id: null}))
+        dispatch(setSelectedService({name: null, id: null}))
+    }, [])
+
     return (
         <Formik
             validateOnBlur={false}
             // enableReinitialize
             initialValues={{
                 //Услуга приема специалиста по умолчанию (для заявки на прием к специалисту, уточнение услуги не критично)
+                title: '',
                 serviceId: '',
                 employer: '', //сотрудник принимающий по записи на прием.
                 firstName: '',
@@ -85,8 +105,7 @@ export const AppointmentForm = ({
                         //источник обращения
                         source_name: source_name,
                     };
-                    console.log('source',source_name)
-                    switch (source_name){
+                    switch (source_name) {
                         case 'services':
                             postData.service = values.serviceId
                             break
@@ -138,59 +157,57 @@ export const AppointmentForm = ({
                                                 ((selectedSpecialist.name === null) ? 'Выберите специалиста' : selectedSpecialist.name)
                                             }
                                         </div>
-
                                         {
                                             // !isSpecialist
-                                            (source_name === 'services'||source_name === 'rehabilitation')
-                                            ?
-                                            <>
-                                                <ServiceIdInput setFieldValue={setFieldValue}/>
-                                                {(errors.serviceId && touched.serviceId) &&
-                                                    <div className={s.error}>{errors.serviceId}</div>}
-                                                {/*Сервисы*/}
-                                                <div
-                                                    className={isOpen ? s.selectContainer : `${s.selectContainer} ${s.closeContainer}`}>
-                                                    {services.map((service, key) =>
-                                                        <div key={`emp_${key}_${service._id}`}
-                                                            // className={s.selectInput}
-                                                             className={`${s.selectLabel} ${service._id === selected.id ? s.active : ''}`}
-                                                            // data-index={service._id}
-                                                             onClick={(e) => {
-                                                                 setFieldValue('serviceId', service._id);
-                                                                 onClickItem(e, service._id, service.name);
-                                                             }}
-                                                        >
-                                                            {service.name}
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </>
-                                            :
-                                            <>
-                                                <EmployerIdInput setFieldValue={setFieldValue}/>
-                                                {(errors.employer && touched.employer) &&
-                                                    <div className={s.error}>{errors.employer}</div>}
+                                            (source_name === 'services' || source_name === 'rehabilitation')
+                                                ?
+                                                <>
+                                                    <ServiceIdInput setFieldValue={setFieldValue}/>
+                                                    {(errors.serviceId && touched.serviceId) &&
+                                                        <div className={s.error}>{errors.serviceId}</div>}
+                                                    {/*Сервисы*/}
+                                                    <div
+                                                        className={isOpen ? s.selectContainer : `${s.selectContainer} ${s.closeContainer}`}>
+                                                        {services.map((service, key) =>
+                                                            <div key={`emp_${key}_${service._id}`}
+                                                                // className={s.selectInput}
+                                                                 className={`${s.selectLabel} ${service._id === selected.id ? s.active : ''}`}
+                                                                // data-index={service._id}
+                                                                 onClick={(e) => {
+                                                                     setFieldValue('serviceId', service._id);
+                                                                     onClickItem(e, service._id, service.name);
+                                                                 }}
+                                                            >
+                                                                {service.name}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </>
+                                                :
+                                                <>
+                                                    <EmployerIdInput setFieldValue={setFieldValue}/>
+                                                    {(errors.employer && touched.employer) &&
+                                                        <div className={s.error}>{errors.employer}</div>}
 
+                                                    <div
+                                                        className={isOpen ? s.selectContainer : `${s.selectContainer} ${s.closeContainer}`}>
 
-                                                <div
-                                                    className={isOpen ? s.selectContainer : `${s.selectContainer} ${s.closeContainer}`}>
-
-                                                    {employers.map((employer, key) =>
-                                                        <div key={`${key}_${employer._id}`}
-                                                            // className={s.selectInput}
-                                                             className={`${s.selectLabel} ${employer._id === selectedSpecialist._id ? s.active : ''}`}
-                                                            // data-index={service._id}
-                                                             onClick={(e) => {
-                                                                 setFieldValue('employer', employer._id);
-                                                                 onClickItem(e, employer._id,
-                                                                     employer.fullName + " - " + employer.employer.profession);
-                                                             }}
-                                                        >
-                                                            {employer.fullName} - {employer.employer && employer.employer.profession}
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </>
+                                                        {employers.map((employer, key) =>
+                                                            <div key={`${key}_${employer._id}`}
+                                                                // className={s.selectInput}
+                                                                 className={`${s.selectLabel} ${employer._id === selectedSpecialist._id ? s.active : ''}`}
+                                                                // data-index={service._id}
+                                                                 onClick={(e) => {
+                                                                     setFieldValue('employer', employer._id);
+                                                                     onClickItem(e, employer._id,
+                                                                         employer.fullName + " - " + employer.employer.profession);
+                                                                 }}
+                                                            >
+                                                                {employer.fullName} - {employer.employer && employer.employer.profession}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </>
                                         }
 
                                     </div>
