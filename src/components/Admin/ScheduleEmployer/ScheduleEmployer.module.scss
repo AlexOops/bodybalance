@@ -1,0 +1,63 @@
+.block {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  padding: 0 0 5px 15px;
+  font-size: 16px;
+}
+
+.message {
+  color: #5D3274;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  border-radius: 40px;
+  border: 1px solid #D78DFF;
+}
+
+.schedule {
+  display: flex;
+  flex-direction: column;
+
+  padding: 50px;
+  border-radius: 40px;
+  border: 1px solid #D78DFF;
+
+  position: relative;
+
+  &:not(:last-child) {
+    margin-right: 20px;
+  }
+}
+
+
+.dateContainer {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.date {
+  width: 100%;
+  margin-bottom: 15px;
+
+  padding: 20px;
+  outline: none;
+  border: 1px solid #D78DFF;
+  border-radius: 40px;
+
+  &:focus {
+    box-shadow: 0 2px 2px rgb(216, 159, 246);
+  }
+}
+
+.buttonAddDate {
+  margin-top: 0;
+  margin-bottom: 20px;
+}

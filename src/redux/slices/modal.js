@@ -25,6 +25,9 @@ const initialState = {
         },
         modalNewEmployer: {
             active: false,
+        },
+        modalOpenEmployer: {
+            active: false,
         }
     }
 

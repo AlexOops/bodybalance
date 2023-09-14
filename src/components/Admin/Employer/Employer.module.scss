@@ -1,0 +1,51 @@
+.block {
+  padding: 60px;
+}
+
+.title {
+  padding-bottom: 15px;
+  text-align: right;
+}
+
+.message {
+  color: #5D3274;
+}
+
+.container {
+  display: flex;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.avatar {
+
+}
+
+.bio {
+
+}
+// описание сотрудника
+.about {
+  border: 1px solid #D78DFF;
+  border-radius: 40px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: flex;
+}
+
+.text {
+  font-size: 16px;
+  padding-right: 10px;
+}
+
+.workTime {
+
+}
+

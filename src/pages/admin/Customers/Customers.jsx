@@ -9,7 +9,7 @@ import {fetchPatientCards, setPatientCard} from "../../../redux/slices/patientCa
 import {Patient} from "../../../components/Admin/Patient/Patient";
 import {fetchEmployers} from "../../../redux/slices/employers";
 import {fetchTraining} from "../../../redux/slices/training";
-import CustomAvatar from "../../../components/Profile/CustomAvatar/CustomAvatar";
+import CustomAvatar from "../../../components/Avatar/CustomAvatar/CustomAvatar";
 import {SearchBar} from "../../../components/Admin/SearchBar/SearchBar";
 import {CreatePatient} from "../../../components/Admin/CreatePatient/CreatePatient";
 
