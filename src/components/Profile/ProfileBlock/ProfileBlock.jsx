@@ -4,7 +4,7 @@ import s from './ProfileBlock.module.scss';
 import {logout} from "../../../redux/slices/auth";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import CustomAvatar from "../CustomAvatar/CustomAvatar";
+import CustomAvatar from "../../Avatar/CustomAvatar/CustomAvatar";
 import {fetchPatientCards} from "../../../redux/slices/patientCard";
 
 const ProfileBlock = ({handleNavigate, redirectLabel}) => {
@@ -31,7 +31,8 @@ const ProfileBlock = ({handleNavigate, redirectLabel}) => {
         <div className={s.profileWrp}>
             <div className={s.profile}>
 
-                <CustomAvatar avatarUrl={uploadedAvatarUrl || user.avatarUrl } fullName={user.fullName} size={'60px'}/>
+                <CustomAvatar avatarUrl={uploadedAvatarUrl ? uploadedAvatarUrl : user.avatarUrl}
+                              fullName={user.fullName} size={'60px'}/>
 
                 <span className={s.profileRole}>{user.role}</span>
             </div>

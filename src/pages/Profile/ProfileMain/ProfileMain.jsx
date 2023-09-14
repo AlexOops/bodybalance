@@ -8,8 +8,8 @@ import {fetchCustomerList} from "../../../redux/slices/customers";
 import PhoneInput from "react-phone-number-input";
 import axios from "../../../axios";
 import validator from 'validator'
-import {AvatarUploader} from "../../../components/Profile/AvatarUploader/AvatarUploader";
-import CustomAvatar from "../../../components/Profile/CustomAvatar/CustomAvatar";
+import {AvatarUploader} from "../../../components/Avatar/AvatarUploader/AvatarUploader";
+import CustomAvatar from "../../../components/Avatar/CustomAvatar/CustomAvatar";
 
 export const ProfileMain = () => {
     const dispatch = useDispatch();
@@ -114,12 +114,13 @@ export const ProfileMain = () => {
         return setDateOfBirth(value);
     }
 
-    // АВАТАРКА
-    const handleAvatarUpdate = (updatedAvatarUrl) => {
-        dispatch(updateUploadedAvatarUrl(updatedAvatarUrl));
-    };
+    const [avatarUrl, setAvatarUrl] = useState('');
 
-    const uploadedAvatarUrl = useSelector((state) => state.patients.uploadedAvatarUrl);
+    const handleUploadedAvatarUrl = (updatedAvatarUrl) => {
+        setAvatarUrl(updatedAvatarUrl);
+
+        dispatch(updateUploadedAvatarUrl(updatedAvatarUrl));
+    }
 
     return (
         <>
@@ -130,10 +131,10 @@ export const ProfileMain = () => {
                     <p className={s.healthIdTitle}>Моя карточка</p>
 
                     <div className={s.avatar}>
-                        <CustomAvatar avatarUrl={uploadedAvatarUrl || user.avatarUrl} fullName={user.fullName} size={'150px'}/>
+                        <CustomAvatar avatarUrl={ avatarUrl ? avatarUrl : user.avatarUrl} fullName={user.fullName} size={'150px'}/>
                     </div>
 
-                    <AvatarUploader user={user} onAvatarUpdate={handleAvatarUpdate}/>
+                    <AvatarUploader userId={user._id} handleUpdatedAvatarUrl={handleUploadedAvatarUrl}/>
 
                     <form onSubmit={handleSubmit}>
 
