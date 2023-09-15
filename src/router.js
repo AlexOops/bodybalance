@@ -23,6 +23,7 @@ import {Training as ProfileTraining} from "./pages/Profile/Training/Training";
 import {TrainingVideo} from "./pages/Profile/Training/TrainingVideo/TrainingVideo";
 import {AdminMain} from "./pages/admin/AdminMain/AdminMain";
 import {ResetPassword} from "./pages/ResetPassword/ResetPassword";
+import Calendar from "./pages/admin/Calendar/Calendar";
 
 export const router = createBrowserRouter([
     {
@@ -88,6 +89,10 @@ export const router = createBrowserRouter([
             {
                 path: "/admin/settings",
                 element: <SettingsAdmin/>,
+            },
+            {
+                path: "/admin/calendar",
+                element: <Calendar/>,
             },
         ]
     },

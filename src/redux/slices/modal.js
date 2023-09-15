@@ -28,6 +28,9 @@ const initialState = {
         },
         modalOpenEmployer: {
             active: false,
+        },
+        modalCalendar:{
+            active: false,
         }
     }
 
