@@ -42,6 +42,14 @@ export const Admin = () => {
                             <NavLink to='/admin/specialists'>
                                 <li className={location.pathname === '/admin/Specialists' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>Специалисты</li>
                             </NavLink>
+
+                            <NavLink to='/admin'>
+                                <li className={location.pathname === '/admin' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>Услуги</li>
+                            </NavLink>
+
+                            <NavLink to='/admin'>
+                                <li className={location.pathname === '/admin' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>Видео</li>
+                            </NavLink>
                         </ul>
                     </aside>
 
