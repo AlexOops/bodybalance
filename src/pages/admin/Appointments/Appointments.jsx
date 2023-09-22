@@ -54,15 +54,15 @@ export const Appointments = () => {
             <h1 className={s.title}>Заявка клиента на запись</h1>
             <div className={s.appointments}>
 
-                <div className={`${s.cell} ${s.startCell}`}>Источник</div>
-                <div className={s.cell}>Имя</div>
-                <div className={s.cell}>Фамилия</div>
-                <div className={s.cell}>Телефон</div>
-                <div className={s.cell}>Услуга</div>
-                <div className={s.cell}>Специалист</div>
-                <div className={s.cell}>Статус</div>
-                <div className={s.cell}>Авторизован</div>
-                <div className={`${s.cell} ${s.endCell}`}>Дата</div>
+                <div className={`${s.cell} ${s.headerCell} ${s.startCell}`}>Источник</div>
+                <div className={`${s.cell} ${s.headerCell}`}>Имя</div>
+                <div className={`${s.cell} ${s.headerCell}`}>Фамилия</div>
+                <div className={`${s.cell} ${s.headerCell}`}>Телефон</div>
+                <div className={`${s.cell} ${s.headerCell}`}>Услуга</div>
+                <div className={`${s.cell} ${s.headerCell}`}>Специалист</div>
+                <div className={`${s.cell} ${s.headerCell}`}>Статус</div>
+                <div className={`${s.cell} ${s.headerCell}`}>Авторизован</div>
+                <div className={`${s.cell} ${s.headerCell} ${s.endCell}`}>Дата</div>
 
                 {(isAppointmentsLoading ? [...Array(3)] : appointments.items).map((obj, ind) => (
                     isAppointmentsLoading
