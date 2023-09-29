@@ -40,15 +40,15 @@ export const Admin = () => {
                                 <li className={location.pathname === '/admin/customers' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>Пациенты</li>
                             </NavLink>
                             <NavLink to='/admin/specialists'>
-                                <li className={location.pathname === '/admin/Specialists' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>Специалисты</li>
+                                <li className={location.pathname === '/admin/specialists' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>Специалисты</li>
                             </NavLink>
 
-                            <NavLink to='/admin'>
-                                <li className={location.pathname === '/admin' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>Услуги</li>
+                            <NavLink to='/admin/services'>
+                                <li className={location.pathname === '/admin/services' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>Услуги</li>
                             </NavLink>
 
-                            <NavLink to='/admin'>
-                                <li className={location.pathname === '/admin' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>Видео</li>
+                            <NavLink to='/admin/video'>
+                                <li className={location.pathname === '/admin/video' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>Видео</li>
                             </NavLink>
                         </ul>
                     </aside>

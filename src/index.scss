@@ -216,6 +216,8 @@ input:-webkit-autofill:active {
 // Для кнопки удалить
 .remove {
   cursor: pointer;
+  width: 20px;
+  height: 20px;
 
   &::before, &::after {
     position: absolute;

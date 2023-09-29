@@ -2,7 +2,7 @@ import s from './Specialists.module.scss';
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchEmployers} from "../../../redux/slices/employers";
-import CustomAvatar from "../../../components/Avatar/CustomAvatar/CustomAvatar";
+import CustomAvatar from "../../../components/Images/CustomAvatar/CustomAvatar";
 import {openModal} from "../../../redux/slices/modal";
 import Modal from "../../../components/Modal/Modal";
 import {CreateEmployer} from "../../../components/Admin/CreateEmployer/CreateEmployer";
@@ -18,8 +18,8 @@ export const Specialists = () => {
     const [message, setMessage] = useState('');
 
     useEffect(() => {
-        dispatch(fetchEmployers())
-        dispatch(fetchSchedules())
+        dispatch(fetchEmployers());
+        dispatch(fetchSchedules());
     }, [dispatch]);
 
     //СОЗДАНИЕ НОВОГО СПЕЦИАЛИСТА
@@ -37,7 +37,7 @@ export const Specialists = () => {
             setMessage('Специалист успешно удален!');
             dispatch(fetchEmployers());
         } else {
-            setMessage('Произошла ошибка при удалении специалиста');
+            setMessage('Произошла ошибка при удалении');
         }
     }
 
@@ -48,11 +48,11 @@ export const Specialists = () => {
         event.preventDefault();
 
         setSelectedEmployer(employer);
-        dispatch(openModal('modalOpenEmployer'))
+        dispatch(openModal('modalOpenEmployer'));
     }
 
     const handleUpdatedUsers = () => {
-        dispatch(fetchEmployers())
+        dispatch(fetchEmployers());
     }
 
     return (

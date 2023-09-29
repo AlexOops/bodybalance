@@ -8,11 +8,13 @@ import {Registration} from "./pages/Registration/Registration";
 import {Specialists} from "./pages/Specialists/Specialists";
 import {OnlineRehabilitation} from "./pages/OnlineRehabilitation/OnlineRehabilitation";
 import {ErrorPage} from "./pages/404/ErrorPage";
+
+//admin
 import {Admin} from "./pages/admin/Admin";
 import {Consultations} from "./pages/admin/Consultations/Consultations";
 import {Customers} from "./pages/admin/Customers/Customers";
 import {Specialists as SpecialistsAdmin} from "./pages/admin/Specialists/Specialists";
-import {SettingsAdmin} from "./pages/admin/settings/SettingsAdmin";
+import {Services as ServicesAdmin} from "./pages/admin/Services/Services";
 import {Appointments} from "./pages/admin/Appointments/Appointments";
 
 //profile
@@ -82,12 +84,12 @@ export const router = createBrowserRouter([
                 element: <Customers/>,
             },
             {
-                path: "/admin/Specialists",
+                path: "/admin/specialists",
                 element: <SpecialistsAdmin/>,
             },
             {
-                path: "/admin/settings",
-                element: <SettingsAdmin/>,
+                path: "/admin/services",
+                element: <ServicesAdmin/>,
             },
         ]
     },

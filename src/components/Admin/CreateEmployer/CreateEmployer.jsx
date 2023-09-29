@@ -108,7 +108,7 @@ export const CreateEmployer = () => {
                                       value={achievements}
                                       onChange={(e) => setAchievements(e.target.value)}/>
 
-                            {/*Аватарка и Сертификаты загрузка*/}
+                            {/*Сертификаты загрузка*/}
 
                             <button type={"submit"} className={s.button}>Добавить сотрудника</button>
                         </form>

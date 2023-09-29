@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import s from "./Employer.module.scss";
 import {EditForm} from "./EditForm/EditForm";
 import axios from "../../../axios";
-import {AvatarUploader} from "../../Avatar/AvatarUploader/AvatarUploader";
-import CustomAvatar from "../../Avatar/CustomAvatar/CustomAvatar";
+import {ImageUploader} from "../../Images/ImageUploader/ImageUploader";
+import CustomAvatar from "../../Images/CustomAvatar/CustomAvatar";
 import {LocalizationProvider} from "@mui/x-date-pickers";
 import {ScheduleEmployer} from "../ScheduleEmployer/ScheduleEmployer";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
@@ -12,7 +12,7 @@ import {useSelector} from "react-redux";
 export const Employer = ({employer, handleUpdatedUsers}) => {
 
     const [isEditing, setIsEditing] = useState(false);
-    const [employerData, setEmployerData] = useState({})
+    const [employerData, setEmployerData] = useState({});
     const [avatarUrl, setAvatarUrl] = useState('');
     const [message, setMessage] = useState('');
 
@@ -35,27 +35,27 @@ export const Employer = ({employer, handleUpdatedUsers}) => {
 
             handleUpdatedUsers(); // обновляем в родителе
 
-            setMessage(response.body.message) //доделать сообщения ?????
+            setMessage(response.body.message); //доделать сообщения ?????
 
         } catch (e) {
-            setMessage('Не удалось сохранить данные!', e)
+            setMessage('Не удалось обновить данные!', e);
         }
 
-        setIsEditing(false)
+        setIsEditing(false);
     }
 
     const handleCancelClick = () => {
 
-        setIsEditing(false)
+        setIsEditing(false);
     }
 
     const onClickEditing = () => {
 
-        setIsEditing(true)
+        setIsEditing(true);
     }
 
     const handleUploadedAvatarUrl = (updatedAvatarUrl) => {
-        setAvatarUrl(updatedAvatarUrl)
+        setAvatarUrl(updatedAvatarUrl);
 
         handleUpdatedUsers(); // обновляем в родителе
     }
@@ -68,13 +68,13 @@ export const Employer = ({employer, handleUpdatedUsers}) => {
 
                 <div className={s.container}>
 
-
                     <div className={s.card}>
+
                         <div className={s.avatar}>
                             <CustomAvatar avatarUrl={avatarUrl ? avatarUrl : employerData.avatarUrl}
                                           fullName={employerData.fullName} size={'100px'}/>
 
-                            <AvatarUploader userId={employerData._id} handleUpdatedAvatarUrl={handleUploadedAvatarUrl}/>
+                            <ImageUploader uploadUrl={`/profile/updateAvatar/${employerData._id}`} handleUpdatedImageUrl={handleUploadedAvatarUrl}/>
                         </div>
 
                         <div className={s.about}>

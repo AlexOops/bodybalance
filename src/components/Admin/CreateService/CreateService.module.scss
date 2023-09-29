@@ -1,22 +1,19 @@
+.message {
+  color: red;
+  padding: 20px 30px;
+}
+
 .block {
-  padding: 50px;
+padding: 40px;
 }
 
 .title {
-  padding-bottom: 5px;
-  text-align: center;
+  padding-bottom: 20px;
 }
 
-.formCreateEmployer {
-  padding: 10px;
-
+.formCreateService {
   display: flex;
   flex-direction: column;
-}
-
-.phone {
-  margin-bottom: 0;
-  margin-top: 10px;
 }
 
 .input {
@@ -48,28 +45,4 @@
     border: 1px solid #D78DFF;
     box-shadow: 0 2px 2px rgb(227, 199, 245);
   }
-}
-
-.button {
-  cursor: pointer;
-  padding: 20px 30px;
-  background: #D78DFF;
-  border: none;
-  border-radius: 40px;
-  font-size: 20px;
-  margin-top: 20px;
-  color: #FFFFFF;
-
-  &:hover {
-    background: #9e8dff;
-  }
-
-  &:active {
-    background: #9e8dff;
-    opacity: 0.8;
-  }
-}
-
-.message {
-  padding: 50px;
 }

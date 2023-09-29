@@ -28,7 +28,13 @@ const initialState = {
         },
         modalOpenEmployer: {
             active: false,
-        }
+        },
+        modalNewService: {
+            active: false
+        },
+        modalOpenService: {
+            active: false,
+        },
     }
 
     // active: false,

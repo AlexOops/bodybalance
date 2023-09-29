@@ -4,7 +4,7 @@ import s from './ProfileBlock.module.scss';
 import {logout} from "../../../redux/slices/auth";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import CustomAvatar from "../../Avatar/CustomAvatar/CustomAvatar";
+import CustomAvatar from "../../Images/CustomAvatar/CustomAvatar";
 import {fetchPatientCards} from "../../../redux/slices/patientCard";
 
 const ProfileBlock = ({handleNavigate, redirectLabel}) => {
