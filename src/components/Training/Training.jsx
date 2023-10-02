@@ -15,7 +15,7 @@ export const Training = () => {
     const {patients} = useSelector(state => state.patients);
     const {training: videoCatalog} = useSelector(state => state.training);
 
-    const patientData = patients.items.find((patient) => patient.userId === user._id);
+    const patientData = patients && patients.items ? patients.items.find((patient) => patient.userId === user._id) : null;
 
     const trainingCatalog = patientData && patientData.catalogVideoId
         ? videoCatalog.items.find((catalog) => catalog._id === patientData.catalogVideoId)

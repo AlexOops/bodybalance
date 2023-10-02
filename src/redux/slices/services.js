@@ -4,15 +4,12 @@ import staticData from "../staticData";
 
 export const fetchServices = createAsyncThunk('services/fetchServices', async () => {
     const {data} = await axios.get('/services');
-    if(Array.isArray(data) && data.length > 0){
-        return data;
-    }
-    return staticData;
+    return data;
 });
 
 export const fetchServicesByRating = createAsyncThunk('services/fetchServicesByRating', async () => {
-    const {data} = await axios.get('/services/popular').catch(()=> staticData);
-    if(Array.isArray(data) && data.length > 0){
+    const {data} = await axios.get('/services/popular').catch(() => staticData);
+    if (Array.isArray(data) && data.length > 0) {
         return data;
     }
     //вернем тестовые данные если подключение не удалось
@@ -22,12 +19,12 @@ export const fetchServicesByRating = createAsyncThunk('services/fetchServicesByR
 
 const initialState = {
     services: {
-      items: [],
-      status: 'loading',
-      selectedService: {
-          name: null ,
-          id: null
-      }
+        items: [],
+        status: 'loading',
+        selectedService: {
+            name: null,
+            id: null
+        }
     },
 };
 
@@ -36,7 +33,6 @@ const servicesSlice = createSlice({
     initialState,
     reducers: {
         setSelectedService: (state, action) => {
-            console.log('actionSetSelected', action.payload);
             state.services.selectedService = action.payload;
         },
     },
@@ -69,7 +65,7 @@ const servicesSlice = createSlice({
     },
 });
 
-export const selectedService = (state)=> state.services.services.selectedService;
+export const selectedService = (state) => state.services.services.selectedService;
 export const servicesReducer = servicesSlice.reducer;
 
 //экшены

@@ -8,8 +8,8 @@ import {fetchCustomerList} from "../../../redux/slices/customers";
 import PhoneInput from "react-phone-number-input";
 import axios from "../../../axios";
 import validator from 'validator'
-import {AvatarUploader} from "../../../components/Avatar/AvatarUploader/AvatarUploader";
-import CustomAvatar from "../../../components/Avatar/CustomAvatar/CustomAvatar";
+import {ImageUploader} from "../../../components/Images/ImageUploader/ImageUploader";
+import CustomAvatar from "../../../components/Images/CustomAvatar/CustomAvatar";
 
 export const ProfileMain = () => {
     const dispatch = useDispatch();
@@ -38,7 +38,7 @@ export const ProfileMain = () => {
     }, [customer])
 
     // Карточка пациента
-    const patientData = patients.items.find((patient) => patient.userId === user._id);
+    const patientData = patients && patients.items ? patients.items.find((patient) => patient.userId === user._id) : null;
 
     //ВРАЧ
     const attendingDoctor = patientData && patientData.employerId
@@ -82,7 +82,7 @@ export const ProfileMain = () => {
         e.preventDefault();
 
         // Для проверки на существование, либо обновляем, либо создаем
-        const isExistingCustomer = customers.list.find((customer) => customer.userId && customer.userId._id === user._id);
+        const isExistingCustomer = customers.list.find((customer) => customer?.userId && customer.userId._id === user._id);
 
         const dataToSendInToCustomer = {
             userId,
@@ -131,10 +131,11 @@ export const ProfileMain = () => {
                     <p className={s.healthIdTitle}>Моя карточка</p>
 
                     <div className={s.avatar}>
-                        <CustomAvatar avatarUrl={ avatarUrl ? avatarUrl : user.avatarUrl} fullName={user.fullName} size={'150px'}/>
+                        <CustomAvatar avatarUrl={avatarUrl ? avatarUrl : user.avatarUrl} fullName={user.fullName}
+                                      size={'150px'}/>
                     </div>
 
-                    <AvatarUploader userId={user._id} handleUpdatedAvatarUrl={handleUploadedAvatarUrl}/>
+                    <ImageUploader uploadUrl={`/profile/updateAvatar/${user._id}`} handleUpdatedImageUrl={handleUploadedAvatarUrl}/>
 
                     <form onSubmit={handleSubmit}>
 

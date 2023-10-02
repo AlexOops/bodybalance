@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
-import s from './AvatarUploader.module.scss'
+import s from './ImageUploader.module.scss'
 import axios from "../../../axios";
 
-export const AvatarUploader = ({userId, handleUpdatedAvatarUrl}) => {
+export const ImageUploader = ({fieldName = 'image', uploadUrl, handleUpdatedImageUrl}) => {
 
     const [image, setImage] = useState(null);
 
-    const handleAvatarUpdate = (updatedAvatarUrl) => {
-        handleUpdatedAvatarUrl(updatedAvatarUrl);
+    const handleImageUpdate = (updatedAvatarUrl) => {
+        handleUpdatedImageUrl(updatedAvatarUrl);
     };
 
     const handleImageChange = (e) => {
@@ -17,16 +17,17 @@ export const AvatarUploader = ({userId, handleUpdatedAvatarUrl}) => {
 
     const handleUpload = async () => {
         const formData = new FormData();
-        formData.append('image', image);
+
+        formData.append(fieldName, image); // как заготовка на проброс
 
         try {
-            const response = await axios.patch(`/profile/updateAvatar/${userId}`, formData, {
+            const response = await axios.patch(uploadUrl, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
 
-            handleAvatarUpdate(response.data.avatarUrl);
+            handleImageUpdate(response.data.imageUrl);
 
         } catch (e) {
             console.error('Не удалось загрузить аватарку', e);

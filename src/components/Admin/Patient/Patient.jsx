@@ -5,7 +5,7 @@ import s from './patient.module.scss';
 import {fetchEmployers} from "../../../redux/slices/employers";
 import {fetchTraining} from "../../../redux/slices/training";
 import axios from "../../../axios";
-import CustomAvatar from "../../Avatar/CustomAvatar/CustomAvatar";
+import CustomAvatar from "../../Images/CustomAvatar/CustomAvatar";
 
 export const Patient = ({patientCard, customer, employer, catalogVideo}) => {
 

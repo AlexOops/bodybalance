@@ -37,10 +37,17 @@ export const ScheduleEmployer = ({employerId, employerFullName, schedulesEmploye
         setShowDate(true);
     }
 
-    const handleScheduleChange = (index, key, value) => {
-        const newSchedule = [...schedules];
-        newSchedule[index][key] = value;
-        setSchedules(newSchedule);
+    const handleSelectChange = (index, e) => {
+        const newDaysOfWeek = e.target.value;
+        handleScheduleChange(index, 'daysOfWeek', newDaysOfWeek);
+    }
+
+    const handleScheduleChange = (index, key, values) => {
+        setSchedules(prevSchedules => {
+            const newSchedules = [...prevSchedules];
+            newSchedules[index] = {...newSchedules[index], [key]: values};
+            return newSchedules;
+        });
     }
 
     const handleSubmit = async () => {
@@ -87,23 +94,26 @@ export const ScheduleEmployer = ({employerId, employerFullName, schedulesEmploye
         }
     }
 
-    // const handleEditSchedule = async (editedSchedule) => {
-    //     try {
-    //         const response = await axios.put(`/admin/schedules/${editedSchedule._id}`, editedSchedule);
-    //
-    //         if (response.status === 200) {
-    //
-    //             const updatedSchedules = schedules.map(schedule =>
-    //                 schedule._id === editedSchedule._id ? editedSchedule : schedule
-    //             );
-    //             setSchedules(updatedSchedules);
-    //             setMessage(response.data.message);
-    //         }
-    //
-    //     } catch (e) {
-    //         setMessage('Не удалось обновить расписание!', e);
-    //     }
-    // };
+    const handleEditSchedule = async (index) => {
+
+        const editedSchedule = schedules[index];
+
+        try {
+            const response = await axios.patch(`/admin/schedules/${editedSchedule._id}`, editedSchedule);
+
+            if (response.status === 200) {
+
+                const updatedSchedules = schedules.map(schedule =>
+                    schedule._id === editedSchedule._id ? editedSchedule : schedule
+                );
+                setSchedules(updatedSchedules);
+                setMessage(response.data.message);
+            }
+
+        } catch (e) {
+            setMessage('Не удалось обновить расписание!', e);
+        }
+    };
 
     const styles = {
         textFieldColor: {
@@ -163,7 +173,6 @@ export const ScheduleEmployer = ({employerId, employerFullName, schedulesEmploye
         return `${year}-${month}-${day}`;
     }
 
-
     return (
         <div className={s.block}>
 
@@ -183,15 +192,15 @@ export const ScheduleEmployer = ({employerId, employerFullName, schedulesEmploye
                                     sx={selectStyles}
                                     multiple
                                     value={schedule.daysOfWeek}
-                                    onChange={(e) => handleScheduleChange(index, 'daysOfWeek', e.target.value)}
+                                    onChange={(e) => handleSelectChange(index, e)}
                                 >
-                                    <MenuItem style={styles.menuItem} value="1">Понедельник</MenuItem>
-                                    <MenuItem style={styles.menuItem} value="2">Вторник</MenuItem>
-                                    <MenuItem style={styles.menuItem} value="3">Среда</MenuItem>
-                                    <MenuItem style={styles.menuItem} value="4">Четверг</MenuItem>
-                                    <MenuItem style={styles.menuItem} value="5">Пятница</MenuItem>
-                                    <MenuItem style={styles.menuItem} value="6">Суббота</MenuItem>
-                                    <MenuItem style={styles.menuItem} value="7">Воскресенье</MenuItem>
+                                    <MenuItem style={styles.menuItem} value={1}>Понедельник</MenuItem>
+                                    <MenuItem style={styles.menuItem} value={2}>Вторник</MenuItem>
+                                    <MenuItem style={styles.menuItem} value={3}>Среда</MenuItem>
+                                    <MenuItem style={styles.menuItem} value={4}>Четверг</MenuItem>
+                                    <MenuItem style={styles.menuItem} value={5}>Пятница</MenuItem>
+                                    <MenuItem style={styles.menuItem} value={6}>Суббота</MenuItem>
+                                    <MenuItem style={styles.menuItem} value={7}>Воскресенье</MenuItem>
                                 </Select>
                             </FormControl>
 
@@ -251,7 +260,18 @@ export const ScheduleEmployer = ({employerId, employerFullName, schedulesEmploye
                                 disabled={true}
                             />
 
-                            <button className={'adminButton'} onClick={handleSubmit}>Сохранить график работы</button>
+
+                            {
+                                schedule._id ?
+                                    (
+                                        <button className={'adminButton'} onClick={() => handleEditSchedule(index)}>Редактировать
+                                            график
+                                            работы</button>
+                                    ) : (
+                                        <button className={'adminButton'} onClick={handleSubmit}>Сохранить график
+                                            работы</button>
+                                    )
+                            }
                         </div>
                     ))
                 }
