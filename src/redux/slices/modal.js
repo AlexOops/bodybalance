@@ -35,6 +35,9 @@ const initialState = {
         modalOpenService: {
             active: false,
         },
+        modalCalendar:{
+            active: false,
+        }
     }
 
     // active: false,

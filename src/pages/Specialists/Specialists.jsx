@@ -1,5 +1,5 @@
 import s from './Specialists.module.scss'
-import sertificate from '../../assets/sertificate.png'
+import certificate from '../../assets/sertificate.png'
 import {AppointmentForm} from "../../components/AppointmentForm/AppointmentForm";
 import React, {useState, useRef, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
@@ -12,7 +12,7 @@ import {openModal} from "../../redux/slices/modal";
 import {Employer} from "../../components/Employer/Employer";
 import Carousel from "../../components/Carousel/Carousel";
 
-const certificates = [{img: sertificate}, {img: sertificate}, {img: sertificate}, {img: sertificate}, {img: sertificate}]
+const certificates = [{img: certificate}, {img: certificate}, {img: certificate}, {img: certificate}, {img: certificate}]
 
 export const Specialists = () => {
     const dispatch = useDispatch();
@@ -21,7 +21,6 @@ export const Specialists = () => {
     const [card, setCard] = useState({});
     const [certificateUrl, setCertificateUrl] = useState('');
 
-    console.log(employers)
 
     const openFullCard = (employer) => {
         setCard(employer);
@@ -87,7 +86,8 @@ export const Specialists = () => {
 
                                             <Employer
                                                 id={employer._id}
-                                                imageUrl={(employer.avatarUrl) ? `http://localhost:4444${employer.avatarUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                                                imageUrl={(employer.avatarUrl) ? `${process.env.REACT_APP_API_URI}${employer.avatarUrl}` :
+                                                    `${process.env.REACT_APP_API_URI}/uploads/default_service.png`}
                                                 name={employer.fullName}
                                                 profession={employer.employer.profession}
                                                 description={employer.employer.description}
@@ -104,9 +104,10 @@ export const Specialists = () => {
                             {card.employer &&
                                 <Employer isFull={true}
                                           id={card._id}
+
                                           imageUrl={card.avatarUrl ?
-                                              `http://localhost:4444${card.avatarUrl}` :
-                                              'http://localhost:4444/uploads/default_service.png'} name={card.fullName}
+                                              `${process.env.REACT_APP_API_URI}${card.avatarUrl}` :
+                                              `${process.env.REACT_APP_API_URI}/uploads/default_service.png`} name={card.fullName}
                                           profession={card.employer.profession}
                                           description={card.employer.description}
                                           achievements={card.employer.achievements}
@@ -117,7 +118,7 @@ export const Specialists = () => {
                         </Modal>
                         <Modal type={'modalGallery'}>
                             <div className={s.modalGallery}>
-                                <img src={`http://localhost:4444${certificateUrl}`} alt="сертификат"/>
+                                <img src={certificateUrl ? `${process.env.REACT_APP_API_URI}${certificateUrl}`: ""} alt="сертификат"/>
                             </div>
                         </Modal>
                     </div>
@@ -128,6 +129,7 @@ export const Specialists = () => {
                                  name={'Быстрая запись к специалисту'}
                                  services={services.items}
                                  employers={employers.items}
+                                 source_name={'specialists'}
                 />
             </div>
             <div className="container-color">

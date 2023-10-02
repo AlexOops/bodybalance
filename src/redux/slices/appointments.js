@@ -10,7 +10,7 @@ export const fetchAppointments = createAsyncThunk('appointments/fetchAppointment
 export const fetchAppointmentsByEmployer = createAsyncThunk('appointments/fetchAppointmentsByEmployer', async (params) => {
    const {data} = await axios.get('/appointments/employer/' + params);
    let indApp = {};
-   data.map(el => {
+   data.forEach(el => {
        let dateTime = new Date(el.dateTime)
        let day = (dateTime).toLocaleDateString('ru-Ru')
        let time = (dateTime).toLocaleTimeString('ru-Ru');
