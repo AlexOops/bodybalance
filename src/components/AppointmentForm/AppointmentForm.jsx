@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import s from './AppointmentForm.module.scss';
 import {Form, Formik, Field} from 'formik';
 
-import {CalendarPicker} from "./DataPicker/CalendarPicker";
 import * as Yup from 'yup';
 import {useDispatch, useSelector} from "react-redux";
 import {selectedService, setSelectedService} from "../../redux/slices/services";
@@ -12,42 +11,46 @@ import Modal from "../Modal/Modal";
 import {openModal} from "../../redux/slices/modal";
 import {selectedEmployer, setSelectedEmployer} from "../../redux/slices/employers";
 import EmployerIdInput from "./EmployerIdInput";
-import {nanoid} from "nanoid";
+import Phone from "./Phone";
 
-const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
 const SignupSchema = Yup.object().shape({
-    firstName: Yup.string()
-        .min(3, 'Не менее трех символов')
-        // .max(50, 'Too Long!')
-        .required('Укажите имя'),
-    secondName: Yup.string()
-        .min(3, 'Не менее трех символов')
-        // .max(50, 'Too Long!')
-        .required('Укажите фамилию'),
-    email: Yup.string().email('Некорректный email').required('Введите e-mail'),
-    phone: Yup.string().required('Укажите контактный номер').matches(phoneRegExp, 'Некорректный номер телефона'),
-    text: Yup.string().max(500, 'Пожалуйста, введите сообщение не более 500 символов'),
-    datetime: Yup.string().required('Выберите дату и время'),
-    serviceId: Yup.string().required('Выберите Услугу'),
+        firstName: Yup.string()
+            .min(3, 'Не менее трех символов')
+            // .max(50, 'Too Long!')
+            .required('Укажите имя'),
+        secondName: Yup.string()
+            .min(3, 'Не менее трех символов')
+            // .max(50, 'Too Long!')
+            .required('Укажите фамилию'),
+        email: Yup.string().email('Некорректный email').required('Введите e-mail'),
+        phone: Yup.string().required('Укажите контактный номер'),
+        text: Yup.string().max(500, 'Пожалуйста, введите сообщение не более 500 символов'),
+        // serviceId: Yup.string().required('Выберите Услугу'),
+        // Делаем поле обязательным на фронте для страницы услуги или специалисты соответственно
+        serviceId: Yup.string().when("employer", {
+            is: employer => employer === undefined,
+            then: () => Yup.string().required("Выберите услугу"),
+            // otherwise: Yup.string()
+        }),
+        employer: Yup.string().when("serviceId", {
+            is: serviceId => serviceId === undefined,
+            then: () => Yup.string().required("Выберите специалиста"),
+            // otherwise: ()=>Yup.string()
+        })
 
-});
+    },
+    [["serviceId", "employer"]]
+);
 
 export const AppointmentForm = ({
-                                    services, name, isSpecialist, employers
+                                    services, name, isSpecialist, employers, source_name
                                     // isSubmitting, errors, values, setFieldValue, touched
                                 }) => {
 
     const selected = useSelector(selectedService);
     const selectedSpecialist = useSelector(selectedEmployer);
     const {data: authUser} = useSelector(state => state.auth); //получим id авторизованного покупателя
-    const [workDates, setWorkDates] = useState([]); // храним полученые рабочие даты специалиста.
-
-
-    //  const [value, setValue] = useState(dayjs('2023-05-28T08:00:00.000+00:00')); //пример работы day.js
-    // console.log(value);
-
-    const [workTimes, setWorkTimes] = useState([]); //список доступного времени
-    const [workDate, setWorkDate] = useState(''); // дата выбранная пикером
 
     const [isOpen, setOpen] = useState(false);//Развернуть селект
     const dispatch = useDispatch();
@@ -56,69 +59,34 @@ export const AppointmentForm = ({
         setOpen((prevOpen) => !prevOpen);
     };
 
-    const onClickItem = (e, id, name, employer) => {
+    const onClickItem = (e, id, name) => {
         setOpen(false);
-        if (!isSpecialist) {
-            dispatch(setSelectedService({name: name, id: id}));
-            (employer) ? dispatch(setSelectedEmployer({
-                name: employer.fullName,
-                id: employer._id
-            })) : console.log("Нет данных сотрудника по услуге");
+        if (isSpecialist) {
+            dispatch(setSelectedEmployer({name: name, id: id})); //поместим выбранного специалиста в стейт
         } else {
-            dispatch(setSelectedEmployer({name: name, id: id})); //поместим выбранную услугу в стейт
+            dispatch(setSelectedService({name: name, id: id})); //поместим выбранную услугу в стейт
         }
-        console.log('selectedSpecialist', selectedSpecialist);
     };
 
 
     useEffect(() => {
-        setWorkDate('');
-        setWorkTimes([]);
-        const fetchDataByEmployer = async () => {
-            try {
-
-                console.log(selectedSpecialist.id)
-                await axios.get(`/worktime/employer/${selectedSpecialist.id}`)
-                    .then(res => {
-                        setWorkDates(res.data);
-                    });
-            } catch (err) {
-                console.log(err)
-            }
-        }
-        if (selectedSpecialist.id !== null) {
-            fetchDataByEmployer().then();
-        }
-    }, [selectedSpecialist.id]);
-
-    //получим все рабочие даты в массив
-    // const workDatesArr = workDates.map((obj) => obj.date);
-
-    const getWorkTimes = (date) => { //отобразим список времени приема для даты.
-        if (date) {
-            const arrData = workDates.filter((obj) => {
-                return (obj.slice(0, 10) === date.format('YYYY-MM-DD'))
-            });
-            setWorkDate(date.format('YYYY-MM-DD'));
-            setWorkTimes(arrData.map(obj => obj.slice(11, 16)))
-        } else {
-            console.log('Дата не выбрана');
-        }
-    };
+        dispatch(setSelectedEmployer({name: null, id: null}))
+        dispatch(setSelectedService({name: null, id: null}))
+    }, [])
 
     return (
         <Formik
             validateOnBlur={false}
             // enableReinitialize
             initialValues={{
-                // serviceId: (selected !== null) ? selected.id : '',
-                serviceId: isSpecialist ? '64480825e556a337db3fb841' : '',
-                employer: '6447fcd874f077e18de6dfa1', //сотрудник принимающий по записи на прием.
+                //Услуга приема специалиста по умолчанию (для заявки на прием к специалисту, уточнение услуги не критично)
+                title: '',
+                serviceId: '',
+                employer: '', //сотрудник принимающий по записи на прием.
                 firstName: '',
                 secondName: '',
                 email: '',
                 phone: '',
-                datetime: '',
                 text: '',
                 // picked: '',
             }}
@@ -132,10 +100,25 @@ export const AppointmentForm = ({
                         secondName: values.secondName,
                         email: values.email,
                         phone: values.phone,
-                        service: values.serviceId,
-                        employer: values.employer, // (по умолчанию) если сотрудников одной услуги несколько, то нужно будет отображать их в форме// идея хранить в базе сотрудника у услуги.
-                        dateTime: values.datetime,
+                        // service: values.serviceId,
+                        // employer: values.employer,
+                        //источник обращения
+                        source_name: source_name,
                     };
+                    switch (source_name) {
+                        case 'services':
+                            postData.service = values.serviceId
+                            break
+                        case 'specialists':
+                            postData.employer = values.employer
+                            break
+                        case 'rehabilitation':
+                            postData.onlineRehabilitation = values.serviceId
+                            break
+                        default:
+                            console.log('Источник не определен')
+                    }
+
                     if (authUser) {
                         postData = {...postData, customer: authUser._id};
                     }
@@ -156,7 +139,7 @@ export const AppointmentForm = ({
                 }
             }}
         >
-            {({isSubmitting, values, errors, touched, setFieldValue, resetForm, setSubmitting}) => {
+            {({isSubmitting, values, errors, touched, setFieldValue, resetForm, setSubmitting, setValues}) => {
 
                 return (
 
@@ -174,56 +157,57 @@ export const AppointmentForm = ({
                                                 ((selectedSpecialist.name === null) ? 'Выберите специалиста' : selectedSpecialist.name)
                                             }
                                         </div>
+                                        {
+                                            // !isSpecialist
+                                            (source_name === 'services' || source_name === 'rehabilitation')
+                                                ?
+                                                <>
+                                                    <ServiceIdInput setFieldValue={setFieldValue}/>
+                                                    {(errors.serviceId && touched.serviceId) &&
+                                                        <div className={s.error}>{errors.serviceId}</div>}
+                                                    {/*Сервисы*/}
+                                                    <div
+                                                        className={isOpen ? s.selectContainer : `${s.selectContainer} ${s.closeContainer}`}>
+                                                        {services.map((service, key) =>
+                                                            <div key={`emp_${key}_${service._id}`}
+                                                                // className={s.selectInput}
+                                                                 className={`${s.selectLabel} ${service._id === selected.id ? s.active : ''}`}
+                                                                // data-index={service._id}
+                                                                 onClick={(e) => {
+                                                                     setFieldValue('serviceId', service._id);
+                                                                     onClickItem(e, service._id, service.name);
+                                                                 }}
+                                                            >
+                                                                {service.name}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </>
+                                                :
+                                                <>
+                                                    <EmployerIdInput setFieldValue={setFieldValue}/>
+                                                    {(errors.employer && touched.employer) &&
+                                                        <div className={s.error}>{errors.employer}</div>}
 
-                                        {!isSpecialist ?
-                                            <>
-                                                <ServiceIdInput setFieldValue={setFieldValue}/>
-                                                {(errors.serviceId && touched.serviceId) &&
-                                                    <div className={s.error}>{errors.serviceId}</div>}
+                                                    <div
+                                                        className={isOpen ? s.selectContainer : `${s.selectContainer} ${s.closeContainer}`}>
 
-
-                                                <div
-                                                    className={isOpen ? s.selectContainer : `${s.selectContainer} ${s.closeContainer}`}>
-
-                                                    {services.map((service, key) =>
-                                                        <div key={`emp_${key}_${service._id}`}
-                                                            // className={s.selectInput}
-                                                             className={`${s.selectLabel} ${service._id === selected.id ? s.active : ''}`}
-                                                            // data-index={service._id}
-                                                             onClick={(e) => {
-                                                                 setFieldValue('serviceId', service.id);
-                                                                 onClickItem(e, service.id, service.name, service.employer);
-                                                             }}
-                                                        >
-                                                            {service.name}
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </> :
-                                            <>
-                                                <EmployerIdInput setFieldValue={setFieldValue}/>
-                                                {(errors.employer && touched.employer) &&
-                                                    <div className={s.error}>{errors.employer}</div>}
-
-
-                                                <div
-                                                    className={isOpen ? s.selectContainer : `${s.selectContainer} ${s.closeContainer}`}>
-
-                                                    {employers.map((employer, key) =>
-                                                        <div key={`${key}_${employer._id}`}
-                                                            // className={s.selectInput}
-                                                             className={`${s.selectLabel} ${employer._id === selectedSpecialist._id ? s.active : ''}`}
-                                                            // data-index={service._id}
-                                                             onClick={(e) => {
-                                                                 setFieldValue('employer', employer._id);
-                                                                 onClickItem(e, employer._id, employer.fullName + " - " + employer.employer && employer.employer.profession);
-                                                             }}
-                                                        >
-                                                            {employer.fullName} - {employer.employer && employer.employer.profession}
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </>
+                                                        {employers.map((employer, key) =>
+                                                            <div key={`${key}_${employer._id}`}
+                                                                // className={s.selectInput}
+                                                                 className={`${s.selectLabel} ${employer._id === selectedSpecialist._id ? s.active : ''}`}
+                                                                // data-index={service._id}
+                                                                 onClick={(e) => {
+                                                                     setFieldValue('employer', employer._id);
+                                                                     onClickItem(e, employer._id,
+                                                                         employer.fullName + " - " + employer.employer.profession);
+                                                                 }}
+                                                            >
+                                                                {employer.fullName} - {employer.employer && employer.employer.profession}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </>
                                         }
 
                                     </div>
@@ -251,8 +235,7 @@ export const AppointmentForm = ({
                                             <div className={s.error}>{errors.email}</div>}
                                     </div>
                                     <div className={`${s.flexRelative} ${s.width50}`}>
-                                        <Field type="text" name="phone" id="phone" placeholder="+7 (999) 999-99-99"
-                                               className={`${s.textField} `}/>
+                                        <Field name="phone" component={Phone}/>
                                         {(errors.phone && touched.phone) &&
                                             <div className={s.error}>{errors.phone}</div>}
                                     </div>
@@ -264,31 +247,7 @@ export const AppointmentForm = ({
                                     {(errors.text && touched.text) && <div className={s.error}>{errors.text}</div>}
                                 </div>
 
-                                {/*Календарь*/}
-                                <CalendarPicker id="datetime"
-                                                selected={workDate}
 
-                                    // workDatesArr={workDatesArr}
-                                                workDatesArr={workDates.map(el => el.slice(0, 10))}
-                                                getWorkTimes={getWorkTimes}
-                                                placeholderText={'Дата и время приема'}/>
-                                {/*Часы приема*/}
-                                <div className={(!workTimes || (workTimes.length === 0)) ? s.hidden : s.time}>
-                                    <h3 className={s.timeTittle}>Доступное время</h3>
-                                    <Field
-                                        component="select"
-                                        id="time"
-                                        name="datetime"
-
-                                    > {workTimes.map((time) =>
-                                        <option key={nanoid()} value={`${workDate}T${time}:00`}>{time}</option>
-                                    )}
-                                    </Field>
-                                </div>
-                                <div className={s.flexRelative}>
-                                    {(errors.datetime && touched.datetime) &&
-                                        <div className={s.error}>{errors.datetime}</div>}
-                                </div>
                                 <div className={s.flexSBetween}>
                                     <button type='button' className={s.clearButton} onClick={() => {
                                         resetForm();
@@ -298,8 +257,8 @@ export const AppointmentForm = ({
                                     </button>
                                 </div>
                                 <Modal type={'modalMessage'}>
-                                    <div className={s.feedback}>{values.firstName} {values.secondName}, Вы записаны на
-                                        прием на {values.datetime.replace('T', ' ')} <br/>
+                                    <div className={s.feedback}>{values.firstName} {values.secondName}, Ваша заявка
+                                        отправлена <br/>
                                         Ожидайте телефонного звонка в ближайшее время для подтверждения записи
                                     </div>
                                 </Modal>
