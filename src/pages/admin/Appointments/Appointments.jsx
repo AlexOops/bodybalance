@@ -90,7 +90,7 @@ export const Appointments = () => {
                                 <option value="Прием состоялся" className={s.completedOption}>Прием состоялся</option>
                                 <option value="Прием не состоялся" className={s.canceledOption}>Прием не состоялся</option>
                             </select>
-                            <div className={s.cell}>{obj.customer.fullName || 'не авторизован'}</div>
+                            <div className={s.cell}>{obj.customer?.fullName || 'не авторизован'}</div>
                             <div
                                 className={`${s.cell} ${s.endCell}`}>{new Date(obj.createdAt).toLocaleString('ru-RU')}</div>
 

@@ -1,23 +1,14 @@
-// Замена, апгрейд в будущем
-
-.message {
-  color: red;
-  padding: 20px 30px;
-}
-
-.block {
-padding: 40px;
-}
-
-.title {
-  padding-bottom: 20px;
-}
-
-.formCreateService {
+.videoBlock {
   display: flex;
   flex-direction: column;
 }
 
+.formCreateVideo {
+  display: flex;
+  flex-direction: column;
+}
+
+// вынести
 .input {
   outline: none;
   font-size: 20px;
@@ -33,6 +24,7 @@ padding: 40px;
   }
 }
 
+// вынести
 .textarea {
   outline: none;
   font-size: 20px;

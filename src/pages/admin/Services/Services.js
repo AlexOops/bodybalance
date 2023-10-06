@@ -36,7 +36,8 @@ export const Services = () => {
         dispatch(openModal('modalOpenService'));
     }
 
-    const handleSubmitToRemove = async (id) => {
+    const handleSubmitToRemove = async (e, id) => {
+        e.stopPropagation();
 
         const response = await axios.delete(`/admin/services/removeService/${id}`);
 
@@ -75,7 +76,7 @@ export const Services = () => {
                             <div className={s.card} key={idx} onClick={(e) => handleOpenService(e, service)}>
 
                                 <div className="remove"
-                                     onClick={() => handleSubmitToRemove(service._id)}>
+                                     onClick={(e) => handleSubmitToRemove(e, service._id)}>
                                 </div>
 
                                 <CustomAvatar avatarUrl={service.imageUrl}

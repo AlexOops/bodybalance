@@ -73,12 +73,10 @@ export const Service = ({service, handleUpdatedServices}) => {
                         {
                             isEditing ?
                                 (
-                                    <div>
-                                        <div className={s.card}>
-                                            <EditService data={serviceData} setData={setServiceData}
-                                                         onSave={handleSaveClick}
-                                                         onCancel={handleCancelClick}/>
-                                        </div>
+                                    <div className={s.card}>
+                                        <EditService data={serviceData} setData={setServiceData}
+                                                     onSave={handleSaveClick}
+                                                     onCancel={handleCancelClick}/>
                                     </div>
 
                                 ) : (

@@ -40,7 +40,7 @@ export const Customers = () => {
     }
 
     const videoCatalogForPatient = (videoCatalog, selectedPatient) => {
-        return videoCatalog.items.find((catalog) => catalog._id === selectedPatient.catalogVideoId);
+        return videoCatalog.items?.find((catalog) => catalog._id === selectedPatient.catalogVideoId);
     };
 
     //ПРЕОБРАЗУЕМ ДАТУ
@@ -139,7 +139,7 @@ export const Customers = () => {
 
                 {isCustomersLoading ? 'Загрузка списка пациентов ...'
 
-                    : customers.items.filter((customer) =>
+                    : customers.items?.filter((customer) =>
                         customer.fullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
                         customer.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
                         customer.customerData.some((data) =>
