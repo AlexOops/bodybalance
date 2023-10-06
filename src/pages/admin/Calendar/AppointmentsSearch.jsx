@@ -156,7 +156,7 @@ export const AppointmentsSearch = () => {
                                     className={s.cell}>{obj.service?.name || obj.onlineRehabilitation?.name || 'Услуга не указана'}</div>
                                 <div className={s.cell}>{obj.employer?.fullName || 'Специалист не указан'}</div>
                                 <div className={s.cell}>{obj.status}</div>
-                                <div className={s.cell}>{obj.customer.fullName || 'не авторизован'}</div>
+                                <div className={s.cell}>{obj.customer?.fullName || 'не авторизован'}</div>
                                 <div
                                     className={`${s.cell} ${s.endCell}`}>{new Date(obj.createdAt).toLocaleString('ru-RU')}</div>
                             </div>

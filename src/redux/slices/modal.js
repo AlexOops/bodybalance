@@ -35,8 +35,14 @@ const initialState = {
         modalOpenService: {
             active: false,
         },
-        modalCalendar:{
+        modalCalendar: {
             active: false,
+        },
+        modalNewCatalog: {
+            active: false
+        },
+        modalOpenCatalog: {
+            active: false
         }
     }
 
@@ -47,7 +53,7 @@ const initialState = {
 const modalSlice = createSlice({
     name: 'modal',
     initialState,
-    reducers:{
+    reducers: {
         openModal: (state, action) => {
             state.modals[action.payload].active = true;
         },
@@ -59,8 +65,7 @@ const modalSlice = createSlice({
             state.active = action.payload;
         }
     },
-    extraReducers: {
-    }
+    extraReducers: {}
 });
 
 export const getModalByType = type => (state) => state.modal.modals[type].active;

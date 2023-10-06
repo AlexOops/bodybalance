@@ -80,7 +80,7 @@ export const Consultations = () => {
             <div className={s.consultations}>
 
                 {
-                    consultations.items.map((item, idx) =>
+                    consultations.items?.map((item, idx) =>
                         <div className={s.consultation} key={idx}>
                             <div className={s.consultationItem}>{getTopicName(item.topic)}</div>
                             <div className={s.consultationItem}>{item.clientName}</div>

@@ -8,6 +8,7 @@ import {Registration} from "./pages/Registration/Registration";
 import {Specialists} from "./pages/Specialists/Specialists";
 import {OnlineRehabilitation} from "./pages/OnlineRehabilitation/OnlineRehabilitation";
 import {ErrorPage} from "./pages/404/ErrorPage";
+import {ResetPassword} from "./pages/ResetPassword/ResetPassword";
 
 //admin
 import {Admin} from "./pages/admin/Admin";
@@ -16,16 +17,15 @@ import {Customers} from "./pages/admin/Customers/Customers";
 import {Specialists as SpecialistsAdmin} from "./pages/admin/Specialists/Specialists";
 import {Services as ServicesAdmin} from "./pages/admin/Services/Services";
 import {Appointments} from "./pages/admin/Appointments/Appointments";
+import Calendar from "./pages/admin/Calendar/Calendar";
+import {Training as AdminTraining} from "./pages/admin/Training/Training";
+import {AdminMain} from "./pages/admin/AdminMain/AdminMain";
 
 //profile
 import {ProfileMain} from "./pages/Profile/ProfileMain/ProfileMain";
 import {ProfileLayout} from "./pages/Profile/ProfileLayout";
 import {Appointments as ProfileAppointments} from "./pages/Profile/Appointments/Appointments";
 import {Training as ProfileTraining} from "./pages/Profile/Training/Training";
-import {TrainingVideo} from "./pages/Profile/Training/TrainingVideo/TrainingVideo";
-import {AdminMain} from "./pages/admin/AdminMain/AdminMain";
-import {ResetPassword} from "./pages/ResetPassword/ResetPassword";
-import Calendar from "./pages/admin/Calendar/Calendar";
 
 export const router = createBrowserRouter([
     {
@@ -96,6 +96,10 @@ export const router = createBrowserRouter([
                 path: "/admin/calendar",
                 element: <Calendar/>,
             },
+            {
+                path: "/admin/training",
+                element: <AdminTraining/>,
+            },
         ]
     },
     {
@@ -114,10 +118,6 @@ export const router = createBrowserRouter([
             {
                 path: "/profile/training",
                 element: <ProfileTraining/>
-            },
-            {
-                path: "/profile/training/:id",
-                element: <TrainingVideo/>,
             },
         ]
     },

@@ -14,7 +14,7 @@ export const Select = ({ selectedOption, setSelectedOption }) => {
         dispatch(fetchConsultationTopics());
     }, [dispatch]);
 
-    const selectOptions = consultationTopics.items.map((topic) => ({
+    const selectOptions = consultationTopics.items?.map((topic) => ({
         label: topic.name,
         value: topic._id
     }));

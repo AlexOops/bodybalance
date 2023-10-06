@@ -1,0 +1,49 @@
+.container {
+  padding: 60px;
+}
+
+.avatar {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+}
+
+.videoCatalog {
+  display: flex;
+  align-items: start;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+  max-width: 500px;
+}
+
+.createVideo {
+  padding-left: 50px;
+}
+
+.videos {
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.video {
+  display: flex;
+
+  border: 1px solid #D78DFF;
+  border-radius: 40px;
+
+  position: relative;
+}
+
+.videoItem {
+  max-width: 150px;
+  overflow-y: auto;
+
+  &:not(:last-child) {
+    border-right: 1px solid #D78DFF;
+  }
+}

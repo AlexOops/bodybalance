@@ -47,13 +47,11 @@ export const Patient = ({patientCard, customer, employer, catalogVideo}) => {
     const handleSubmit = async () => {
 
         try {
-            const response = await axios.patch(`/admin/customers/${patientCard._id}`, {
+            await axios.patch(`/admin/customers/${patientCard._id}`, {
                 employerId: selectedEmployer?.value,
                 catalogVideoId: selectedVideoCatalog?.value,
                 recommendations: selectedRecommendations
             })
-
-            console.log(response.data)
 
         } catch (e) {
             console.log(e, "Ошибка ввода данных!")
@@ -97,7 +95,6 @@ export const Patient = ({patientCard, customer, employer, catalogVideo}) => {
             {label}
         </div>
     );
-    console.log(customer)
 
     return (
         <>
@@ -107,11 +104,11 @@ export const Patient = ({patientCard, customer, employer, catalogVideo}) => {
                 <div className={s.healthIdName}>{customer.fullName}</div>
                 <div className={s.healthIdEmail}><span>Почта: </span>{customer.email}</div>
 
-               {customer.customerData.map(customer =>
-                <>
-                    <div className={s.healthIdPhone}><span>Номер телефона: </span> {customer.phone}</div>
-                    <div className={s.healthIdBirth}><span>Дата рождения: </span>{customer.dateOfBirth}</div>
-                </>)}
+                {customer.customerData.map(customer =>
+                    <>
+                        <div className={s.healthIdPhone}><span>Номер телефона: </span> {customer.phone}</div>
+                        <div className={s.healthIdBirth}><span>Дата рождения: </span>{customer.dateOfBirth}</div>
+                    </>)}
 
                 <div className={s.healthIdWrp}>
 
@@ -137,7 +134,7 @@ export const Patient = ({patientCard, customer, employer, catalogVideo}) => {
                         components={{
                             Option: customOptionComponent,
                         }}
-                        options={videoCatalog.items.map(catalog => ({
+                        options={videoCatalog.items?.map(catalog => ({
                             value: catalog._id,
                             label: catalog.name
                         }))}

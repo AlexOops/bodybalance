@@ -30,7 +30,9 @@ export const Specialists = () => {
     }
 
     // УДАЛЕНИЕ СПЕЦИАЛИСТА
-    const handleSubmitToRemove = async (id) => {
+    const handleSubmitToRemove = async (e, id) => {
+        e.stopPropagation();
+
         const response = await axios.delete(`/admin/specialists/removeEmployer/${id}`);
 
         if (response.data.success) {
@@ -79,7 +81,7 @@ export const Specialists = () => {
                             <div className={s.card} key={idx} onClick={(e) => handleOpenEmployer(e, employer)}>
 
                                 <div className="remove"
-                                     onClick={() => handleSubmitToRemove(employer._id)}>
+                                     onClick={(e) => handleSubmitToRemove(e, employer._id)}>
                                 </div>
 
                                 <CustomAvatar avatarUrl={employer.avatarUrl && employer.avatarUrl} fullName={employer.fullName} size={'100px'}/>

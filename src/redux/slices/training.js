@@ -8,37 +8,37 @@ export const fetchTraining = createAsyncThunk('/training/fetchTraining', async (
     }
 })
 
-export const fetchVideos = createAsyncThunk('/training/fetchVideos', async (id) => {
-    const {data} = await axios.get(`/training/${id}`);
-    if (Array.isArray(data) && data.length > 0) {
-        return data;
-    }
-})
+// export const fetchVideos = createAsyncThunk('/training/fetchVideos', async (id) => {
+//     const {data} = await axios.get(`/training/${id}`);
+//     if (Array.isArray(data) && data.length > 0) {
+//         return data;
+//     }
+// })
 
 const initialState = {
     training: {
         items: [],
-        name: '',
-        description: '',
+        // name: '',
+        // description: '',
         status: 'loading'
     },
-
-    videos: {
-        items: [],
-        status: 'loading'
-    }
+    //
+    // videos: {
+    //     items: [],
+    //     status: 'loading'
+    // }
 }
 
 const trainingSlice = createSlice({
     name: 'training',
     initialState,
     reducers: {
-        setName: (state, action) => {
-            state.training.name = action.payload
-        },
-        setDescription: (state, action) => {
-            state.training.description = action.payload
-        }
+        // setName: (state, action) => {
+        //     state.training.name = action.payload
+        // },
+        // setDescription: (state, action) => {
+        //     state.training.description = action.payload
+        // }
     },
     extraReducers: {
         [fetchTraining.pending]: (state) => {
@@ -52,22 +52,9 @@ const trainingSlice = createSlice({
         [fetchTraining.rejected]: (state) => {
             state.training.items = [];
             state.training.status = 'error';
-        },
-
-        [fetchVideos.pending]: (state) => {
-            state.videos.items = [];
-            state.videos.status = 'loading';
-        },
-        [fetchVideos.fulfilled]: (state, action) => {
-            state.videos.items = action.payload;
-            state.videos.status = 'loaded';
-        },
-        [fetchVideos.rejected]: (state) => {
-            state.videos.items = [];
-            state.videos.status = 'error';
-        },
+        }
     }
 });
 
-export const {setName, setDescription} = trainingSlice.actions;
+// export const {setName, setDescription} = trainingSlice.actions;
 export const trainingReducer = trainingSlice.reducer;

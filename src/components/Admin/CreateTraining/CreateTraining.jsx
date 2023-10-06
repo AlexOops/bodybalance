@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
-import s from './CreateService.module.scss';
 import {useDispatch} from "react-redux";
-import {fetchServices} from "../../../redux/slices/services";
+import {fetchTraining} from "../../../redux/slices/training";
 import axios from "../../../axios";
+import s from "./CreateTraining.module.scss";
 
-export const CreateService = () => {
+export const CreateTraining = () => {
 
     const dispatch = useDispatch();
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [recommendations, setRecommendations] = useState('');
+    const [category, setCategory] = useState('');
 
     // проброс наверх ?????
     const [message, setMessage] = useState('');
@@ -20,9 +20,9 @@ export const CreateService = () => {
         // Сбрасываем поля после успешного создания
         setName('');
         setDescription('');
-        setRecommendations('');
+        setCategory('');
 
-        dispatch(fetchServices());
+        dispatch(fetchTraining());
 
         setTimeout(() => {
             setMessage('');
@@ -32,18 +32,18 @@ export const CreateService = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const newService = {
+        const newCatalog = {
             name,
             description,
-            recommendations
+            category
         }
 
         try {
-            const response = await axios.post('/admin/services/newService', newService);
+            const response = await axios.post('/admin/training/newCatalog', newCatalog);
 
             handleSuccessMessage(response.data.message);
         } catch (e) {
-            console.log("Ошибка создания сотрудника", e);
+            console.log("Ошибка создания видеокаталога", e);
             throw e;
         }
     }
@@ -52,34 +52,37 @@ export const CreateService = () => {
         <>
             {
                 message ?
+
                     <div className={s.message}>
                         {message}
                     </div>
+
                     :
+
                     <div className={s.block}>
 
-                        <h3 className={s.title}>Создание новой услуги</h3>
+                        <h3 className={s.title}>Создание новой видеокаталога</h3>
 
-                        <form className={s.formCreateService} onSubmit={handleSubmit}>
+                        <form className={s.formCreateCatalog} onSubmit={handleSubmit}>
 
                             <input className={s.input}
                                    type="text"
-                                   placeholder={'Название услуги'}
+                                   placeholder={'Название каталога'}
                                    value={name}
                                    onChange={(e) => setName(e.target.value)}/>
 
                             <textarea className={s.textarea}
-                                      placeholder={'Описание услуги'}
+                                      placeholder={'Описание каталога'}
                                       value={description}
                                       onChange={(e) => setDescription(e.target.value)}/>
 
-                            <textarea className={s.textarea}
-                                      placeholder={'Рекомендации '}
-                                      value={recommendations}
-                                      onChange={(e) => setRecommendations(e.target.value)}/>
+                            <input className={s.input}
+                                   type="text"
+                                   placeholder={'Категория'}
+                                   value={category}
+                                   onChange={(e) => setCategory(e.target.value)}/>
 
-
-                            <button type={"submit"} className={'adminButton'}>Добавить услугу</button>
+                            <button type={"submit"} className={'adminButton'}>Добавить видеокаталог</button>
 
                         </form>
                     </div>
