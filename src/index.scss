@@ -126,6 +126,10 @@ a {
   border-radius: 50%;
   z-index: -1;
 }
+.flexRelative {
+  position: relative;
+  display: flex;
+}
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
