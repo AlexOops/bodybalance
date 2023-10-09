@@ -132,12 +132,24 @@ export const Registration = () => {
                     <Input className={stylesLogin.field}
                            error={Boolean(errors.password?.message)} //подсвечиваем красным если true
                            type="password"
-                           {...register('password', {required: 'Укажите пароль'})}
+                           {...register('password', {
+                               required: 'Укажите пароль',
+                               minLength: {
+                                   value: 8,
+                                   message: 'Пароль должен содержать не менее 8 символов'
+                               },
+                               validate: (str) =>
+                                       [/[a-z]/, /[A-Z]/, /[0-9]/, /[^a-zA-Z0-9]/].every((pattern) =>
+                                           pattern.test(str)
+                                   )|| 'Пароль должен содержать буквы разных регистров, цифры и спецсимволы',
+                           })}
                            placeholder='Введите пароль'
                            fullWidth
                            disableUnderline={true}
                     />
                     {errors.password && errors.password.type === "required" && <div className={stylesLogin.error}>{errors.password.message}</div>}
+                    {errors.password && errors.password.type === "minLength" && <div className={stylesLogin.error}>{errors.password.message}</div>}
+                    {errors.password && errors.password.type === "validate" && <div className={stylesLogin.error}>{errors.password.message}</div>}
                 </div>
                 <div className={stylesLogin.fieldRow}>
                     <Input className={stylesLogin.field}
