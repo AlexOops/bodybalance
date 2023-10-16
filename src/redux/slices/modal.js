@@ -47,8 +47,10 @@ const initialState = {
         modalRemoveUser: {
             active: false
         },
+        modalNewEvent: {
+            active: false
+        }
     }
-
     // active: false,
     // body: null // Компонент внутрь модального окна
 };

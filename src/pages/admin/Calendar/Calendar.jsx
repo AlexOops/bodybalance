@@ -18,6 +18,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import axios from "../../../axios";
+import {fetchEventsByEmployer} from "../../../redux/slices/appointments";
 
 
 const events = [
@@ -67,19 +69,35 @@ const Calendar = () => {
     const dispatch = useDispatch();
     const {employers} = useSelector(state => state.employers)
     const {schedules} = useSelector(state => state.schedules);
+    const events = useSelector(state => state.appointments.events);
     const [bgEvents, setBgEvents] = useState([]);
 
     const handleDateClick = (clickInfo) => {
         dispatch(openModal('modalCalendar'))
         console.log(clickInfo)
     }
+    const handleSelectEmployer = (emp) => {
+        setSelectEmployer(emp._id) // для событий сотрудника
+        setSelectUserId(emp.userId) // для расписания
+    }
 
     const [selectEmployer, setSelectEmployer] = useState("");
+    const [selectUserId, setSelectUserId] = useState("");
+
 
     useEffect(() => {
         dispatch(fetchEmployers())
         dispatch(fetchSchedules())
+        // async function fetchData() {
+        //     const result = await axios(
+        //         '/events',
+        //     );
+        //     setEvents(result)
+        // }
+        // fetchData();
     }, [])
+
+
 
     //выбрать календарь первого сотрудника при загрузке
     useEffect(() => {
@@ -88,8 +106,9 @@ const Calendar = () => {
     }, [employers])
 
     useEffect(()=>{
-        getEmpEvents(selectEmployer)
-    }, [selectEmployer])
+        getEmpEvents(selectEmployer);
+        dispatch(fetchEventsByEmployer(selectUserId))
+    }, [selectEmployer, selectUserId])
 
    //Можно сделать через UseEffect при изменении selectEmployer
     const getEmpEvents = (emp_id) => {
@@ -103,14 +122,14 @@ const Calendar = () => {
    }
 
     return (
-        <div>{console.log(555, schedules, employers, selectEmployer)}
+        <div>
             <h1 className={s.title}>Календарь</h1>
-            <p>Выбрать календарь сотрудника</p>
+            <p>Выбрать календарь сотрудника</p>{console.log(events, selectUserId)}
 
             {employers.items.map(emp => <Box key={'cal' + emp._id}
                                              sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
                 <nav aria-label="main mailbox folders">
-                    <List onClick={()=>setSelectEmployer(emp.employer._id)}>
+                    <List onClick={()=>handleSelectEmployer(emp.employer)}>
                         <ListItem disablePadding>
                             <ListItemButton selected={selectEmployer === emp.employer._id}>
                                 <ListItemIcon>

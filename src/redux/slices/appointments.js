@@ -16,7 +16,6 @@ export const fetchAppointmentsByEmployer = createAsyncThunk('appointments/fetchA
        let time = (dateTime).toLocaleTimeString('ru-Ru');
        let timeEl = {[time]: el}
        indApp[day] = timeEl;
-
    });
 
        // .catch((err)=> console.log(err)).then(res => {
@@ -33,12 +32,23 @@ export const fetchAppointmentsByEmployer = createAsyncThunk('appointments/fetchA
 });
 
 
+// получить события календаря по сотруднику
+export const fetchEventsByEmployer = createAsyncThunk('appointments/fetchEventsByEmployer', async (params) => {
+    const {data} = await axios.get('/events/employer/' + params);
+    return {data: data, emp_id: params};
+});
+
+
 const initialState = {
     appointments: {
       indAppointments : {},
       items: [],
       status: 'loading',
     },
+    events: {
+        status: 'loading',
+        items: {}// { id1: [], id2: [] }
+    }
 };
 
 const appointmentsSlice = createSlice({
@@ -72,6 +82,19 @@ const appointmentsSlice = createSlice({
         [fetchAppointmentsByEmployer.rejected]: (state) => {
             state.appointments.items = [];
             state.appointments.status = 'error';
+        },
+        //события по сотруднику
+        [fetchEventsByEmployer.pending]: (state) => {
+            state.events.items = [];
+            state.events.status = 'loading';
+        },
+        [fetchEventsByEmployer.fulfilled]: (state, action) => {
+            state.events.items[action.payload.emp_id] = action.payload.data;
+            state.events.status = 'loaded';
+        },
+        [fetchEventsByEmployer.rejected]: (state) => {
+            state.events.items = [];
+            state.events.status = 'error';
         },
     },
 });
