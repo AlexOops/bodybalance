@@ -22,7 +22,6 @@ const employersSlice = createSlice({
     initialState,
     reducers: {
         setSelectedEmployer: (state, action) => {
-            console.log('setEmployer', action.payload);
             state.employers.selectedEmployer = action.payload;
         },
     },

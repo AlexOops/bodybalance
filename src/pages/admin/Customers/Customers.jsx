@@ -25,10 +25,10 @@ export const Customers = () => {
     const [idRemoveCustomer, setIdRemoveCustomer] = useState('');
 
     useEffect(() => {
-        dispatch(fetchPatientCards())
+        dispatch(fetchPatientCards());
         dispatch(fetchEmployers());
         dispatch(fetchTraining());
-        dispatch(fetchCustomers())
+        dispatch(fetchCustomers());
     }, [dispatch]);
 
     // ДОБАВЛЕНИЕ ВАРАЧА И КАТАЛОГА

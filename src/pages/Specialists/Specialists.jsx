@@ -21,7 +21,6 @@ export const Specialists = () => {
     const [card, setCard] = useState({});
     const [certificateUrl, setCertificateUrl] = useState('');
 
-
     const openFullCard = (employer) => {
         setCard(employer);
         dispatch(openModal('modalService'));
@@ -43,7 +42,6 @@ export const Specialists = () => {
     }
 
     useEffect(() => {
-        dispatch(fetchServices());
         dispatch(fetchEmployers());
     }, [dispatch]);
 

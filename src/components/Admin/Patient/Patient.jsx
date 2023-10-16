@@ -1,26 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import Select from "react-select";
 import s from './patient.module.scss';
-import {fetchEmployers} from "../../../redux/slices/employers";
-import {fetchTraining} from "../../../redux/slices/training";
 import axios from "../../../axios";
 import CustomAvatar from "../../Images/CustomAvatar/CustomAvatar";
 
 export const Patient = ({patientCard, customer, employer, catalogVideo}) => {
 
-    const dispatch = useDispatch();
     const {employers} = useSelector(state => state.employers);
     const {training: videoCatalog} = useSelector(state => state.training);
 
     const [selectedEmployer, setSelectedEmployer] = useState(null);
     const [selectedVideoCatalog, setSelectedVideoCatalog] = useState(null);
     const [selectedRecommendations, setSelectedRecommendations] = useState('');
-
-    useEffect(() => {
-        dispatch(fetchEmployers());
-        dispatch(fetchTraining());
-    }, [dispatch]);
 
     useEffect(() => {
         if (employer) {
@@ -119,10 +111,17 @@ export const Patient = ({patientCard, customer, employer, catalogVideo}) => {
                         components={{
                             Option: customOptionComponent,
                         }}
-                        options={employers.items.map(employer => ({
-                            value: employer._id,
-                            label: employer.fullName
-                        }))}
+                        options={
+                            [
+                                {value: null, label: 'Не выбрано'},
+
+                                ...employers.items?.map(employer => ({
+                                    value: employer._id,
+                                    label: employer.fullName
+                                }))
+                            ]
+                        }
+
                         onChange={handleEmployerChange}
                         value={selectedEmployer}
                     />
@@ -134,10 +133,15 @@ export const Patient = ({patientCard, customer, employer, catalogVideo}) => {
                         components={{
                             Option: customOptionComponent,
                         }}
-                        options={videoCatalog.items?.map(catalog => ({
-                            value: catalog._id,
-                            label: catalog.name
-                        }))}
+                        options={
+                            [
+                                {value: null, label: 'Не выбрано'},
+                                ...videoCatalog.items?.map(catalog => ({
+                                    value: catalog._id,
+                                    label: catalog.name
+                                }))
+                            ]
+                        }
                         onChange={handleVideoCatalogChange}
                         value={selectedVideoCatalog}
                     />
