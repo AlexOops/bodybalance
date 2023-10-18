@@ -26,6 +26,7 @@ import {ProfileMain} from "./pages/Profile/ProfileMain/ProfileMain";
 import {ProfileLayout} from "./pages/Profile/ProfileLayout";
 import {Appointments as ProfileAppointments} from "./pages/Profile/Appointments/Appointments";
 import {Training as ProfileTraining} from "./pages/Profile/Training/Training";
+import {Security} from "./pages/Profile/Security/Security";
 
 export const router = createBrowserRouter([
     {
@@ -119,6 +120,12 @@ export const router = createBrowserRouter([
                 path: "/profile/training",
                 element: <ProfileTraining/>
             },
+            {
+                path: "/profile/security",
+                element: <Security/>
+            },
+
+
         ]
     },
     {

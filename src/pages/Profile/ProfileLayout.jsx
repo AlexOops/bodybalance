@@ -40,6 +40,11 @@ export const ProfileLayout = () => {
                                     Мои записи
                                 </li>
                             </NavLink>
+                            <NavLink to='/profile/security'>
+                                <li className={location.pathname === '/profile/security' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>
+                                    Безопасность
+                                </li>
+                            </NavLink>
                         </ul>
 
                     </aside>
