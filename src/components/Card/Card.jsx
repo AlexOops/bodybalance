@@ -6,7 +6,6 @@ import card_img from "../../assets/rectangle33.jpg";
 import {useDispatch} from "react-redux";
 import {setSelectedService} from "../../redux/slices/services";
 import {closeModal} from "../../redux/slices/modal";
-import {useRef} from "react";
 import {setSelectedEmployer} from "../../redux/slices/employers";
 export const Card = ({
     id,
@@ -63,7 +62,7 @@ export const Card = ({
            <div className={s.card}>
                <div className={s.flexCenter}>
                    <div className={`${s.img} ${s.center}`}>
-                       <img src={imageUrl} alt=""/>
+                       <img className={s.image} src={imageUrl} alt=""/>
                    </div>
 
                    <h3 className={s.name}>
@@ -71,13 +70,13 @@ export const Card = ({
                    </h3>
 
                    {isPopular ?
-                       <>
+                       <div className={s.description}>
                            <ReactMarkdown>{description}</ReactMarkdown>
-                       </>
+                       </div>
                        :
-                       <>
+                       <div>
                            <div className={s.text}><ReactMarkdown>{text}</ReactMarkdown></div>
-                       </>
+                       </div>
                    }
                </div>
 

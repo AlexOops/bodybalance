@@ -5,9 +5,8 @@
   align-items: center;
 }
 
-.space {
-  margin-top: 44px;
-  margin-bottom: 30px;
+.title {
+  padding: 40px 0;
 }
 
 .cards {
@@ -19,7 +18,7 @@
   gap: 30px;
   justify-content: center;
 
-  @media screen and (max-width: 1289px) and (min-width: 850px){
+  @media screen and (max-width: 1289px) and (min-width: 850px) {
     justify-content: flex-start;
   }
 }
@@ -47,8 +46,6 @@
     background-color: #9e8dff;
     border: 2px solid #9e8dff;
   }
-
 }
-
 
 

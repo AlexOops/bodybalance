@@ -15,7 +15,12 @@
   text-align: center;
   text-transform: uppercase;
   color: #4F4E4E;
-  margin: 0 0 20px 0;
+  padding: 15px 0;
+}
+
+.description {
+  min-height: 168px;
+  text-align: center;
 }
 
 .card {
@@ -25,7 +30,7 @@
   padding: 30px;
   gap: 20px;
   width: 410px;
-  max-height: 550px;
+  max-height: 560px;
   background: #FFFFFF;
   box-shadow: 0 0 20px rgba(255, 226, 255, 0.65);
   border-radius: 25px;
@@ -87,7 +92,7 @@
 .img {
   width: 200px;
   height: 200px;
-  margin: 0 0 28px 0;
+  margin: 0 0 10px 0;
 
   display: block;
   position: relative;
@@ -98,8 +103,8 @@
     position: absolute;
     display: block;
     content: "";
-    width: 216px;
-    height: 216px;
+    width: 220px;
+    height: 220px;
     background: rgba(255, 226, 255, 0.5);
     filter: blur(10px);
     border-radius: 50%;
@@ -114,6 +119,13 @@
   background-color: #D78DFF;
   border-radius: 50%;
   margin-right: 15px;
+}
+
+.image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .price {

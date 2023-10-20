@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import {openModal} from "../../../redux/slices/modal";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
-import {redirect, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import axios from "../../../axios";
 
 export const Security = () => {

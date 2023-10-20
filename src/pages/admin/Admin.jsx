@@ -11,12 +11,19 @@ export const Admin = () => {
     const location = useLocation();
     const isAuth = useSelector(selectIsAuth);
     const navigate = useNavigate();
+    const user = useSelector(state => state.auth.data);
 
     const handleNavigateToHome = () => {
         navigate('/');
     };
 
     if (isAuth) {
+
+        if (user.role !== 'admin') {
+            navigate('/');
+            return null;
+        }
+
         return (
             <div className={s.container}>
 
@@ -39,7 +46,9 @@ export const Admin = () => {
                             </NavLink>
 
                             <NavLink to='/admin/consultations'>
-                                <li className={location.pathname === '/admin/Consultations' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>Заявки на консультации</li>
+                                <li className={location.pathname === '/admin/Consultations' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>Заявки
+                                    на консультации
+                                </li>
                             </NavLink>
 
                             <NavLink to='/admin/customers'>

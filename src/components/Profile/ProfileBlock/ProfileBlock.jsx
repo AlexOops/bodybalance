@@ -19,7 +19,7 @@ const ProfileBlock = ({handleNavigate, redirectLabel}) => {
         dispatch(fetchPatientCards())
     }, [dispatch]);
 
-    const onClickLogout = () => {
+    const onClickLogout = () => { // переделать под модал классический
         if (window.confirm("Вы действительно хотите выйти?")) {
             dispatch(logout()); //обнулили данные в state auth
             window.localStorage.removeItem('token'); //удалили токен из localStorage

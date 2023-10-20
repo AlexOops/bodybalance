@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import s from "./ProfileMain.module.scss";
+import s from "./Main.module.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchPatientCards, updateUploadedAvatarUrl} from "../../../redux/slices/patientCard";
 import {fetchEmployers} from "../../../redux/slices/employers";
@@ -11,7 +11,7 @@ import validator from 'validator'
 import {ImageUploader} from "../../../components/Images/ImageUploader/ImageUploader";
 import CustomAvatar from "../../../components/Images/CustomAvatar/CustomAvatar";
 
-export const ProfileMain = () => {
+export const Main = () => {
     const dispatch = useDispatch();
 
     const user = useSelector(state => state.auth.data);

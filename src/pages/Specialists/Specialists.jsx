@@ -3,7 +3,6 @@ import certificate from '../../assets/sertificate.png'
 import {AppointmentForm} from "../../components/AppointmentForm/AppointmentForm";
 import React, {useState, useRef, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchServices} from "../../redux/slices/services";
 import {nanoid} from "nanoid";
 import Recommendation from "../../components/Recommendation/Recommendation";
 import {fetchEmployers} from "../../redux/slices/employers";
