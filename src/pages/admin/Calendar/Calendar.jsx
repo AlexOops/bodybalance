@@ -97,21 +97,20 @@ const Calendar = () => {
         // fetchData();
     }, [])
 
-
-
-    //выбрать календарь первого сотрудника при загрузке
+    //выбрать календарь первого сотрудника при их загрузке
     useEffect(() => {
-        let emp_id = employers?.items[0]?.employer._id
-        setSelectEmployer(emp_id)
+        let emp = employers?.items[0]?.employer
+        setSelectEmployer(emp?._id)
+        setSelectUserId(emp?.userId)
     }, [employers])
 
     useEffect(()=>{
-        getEmpEvents(selectEmployer);
-        dispatch(fetchEventsByEmployer(selectUserId))
+        if(selectEmployer) getEmpSchedules(selectEmployer);
+        if(selectUserId) dispatch(fetchEventsByEmployer(selectUserId));
     }, [selectEmployer, selectUserId])
 
    //Можно сделать через UseEffect при изменении selectEmployer
-    const getEmpEvents = (emp_id) => {
+    const getEmpSchedules = (emp_id) => {
         setSelectEmployer(emp_id);
         const newEvents = schedules.items.filter( schedule =>  schedule.employerId === emp_id).map(
             event => {
@@ -124,7 +123,7 @@ const Calendar = () => {
     return (
         <div>
             <h1 className={s.title}>Календарь</h1>
-            <p>Выбрать календарь сотрудника</p>{console.log(events, selectUserId)}
+            <p>Выбрать календарь сотрудника</p>{console.log(events[selectUserId], selectUserId)}
 
             {employers.items.map(emp => <Box key={'cal' + emp._id}
                                              sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
@@ -165,7 +164,23 @@ const Calendar = () => {
                 }}
                 slotMinTime={"06:00:00"}
                 slotMaxTime={"22:00:00"}
-                events={bgEvents}
+                // events={bgEvents}
+                eventSources ={[
+                    // worktimes
+                    {
+                        events: bgEvents,
+                        // color: 'black',     // an option!
+                        // textColor: 'yellow' // an option!
+                        display: 'background',
+                    },
+                    {
+                        events: events[selectUserId]
+                    }
+
+
+                ]}
+
+                // events[selectUserId]]
                 // businessHours={{}}
                 // eventSources={[...allEvents,
                 //     ...allWorkTimes]}
