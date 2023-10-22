@@ -84,17 +84,9 @@ const Calendar = () => {
     const [selectEmployer, setSelectEmployer] = useState("");
     const [selectUserId, setSelectUserId] = useState("");
 
-
     useEffect(() => {
         dispatch(fetchEmployers())
         dispatch(fetchSchedules())
-        // async function fetchData() {
-        //     const result = await axios(
-        //         '/events',
-        //     );
-        //     setEvents(result)
-        // }
-        // fetchData();
     }, [])
 
     //выбрать календарь первого сотрудника при их загрузке

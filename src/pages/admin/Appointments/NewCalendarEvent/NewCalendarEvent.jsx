@@ -7,11 +7,14 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import 'dayjs/locale/ru';
 import axios from "../../../../axios";
+import {useDispatch} from "react-redux";
+import {closeModal} from "../../../../redux/slices/modal";
 
 const NewCalendarEvent = ({appointment}) => {
 
     const [startDate, setStartDate] = React.useState(dayjs(new Date()));
     const [endDate, setEndDate] = React.useState(dayjs(new Date()));
+    const dispatch = useDispatch();
 
     const saveNewEvent = async () => { //создадим событие и привяжем его к записи
 
@@ -21,9 +24,12 @@ const NewCalendarEvent = ({appointment}) => {
             start: startDate.format(),
             end: endDate.format(),
             public: true,
+            status: "Назначен прием",
         });
 
-        console.log(response);
+        if(response){
+            dispatch(closeModal('modalNewEvent'));
+        }
     }
 
     return (
