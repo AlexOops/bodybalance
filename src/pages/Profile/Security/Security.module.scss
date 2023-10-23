@@ -1,0 +1,87 @@
+.security {
+  display: flex;
+}
+
+.title {
+  font-size: 28px;
+  padding-left: 10px;
+  padding-bottom: 15px;
+}
+
+.changePasswordUser {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.formPass {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.modalRemoveUser {
+  padding: 60px 50px 40px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+// заменить
+
+.input {
+  outline: none;
+  font-size: 20px;
+  border: 1px solid #D78DFF;
+  padding: 15px 30px;
+  border-radius: 40px;
+
+  &:focus {
+    border: 1px solid #D78DFF;
+    box-shadow: 0 2px 2px rgb(216, 159, 246);
+  }
+}
+
+.button {
+  margin-top: 30px;
+  background: #f61616;
+  border: none;
+  color: #fff;
+  padding: 15px 20px;
+  border-radius: 40px;
+  font-size: 18px;
+
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+    box-shadow: 0 3px 3px rgb(203, 203, 203);
+  }
+}
+
+.blockPass {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  position: relative;
+}
+
+.error {
+  color: #9747FF;
+  font-size: 12px;
+  position: absolute;
+  right: 15px;
+  top: 20px;
+}
+
+.message {
+  padding-top: 20px;
+  text-align: center;
+  color: #9747FF;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.label {
+  padding: 10px 0 8px 10px;
+  font-size: 16px;
+}

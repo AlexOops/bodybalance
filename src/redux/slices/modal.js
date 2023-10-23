@@ -43,7 +43,10 @@ const initialState = {
         },
         modalOpenCatalog: {
             active: false
-        }
+        },
+        modalRemoveUser: {
+            active: false
+        },
     }
 
     // active: false,

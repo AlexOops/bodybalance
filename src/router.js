@@ -19,13 +19,14 @@ import {Services as ServicesAdmin} from "./pages/admin/Services/Services";
 import {Appointments} from "./pages/admin/Appointments/Appointments";
 import Calendar from "./pages/admin/Calendar/Calendar";
 import {Training as AdminTraining} from "./pages/admin/Training/Training";
-import {AdminMain} from "./pages/admin/AdminMain/AdminMain";
+import {Main as AdminMain} from "./pages/admin/Main/Main";
 
 //profile
-import {ProfileMain} from "./pages/Profile/ProfileMain/ProfileMain";
-import {ProfileLayout} from "./pages/Profile/ProfileLayout";
+import {Main as ProfileMain} from "./pages/Profile/Main/Main";
+import {Profile} from "./pages/Profile/Profile";
 import {Appointments as ProfileAppointments} from "./pages/Profile/Appointments/Appointments";
 import {Training as ProfileTraining} from "./pages/Profile/Training/Training";
+import {Security} from "./pages/Profile/Security/Security";
 
 export const router = createBrowserRouter([
     {
@@ -104,7 +105,7 @@ export const router = createBrowserRouter([
     },
     {
         path: "/profile",
-        element:  <ProfileLayout/>,
+        element:  <Profile/>,
         errorElement: <ErrorPage/>,
         children: [
             {
@@ -119,6 +120,12 @@ export const router = createBrowserRouter([
                 path: "/profile/training",
                 element: <ProfileTraining/>
             },
+            {
+                path: "/profile/security",
+                element: <Security/>
+            },
+
+
         ]
     },
     {

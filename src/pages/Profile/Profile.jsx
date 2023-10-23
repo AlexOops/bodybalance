@@ -1,22 +1,28 @@
 import React from 'react';
 import {Link, NavLink, Outlet, useLocation, useNavigate} from "react-router-dom";
-import s from './ProfileLayout.module.scss'
+import s from './Profile.module.scss'
 import logo from "../../assets/logo.svg";
 import {useSelector} from "react-redux";
 import {selectIsAuth} from "../../redux/slices/auth";
 import ProfileBlock from "../../components/Profile/ProfileBlock/ProfileBlock";
 
-export const ProfileLayout = () => {
+export const Profile = () => {
 
     const location = useLocation();
     const isAuth = useSelector(selectIsAuth);
     const navigate = useNavigate();
+    const user = useSelector(state => state.auth.data);
 
     const handleNavigateToHome = () => {
         navigate('/');
     };
 
     if (isAuth) {
+        if (user.role === 'admin') {
+            navigate('/');
+            return null;
+        }
+
         return (
             <div className={s.container}>
                 <div className={s.containerProfile}>
@@ -38,6 +44,11 @@ export const ProfileLayout = () => {
                             <NavLink to='/profile/appointments'>
                                 <li className={location.pathname === '/profile/appointments' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>
                                     Мои записи
+                                </li>
+                            </NavLink>
+                            <NavLink to='/profile/security'>
+                                <li className={location.pathname === '/profile/security' ? `${s.active} ${s.menuListItem}` : `${s.menuListItem}`}>
+                                    Безопасность
                                 </li>
                             </NavLink>
                         </ul>

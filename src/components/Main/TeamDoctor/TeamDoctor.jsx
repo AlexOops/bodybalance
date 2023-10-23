@@ -1,24 +1,52 @@
 import s from './TeamDoctor.module.scss'
-import doctor_three from "../../../assets/doctor_3.png";
 import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {fetchEmployers} from "../../../redux/slices/employers";
+import {Circles} from "../../Circles/Circles";
 
 export const TeamDoctor = () => {
+
+    const dispatch = useDispatch();
+    const {employers} = useSelector(state => state.employers);
     const scrollToTop = () => {
         window.scrollTo({
             top: 0
         });
     }
 
+    useEffect(() => {
+        dispatch(fetchEmployers());
+    }, [dispatch]);
+
     return (
         <div className='container'>
             <div className={s.wrapper}>
+
+                <Circles smallSize={180} smallAxisX={-125} smallAxisY={200}
+                         bigSize={350} bigAxisX={-204} bigAxisY={-60}/>
+
+                <Circles smallSize={180} smallAxisX={400} smallAxisY={200}
+                         bigSize={350} bigAxisX={350} bigAxisY={-100}/>
+
                 <div className={s.img}>
-                    <img className={s.three} src={doctor_three} alt=""/>
+
+                    {
+                        employers.items.map((employer, idx) =>
+                            <img className={s.three}
+                                 src={(employer.avatarUrl) ? `http://localhost:4444${employer.avatarUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                                 key={idx} alt="employer"/>
+                        )
+                    }
                 </div>
+
                 <div className={s.description}>
                     <h2 className={s.name}>Команда профессиональных врачей</h2>
-                    <p className={s.text}>Разнообразный и богатый опыт говорит нам, что экономическая повестка сегодняшнего дня однозначно определяет каждого участника как способного принимать собственные решения касаемо глубокомысленных рассуждений.</p>
-                    <Link to={"/Specialists"}  onClick={scrollToTop} className={s.button}>Посмотреть всех специалистов</Link>
+                    <p className={s.text}>Разнообразный и богатый опыт говорит нам, что экономическая повестка
+                        сегодняшнего дня однозначно определяет каждого участника как способного принимать собственные
+                        решения касаемо глубокомысленных рассуждений.</p>
+                    <Link to={"/Specialists"} onClick={scrollToTop} className={s.button}>Посмотреть всех
+                        специалистов</Link>
                 </div>
             </div>
         </div>
