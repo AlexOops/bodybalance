@@ -4,6 +4,9 @@ import {fetchAppointments} from "../../../redux/slices/appointments";
 import s from "./Appointments.module.scss"
 import {nanoid} from "nanoid";
 import axios from "../../../axios";
+import Modal from "../../../components/Modal/Modal";
+import NewCalendarEvent from "./NewCalendarEvent/NewCalendarEvent";
+import {openModal} from "../../../redux/slices/modal";
 
 export const Appointments = () => {
 
@@ -24,6 +27,9 @@ export const Appointments = () => {
         'Прием не состоялся': s.canceledOption,
     });
 
+    //выбранная запись для передачи в модальное окно
+    const [selectedAppointment, setSelectedAppointment] = useState({});
+
 
     useEffect(() => {
         dispatch(fetchAppointments())
@@ -37,7 +43,7 @@ export const Appointments = () => {
             const res = await axios.patch("/appointments/" + id, {
                 status: newStatus
             })
-            if (res.status === 200){
+            if (res.status === 200) {
                 console.log('Статус изменен на ' + newStatus)
                 e.target.className = optionColors[e.target.value]
 
@@ -48,10 +54,16 @@ export const Appointments = () => {
         }
     }
 
+    const openNewEventModal = (obj) => {
+        dispatch(openModal('modalNewEvent'))
+        setSelectedAppointment(obj);
+    }
+
     return (
 
         <div>
             <h1 className={s.title}>Заявка клиента на запись</h1>
+
             <div className={s.appointments}>
 
                 <div className={`${s.cell} ${s.headerCell} ${s.startCell}`}>Источник</div>
@@ -62,7 +74,8 @@ export const Appointments = () => {
                 <div className={`${s.cell} ${s.headerCell}`}>Специалист</div>
                 <div className={`${s.cell} ${s.headerCell}`}>Статус</div>
                 <div className={`${s.cell} ${s.headerCell}`}>Авторизован</div>
-                <div className={`${s.cell} ${s.headerCell} ${s.endCell}`}>Дата</div>
+                <div className={`${s.cell} ${s.headerCell}`}>Дата</div>
+                <div className={`${s.cell} ${s.headerCell} ${s.endCell}`}>Создать событие</div>
 
                 {(isAppointmentsLoading ? [...Array(3)] : appointments.items).map((obj, ind) => (
                     isAppointmentsLoading
@@ -91,15 +104,20 @@ export const Appointments = () => {
                                 <option value="Прием не состоялся" className={s.canceledOption}>Прием не состоялся</option>
                             </select>
                             <div className={s.cell}>{obj.customer?.fullName || 'не авторизован'}</div>
-                            <div
-                                className={`${s.cell} ${s.endCell}`}>{new Date(obj.createdAt).toLocaleString('ru-RU')}</div>
+                            <div className={`${s.cell}`}>
+                                {new Date(obj.createdAt).toLocaleString('ru-RU')}
+                            </div>
+                            <div className={`${s.cell} ${s.endCell}`} onClick={() => openNewEventModal(obj)}>
+                                Назначить прием
+                            </div>
+
 
                         </Fragment>)
                 ))}
             </div>
-            {/*{ <Modal type={'modalMessage'}>*/}
-            {/*    <div className={s.message}>Статус изменен</div>*/}
-            {/*</Modal>}*/}
+            {(selectedAppointment)&&<Modal type={'modalNewEvent'}>
+                <NewCalendarEvent appointment={selectedAppointment}/>
+            </Modal>}
         </div>
     );
 };

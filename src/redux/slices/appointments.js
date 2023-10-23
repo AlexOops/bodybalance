@@ -7,29 +7,11 @@ export const fetchAppointments = createAsyncThunk('appointments/fetchAppointment
     return data;
 });
 
-export const fetchAppointmentsByEmployer = createAsyncThunk('appointments/fetchAppointmentsByEmployer', async (params) => {
-   const {data} = await axios.get('/appointments/employer/' + params);
-   let indApp = {};
-   data.forEach(el => {
-       let dateTime = new Date(el.dateTime)
-       let day = (dateTime).toLocaleDateString('ru-Ru')
-       let time = (dateTime).toLocaleTimeString('ru-Ru');
-       let timeEl = {[time]: el}
-       indApp[day] = timeEl;
 
-   });
-
-       // .catch((err)=> console.log(err)).then(res => {
-        // res.data.map(el => {
-        //     let idx = (new Date(el.dateTime).toLocaleString('ru-RU')).replace('09:', '9:'); //28.05.2023, 11:00:00 //TODO поменять на странице календаря, тут убрать 09
-        //     dataWithTimeIndex[idx] = el;
-        // })
-        // console.log(dataWithTimeIndex);
-        // return dataWithTimeIndex;
-    console.log(indApp)
-        return {data: data, indexAppointments: indApp};
-    // });
-
+// получить события календаря по сотруднику
+export const fetchEventsByEmployer = createAsyncThunk('appointments/fetchEventsByEmployer', async (params) => {
+    const {data} = await axios.get('/appointments/employer/' + params);
+    return {data: data, emp_id: params};
 });
 
 
@@ -39,6 +21,10 @@ const initialState = {
       items: [],
       status: 'loading',
     },
+    events: {
+        status: 'loading',
+        // items: {}// { id1: [], id2: [] }
+    }
 };
 
 const appointmentsSlice = createSlice({
@@ -60,18 +46,31 @@ const appointmentsSlice = createSlice({
             state.appointments.status = 'error';
         },
         //по сотруднику
-        [fetchAppointmentsByEmployer.pending]: (state) => {
-            state.appointments.items = [];
-            state.appointments.status = 'loading';
+        // [fetchAppointmentsByEmployer.pending]: (state) => {
+        //     state.appointments.items = [];
+        //     state.appointments.status = 'loading';
+        // },
+        // [fetchAppointmentsByEmployer.fulfilled]: (state, action) => {
+        //     state.appointments.items = action.payload.data;
+        //     state.appointments.indAppointments = action.payload.indexAppointments;
+        //     state.appointments.status = 'loaded';
+        // },
+        // [fetchAppointmentsByEmployer.rejected]: (state) => {
+        //     state.appointments.items = [];
+        //     state.appointments.status = 'error';
+        // },
+        //события по сотруднику
+        [fetchEventsByEmployer.pending]: (state) => {
+            // state.events.items = [];
+            state.events.status = 'loading';
         },
-        [fetchAppointmentsByEmployer.fulfilled]: (state, action) => {
-            state.appointments.items = action.payload.data;
-            state.appointments.indAppointments = action.payload.indexAppointments;
-            state.appointments.status = 'loaded';
+        [fetchEventsByEmployer.fulfilled]: (state, action) => {
+            state.events[action.payload.emp_id] = action.payload.data;
+            state.events.status = 'loaded';
         },
-        [fetchAppointmentsByEmployer.rejected]: (state) => {
-            state.appointments.items = [];
-            state.appointments.status = 'error';
+        [fetchEventsByEmployer.rejected]: (state) => {
+            // state.events.items = [];
+            state.events.status = 'error';
         },
     },
 });

@@ -6,7 +6,7 @@
 }
 
 .appointments {
-  grid-template-columns: repeat(9, 1fr);
+  grid-template-columns: repeat(10, 1fr);
   padding: 3%;
   display: grid;
   row-gap: 10px;
@@ -64,4 +64,25 @@
 
 .canceledOption {
   color: red; /* Установите цвет для опции "Отменено" */
+}
+
+.newEventBlock{
+  display: flex;
+  flex-direction: column;
+  padding: 55px 20px 30px;
+}
+
+.newEventBlockHeader{
+  display: block;
+  font-weight: bold;
+}
+
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.infoTitle {
+
 }
