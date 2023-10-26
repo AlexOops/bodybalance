@@ -89,9 +89,7 @@ export const Customers = () => {
     // ПОИСК
     const [searchQuery, setSearchQuery] = useState('');
 
-    const handleSearchChange = (query) => {
-        setSearchQuery(query);
-    };
+    const handleSearchChange = (query) => setSearchQuery(query);
 
     //СОЗДАНИЕ НОВОГО ПАЦИЕНТА
     const handleOpenModalForAddNewUser = (e) => {

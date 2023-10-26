@@ -1,0 +1,76 @@
+.block {
+  display: flex;
+  flex-direction: column;
+  max-width: 1070px;
+  padding: 50px;
+}
+
+.name {
+  display: flex;
+}
+
+.info {
+  width: 470px;
+}
+
+.doctor, .service {
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  width: 170px;
+  padding-right: 10px;
+}
+
+.phone, .email {
+  padding-top: 10px;
+  display: flex;
+}
+
+.select {
+  width: 57%;
+}
+
+.customer {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.autocomplete {
+  width: 57%;
+  margin-top: 5px;
+}
+
+.dateCalendar {
+  width: 100%;
+  margin-bottom: 10px;
+
+  padding: 20px;
+  outline: none;
+  border: 1px solid #D78DFF;
+  border-radius: 40px;
+
+  &:focus {
+    box-shadow: 0 2px 2px rgb(216, 159, 246);
+  }
+}
+
+.date {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.start, .end {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  margin-top: 30px;
+  width: 330px;
+  align-self: center;
+}

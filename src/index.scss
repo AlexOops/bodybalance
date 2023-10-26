@@ -126,6 +126,7 @@ a {
   border-radius: 50%;
   z-index: -1;
 }
+
 .flexRelative {
   position: relative;
   display: flex;
@@ -252,18 +253,91 @@ input:-webkit-autofill:active {
 }
 
 .adminButton {
-    margin-top: 15px;
-    border: 1px solid #D78DFF;
-    background: #D78DFF;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 40px;
-    font-size: 18px;
+  margin-top: 15px;
+  border: 1px solid #D78DFF;
+  background: #D78DFF;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 40px;
+  font-size: 18px;
 
-    &:hover {
-      cursor: pointer;
-      color: #fff;
-      background-color: #9e8dff;
-      border: 1px solid #9e8dff;
-    }
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #9e8dff;
+    border: 1px solid #9e8dff;
+  }
+}
+
+.myDatePicker .MuiInputBase-root {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border: 1px solid #D78DFF;
+  border-radius: 40px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.myDatePicker .MuiInputBase-root:focus {
+  border-color: #D78DFF;
+  box-shadow: 0 0 0 2px rgba(215, 141, 255, 0.5);
+}
+
+.myDatePicker .MuiInputBase-input {
+  padding: 10px;
+}
+
+.myDatePicker .MuiInput-underline:before,
+.myDatePicker .MuiInput-underline:after,
+.myDatePicker .MuiInput-underline:hover:not(.Mui-disabled):before {
+  border-bottom: none;
+}
+
+.myDatePicker .MuiOutlinedInput-notchedOutline {
+  border: none;
+}
+
+.myAutocomplete .MuiOutlinedInput-root {
+  outline: none;
+  padding: 4px;
+  border: 1px solid #D78DFF;
+  border-radius: 40px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.myAutocomplete .MuiOutlinedInput-root.Mui-focused {
+  border-color: #D78DFF;
+  box-shadow: 0 1px 0 1px rgba(215, 141, 255, 0.4);
+}
+
+.myAutocomplete .MuiAutocomplete-clearIndicator,
+.myAutocomplete .MuiAutocomplete-popupIndicator {
+  color: #D78DFF;
+}
+
+.myAutocomplete .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border: none;
+}
+
+.myAutocomplete .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border: none; /* Цвет границы при фокусе */
+  box-shadow: none; /* Убираем тень */
+}
+
+.myAutocomplete .MuiAutocomplete-clearIndicator:hover,
+.myAutocomplete .MuiAutocomplete-popupIndicator:hover {
+  background-color: transparent; /* Убираем фоновый цвет при наведении */
+}
+
+.myAutocomplete .MuiAutocomplete-clearIndicator:active,
+.myAutocomplete .MuiAutocomplete-popupIndicator:active {
+  background-color: transparent; /* Убираем фоновый цвет при нажатии */
+}
+
+.myAutocomplete .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] .MuiAutocomplete-endAdornment {
+  right: 8px;
+}
+
+.myAutocomplete .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-width: 0;
 }

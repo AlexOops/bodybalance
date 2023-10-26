@@ -5,15 +5,17 @@ import s from "./Appointments.module.scss"
 import {nanoid} from "nanoid";
 import axios from "../../../axios";
 import Modal from "../../../components/Modal/Modal";
-import NewCalendarEvent from "./NewCalendarEvent/NewCalendarEvent";
-import {openModal} from "../../../redux/slices/modal";
+import {closeModal, openModal} from "../../../redux/slices/modal";
+import {NewCalendarEvent} from "../../../components/Admin/Appointment/NewCalendarEvent/NewCalendarEvent";
 
 export const Appointments = () => {
 
     const dispatch = useDispatch();
+    const [message, setMessage] = useState('');
 
     const {appointments} = useSelector(state => state.appointments);
-    const isAppointmentsLoading = appointments.status === 'loading'; // boolean
+    const isAppointmentsLoading = appointments.status === 'loading';
+
     const [optionSources] = useState({
         'services': 'Услуги',
         'specialists': 'Специалисты',
@@ -33,8 +35,7 @@ export const Appointments = () => {
 
     useEffect(() => {
         dispatch(fetchAppointments())
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [dispatch])
 
     const handleStatusChange = async (e, id) => {
         const newStatus = e.target.value
@@ -59,6 +60,16 @@ export const Appointments = () => {
         setSelectedAppointment(obj);
     }
 
+    const showMessage = (message) => {
+        setMessage(message);
+
+        setTimeout(() => {
+            setMessage('');
+            dispatch(fetchAppointments());  //временно - обновляем все - возможно перейти на redux
+            dispatch(closeModal('modalNewEvent'));
+        }, 1500);
+    }
+
     return (
 
         <div>
@@ -77,7 +88,7 @@ export const Appointments = () => {
                 <div className={`${s.cell} ${s.headerCell}`}>Дата</div>
                 <div className={`${s.cell} ${s.headerCell} ${s.endCell}`}>Создать событие</div>
 
-                {(isAppointmentsLoading ? [...Array(3)] : appointments.items).map((obj, ind) => (
+                {(isAppointmentsLoading ? [...Array(3)] : appointments.items).map((obj) => (
                     isAppointmentsLoading
                         ? (<div key={nanoid()}>Loading...</div>)
                         : (<Fragment key={nanoid()}>
@@ -115,9 +126,25 @@ export const Appointments = () => {
                         </Fragment>)
                 ))}
             </div>
-            {(selectedAppointment)&&<Modal type={'modalNewEvent'}>
-                <NewCalendarEvent appointment={selectedAppointment}/>
-            </Modal>}
+
+            {
+                selectedAppointment &&
+
+                <Modal type={'modalNewEvent'}>
+
+                    {
+
+                        message ?
+                            <div className={s.message}>{message}</div>
+                            :
+                            <NewCalendarEvent appointment={selectedAppointment}
+                                              showMessage={showMessage}
+                            />
+                    }
+
+                </Modal>
+            }
+
         </div>
     );
 };
