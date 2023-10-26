@@ -26,6 +26,7 @@
     border-left: 1px solid #d89ff6;
   }
 }
+
 .headerCell {
   background: #EDCCFF;
 }
@@ -39,17 +40,25 @@
 .endCell {
   border-left: 1px solid #d89ff6;
   border-radius: 0 40px 40px 0;
+  cursor: pointer;
+
+  background-color: #d38dff;
+
+  &:hover {
+    background-color: #9747FF;
+    color: white;
+  }
 }
 
 .rowTable {
 
 }
+
 .message {
   padding: 20px;
-  display: flex;
-  max-width: 350px;
-  min-height: 200px;
+  text-align: center;
 }
+
 .openOption {
   color: blue; /* Установите цвет для опции "Открыто" */
 }
@@ -64,25 +73,4 @@
 
 .canceledOption {
   color: red; /* Установите цвет для опции "Отменено" */
-}
-
-.newEventBlock{
-  display: flex;
-  flex-direction: column;
-  padding: 55px 20px 30px;
-}
-
-.newEventBlockHeader{
-  display: block;
-  font-weight: bold;
-}
-
-
-.info {
-  display: flex;
-  flex-direction: column;
-}
-
-.infoTitle {
-
 }

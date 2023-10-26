@@ -3,6 +3,7 @@ import s from './ScheduleEmployer.module.scss';
 import axios from "../../../axios";
 import {FormControl, MenuItem, Select, TextField} from "@mui/material";
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import {useDispatch} from "react-redux";
 import {fetchSchedules} from "../../../redux/slices/schedules";
 
@@ -226,14 +227,14 @@ export const ScheduleEmployer = ({employerId, employerFullName, schedulesEmploye
                                         <div className={s.dateContainer}>
                                             <label className={s.label}> Дата начала</label>
                                             <DatePicker
-                                                className={s.date}
+                                                className={s.dateSchedule}
                                                 value={schedule.startRecur || null}
                                                 onChange={(date) => handleScheduleChange(index, 'startRecur', date ? formatDate(date) : null)}
                                             />
 
                                             <label className={s.label}> Дата окончания</label>
                                             <DatePicker
-                                                className={s.date}
+                                                className={s.dateSchedule}
                                                 value={schedule.endRecur || null}
                                                 onChange={(date) => handleScheduleChange(index, 'endRecur', date ? formatDate(date) : null)}
                                             />

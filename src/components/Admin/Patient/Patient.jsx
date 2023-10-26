@@ -4,6 +4,7 @@ import Select from "react-select";
 import s from './patient.module.scss';
 import axios from "../../../axios";
 import CustomAvatar from "../../Images/CustomAvatar/CustomAvatar";
+import {CustomSelect} from "../../CustomSelect/CustomSelect";
 
 export const Patient = ({patientCard, customer, employer, catalogVideo}) => {
 
@@ -50,44 +51,6 @@ export const Patient = ({patientCard, customer, employer, catalogVideo}) => {
         }
     }
 
-    //ДЛЯ SELECT
-    const customStyles = {
-        control: (provided, state) => ({
-            ...provided,
-            maxWidth: '400px',
-            border: '1px solid #d89ff6',
-            boxShadow: state.isFocused ? '0 4px 4px rgb(216, 159, 246)' : 'none',
-            borderRadius: '40px',
-            padding: '8px',
-            marginBottom: '5px',
-            marginTop: '10px',
-            outline: 'none',
-            cursor: 'pointer'
-        }),
-        placeholder: (provided) => ({
-            ...provided,
-            color: '#AEAEAE',
-            fontSize: '14px',
-        }),
-        menu: (provided) => ({
-            ...provided,
-            fontSize: '14px',
-            borderRadius: '40px',
-            marginTop: '0'
-        })
-    };
-
-    const customOptionComponent = ({innerProps, label}) => (
-        <div {...innerProps} style={{
-            color: '#636363',
-            fontSize: '16px',
-            padding: '10px 0 10px 25px',
-            cursor: 'pointer'
-        }}>
-            {label}
-        </div>
-    );
-
     return (
         <>
             <div className={s.card}>
@@ -105,45 +68,21 @@ export const Patient = ({patientCard, customer, employer, catalogVideo}) => {
                 <div className={s.healthIdWrp}>
 
                     <label className={s.label}>Лечащий врач: </label>
-                    <Select
-                        placeholder={'Выберите врача...'}
-                        styles={customStyles}
-                        components={{
-                            Option: customOptionComponent,
-                        }}
-                        options={
-                            [
-                                {value: null, label: 'Не выбрано'},
 
-                                ...employers.items?.map(employer => ({
-                                    value: employer._id,
-                                    label: employer.fullName
-                                }))
-                            ]
-                        }
-
+                    <CustomSelect
+                        data={employers}
                         onChange={handleEmployerChange}
                         value={selectedEmployer}
+                        placeholder={'Выберите врача...'}
                     />
 
                     <label className={`${s.label} ${s.labelTrening}`}>Раздел с тренировками: </label>
-                    <Select
-                        placeholder={'Выберите каталог...'}
-                        styles={customStyles}
-                        components={{
-                            Option: customOptionComponent,
-                        }}
-                        options={
-                            [
-                                {value: null, label: 'Не выбрано'},
-                                ...videoCatalog.items?.map(catalog => ({
-                                    value: catalog._id,
-                                    label: catalog.name
-                                }))
-                            ]
-                        }
+
+                    <CustomSelect
+                        data={videoCatalog}
                         onChange={handleVideoCatalogChange}
                         value={selectedVideoCatalog}
+                        placeholder={'Выберите каталог...'}
                     />
 
                     <label className={`${s.label} ${s.labelRecommendations}`}>Рекоммендации по лечению: </label>
