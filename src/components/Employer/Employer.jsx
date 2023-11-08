@@ -24,7 +24,7 @@ export const Employer = ({
 
     const handleSelectService = () => {
         dispatch(setSelectedEmployer({id: id, name: name + ' - ' + profession}));
-        dispatch(closeModal('modalService'));
+        dispatch(closeModal('modalEmployer'));
         handleAction(); //действие в родительском компоненте.
     }
 

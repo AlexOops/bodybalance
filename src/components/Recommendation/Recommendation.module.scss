@@ -3,6 +3,7 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .left {
   width: 520px;
   position: relative;
@@ -29,17 +30,34 @@
   justify-content: center;
 }
 
+.avatar {
+  height: 465px;
+  width: 100%;
+  background-size: cover;
+  background-position: 100% 15%;
+  background-repeat: no-repeat;
+  border-radius:  40px 40px 0 0;
+}
+
 .nameSection {
   text-align: left;
 }
 
 .descriptionSpecialist {
-  margin: 10px 0 30px 0;
+  padding: 10px 0 30px 0;
   font-size: 24px;
 }
+
+.description {
+  width: 100%;
+  padding: 30px;
+  border-radius: 0 0 25px 25px;
+  background: var(--white, #FFF);
+  box-shadow: 0 4px 20px 0 rgba(255, 226, 255, 0.55);
+}
+
 .nameSpecialist {
-  margin: 30px 0 12px 0;
-  font-style: normal;
+  padding-bottom: 15px;
   font-weight: 400;
   font-size: 24px;
   line-height: 130%;
@@ -62,6 +80,7 @@
   background-color: #D78DFF;
   color: #fff;
   border: none;
+
   &:hover {
     cursor: pointer;
     color: #fff;

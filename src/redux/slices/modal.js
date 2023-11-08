@@ -8,6 +8,9 @@ const initialState = {
         modalService: {
             active: false,
         },
+        modalEmployer: {
+            active: false,
+        },
         modalRegister: {
             active: false,
         },

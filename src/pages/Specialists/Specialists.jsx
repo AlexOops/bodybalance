@@ -4,12 +4,14 @@ import {AppointmentForm} from "../../components/AppointmentForm/AppointmentForm"
 import React, {useState, useRef, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {nanoid} from "nanoid";
-import Recommendation from "../../components/Recommendation/Recommendation";
+import {Recommendation} from "../../components/Recommendation/Recommendation";
 import {fetchEmployers} from "../../redux/slices/employers";
 import Modal from "../../components/Modal/Modal"
 import {openModal} from "../../redux/slices/modal";
 import {Employer} from "../../components/Employer/Employer";
 import Carousel from "../../components/Carousel/Carousel";
+import DmitryBocharnikov from '../../assets/doc/DmitryBocharnikov.jpg'
+import {Circles} from "../../components/Circles/Circles";
 
 const certificates = [{img: certificate}, {img: certificate}, {img: certificate}, {img: certificate}, {img: certificate}]
 
@@ -22,7 +24,7 @@ export const Specialists = () => {
 
     const openFullCard = (employer) => {
         setCard(employer);
-        dispatch(openModal('modalService'));
+        dispatch(openModal('modalEmployer'));
     }
 
     const openEmployerCertificate = (doc) => {
@@ -65,6 +67,7 @@ export const Specialists = () => {
                             "   принимать собственные решения касаемо глубокомысленных рассуждений."}
                         button={"Посмотреть всех специалистов"}
                         clickHandle={scrollToEmployers}
+                        avatar={DmitryBocharnikov}
                     />
 
                 </div>
@@ -75,8 +78,11 @@ export const Specialists = () => {
                         </div>
 
                         <div className={`${s.positionDoc}`}>
+
                             <Carousel show={4}>
+
                                 {employers.items.map((employer, idx) => {
+
                                     return <div className={s.cardRow}
                                                 key={idx}
                                                 onClick={() => openFullCard(employer)}>
@@ -94,10 +100,11 @@ export const Specialists = () => {
                                             />
                                     </div>
                                 })}
+
                             </Carousel>
                         </div>
 
-                        <Modal type={'modalService'}>
+                        <Modal type={'modalEmployer'}>
                             {card.employer &&
                                 <Employer isFull={true}
                                           id={card._id}
@@ -122,12 +129,20 @@ export const Specialists = () => {
                 </div>
             </div>
             <div className="container" ref={scrollToRef}>
+
                 <AppointmentForm isSpecialist={true}
                                  name={'Быстрая запись к специалисту'}
                                  services={services.items}
                                  employers={employers.items}
                                  source_name={'specialists'}
                 />
+
+                <Circles smallSize={270} smallAxisX={-140} smallAxisY={170}
+                         bigSize={420} bigAxisX={-90} bigAxisY={215}/>
+
+                <Circles smallSize={345} smallAxisX={945} smallAxisY={220}
+                         bigSize={530} bigAxisX={1020} bigAxisY={-40}/>
+
             </div>
             <div className="container-color">
                 <div className={s.servicesTitleWrap}>
