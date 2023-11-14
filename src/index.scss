@@ -130,6 +130,7 @@ a {
 .flexRelative {
   position: relative;
   display: flex;
+  flex-direction: column;
 }
 
 input:-webkit-autofill,

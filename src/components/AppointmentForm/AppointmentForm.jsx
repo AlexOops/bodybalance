@@ -8,7 +8,7 @@ import {selectedService, setSelectedService} from "../../redux/slices/services";
 import ServiceIdInput from "./ServiceIdInput";
 import axios from "../../axios";
 import Modal from "../Modal/Modal";
-import {openModal} from "../../redux/slices/modal";
+import {closeModal, openModal} from "../../redux/slices/modal";
 import {selectedEmployer, setSelectedEmployer} from "../../redux/slices/employers";
 import EmployerIdInput from "./EmployerIdInput";
 import Phone from "./Phone";
@@ -92,52 +92,65 @@ export const AppointmentForm = ({
             }}
             validationSchema={SignupSchema}
 
-            onSubmit={async (values) => {
-                // actions.setFieldValue('serviceId', selected.id); //если выбрали услугу из карточки, то берем значение из стейта.
-                try {
-                    let postData = {
-                        firstName: values.firstName,
-                        secondName: values.secondName,
-                        email: values.email,
-                        phone: values.phone,
-                        // service: values.serviceId,
-                        // employer: values.employer,
-                        //источник обращения
-                        source_name: source_name,
-                    };
-                    switch (source_name) {
-                        case 'services':
-                            postData.service = values.serviceId
-                            break
-                        case 'specialists':
-                            postData.employer = values.employer
-                            break
-                        case 'rehabilitation':
-                            postData.onlineRehabilitation = values.serviceId
-                            break
-                        default:
-                            console.log('Источник не определен')
-                    }
+            onSubmit={
 
-                    if (authUser) {
-                        postData = {...postData, customer: authUser._id};
-                    }
-                    if (values.text) {
-                        postData = {...postData, text: values.text};
-                    }
-                    await axios.post('/appointments', postData)
-                        .then(res => {
-                            // actions.setSubmitting(false);
-                            dispatch(openModal('modalMessage'));
-                        })
-                        .catch(err => console.log("Не удалась запись на прием", err))
+                async (values, actions) => {
+                    // actions.setFieldValue('serviceId', selected.id); //если выбрали услугу из карточки, то берем значение из стейта.
+                    try {
+                        let postData = {
+                            firstName: values.firstName,
+                            secondName: values.secondName,
+                            email: values.email,
+                            phone: values.phone,
+                            // service: values.serviceId,
+                            // employer: values.employer,
+                            //источник обращения
+                            source_name: source_name,
+                        };
 
+                        switch (source_name) {
+                            case 'services':
+                                postData.service = values.serviceId
+                                break
+                            case 'specialists':
+                                postData.employer = values.employer
+                                break
+                            case 'rehabilitation':
+                                postData.onlineRehabilitation = values.serviceId
+                                break
+                            default:
+                                console.log('Источник не определен')
+                        }
 
-                } catch (err) {
-                    console.warn(err);
-                    alert('Ошибка при создании записи');
-                }
-            }}
+                        if (authUser) {
+                            postData = {...postData, customer: authUser._id};
+                        }
+
+                        if (values.text) {
+                            postData = {...postData, text: values.text};
+                        }
+
+                        await axios.post('/appointments', postData)
+
+                            .then(res => {
+                                dispatch(openModal('modalMessage'));
+
+                                setTimeout(() => {
+                                    actions.resetForm();
+                                    dispatch(closeModal('modalMessage'));
+                                }, 2500);
+                            })
+                            .catch(err => console.log("Не удалась запись на прием", err))
+
+                            .finally(() => {
+                                actions.setSubmitting(false);
+                            });
+
+                    } catch (err) {
+                        console.warn(err);
+                        alert('Ошибка при создании записи!');
+                    }
+                }}
         >
             {({isSubmitting, values, errors, touched, setFieldValue, resetForm, setSubmitting, setValues}) => {
 
@@ -227,7 +240,7 @@ export const AppointmentForm = ({
                                     </div>
                                 </div>
 
-                                <div className={s.flexRowContainer}>
+                                <div className={s.flexRowContainerContact}>
                                     <div className={`${s.flexRelative} ${s.width50}`}>
                                         <Field type="email" name="email" id="email" placeholder="E-mail"
                                                className={`${s.textField} `}/>
@@ -247,15 +260,10 @@ export const AppointmentForm = ({
                                     {(errors.text && touched.text) && <div className={s.error}>{errors.text}</div>}
                                 </div>
 
-
                                 <div className={s.flexSBetween}>
-                                    <button type='button' className={s.clearButton} onClick={() => {
-                                        resetForm();
-                                    }}>Очистить данные
-                                    </button>
-                                    <button className={s.button} type="submit" disabled={isSubmitting}>Записаться
-                                    </button>
+                                    <button className={s.button} type="submit" disabled={isSubmitting}>Записаться</button>
                                 </div>
+
                                 <Modal type={'modalMessage'}>
                                     <div className={s.feedback}>{values.firstName} {values.secondName}, Ваша заявка
                                         отправлена <br/>

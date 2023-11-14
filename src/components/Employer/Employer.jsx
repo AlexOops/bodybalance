@@ -24,7 +24,7 @@ export const Employer = ({
 
     const handleSelectService = () => {
         dispatch(setSelectedEmployer({id: id, name: name + ' - ' + profession}));
-        dispatch(closeModal('modalService'));
+        dispatch(closeModal('modalEmployer'));
         handleAction(); //действие в родительском компоненте.
     }
 
@@ -36,7 +36,7 @@ export const Employer = ({
         return <div className={s.fullCard}>
 
             <div className={s.leftBox}>
-                <img className={s.employerImageFull} src={imageUrl} alt=""/>
+                <img className={s.employerImageFull} src={imageUrl} alt="аватар"/>
 
                 <div className={s.certificates}>{certificates?.map((doc, key) =>
                     <img key={"certificate" + key}

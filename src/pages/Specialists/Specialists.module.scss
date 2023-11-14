@@ -6,7 +6,7 @@
 
 .description {
   max-width: 630px;
-  margin-top: 80px;
+  padding-top: 80px;
 }
 
 .title {
@@ -15,6 +15,10 @@
   font-size: 60px;
   line-height: 140%;
   color: #4F4E4E;
+}
+
+.appointmentFormBlock {
+position: relative;
 }
 
 .servicesTitleWrap {
@@ -27,12 +31,10 @@
   margin-top: 110px;
   min-width: 248px;
   position: relative;
-  font-style: normal;
-  font-weight: 500;
   font-size: 40px;
   line-height: 47px;
   text-transform: uppercase;
-  /* main_text */
+
   color: #4F4E4E;
   padding: 0 250px;
 
@@ -69,7 +71,7 @@
   font-size: 24px;
   line-height: 140%;
   color: #4F4E4E;
-  margin: 16px 0 80px 0;
+  padding: 16px 0 80px 0;
 }
 
 .positionDoc {
@@ -90,6 +92,8 @@
 .cardRow {
   width: 20%;
   padding: 10px;
+
+  cursor: pointer;
 }
 
 .modalGallery {

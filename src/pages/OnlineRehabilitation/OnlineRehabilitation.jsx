@@ -5,7 +5,7 @@ import {openModal} from "../../redux/slices/modal";
 import {fetchOnlineServices} from "../../redux/slices/onlineRehabilitation"
 import {Card} from "../../components/Card/Card";
 import Modal from "../../components/Modal/Modal";
-import Recommendation from "../../components/Recommendation/Recommendation";
+import {Recommendation} from "../../components/Recommendation/Recommendation";
 import {AppointmentForm} from "../../components/AppointmentForm/AppointmentForm";
 
 
