@@ -14,6 +14,7 @@ import axios from "../../axios";
 import Modal from "../../components/Modal/Modal";
 import {openModal} from "../../redux/slices/modal";
 import {useDispatch} from "react-redux";
+import {Circles} from "../../components/Circles/Circles";
 
 
 export const Contacts = () => {
@@ -75,6 +76,13 @@ export const Contacts = () => {
                 </div>
             </div>
             <div className={s.content}>
+
+                <Circles smallSize={175} smallAxisX={-140} smallAxisY={170}
+                         bigSize={350} bigAxisX={-90} bigAxisY={215}/>
+
+                <Circles smallSize={270} smallAxisX={1050} smallAxisY={490}
+                         bigSize={480} bigAxisX={1200} bigAxisY={210}/>
+
                 <div className={s.contacts}>
                     <p className={s.contactsTitle}>Мы на связи</p>
                     <ul className={s.contactList}>
@@ -123,6 +131,7 @@ export const Contacts = () => {
                     </Modal>
                 </form>
             </div>
+
             <MapYandex/>
         </>
     );

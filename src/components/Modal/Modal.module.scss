@@ -31,6 +31,16 @@
     //width: 1070px;
     //height: 490px;
     /* white */
+    max-height: 99vh;
+    overflow-y: auto;
+    -ms-overflow-style: none; /* Для IE и Edge */
+    scrollbar-width: none; /* Для Firefox */
+
+    &::-webkit-scrollbar {
+      display: none; /* Для Chrome, Safari, Opera */
+    }
+
+
 
     background: #FFFFFF;
     border-radius: 50px;
