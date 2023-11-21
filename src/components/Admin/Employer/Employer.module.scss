@@ -1,10 +1,5 @@
 .block {
-  padding: 60px;
-}
-
-.title {
-  padding-bottom: 15px;
-  text-align: right;
+  padding: 50px;
 }
 
 .message {
@@ -13,39 +8,135 @@
 
 .container {
   display: flex;
+  flex-direction: column;
 }
 
 .card {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
-.avatar {
-
+.header {
+  display: flex;
+  align-items: center;
 }
 
-.bio {
-
-}
-// описание сотрудника
 .about {
-  border: 1px solid #D78DFF;
-  border-radius: 40px;
-  padding: 30px;
+  padding: 30px 0 50px 30px;
+}
+
+.name {
+  font-size: 23px;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+}
+
+
+// описание сотрудника
+.description {
   display: flex;
   flex-direction: column;
 }
 
 .item {
   display: flex;
+  flex: 1;
+  font-size: 20px;
+
+  &:not(:last-child) {
+    padding-bottom: 20px;
+  }
+}
+
+.label {
+  color: #D78DFF;
+  width: 170px;
 }
 
 .text {
-  font-size: 16px;
-  padding-right: 10px;
+  width: 780px;
+  font-size: 20px;
+  padding-bottom: 30px;
 }
 
-.workTime {
+.headerSchedule {
+  display: flex;
+  justify-content: space-between;
 
+  border-bottom: 1px solid #D78DFF;
+
+  padding-bottom: 20px;
 }
+
+.scheduleItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 14px 0;
+  border-bottom: 1px solid #D78DFF;
+}
+
+.labelSchedule {
+  width: 200px;
+  font-size: 20px;
+  font-weight: 500;
+
+  &:first-child {
+    width: 400px;
+  }
+
+  &:nth-child(3) {
+    width: 250px;
+  }
+
+  &:not(:last-child) {
+    padding-right: 30px;
+  }
+}
+
+.scheduleItem {
+  display: flex;
+  font-size: 20px;
+}
+
+.day {
+  text-align: center;
+  line-height: 38px;
+  font-size: 20px;
+  width: 45px;
+  height: 38px;
+  border-radius: 40px;
+  background-color: #D78DFF;
+  color: white;
+
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+
+.days {
+  display: flex;
+  width: 400px;
+  padding-right: 30px;
+}
+
+.time {
+  width: 200px;
+  padding-right: 30px;
+}
+
+.date {
+  width: 250px;
+  padding-right: 30px;
+}
+
+.color {
+  width: 200px;
+  height: 20px;
+  border-radius: 15px;
+}
+
 

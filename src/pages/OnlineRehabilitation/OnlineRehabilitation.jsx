@@ -7,7 +7,8 @@ import {Card} from "../../components/Card/Card";
 import Modal from "../../components/Modal/Modal";
 import {Recommendation} from "../../components/Recommendation/Recommendation";
 import {AppointmentForm} from "../../components/AppointmentForm/AppointmentForm";
-
+import AlexMitkin from "../../assets/doc/AlexMitkin.JPG";
+import {Circles} from "../../components/Circles/Circles";
 
 export const OnlineRehabilitation = () => {
 
@@ -46,36 +47,41 @@ export const OnlineRehabilitation = () => {
                         name={"Александр Митькин"}
                         profession={"Врач - невролог реабилитолог"}
                         title={"наш профессионал"}
-                        text={"Онлайн-реабилитация — лучшее решение для тех, кого\n" +
-                            "  беспокоит травма, но нет возможности лично посетить реабилитолога. Наши специалисты\n" +
-                            "  помогут вам восстановиться после травмы, избавиться от боли в спине и суставах и как\n" +
-                            "  можно скорее вернуться в спорт."}
+                        text={`
+                            Специализируюсь на диагностике и лечении острого и хронического болевого синдрома 
+                            (головная боль, боль в шее и спине, миофасциальный болевой синдром, невропатическая боль и тд).
+                            Нестандартный подход к лечению болевого синдрома, не ограниченный фармакологической терапией.
+                            Имею большой опыт по профилю спортивной медицины, кинезио и мануальной терапии.`
+                        }
                         button={"Записаться на прием"}
+                        clickHandle={cardAction}
+                        avatar={AlexMitkin}
                     />
 
                     <div className={s.services}>
                         <div className={s.servicesTitleWrap}>
                             <h2 className={s.servicesTitle}>Онлайн-программы</h2>
                         </div>
-                        {(isOnlineServiceListLoading ? [...Array(3)] : onlineServiceList.items)?.map((item, idx) =>
-                            isOnlineServiceListLoading
-                                ? (<div key={idx}>
+                        {
+                            (isOnlineServiceListLoading ? [...Array(3)] : onlineServiceList.items)?.map((item, idx) =>
+
+                                isOnlineServiceListLoading ? (
+                                    <div key={idx}>
                                         <Card key={idx} isLoading={true}/>
                                     </div>
-                                )
-                                : (
+                                ) : (
                                     <div key={idx} onClick={(event) => setModal(event, item)}>
                                         <Card
                                             id={item._id}
-                                            price={item.price}
                                             name={item.name}
                                             description={item.description}
-                                            text={item.text}
+                                            recommendations={item.text}
                                             imageUrl={(item.imageUrl) ? `http://localhost:4444${item.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
                                         />
                                     </div>
                                 )
-                        )}
+                            )
+                        }
                     </div>
                 </div>
             </div>
@@ -86,6 +92,13 @@ export const OnlineRehabilitation = () => {
                     services={onlineServiceList.items}
                     source_name={'rehabilitation'}
                 />
+
+                <Circles smallSize={270} smallAxisX={-140} smallAxisY={170}
+                         bigSize={420} bigAxisX={-90} bigAxisY={215}/>
+
+                <Circles smallSize={345} smallAxisX={945} smallAxisY={220}
+                         bigSize={530} bigAxisX={1020} bigAxisY={-40}/>
+
             </div>
 
             <Modal type='modalService'>
@@ -93,8 +106,9 @@ export const OnlineRehabilitation = () => {
                     isFull={true}
                     id={service._id}
                     name={service.name}
+                    imageUrl={(service.imageUrl) ? `http://localhost:4444${service.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
                     description={service.description}
-                    text={service.text}
+                    recommendations={service.text}
                     handleAction={cardAction}
                 />
             </Modal>

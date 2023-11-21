@@ -1,11 +1,19 @@
 .block {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding-bottom: 50px;
 }
 
 .label {
-  padding: 0 0 5px 15px;
-  font-size: 16px;
+  width: 180px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+
+  &:not(:last-child) {
+    padding-right: 20px;
+  }
 }
 
 .message {
@@ -16,28 +24,62 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30px;
-  border-radius: 40px;
-  border: 1px solid #D78DFF;
+  flex-direction: column;
+}
+
+.headerSchedule {
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid #D78DFF;
+  padding-bottom: 20px;
 }
 
 .schedule {
   display: flex;
-  flex-direction: column;
-
-  padding: 50px;
-  border-radius: 40px;
-  border: 1px solid #D78DFF;
-
-  position: relative;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  border-bottom: 1px solid #D78DFF;
+  padding-top: 14px;
 
   &:not(:last-child) {
     margin-right: 20px;
   }
 }
 
+.item {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.edit {
+  border-radius: 15px;
+  width: 200px;
+  margin: 0;
+}
+
+.remove {
+  border-radius: 15px;
+  width: 200px;
+  border: none;
+  background-color: #b9b9e0;
+
+  &:hover {
+    background-color: #9080ff;
+    border: none;
+  }
+}
+
+.workingHours {
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+}
 
 .dateContainer {
+  width: 160px;
   display: flex;
   flex-direction: column;
 }
@@ -49,14 +91,52 @@
   padding: 20px;
   outline: none;
   border: 1px solid #D78DFF;
-  border-radius: 40px;
+  border-radius: 15px;
 
   &:focus {
     box-shadow: 0 2px 2px rgb(216, 159, 246);
   }
 }
 
+.period {
+  width: 160px;
+  margin-right: 20px;
+}
+
+.color {
+  width: 160px;
+  margin-right: 30px;
+  padding-left: 10px;
+}
+
 .buttonAddDate {
   margin-top: 0;
   margin-bottom: 20px;
+  border-radius: 15px;
+}
+
+.scheduleButtons {
+  display: flex;
+  flex-direction: column;
+}
+
+.labelDays {
+  width: 520px;
+}
+
+.buttons {
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.buttonCancel {
+  border: none;
+  background-color: #b9b9e0;
+
+  &:hover {
+    background-color: #9080ff;
+    border: none;
+  }
 }

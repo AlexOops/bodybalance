@@ -8,10 +8,13 @@ import {LocalizationProvider} from "@mui/x-date-pickers";
 import {ScheduleEmployer} from "../ScheduleEmployer/ScheduleEmployer";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {useSelector} from "react-redux";
+import {Edit} from "../../Edit/Edit";
 
 export const Employer = ({employer, handleUpdatedUsers}) => {
 
     const [isEditing, setIsEditing] = useState(false);
+    const [isEditingSchedule, setIsEditingSchedule] = useState(false);
+
     const [employerData, setEmployerData] = useState({});
     const [avatarUrl, setAvatarUrl] = useState('');
     const [message, setMessage] = useState('');
@@ -44,15 +47,10 @@ export const Employer = ({employer, handleUpdatedUsers}) => {
         setIsEditing(false);
     }
 
-    const handleCancelClick = () => {
-
-        setIsEditing(false);
-    }
-
-    const onClickEditing = () => {
-
-        setIsEditing(true);
-    }
+    const handleCancelClick = () => setIsEditing(false);
+    const onClickEditing = () => setIsEditing(true);
+    const onClickAddSchedule = () => setIsEditingSchedule(true);
+    const onClickCancelSchedule = () => setIsEditingSchedule(false);
 
     const handleUploadedAvatarUrl = (updatedAvatarUrl) => {
         setAvatarUrl(updatedAvatarUrl);
@@ -60,75 +58,170 @@ export const Employer = ({employer, handleUpdatedUsers}) => {
         handleUpdatedUsers(); // обновляем в родителе
     }
 
+    const getDayName = (dayNumber) => {
+        const date = new Date();
+        date.setDate((date.getDate() - date.getDay()) + dayNumber);
+        return <div className={s.day}>{date.toLocaleDateString('ru-RU', {weekday: 'short'})}</div>;
+    };
+
     return (
         <div className={s.block}>
-            <h3 className={s.title}>Карточка сотрудника</h3>
 
-            {employerData && employerData.employer ? (
+            {
+                employerData && employerData.employer ? (
 
-                <div className={s.container}>
+                    <div className={s.container}>
 
-                    <div className={s.card}>
+                        <div className={s.card}>
 
-                        <div className={s.avatar}>
-                            <CustomAvatar avatarUrl={avatarUrl ? avatarUrl : employerData.avatarUrl}
-                                          fullName={employerData.fullName} size={'100px'}/>
+                            <div className={s.header}>
 
-                            <ImageUploader uploadUrl={`/profile/updateAvatar/${employerData._id}`} handleUpdatedImageUrl={handleUploadedAvatarUrl}/>
+                                <div className={s.avatar}>
+                                    <CustomAvatar avatarUrl={avatarUrl ? avatarUrl : employerData.avatarUrl}
+                                                  fullName={employerData.fullName} size={'100px'}/>
+
+                                    <ImageUploader uploadUrl={`/profile/updateAvatar/${employerData._id}`}
+                                                   handleUpdatedImageUrl={handleUploadedAvatarUrl}/>
+                                </div>
+
+                                <div className={s.about}>
+                                    <div className={s.name}>{employerData.fullName}</div>
+                                    <div className={s.item}>{employerData.employer.profession}</div>
+                                </div>
+
+                            </div>
+
+
+                            <div className={s.description}>
+
+                                <Edit text={'Данные специалиста'} action={onClickEditing}/>
+
+                                {
+                                    isEditing ? (
+
+                                        <div className={s.card}>
+                                            <EditForm data={employerData} setData={setEmployerData}
+                                                      onSave={handleSaveClick}
+                                                      onCancel={handleCancelClick}/>
+                                        </div>
+
+                                    ) : (
+
+                                        <ul className={s.card}>
+                                            <li className={s.item}>
+                                                <div className={s.label}>Имя и фамилия:</div>
+                                                <div className={s.text}>{employerData.fullName}</div>
+                                            </li>
+
+                                            <li className={s.item}>
+                                                <div className={s.label}>Почта:</div>
+                                                <div className={s.text}>{employerData.email}</div>
+                                            </li>
+
+                                            <li className={s.item}>
+                                                <div className={s.label}>Телефон:</div>
+                                                <div className={s.text}>{employerData.employer.phone} </div>
+                                            </li>
+
+                                            <li className={s.item}>
+                                                <div className={s.label}>Специальность:</div>
+                                                <div className={s.text}>{employerData.employer.profession}</div>
+                                            </li>
+
+                                            <li className={s.item}>
+                                                <div className={s.label}>Описание:</div>
+                                                <div className={s.text}>{employerData.employer.description}</div>
+                                            </li>
+
+                                            <li className={s.item}>
+                                                <div className={s.label}>Достижения:</div>
+                                                <div className={s.text}>{employerData.employer.achievements}</div>
+                                            </li>
+
+                                            <li className={s.item}>
+                                                <div className={s.label}>Дата создания:</div>
+                                                <div className={s.text}>
+                                                    {employerData.employer.createdAt && new Date(employerData.employer.createdAt).toLocaleDateString('ru-RU')}
+                                                </div>
+                                            </li>
+                                        </ul>
+
+                                    )
+                                }
+
+                                <Edit text={'График работы'} action={onClickAddSchedule}/>
+
+                                {
+                                    isEditingSchedule ?
+
+                                        (
+
+                                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                                <ScheduleEmployer
+                                                    employerId={employer.employer._id}
+                                                    employerFullName={employer.fullName}
+                                                    schedulesEmployer={schedulesEmployer}
+                                                    onClickCancelSchedule={onClickCancelSchedule}
+                                                />
+                                            </LocalizationProvider>
+
+                                        ) : (
+
+                                            <>
+                                                {
+                                                    schedulesEmployer && schedulesEmployer.length > 0 ?
+
+                                                        (
+                                                            <>
+                                                                <div className={s.headerSchedule}>
+                                                                    <div className={s.labelSchedule}>Дни недели</div>
+                                                                    <div className={s.labelSchedule}>Время работы</div>
+                                                                    <div className={s.labelSchedule}>Период</div>
+                                                                    <div className={s.labelSchedule}>Цвет расписания</div>
+                                                                </div>
+
+                                                                <div className={s.ScheduleList}>
+                                                                    {
+                                                                        schedulesEmployer.map((schedule, idx) => (
+
+                                                                            <div className={s.scheduleItem} key={idx}>
+
+                                                                                <div
+                                                                                    className={s.days}>{schedule.daysOfWeek.map(day => getDayName(day))}</div>
+
+                                                                                <div
+                                                                                    className={s.time}>{schedule.startTime} - {schedule.endTime}</div>
+
+                                                                                <div className={s.date}>
+                                                                                    {schedule.startRecur && new Date(schedule.startRecur).toLocaleDateString('ru-RU') + ' - '}
+                                                                                    {schedule.endRecur && new Date(schedule.endRecur).toLocaleDateString('ru-RU')}
+                                                                                </div>
+
+                                                                                <div className={s.color}
+                                                                                     style={{backgroundColor: schedule.color}}></div>
+                                                                            </div>
+                                                                        ))
+                                                                    }
+                                                                </div>
+                                                            </>
+
+                                                        ) : (
+
+                                                            <div className={s.text}>
+                                                                Расписание не указано!
+                                                            </div>
+                                                        )
+                                                }
+
+                                            </>
+                                        )
+                                }
+                            </div>
                         </div>
 
-                        <div className={s.about}>
-
-                            {
-                                isEditing ? (
-
-                                    <div className={s.card}>
-                                        <EditForm data={employerData} setData={setEmployerData} onSave={handleSaveClick}
-                                                  onCancel={handleCancelClick}/>
-                                    </div>
-
-                                ) : (
-
-                                    <div className={s.card}>
-                                        <div className={s.item}>
-                                            <p className={s.text}>Фамилия и Имя: </p>{employerData.fullName}</div>
-                                        <div className={s.item}>
-                                            <p className={s.text}>Почта: </p>{employerData.email}</div>
-                                        <div className={s.item}>
-                                            <p className={s.text}>Телефон: </p>{employerData.employer.phone}
-                                        </div>
-                                        <div className={s.item}>
-                                            <p className={s.text}>Профессия: </p>{employerData.employer.profession}
-                                        </div>
-                                        <div className={s.item}>
-                                            <p className={s.text}>Описание: </p>{employerData.employer.description}
-                                        </div>
-                                        <div className={s.item}>
-                                            <p className={s.text}>Достижения: </p>{employerData.employer.achievements}
-                                        </div>
-                                        <div className={s.item}>
-                                            <p className={s.text}>
-                                                Дата создания: <span>{employerData.employer.createdAt}</span>
-                                            </p>
-                                        </div>
-
-                                        <button className={'adminButton'} onClick={onClickEditing}>Редактировать</button>
-                                    </div>
-                                )
-                            }
-                        </div>
                     </div>
 
-                    <div className={s.workTime}>
-
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <ScheduleEmployer employerId={employer.employer._id} employerFullName={employer.fullName} schedulesEmployer={schedulesEmployer} />
-                        </LocalizationProvider>
-
-                    </div>
-                </div>
-
-            ) : null}
+                ) : null}
 
         </div>
     );

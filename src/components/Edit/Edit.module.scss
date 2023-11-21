@@ -1,0 +1,49 @@
+.info {
+  color: var(--pink, #D78DFF);
+  font-size: 24px;
+  font-weight: 500;
+  padding-bottom: 24px;
+  padding-top: 50px;
+
+  display: flex;
+  align-items: center;
+}
+
+.img {
+  padding-left: 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover::before {
+    background-color: #9747FF;
+  }
+}
+
+.img::before {
+  margin-left: 26px;
+  position: absolute;
+  content: '';
+  background-color: #D78DFF;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.img::after {
+  margin-left: 32px;
+  padding-bottom: 9px;
+  position: absolute;
+  content: url('../../assets/pen.svg');
+  width: 24px;
+  height: 24px;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

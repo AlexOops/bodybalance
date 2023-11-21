@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import {useDispatch} from "react-redux";
 import {fetchSchedules} from "../../../redux/slices/schedules";
 
-export const ScheduleEmployer = ({employerId, employerFullName, schedulesEmployer}) => {
+export const ScheduleEmployer = ({employerId, employerFullName, schedulesEmployer, onClickCancelSchedule}) => {
 
     const [message, setMessage] = useState('');
     const dispatch = useDispatch();
@@ -34,9 +34,8 @@ export const ScheduleEmployer = ({employerId, employerFullName, schedulesEmploye
         setSchedules(schedulesEmployer || []);
     }, [schedulesEmployer]);
 
-    const handleShowDateFields = () => {
-        setShowDate(true);
-    }
+    const handleShowDateFields = () => setShowDate(true);
+    const handleHideDateFields = () => setShowDate(false);
 
     const handleSelectChange = (index, e) => {
         const newDaysOfWeek = e.target.value;
@@ -73,25 +72,29 @@ export const ScheduleEmployer = ({employerId, employerFullName, schedulesEmploye
     }
 
     const handleRemoveSchedule = async (scheduleId) => {
-        const scheduleToRemove = schedules.filter(s => s._id === scheduleId);
+        const isTempSchedule  = schedules.some(schedule => schedule.tempId  === scheduleId);
 
-        if (scheduleToRemove && scheduleToRemove.tempId) {
-            setSchedules(schedules.filter(s => s._id !== scheduleId))
-        }
+        if (isTempSchedule) { // временное
 
-        try {
-            const response = await axios.delete(`/admin/schedules/${scheduleId}`)
+            const updatedSchedules = schedules.filter(schedule => schedule.tempId !== scheduleId);
+            setSchedules(updatedSchedules);
 
-            if (response.status === 200) {
-                const updatedSchedules = schedules.filter(schedule => schedule._id !== scheduleId);
-                setSchedules(updatedSchedules);
+        } else {
+
+            try {
+                const response = await axios.delete(`/admin/schedules/${scheduleId}`)
+
+                if (response.status === 200) {
+                    const updatedSchedules = schedules.filter(schedule => schedule._id !== scheduleId);
+                    setSchedules(updatedSchedules);
+                }
+
+                setMessage(response.data.message);
+                dispatch(fetchSchedules());
+
+            } catch (e) {
+                setMessage('Не удалось удалить расписание!', e)
             }
-
-            setMessage(response.data.message);
-            dispatch(fetchSchedules());
-
-        } catch (e) {
-            setMessage('Не удалось удалить расписание!', e)
         }
     }
 
@@ -117,11 +120,16 @@ export const ScheduleEmployer = ({employerId, employerFullName, schedulesEmploye
     };
 
     const styles = {
+
         textFieldColor: {
-            marginTop: '15px',
+            width: '100%',
             '& .MuiOutlinedInput-root': {
                 '& fieldset': {
+                    borderRadius: '15px',
                     border: 'none',
+                },
+                '& input': {
+                    height: '20px',
                 },
             },
         },
@@ -129,7 +137,7 @@ export const ScheduleEmployer = ({employerId, employerFullName, schedulesEmploye
             cursor: 'pointer',
             '& .MuiOutlinedInput-root': {
                 marginBottom: '20px',
-                borderRadius: '40px',
+                borderRadius: '15px',
                 outline: '1px solid #D78DFF',
 
                 '&:hover': {
@@ -152,8 +160,9 @@ export const ScheduleEmployer = ({employerId, employerFullName, schedulesEmploye
     const selectStyles = {
         boxShadow: "none",
         cursor: 'pointer',
-        marginBottom: '20px',
-        borderRadius: '40px',
+        width: '495px',
+        marginRight: '20px',
+        borderRadius: '15px',
         border: '1px solid #D78DFF',
         ".MuiOutlinedInput-notchedOutline": {border: 0},
         "&.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
@@ -178,16 +187,19 @@ export const ScheduleEmployer = ({employerId, employerFullName, schedulesEmploye
         <div className={s.block}>
 
             <div className={s.container}>
+
+                <div className={s.headerSchedule}>
+                    <div className={`${s.label} ${s.labelDays}`}>Дни недели</div>
+                    <div className={s.label}>Время работы</div>
+                    <div className={s.label}>Период</div>
+                    <div className={s.label}>Цвет расписания</div>
+                </div>
+
                 {
                     schedules.map((schedule, index) => (
 
                         <div className={s.schedule} key={index}>
 
-                            <div className="remove"
-                                 onClick={() => handleRemoveSchedule(schedule._id)}>
-                            </div>
-
-                            <label className={s.label}>Выберите дни недели</label>
                             <FormControl>
                                 <Select
                                     sx={selectStyles}
@@ -205,80 +217,94 @@ export const ScheduleEmployer = ({employerId, employerFullName, schedulesEmploye
                                 </Select>
                             </FormControl>
 
-                            <label className={s.label}>Время начала рабочего дня</label>
-                            <TextField
-                                sx={styles.textField}
-                                type="time"
-                                value={schedule.startTime}
-                                onChange={(e) => handleScheduleChange(index, 'startTime', e.target.value)}
-                            />
+                            <div className={s.workingHours}>
+                                <TextField
+                                    sx={styles.textField}
+                                    type="time"
+                                    value={schedule.startTime}
+                                    onChange={(e) => handleScheduleChange(index, 'startTime', e.target.value)}
+                                />
 
-                            <label className={s.label}>Время окончания рабочего дня</label>
-                            <TextField
-                                sx={styles.textField}
-                                type="time"
-                                value={schedule.endTime}
-                                onChange={(e) => handleScheduleChange(index, 'endTime', e.target.value)}
-                            />
+                                <TextField
+                                    label={""}
+                                    sx={styles.textField}
+                                    type="time"
+                                    value={schedule.endTime}
+                                    onChange={(e) => handleScheduleChange(index, 'endTime', e.target.value)}
+                                />
 
-                            {
-                                showDate ?
-                                    ( //ПОПРАВИТЬ
-                                        <div className={s.dateContainer}>
-                                            <label className={s.label}> Дата начала</label>
-                                            <DatePicker
-                                                className={s.dateSchedule}
-                                                value={schedule.startRecur || null}
-                                                onChange={(date) => handleScheduleChange(index, 'startRecur', date ? formatDate(date) : null)}
-                                            />
+                            </div>
 
-                                            <label className={s.label}> Дата окончания</label>
-                                            <DatePicker
-                                                className={s.dateSchedule}
-                                                value={schedule.endRecur || null}
-                                                onChange={(date) => handleScheduleChange(index, 'endRecur', date ? formatDate(date) : null)}
-                                            />
-                                        </div>
-                                    ) : null
-                            }
+                            <div className={s.period}>
+                                {
+                                    showDate ?
+                                        ( //ПОПРАВИТЬ
+                                            <div className={s.dateContainer}>
 
-                            <button className={`adminButton ${s.buttonAddDate}`} onClick={handleShowDateFields}>
-                                Указать дату графика работы
-                            </button>
+                                                <DatePicker
+                                                    className={s.dateSchedule}
+                                                    value={schedule.startRecur && new Date(schedule.startRecur).toLocaleDateString('ru-RU') || null}
+                                                    onChange={(date) => handleScheduleChange(index, 'startRecur', date ? formatDate(date) : null)}
 
-                            <TextField
-                                label="Цвет для графика работы"
-                                sx={styles.textFieldColor}
-                                type="color"
-                                value={schedule.color || '#e5c4f8'}
-                                onChange={(e) => handleScheduleChange(index, 'color', e.target.value)}
-                            />
+                                                />
 
-                            <TextField
-                                label="Имя и Фамилия"
-                                sx={styles.textFieldColor}
-                                value={employerFullName}
-                                disabled={true}
-                            />
+                                                <DatePicker
+                                                    className={s.dateSchedule}
+                                                    value={schedule.endRecur && new Date(schedule.endRecur).toLocaleDateString('ru-RU') || null}
+                                                    onChange={(date) => handleScheduleChange(index, 'endRecur', date ? formatDate(date) : null)}
+                                                />
 
+                                                <button className={`adminButton ${s.buttonAddDate}`}
+                                                        onClick={handleHideDateFields}>
+                                                    Отмена
+                                                </button>
 
-                            {
-                                schedule._id ?
-                                    (
-                                        <button className={'adminButton'} onClick={() => handleEditSchedule(index)}>Редактировать
-                                            график
-                                            работы</button>
-                                    ) : (
-                                        <button className={'adminButton'} onClick={handleSubmit}>Сохранить график
-                                            работы</button>
-                                    )
-                            }
+                                            </div>
+                                        ) : (
+                                            <button className={`adminButton ${s.buttonAddDate}`}
+                                                    onClick={handleShowDateFields}>
+                                                Указать период
+                                            </button>
+                                        )
+                                }
+                            </div>
+
+                            <div className={s.color}>
+                                <TextField
+                                    sx={styles.textFieldColor}
+                                    type="color"
+                                    value={schedule.color || '#e5c4f8'}
+                                    onChange={(e) => handleScheduleChange(index, 'color', e.target.value)}
+                                />
+
+                            </div>
+
+                            <div className={s.scheduleButtons}>
+                                {
+                                    schedule._id ?
+                                        (
+                                            <button className={`adminButton ${s.edit}`}
+                                                    onClick={() => handleEditSchedule(index)}>
+                                                Редактировать график работы</button>
+                                        ) : (
+                                            <button className={`adminButton ${s.edit}`} onClick={handleSubmit}>
+                                                Сохранить график работы</button>
+                                        )
+                                }
+
+                                <button className={`adminButton ${s.remove}`}
+                                        onClick={() => handleRemoveSchedule(schedule._id)}>Удалить график
+                                </button>
+                            </div>
                         </div>
                     ))
                 }
             </div>
 
-            <button className={'adminButton'} onClick={addNewSchedule}>Добавить расписание работы</button>
+            <div className={s.buttons}>
+                <button className={'adminButton'} onClick={addNewSchedule}>Добавить расписание</button>
+                <button className={`adminButton ${s.buttonCancel}`} onClick={onClickCancelSchedule}>Отмена</button>
+            </div>
 
             <div className={s.message}>
                 {message}

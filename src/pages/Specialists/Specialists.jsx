@@ -87,17 +87,17 @@ export const Specialists = () => {
                                                 key={idx}
                                                 onClick={() => openFullCard(employer)}>
 
-                                            <Employer
-                                                id={employer._id}
-                                                imageUrl={(employer.avatarUrl) ? `${process.env.REACT_APP_API_URI}${employer.avatarUrl}` :
-                                                    `${process.env.REACT_APP_API_URI}/uploads/default_service.png`}
-                                                name={employer.fullName}
-                                                profession={employer.employer.profession}
-                                                description={employer.employer.description}
-                                                achievements={employer.employer.achievements}
-                                                certificates={employer.employer.certificates}
-                                                openImageFromParent={openEmployerCertificate}
-                                            />
+                                        <Employer
+                                            id={employer._id}
+                                            imageUrl={(employer.avatarUrl) ? `${process.env.REACT_APP_API_URI}${employer.avatarUrl}` :
+                                                `${process.env.REACT_APP_API_URI}/uploads/default_service.png`}
+                                            name={employer.fullName}
+                                            profession={employer.employer.profession}
+                                            description={employer.employer.description}
+                                            achievements={employer.employer.achievements}
+                                            certificates={employer.employer.certificates}
+                                            openImageFromParent={openEmployerCertificate}
+                                        />
                                     </div>
                                 })}
 
@@ -111,7 +111,8 @@ export const Specialists = () => {
 
                                           imageUrl={card.avatarUrl ?
                                               `${process.env.REACT_APP_API_URI}${card.avatarUrl}` :
-                                              `${process.env.REACT_APP_API_URI}/uploads/default_service.png`} name={card.fullName}
+                                              `${process.env.REACT_APP_API_URI}/uploads/default_service.png`}
+                                          name={card.fullName}
                                           profession={card.employer.profession}
                                           description={card.employer.description}
                                           achievements={card.employer.achievements}
@@ -122,7 +123,8 @@ export const Specialists = () => {
                         </Modal>
                         <Modal type={'modalGallery'}>
                             <div className={s.modalGallery}>
-                                <img src={certificateUrl ? `${process.env.REACT_APP_API_URI}${certificateUrl}`: ""} alt="сертификат"/>
+                                <img src={certificateUrl ? `${process.env.REACT_APP_API_URI}${certificateUrl}` : ""}
+                                     alt="сертификат"/>
                             </div>
                         </Modal>
                     </div>
@@ -130,11 +132,12 @@ export const Specialists = () => {
             </div>
             <div className="container" ref={scrollToRef}>
 
-                <AppointmentForm isSpecialist={true}
-                                 name={'Быстрая запись к специалисту'}
-                                 services={services.items}
-                                 employers={employers.items}
-                                 source_name={'specialists'}
+                <AppointmentForm
+                    isSpecialist={true}
+                    name={'Быстрая запись к специалисту'}
+                    services={services.items}
+                    employers={employers.items}
+                    source_name={'specialists'}
                 />
 
                 <Circles smallSize={270} smallAxisX={-140} smallAxisY={170}
