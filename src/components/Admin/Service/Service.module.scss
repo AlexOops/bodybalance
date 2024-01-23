@@ -2,18 +2,34 @@
   padding: 30px 60px;
 }
 
-.aboutService {
+.avatar {
 
 }
 
-.name {
-
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.description {
+.item {
+  display: flex;
+  flex: 1;
+  font-size: 20px;
 
+  &:not(:last-child) {
+    padding-bottom: 20px;
+  }
 }
 
-.recommendations {
-
+.label {
+  color: #D78DFF;
+  width: 200px;
 }
+
+.text {
+  width: 780px;
+  font-size: 20px;
+  padding-bottom: 30px;
+}
+

@@ -8,6 +8,7 @@ import Modal from "../../../components/Modal/Modal";
 import {CreateService} from "../../../components/Admin/CreateService/CreateService";
 import CustomAvatar from "../../../components/Images/CustomAvatar/CustomAvatar";
 import {Service} from "../../../components/Admin/Service/Service";
+import ReactMarkdown from "react-markdown";
 
 export const Services = () => {
 
@@ -71,19 +72,24 @@ export const Services = () => {
                 {
                     isServicesLoading ? 'Загрузка услуг...'
 
-                        : services.items.map((service, idx) =>
+                        : services.items.map((service) =>
 
-                            <div className={s.card} key={idx} onClick={(e) => handleOpenService(e, service)}>
+                            <div className={s.card} key={service._id} onClick={(e) => handleOpenService(e, service)}>
 
                                 <div className="remove"
                                      onClick={(e) => handleSubmitToRemove(e, service._id)}>
                                 </div>
 
-                                <CustomAvatar avatarUrl={service.imageUrl}
-                                              fullName={service.name} size={'100px'}/>
+                                <div className={s.avatar}>
+                                    <CustomAvatar avatarUrl={service.imageUrl}
+                                                  fullName={service.name} size={'100px'}/>
+                                </div>
 
                                 <div className={s.name}>{service.name}</div>
-                                <div className={s.descriptions}>{service.recommendations}</div>
+
+                                <div className={`${s.descriptions} serviceDescription`}>
+                                    <ReactMarkdown>{service.recommendations}</ReactMarkdown>
+                                </div>
                             </div>
                         )
                 }
