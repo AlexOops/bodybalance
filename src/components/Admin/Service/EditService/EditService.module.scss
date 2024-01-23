@@ -27,6 +27,7 @@
   padding: 20px;
   border: 1px solid #d38dff;
   border-radius: 40px;
+
   &:focus {
     outline: none;
     border: 2px solid red;
@@ -49,6 +50,7 @@
 }
 
 .buttons {
+  padding-top: 20px;
   width: 100%;
 }
 
@@ -59,5 +61,5 @@
 }
 
 .cancel {
-
+  width: 180px;
 }

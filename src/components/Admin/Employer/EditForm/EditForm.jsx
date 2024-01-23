@@ -24,38 +24,38 @@ export const EditForm = ({data, setData, onSave, onCancel}) => {
         <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
 
             <label className={s.label}>
-                Фамилия и Имя:
+                <span>Фамилия и Имя:</span>
                 <input className={s.input} type="text" {...register("fullName")} />
             </label>
 
             <label className={s.label}>
-                Почта:
+                <span>Почта:</span>
                 <input className={s.input} type="email" {...register("email")} />
             </label>
 
             <label className={s.label}>
-                Телефон:
+                <span>Телефон:</span>
                 <input className={s.input} type="text" {...register("employer.phone")} />
             </label>
 
             <label className={s.label}>
-                Профессия:
+                <span>Профессия:</span>
                 <input className={s.input} type="text" {...register("employer.profession")}/>
             </label>
 
             <label className={s.label}>
-                Биография:
+                <span>Биография:</span>
                 <textarea className={s.textarea} {...register("employer.description")}/>
             </label>
 
             <label className={s.label}>
-                Достижения:
+                <span>Достижения:</span>
                 <textarea className={s.textarea} {...register("employer.achievements")}/>
             </label>
 
             <div className={s.buttons}>
-                <button type="submit">Сохранить</button>
-                <button type="button" onClick={handleCancel}>Отмена</button>
+                <button className={`adminButton ${s.save}`} type="submit">Сохранить</button>
+                <button className={`adminButton ${s.cancel}`} type="button" onClick={handleCancel}>Отмена</button>
             </div>
         </form>
     );

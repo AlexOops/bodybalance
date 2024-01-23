@@ -18,8 +18,8 @@ export const Services = () => {
 
     const scrollToRef = useRef();
 
-    const setModal = (event, obj) => {
-        setService(obj);
+    const setModal = (event, item) => {
+        setService(item);
         dispatch(openModal('modalService'));
     }
 
@@ -52,7 +52,7 @@ export const Services = () => {
 
                     <div className={s.servicesItems}>
                         {
-                            (isServicesLoading ? [...Array(6)] : services.items).map((obj, index) =>
+                            (isServicesLoading ? [...Array(6)] : services.items).map((item, index) =>
 
                                 isServicesLoading ?
                                     (
@@ -60,15 +60,15 @@ export const Services = () => {
                                             <Card key={index} isLoading={true}/>
                                         </div>
                                     ) : (
-                                        <div className={s.margin} key={obj._id} onClick={(event) => {
-                                            setModal(event, obj)
+                                        <div className={s.margin} key={item._id} onClick={(event) => {
+                                            setModal(event, item)
                                         }}>
                                             <Card
-                                                id={obj._id}
-                                                name={obj.name}
-                                                recommendations={obj.recommendations}
-                                                text={obj.text}
-                                                imageUrl={(obj.imageUrl) ? `http://localhost:4444${obj.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                                                id={item._id}
+                                                name={item.name}
+                                                recommendations={item.recommendations}
+                                                text={item.text}
+                                                imageUrl={(item.imageUrl) ? `http://localhost:4444${item.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
                                             />
                                         </div>
                                     )

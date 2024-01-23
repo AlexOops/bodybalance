@@ -253,6 +253,28 @@ input:-webkit-autofill:active {
   }
 }
 
+.serviceDescription {
+  li {
+    line-height: 130%;
+    display: flex;
+    align-items: center;
+    margin: 10px 0 10px 25px;
+    position: relative;
+  }
+
+  li::before {
+    display: block;
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: -25px;
+    top: 4px;
+    border-radius: 50%;
+    background: #D78DFF;
+  }
+}
+
 .adminButton {
   margin-top: 15px;
   border: 1px solid #D78DFF;

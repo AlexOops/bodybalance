@@ -100,9 +100,12 @@ export const Employer = ({employer, handleUpdatedUsers}) => {
                                     isEditing ? (
 
                                         <div className={s.card}>
-                                            <EditForm data={employerData} setData={setEmployerData}
-                                                      onSave={handleSaveClick}
-                                                      onCancel={handleCancelClick}/>
+                                            <EditForm
+                                                data={employerData}
+                                                setData={setEmployerData}
+                                                onSave={handleSaveClick}
+                                                onCancel={handleCancelClick}
+                                            />
                                         </div>
 
                                     ) : (
@@ -145,7 +148,6 @@ export const Employer = ({employer, handleUpdatedUsers}) => {
                                                 </div>
                                             </li>
                                         </ul>
-
                                     )
                                 }
 
@@ -155,7 +157,6 @@ export const Employer = ({employer, handleUpdatedUsers}) => {
                                     isEditingSchedule ?
 
                                         (
-
                                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                                 <ScheduleEmployer
                                                     employerId={employer.employer._id}
@@ -182,9 +183,10 @@ export const Employer = ({employer, handleUpdatedUsers}) => {
 
                                                                 <div className={s.ScheduleList}>
                                                                     {
-                                                                        schedulesEmployer.map((schedule, idx) => (
+                                                                        schedulesEmployer.map((schedule) => (
 
-                                                                            <div className={s.scheduleItem} key={idx}>
+                                                                            <div className={s.scheduleItem}
+                                                                                 key={schedule._id}>
 
                                                                                 <div
                                                                                     className={s.days}>{schedule.daysOfWeek.map(day => getDayName(day))}</div>

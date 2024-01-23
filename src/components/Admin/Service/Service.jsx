@@ -4,6 +4,8 @@ import CustomAvatar from "../../Images/CustomAvatar/CustomAvatar";
 import {ImageUploader} from "../../Images/ImageUploader/ImageUploader";
 import axios from "../../../axios";
 import {EditService} from "./EditService/EditService";
+import {Edit} from "../../Edit/Edit";
+import ReactMarkdown from "react-markdown";
 
 export const Service = ({service, handleUpdatedServices}) => {
 
@@ -70,6 +72,8 @@ export const Service = ({service, handleUpdatedServices}) => {
                                            handleUpdatedImageUrl={handleUploadedImageUrl}/>
                         </div>
 
+                        <Edit text={'Данные услуги'} action={onClickEditing}/>
+
                         {
                             isEditing ?
                                 (
@@ -81,15 +85,21 @@ export const Service = ({service, handleUpdatedServices}) => {
 
                                 ) : (
 
-                                    <div className={s.aboutService}>
-                                        <div className={s.name}><span>Название услуги: </span>{serviceData.name}</div>
-                                        <div className={s.description}>
-                                            <span>Описание услуги: </span>{serviceData.description}
+                                    <div className={s.card}>
+                                        <div className={s.item}>
+                                            <div className={s.label}>Название услуги:</div>
+                                            <div className={s.text}>{serviceData.name}</div>
                                         </div>
-                                        <div className={s.recommendations}>
-                                            <span>Рекоммендации: </span>{serviceData.recommendations}</div>
 
-                                        <button className={'adminButton'} onClick={onClickEditing}>Редактировать</button>
+                                        <div className={s.item}>
+                                            <div className={s.label}>Описание услуги:</div>
+                                            <div className={s.text}>  {serviceData.description}</div>
+                                        </div>
+
+                                        <div className={s.item}>
+                                            <div className={s.label}>Рекоммендации:</div>
+                                            <div className={`${s.text} serviceDescription`}><ReactMarkdown>{serviceData.recommendations}</ReactMarkdown></div>
+                                        </div>
                                     </div>
                                 )
                         }

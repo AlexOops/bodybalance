@@ -82,7 +82,7 @@ export const Card = (
                     {name}
                 </h3>
 
-                <div className={s.recommendations}><ReactMarkdown>{recommendations}</ReactMarkdown></div>
+                <div className={`${s.recommendations} serviceDescription`}><ReactMarkdown>{recommendations}</ReactMarkdown></div>
 
             </div>
         </div>

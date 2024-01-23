@@ -252,8 +252,6 @@ label {
   outline: 1.5px solid #D78DFF;
   border: none;
   border-radius: 40px;
-
-  font-style: normal;
   font-weight: 400;
   font-size: 20px;
   line-height: 130%;
@@ -279,7 +277,7 @@ label {
 
 .flexSBetween {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .time {
