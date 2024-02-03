@@ -63,15 +63,19 @@ export const AddVideo = ({category, onCancel, onVideoAdded}) => {
                           value={description}
                           onChange={(e) => setDescription(e.target.value)}/>
 
-                <textarea className={s.textarea}
-                          placeholder={'Ccылка на видеоролик'}
-                          value={videoUrl}
-                          onChange={(e) => setVideoUrl(e.target.value)}/>
+                <input className={s.input}
+                       placeholder={'Ccылка на видеоролик'}
+                       value={videoUrl}
+                       onChange={(e) => setVideoUrl(e.target.value)}/>
 
-                <button type={"submit"} className={'adminButton'}>Сохранить</button>
+                <div className={s.buttons}>
+                    <button type={'submit'} className={"adminButton save"}>Сохранить</button>
+                    <button className={"adminButton cancel"} onClick={handleCancel}>Отмена</button>
+                </div>
+
             </form>
 
-            <button className={'adminButton'} onClick={handleCancel}>Отмена</button>
+
         </div>
     );
 };

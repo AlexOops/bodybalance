@@ -5,13 +5,14 @@ import CustomAvatar from "../../Images/CustomAvatar/CustomAvatar";
 import {ImageUploader} from "../../Images/ImageUploader/ImageUploader";
 import {EditCatalog} from "./EditCatalog/EditCatalog";
 import {AddVideo} from "../CreateTraining/AddVideo/AddVideo";
+import {Edit} from "../../Edit/Edit";
 
 export const Training = ({catalog, handleUpdatedCatalog}) => {
 
     const [catalogData, setCatalogData] = useState();
     const [imageUrl, setImageUrl] = useState('');
     const [isEditing, setIsEditing] = useState(false);
-    const [isAddingVideo, setIsAddingVideo] = useState(false);
+    const [isEditingVideo, setIsEditingVideo] = useState(false);
     const [message, setMessage] = useState('');
 
     useEffect(() => {
@@ -22,7 +23,7 @@ export const Training = ({catalog, handleUpdatedCatalog}) => {
     const handleCancelClick = () => setIsEditing(false);
 
     // ДОБАВЛЕНИЕ ВИДЕО
-    const toggleAddVideo = () => setIsAddingVideo(prevState => !prevState);
+    const toggleAddVideo = () => setIsEditingVideo(prevState => !prevState);
 
     const handleUploadedImageUrl = (updatedImageUrl) => {
 
@@ -103,77 +104,105 @@ export const Training = ({catalog, handleUpdatedCatalog}) => {
                                                handleUpdatedImageUrl={handleUploadedImageUrl}/>
                             </div>
 
+                            <Edit text={'Данные видеокаталога'} action={onClickEditing}/>
+
                             {
                                 isEditing ?
 
                                     (
-                                        <div>
-                                            <EditCatalog data={catalogData} setData={setCatalogData}
-                                                         onSave={handleSaveClick} onCancel={handleCancelClick}/>
+                                        <div className={s.cardEdit}>
+                                            <EditCatalog data={catalogData}
+                                                         setData={setCatalogData}
+                                                         onSave={handleSaveClick}
+                                                         onCancel={handleCancelClick}
+                                            />
                                         </div>
+
 
                                     ) : (
 
-                                        <div className={s.videoCatalog}>
+                                        <div className={s.card}>
 
-                                            <div className={s.description}>
-
-                                                <div className={s.name}>
-                                                    <span>Название видеокаталога: </span>{catalogData.name}
-                                                </div>
-                                                <div className={s.description}>
-                                                    <span>Описание видеокаталога: </span>{catalogData.description}
-                                                </div>
-                                                <div className={s.recommendations}>
-                                                    <span>Категория видео: </span>{catalogData.category}</div>
-
-                                                <button className={'adminButton'} onClick={onClickEditing}>Редактировать
-                                                </button>
-
-                                                <button className={'adminButton'}
-                                                        onClick={toggleAddVideo}>Добавить видео
-                                                </button>
-
-
-                                                <div className={s.videos}>
-
-                                                    {
-                                                        catalogData.videos?.map((video, idx) =>
-
-                                                            <div className={s.video} key={idx}>
-                                                                <div className={s.videoItem}>{video.title}</div>
-                                                                <div className={s.videoItem}>{video.description}</div>
-                                                                <div className={s.videoItem}><a href={video.videoUrl}><span>{video.title}</span></a></div>
-
-                                                                <div className="remove"
-                                                                     onClick={(e) => handleSubmitToRemoveVideo(e, video._id)}>
-                                                                </div>
-                                                            </div>
-                                                        )
-                                                    }
-
-                                                </div>
-
-
+                                            <div className={s.item}>
+                                                <div className={s.label}>Название:</div>
+                                                <div className={s.text}>{catalogData.name}</div>
                                             </div>
 
-                                            <div className={s.createVideo}>
+                                            <div className={s.item}>
+                                                <div className={s.label}>Описание:</div>
+                                                <div className={s.text}>{catalogData.description}</div>
+                                            </div>
 
-                                                {
-                                                    isAddingVideo ?
-                                                        <AddVideo category={catalogData.category}
-                                                                  onCancel={toggleAddVideo}
-                                                                  onVideoAdded={onNewVideoAdded}
-                                                        />
-                                                        : null
-                                                }
-
+                                            <div className={s.item}>
+                                                <div className={s.label}>Категория видео:</div>
+                                                <div className={s.text}>{catalogData.category}</div>
                                             </div>
 
                                         </div>
                                     )
                             }
 
+                            <div>
+
+                                <Edit text={'Видеокаталог'} action={toggleAddVideo}/>
+
+                                {
+                                    isEditingVideo ?
+
+                                        (
+                                            <AddVideo category={catalogData.category}
+                                                      onCancel={toggleAddVideo}
+                                                      onVideoAdded={onNewVideoAdded}
+                                            />
+
+                                        ) : (
+
+                                            <div className={s.videos}>
+
+                                                {
+                                                    catalogData.videos && catalogData.videos.length > 0 ?
+
+                                                        (
+                                                            <>
+                                                                <div className={s.videoCard}>
+                                                                    <div className={s.videoCardItem}>Название видео</div>
+                                                                    <div className={s.videoCardItem}>Описание видео</div>
+                                                                    <div className={s.videoCardItem}>Ссылка на видео</div>
+                                                                </div>
+
+                                                                {
+                                                                    catalogData.videos.map((video) =>
+
+                                                                        <div className={s.video} key={video._id}>
+                                                                            <div className={s.videoTitle}>{video.title}</div>
+                                                                            <div className={s.videoDescription}>{video.description}</div>
+                                                                            <div className={s.videoUrl}>
+                                                                                <a className={s.link} target="_blank"
+                                                                                   href={video.videoUrl} rel="noreferrer">{video.videoUrl}</a>
+                                                                            </div>
+
+                                                                            <div className="remove"
+                                                                                 onClick={(e) => handleSubmitToRemoveVideo(e, video._id)}>
+                                                                            </div>
+                                                                        </div>
+                                                                    )
+                                                                }
+
+                                                            </>
+
+                                                        ) : (
+
+                                                            <div className={s.text}>
+                                                                В этом видеокаталоге еще нет видео!
+                                                            </div>
+                                                        )
+                                                }
+
+                                            </div>
+                                        )
+                                }
+
+                            </div>
                         </div>
 
                     ) : null

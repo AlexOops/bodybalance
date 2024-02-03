@@ -21,10 +21,6 @@
   box-shadow: 0 0 20px 0 rgba(255, 226, 255, 0.35),
   0 0 20px 0 rgba(255, 153, 255, 0.35);
 
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-
   position: relative;
 
   &:hover {
@@ -35,7 +31,9 @@
 }
 
 .name {
-  color: #9e8dff;
+  padding-top: 15px;
+  text-align: center;
+  font-weight: 500;
   font-size: 20px;
 }
 
@@ -45,5 +43,13 @@
 }
 
 .category {
-  padding-top: 10px;
+  padding-top: 20px;
+  word-wrap: break-word;
+  color: #d38dff;
+}
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

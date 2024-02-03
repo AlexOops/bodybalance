@@ -8,11 +8,6 @@
   flex-direction: column;
 }
 
-.videoCatalog {
-  display: flex;
-  align-items: flex-start;
-}
-
 .description {
   display: flex;
   flex-direction: column;
@@ -20,23 +15,17 @@
   max-width: 500px;
 }
 
-.createVideo {
-  padding-left: 50px;
-}
 
 .videos {
-  padding-top: 30px;
   display: flex;
   flex-direction: column;
 }
 
 .video {
+  padding: 10px;
   display: flex;
-
-  border: 1px solid #D78DFF;
-  border-radius: 40px;
-
   position: relative;
+  border-bottom: 1px solid #d38dff;
 }
 
 .videoItem {
@@ -46,4 +35,81 @@
   &:not(:last-child) {
     border-right: 1px solid #D78DFF;
   }
+}
+
+// display video catalog
+
+.videoCard {
+  display: flex;
+  border-bottom: 1px solid #D78DFF;
+  padding-bottom: 20px;
+}
+
+.videoCardItem {
+  width: 200px;
+  font-size: 20px;
+  font-weight: 500;
+
+  &:first-child {
+    width: 300px;
+  }
+
+
+  &:not(:last-child) {
+    padding-right: 30px;
+  }
+}
+
+.videoTitle {
+  width: 300px;
+  padding-right: 30px;
+}
+
+.videoDescription {
+  width: 200px;
+  padding-right: 30px;
+}
+
+.videoUrl {
+  width: 250px;
+  padding-right: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.link {
+  color: #9747FF;
+}
+.cardEdit {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.item {
+  display: flex;
+  flex: 1;
+  font-size: 20px;
+
+  &:not(:last-child) {
+    padding-bottom: 20px;
+  }
+}
+
+.label {
+  color: #D78DFF;
+  width: 180px;
+}
+
+.text {
+  width: 780px;
+  font-size: 20px;
+  padding-bottom: 30px;
 }

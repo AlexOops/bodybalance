@@ -25,23 +25,23 @@ export const EditCatalog = ({data, setData, onCancel, onSave}) => {
             <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
 
                 <label className={s.label}>
-                    Название видеокаталога:
+                    <span>Название:</span>
                     <input className={s.input} type="text" {...register("name")} />
                 </label>
 
                 <label className={s.label}>
-                    Описание видеокаталога:
+                    <span>Описание:</span>
                     <textarea className={s.textarea} {...register("description")}/>
                 </label>
 
                 <label className={s.label}>
-                    Категория:
+                    <span>Категория:</span>
                     <textarea className={s.textarea} {...register("category")}/>
                 </label>
 
                 <div className={s.buttons}>
-                    <button type="submit">Сохранить</button>
-                    <button type="button" onClick={handleCancel}>Отмена</button>
+                    <button type={'submit'} className={"adminButton save"}>Сохранить</button>
+                    <button className={"adminButton cancel"} onClick={handleCancel}>Отмена</button>
                 </div>
 
             </form>
