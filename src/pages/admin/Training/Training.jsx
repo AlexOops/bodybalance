@@ -61,7 +61,7 @@ export const Training = () => {
 
             <div className={s.controlBar}>
                 <button className={'adminButton'} onClick={(e) => handleOpenModalForAddNewTrainingCatalog(e)}>
-                    Создать каталог тренировок
+                    Создать каталог
                 </button>
 
                 <Modal type={'modalNewCatalog'}>

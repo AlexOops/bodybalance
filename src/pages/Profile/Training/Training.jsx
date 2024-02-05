@@ -3,7 +3,6 @@ import s from "./Training.module.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchTraining} from "../../../redux/slices/training";
 import training_1 from "../../../assets/training_1.png";
-import play_item from "../../../assets/play_item.svg";
 import {VideoPlaylist} from "../../../components/Training/VideoPlaylist/VideoPlaylist";
 
 export const Training = () => {
@@ -15,7 +14,7 @@ export const Training = () => {
 
     useEffect(() => {
         dispatch(fetchTraining());
-    }, [dispatch])
+    }, [dispatch]);
 
     const patientData = patients && patients.items ? patients.items.find((patient) => patient.userId === user._id) : null;
 
@@ -28,58 +27,51 @@ export const Training = () => {
     const handleCatalogClick = (catalog) => setSelectedCatalog(catalog);
 
     return (
-        <>
-            <h1 className={s.title}> Мои тренировки</h1>
+        <div className={s.container}>
 
+            {
+                selectedCatalog ?
 
-                <div className={s.trainingList}>
+                    (
+                        <VideoPlaylist trainingCatalog={selectedCatalog}/>
 
-                    {
-                        selectedCatalog ?
+                    ) : (
 
-                            (
-                                <VideoPlaylist trainingCatalog={selectedCatalog}/>
+                        <div className={s.block}>
 
-                            ) : (
+                            <h1 className={s.title}>Мои тренировки</h1>
 
-                                <div className={s.trainingList}>
+                            <div className={s.text}>
+                                В разделе с тренировками вы можете найти комплексы упражнений, специально
+                                разработанные для лечения суставов и реабилитации. Эти упражнения помогут вам
+                                укрепить суставы, улучшить их гибкость и мобильность, а также снять боль и восстановить
+                                функциональность.
+                            </div>
 
-                                    <div className={s.content}>
-                                        <div className={s.text}>В разделе с тренировками вы можете найти комплексы упражнений, специально
-                                            разработанные для лечения суставов и реабилитации. Эти упражнения помогут вам укрепить
-                                            суставы, улучшить их гибкость и мобильность, а также снять боль и восстановить
-                                            функциональность.
+                            {
+                                trainingCatalog ? (
+
+                                    <div className={s.item} onClick={() => handleCatalogClick(trainingCatalog)}>
+                                        <img
+                                            className={s.itemImage}
+                                            src={(trainingCatalog.imageUrl) ? `http://localhost:4444${trainingCatalog.imageUrl}` : training_1}
+                                            alt="trn1"/>
+
+                                        <div className={s.itemContent}>
+                                            <p className={s.itemText}>{trainingCatalog.name}</p>
+
+                                            <div className={s.play}></div>
+
                                         </div>
 
                                     </div>
-
-                                    {
-                                        trainingCatalog ?
-
-                                            (
-                                                <div className={s.trainingItem}
-                                                     onClick={() => handleCatalogClick(trainingCatalog)}>
-                                                    <img src={training_1} alt="trn1"/>
-                                                    <div className={s.trainingItemWrp}>
-                                                        <p className={s.trainingItemText}>{trainingCatalog.name}</p>
-                                                        <img src={play_item}
-                                                             className={s.trainingItemImg}
-                                                             alt="play"
-                                                             width={36}
-                                                             height={36}/>
-                                                    </div>
-                                                </div>
-                                            ) : (
-                                                <span className={s.message}>Вам еще не открыт доступ!</span>
-                                            )
-                                    }
-
-                                </div>
-                            )
-                    }
-
-
-            </div>
-        </>
+                                ) : (
+                                    <span className={s.message}>Вам еще не открыт доступ!</span>
+                                )
+                            }
+                        </div>
+                    )
+            }
+        </div>
     );
 };

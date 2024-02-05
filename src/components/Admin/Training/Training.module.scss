@@ -63,11 +63,17 @@
 .videoTitle {
   width: 300px;
   padding-right: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .videoDescription {
   width: 200px;
   padding-right: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .videoUrl {

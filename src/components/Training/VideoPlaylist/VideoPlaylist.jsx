@@ -5,22 +5,23 @@ import s from "./VideoPlaylist.module.scss";
 export const VideoPlaylist = ({trainingCatalog}) => {
 
     return (
-        <div>
-            <div className={s.header}>
-                <p className={s.title}>{trainingCatalog?.name}</p>
-                <p className={s.text}>{trainingCatalog?.description}</p>
-            </div>
+        <div className={s.block}>
+
+            <h1 className={s.title}>{trainingCatalog?.name}</h1>
+
+            <p className={s.text}>{trainingCatalog?.description}</p>
 
             {
-                trainingCatalog.videos?.map((video, idx) =>
+                trainingCatalog.videos?.map((video) =>
 
-                    <div className={s.joint} key={idx}>
-                        <div className={s.jointContent}>
-                            <p className={s.jointTitle}>{video.title}</p>
-                            <p className={s.jointText}>{video.description}</p>
-                        </div>
+                    <div className={s.videoContainer} key={video._id}>
 
                         <Video url={video.videoUrl}/>
+
+                        <div className={s.videoContent}>
+                            <p className={s.videoTitle}>{video.title}</p>
+                            <p className={s.videoText}>{video.description}</p>
+                        </div>
                     </div>
                 )
             }
