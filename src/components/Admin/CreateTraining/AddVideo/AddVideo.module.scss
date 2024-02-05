@@ -6,6 +6,7 @@
 .formCreateVideo {
   display: flex;
   flex-direction: column;
+  max-width: 780px;
 }
 
 // вынести
@@ -22,6 +23,20 @@
     border: 1px solid #D78DFF;
     box-shadow: 0 2px 2px rgb(227, 199, 245);
   }
+}
+
+.buttons {
+  display: flex;
+  padding-top: 20px;
+}
+
+.cancel {
+  width: 200px;
+  margin-left: 20px;
+}
+
+.save {
+  width: 200px;
 }
 
 // вынести

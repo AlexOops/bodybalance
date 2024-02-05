@@ -364,3 +364,14 @@ input:-webkit-autofill:active {
 .myAutocomplete .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
   border-width: 0;
 }
+
+// для кнопок
+
+.cancel {
+  width: 200px;
+  margin-left: 20px;
+}
+
+.save {
+  width: 200px;
+}

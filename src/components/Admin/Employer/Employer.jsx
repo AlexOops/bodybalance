@@ -181,26 +181,22 @@ export const Employer = ({employer, handleUpdatedUsers}) => {
                                                                     <div className={s.labelSchedule}>Цвет расписания</div>
                                                                 </div>
 
-                                                                <div className={s.ScheduleList}>
+                                                                <div className={s.scheduleList}>
                                                                     {
                                                                         schedulesEmployer.map((schedule) => (
 
-                                                                            <div className={s.scheduleItem}
-                                                                                 key={schedule._id}>
+                                                                            <div className={s.scheduleItem} key={schedule._id}>
 
-                                                                                <div
-                                                                                    className={s.days}>{schedule.daysOfWeek.map(day => getDayName(day))}</div>
+                                                                                <div className={s.days}>{schedule.daysOfWeek.map(day => getDayName(day))}</div>
 
-                                                                                <div
-                                                                                    className={s.time}>{schedule.startTime} - {schedule.endTime}</div>
+                                                                                <div className={s.time}>{schedule.startTime} - {schedule.endTime}</div>
 
                                                                                 <div className={s.date}>
                                                                                     {schedule.startRecur && new Date(schedule.startRecur).toLocaleDateString('ru-RU') + ' - '}
                                                                                     {schedule.endRecur && new Date(schedule.endRecur).toLocaleDateString('ru-RU')}
                                                                                 </div>
 
-                                                                                <div className={s.color}
-                                                                                     style={{backgroundColor: schedule.color}}></div>
+                                                                                <div className={s.color} style={{backgroundColor: schedule.color}}></div>
                                                                             </div>
                                                                         ))
                                                                     }

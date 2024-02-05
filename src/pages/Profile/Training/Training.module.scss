@@ -1,39 +1,33 @@
+.container {
+  padding-right: 20px;
+  max-width: 1290px;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+}
+
 .title {
   font-weight: 400;
   font-size: 40px;
   padding: 30px 0 100px 40px
 }
 
-.content {
-  padding: 40px;
-}
-
 .text {
-  text-align: center;
+  text-align: left;
   font-weight: 300;
   font-size: 20px;
   padding-bottom: 40px;
+  padding-left: 40px;
 }
 
-.trainingTitle {
-  font-weight: 500;
-  font-size: 40px;
-  text-transform: uppercase;
-  padding-bottom: 60px;
-}
-
-.trainingList {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  max-width: 1290px;
-}
-
-.trainingItem {
+.item {
   width: 350px;
   display: flex;
   flex-direction: column;
   background: none;
+  padding-left: 40px;
 
   margin-bottom: 20px;
 
@@ -42,24 +36,44 @@
   }
 }
 
-.trainingItemWrp {
-  background: white;
-  padding-left: 30px;
+.itemContent {
   box-shadow: 0 0 20px rgba(255, 226, 255, 0.65);
   border-radius: 0 0 25px 25px;
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.trainingItemText {
+.itemImage {
+  border-radius: 25px 25px 0 0;
+}
+
+.itemText {
   padding: 30px 20px;
   font-weight: 300;
   font-size: 20px;
 }
 
-.trainingItemImg {
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
+.play {
+  background-color: #d38dff;
+  margin-right: 30px;
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  &:after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 0 10px 15px;
+    border-color: transparent transparent transparent #ffffff;
+  }
 }
 
 .message {

@@ -5,8 +5,9 @@ import {openModal} from "../../../redux/slices/modal";
 import s from "./Training.module.scss";
 import Modal from "../../../components/Modal/Modal";
 import {CreateTraining} from "../../../components/Admin/CreateTraining/CreateTraining";
-import {Training as TrainingCatalog} from "../../../components/Admin/Training/Training"
+import {Training as TrainingItem} from "../../../components/Admin/Training/Training"
 import axios from "../../../axios";
+import CustomAvatar from "../../../components/Images/CustomAvatar/CustomAvatar";
 
 export const Training = () => {
 
@@ -56,9 +57,11 @@ export const Training = () => {
 
     return (
         <>
+            <h4>Каталог видео тренировок</h4>
+
             <div className={s.controlBar}>
                 <button className={'adminButton'} onClick={(e) => handleOpenModalForAddNewTrainingCatalog(e)}>
-                    Создать каталог тренировок
+                    Создать каталог
                 </button>
 
                 <Modal type={'modalNewCatalog'}>
@@ -70,23 +73,28 @@ export const Training = () => {
                 {
                     isTrainingLoading ? 'Загрузка каталога тренировок...'
 
-                        : training.items?.map((catalog, idx) =>
+                        : training.items?.map((catalog) =>
 
-                            <div className={s.card} key={idx} onClick={(e) => handleOpenTraining(e, catalog)}>
+                            <div className={s.card} key={catalog._id} onClick={(e) => handleOpenTraining(e, catalog)}>
 
                                 <div className="remove"
                                      onClick={(e) => handleSubmitToRemove(e, catalog._id)}>
                                 </div>
 
+                                <div className={s.avatar}>
+                                    <CustomAvatar avatarUrl={catalog.imageUrl}
+                                                  fullName={catalog.name} size={'100px'}/>
+                                </div>
+
                                 <div className={s.name}>{catalog.name}</div>
-                                <div className={s.category}><span>Категория:</span>{catalog.category}</div>
+                                <div className={s.category}>{catalog.category}</div>
 
                             </div>
                         )
                 }
 
                 <Modal type={"modalOpenCatalog"}>
-                    <TrainingCatalog catalog={selectedCatalog} handleUpdatedCatalog={handleUpdatedCatalogs}/>
+                    <TrainingItem catalog={selectedCatalog} handleUpdatedCatalog={handleUpdatedCatalogs}/>
                 </Modal>
             </div>
         </>
