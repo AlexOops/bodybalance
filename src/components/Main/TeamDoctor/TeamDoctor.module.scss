@@ -3,15 +3,17 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 80px;
+  padding-top: 50px;
+
   @media screen and (max-width: 849px) {
     flex-direction: column;
-    align-items: center
+    align-items: center;
   }
 }
 
 .img {
   position: relative;
+  min-height: 265px;
   width: 48%;
   display: flex;
   align-items: center;
@@ -34,6 +36,17 @@
     width: 350px;
     height: 350px;
   }
+
+  @media screen and (max-width: 1200px) {
+    &:nth-child(n) {
+      display: none;
+    }
+
+    &:first-child {
+      display: block; /* Делаем видимым 1 элемент */
+    }
+  }
+
   @media screen and (max-width: 849px) {
     width: 250px;
     height: 250px;
@@ -61,24 +74,37 @@
   }
 }
 
+@media screen and (max-width: 1290px) {
+  .hide-on-mobile {
+    display: none;
+  }
+}
+
 .description {
   width: 48%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-left: 40px;
+
+  @media screen and (max-width: 1290px) {
+    padding-left: 0;
+  }
+
   @media screen and (max-width: 849px) {
     width: 80%;
     align-items: center;
   }
-
 }
 
 .name {
   text-align: left;
   max-width: 500px;
+
   @media screen and (max-width: 849px) {
     text-align: center;
   }
+
   @media screen and (max-width: 420px) and (min-width: 320px) {
     font-size: 26px;
   }
@@ -90,8 +116,8 @@
 }
 
 .button {
-  width: 370px;
-  height: 64px;
+  width: 360px;
+  height: 60px;
   background: #D78DFF;
   border-radius: 40px;
   font-weight: 400;
@@ -111,5 +137,8 @@
 
   &:hover {
     cursor: pointer;
+    color: #fff;
+    background-color: #9e8dff;
+    border: 2px solid #9e8dff;
   }
 }

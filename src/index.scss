@@ -56,9 +56,12 @@ p {
 .container {
   margin: 0 auto;
   position: relative;
+  padding: 0 0 50px 0;
+
   @media screen and (min-width: 1290px) {
     width: 1290px;
   }
+
   @media screen and (max-width: 1289px) {
     width: auto;
   }
@@ -76,6 +79,14 @@ p {
   padding: 0 7%;
   justify-content: center;
   flex-direction: column;
+}
+
+/* Для экранов шириной 768 */
+@media (max-width: 768px) {
+
+  .container-carousel {
+    padding: 0;
+  }
 }
 
 .container-slider {
@@ -374,4 +385,10 @@ input:-webkit-autofill:active {
 
 .save {
   width: 200px;
+}
+
+@media (max-width: 1290px) {
+  .circles {
+    display: none;
+  }
 }

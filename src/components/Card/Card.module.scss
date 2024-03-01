@@ -18,11 +18,44 @@
   padding: 15px 0;
 }
 
+@media (max-width: 1300px) {
+  .name {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .name {
+    padding: 10px 0; /* Уменьшаем верхний и нижний отступы */
+    min-height: 80px; /* Уменьшаем минимальную высоту */
+  }
+}
+
+
+@media (max-width: 480px) {
+  .name {
+    font-size: 16px; /* Ещё меньше размер шрифта для маленьких экранов */
+    padding: 8px 0; /* Ещё меньше верхний и нижний отступы */
+    min-height: 60px; /* Ещё меньше минимальная высота */
+  }
+}
+
+
+
 .description {
   min-height: 108px;
   display: flex;
   padding-left: 0;
   align-self: stretch;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Центрируем карточки */
+  align-items: stretch; /* Растягивает дочерние элементы до максимальной высоты */
+  gap: 20px; /* Зазор между карточками */
+  padding: 0 20px; /* Небольшие паддинги слева и справа для контейнера */
 }
 
 .card {
@@ -31,9 +64,7 @@
   justify-content: space-between;
   padding: 30px;
   gap: 20px;
-  min-height: 480px;
-  max-width: 360px;
-  min-width: 350px;
+  width: calc((100% / 3) - 40px); /* Три карточки в ряд с учетом паддингов */
   background: #FFFFFF;
   box-shadow: 0 0 20px rgba(255, 226, 255, 0.65);
   border-radius: 25px;
@@ -42,16 +73,17 @@
     box-shadow: 0 0 20px rgba(255, 153, 255, 0.65);
     cursor: pointer;
   }
+}
 
-  @media screen and (max-width: 1289px) and (min-width: 850px) {
-    width: 45%;
-
-    &:nth-child(odd) {
-      margin-left: 50px;
-    }
+@media screen and (max-width: 900px) {
+  .card {
+    width: calc(50% - 40px); /* Две карточки в ряд на экранах меньше 900px */
   }
-  @media screen and (max-width: 849px) {
-    width: 80%;
+}
+
+@media screen and (max-width: 600px) {
+  .card {
+    width: 85%;
   }
 }
 

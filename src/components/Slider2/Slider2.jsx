@@ -23,12 +23,11 @@ export const Slider2 = () => {
             <img className={s.sliderImg} src={sliderImg} alt=""/>
 
             <Carousel>
-                 {Object.values(slider).map((el) => {
+                 {slider.map((el) => {
                                 return (
                                     <div className={s.slider} key={nanoid()} >
                                         <h1 className={s.sliderName}>{el.name}</h1>
                                         <p className={s.sliderText}>{el.text}</p>
-                                        <button className={s.signUp}>Записаться</button>
                                     </div>
 
                                 )

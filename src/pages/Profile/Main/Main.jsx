@@ -7,9 +7,9 @@ import {fetchTraining} from "../../../redux/slices/training";
 import {fetchCustomerList} from "../../../redux/slices/customers";
 import PhoneInput from "react-phone-number-input";
 import axios from "../../../axios";
-import validator from 'validator'
 import {ImageUploader} from "../../../components/Images/ImageUploader/ImageUploader";
 import CustomAvatar from "../../../components/Images/CustomAvatar/CustomAvatar";
+import {TextField} from "@mui/material";
 
 export const Main = () => {
     const dispatch = useDispatch();
@@ -27,7 +27,7 @@ export const Main = () => {
         dispatch(fetchPatientCards())
         dispatch(fetchEmployers());
         dispatch(fetchTraining());
-        dispatch(fetchCustomerList())
+        dispatch(fetchCustomerList());
     }, [dispatch]);
 
     useEffect(() => {
@@ -57,6 +57,8 @@ export const Main = () => {
     const [dateOfBirth, setDateOfBirth] = useState(customer ? customer.dateOfBirth : '');
     const [email, setEmail] = useState(customer ? customer.email : user.email);
     const [phone, setPhone] = useState(customer ? customer.phone : '');
+
+    const [avatarUrl, setAvatarUrl] = useState('');
 
     const updateCustomer = async (data) => {
         try {
@@ -101,20 +103,7 @@ export const Main = () => {
         }
     }
 
-    //ВАЛИДАЦИЯ ДАТЫ
-    const [errorMessage, setErrorMessage] = useState('')
-
-    const validateDate = (value) => {
-
-        if (validator.isDate(value)) {
-            setErrorMessage('Валидный формат даты :)');
-        } else {
-            setErrorMessage('Введите валидную дату! ГОД-МЕСЯЦ-ЧИСЛО');
-        }
-        return setDateOfBirth(value);
-    }
-
-    const [avatarUrl, setAvatarUrl] = useState('');
+    const handleChangeDate = (value) => setDateOfBirth(value);
 
     const handleUploadedAvatarUrl = (updatedAvatarUrl) => {
         setAvatarUrl(updatedAvatarUrl);
@@ -135,13 +124,13 @@ export const Main = () => {
                                       size={'150px'}/>
                     </div>
 
-                    <ImageUploader uploadUrl={`/profile/updateAvatar/${user._id}`} handleUpdatedImageUrl={handleUploadedAvatarUrl}/>
+                    <ImageUploader uploadUrl={`/profile/updateAvatar/${user._id}`}
+                                   handleUpdatedImageUrl={handleUploadedAvatarUrl}/>
 
                     <form onSubmit={handleSubmit}>
 
-                        <label htmlFor="fullName"
-                               className={s.label}>
-                            Имя и фамилия:
+                        <label htmlFor="fullName" className={s.label}> Имя и фамилия:
+
                             <input type="text"
                                    className={s.input}
                                    name={'fullName'}
@@ -150,15 +139,15 @@ export const Main = () => {
                             />
                         </label>
 
-                        <label htmlFor="dateOfBirth"
-                               className={s.label}>
-                            Дата рождения:
-                            <input type="text"
-                                   placeholder={"1995-12-12"}
-                                   className={s.input}
-                                   name={'dateOfBirth'}
-                                   value={dateOfBirth}
-                                   onChange={(e) => validateDate(e.target.value)}
+                        <label htmlFor="dateOfBirth" className={s.label}> Дата рождения:
+
+                            <TextField
+                                id="dateOfBirth"
+                                type="date"
+                                variant="outlined"
+                                value={dateOfBirth}
+                                onChange={(e) => handleChangeDate(e.target.value)}
+                                InputLabelProps={{shrink: true}}
                             />
                         </label>
 
@@ -173,8 +162,7 @@ export const Main = () => {
                             />
                         </label>
 
-                        <label htmlFor="phone"
-                               className={s.label}>
+                        <label htmlFor="phone" className={s.label}>
                             Номер телефона:
                             <PhoneInput
                                 className={"phoneInputProfile"}
@@ -185,8 +173,6 @@ export const Main = () => {
                                 onChange={(value) => setPhone(value)}
                             />
                         </label>
-
-                        <p className={s.error}>{errorMessage}</p>
 
                         <button type={"submit"} className={s.button}>Сохранить</button>
                     </form>
@@ -214,7 +200,8 @@ export const Main = () => {
                             {attendingDoctor ? (
                                 <>
                                     <p className={s.subTitle}>МОЙ ВРАЧ</p>
-                                    <img className={s.mySpecialistImg} src={attendingDoctor.avatarUrl} alt="doc"/>
+                                    <img className={s.mySpecialistImg}
+                                         src={(attendingDoctor.avatarUrl) ? `http://localhost:4444${attendingDoctor.avatarUrl}` : `http://localhost:4444/uploads/default_service.png`} alt={'doc'}/>
                                     <p>{attendingDoctor.fullName}</p>
                                 </>
                             ) : (
