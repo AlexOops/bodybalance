@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
 }
+
 .wrapper {
   display: flex;
   width: 100%;
@@ -11,6 +12,7 @@
   position: relative;
   padding: 0 7%;
 }
+
 .contentWrapper {
   overflow: hidden;
   width: 100%;
@@ -20,8 +22,8 @@
 .content {
   display: flex;
   transition: all 250ms linear;
-  -ms-overflow-style: none;  /* hide scrollbar in IE and Edge */
-  scrollbar-width: none;  /* hide scrollbar in Firefox */
+  -ms-overflow-style: none; /* hide scrollbar in IE and Edge */
+  scrollbar-width: none; /* hide scrollbar in Firefox */
 }
 
 /* hide scrollbar in webkit browser */
@@ -48,7 +50,6 @@
   width: calc(100% / 4);
 }
 
-
 .leftArrow, .rightArrow {
   position: absolute;
   z-index: 1;
@@ -60,17 +61,31 @@
   background-color: #D78DFF;
   //border: 1px solid #ddd;
   border: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    background-color: #5D3274;
+  }
 }
+
 .leftArrow {
   left: 24px;
 }
+
 .rightArrow {
   right: 24px;
 }
+
 .dots {
   display: flex;
   justify-content: center;
-  margin-bottom: 60px;
 }
 
 .dot {
@@ -80,11 +95,87 @@
   background: #F0D3FF;
   margin-right: 10px;
   border: none;
-  &:hover{
+
+  &:hover {
     cursor: pointer;
   }
 }
 
 .dotActive {
   background: #5D3274;
+}
+
+@media (min-width: 1200px) {
+  .dots {
+    padding-bottom: 30px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .slider {
+    height: 50vh;
+  }
+
+  .leftArrow {
+    width: 44px;
+    height: 44px;
+  }
+
+  .rightArrow {
+    width: 44px;
+    height: 44px;
+  }
+
+  .dots {
+    padding-bottom: 20px;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+  }
+
+}
+
+/* Для экранов шириной 768 */
+@media (max-width: 768px) {
+
+  .leftArrow {
+    width: 34px;
+    height: 34px;
+  }
+
+  .rightArrow {
+    width: 34px;
+    height: 34px;
+  }
+
+  .dots {
+    padding-bottom: 10px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+/* Для экранов шириной 400px */
+@media (max-width: 500px) {
+  .leftArrow {
+    display: none;
+  }
+
+  .rightArrow {
+    display: none;
+  }
+
+  .dots {
+    padding-bottom: 10px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+  }
 }

@@ -25,20 +25,26 @@ export const PopularServices = () => {
         <>
             <div className='container'>
 
-                <Circles smallSize={180} smallAxisX={-240} smallAxisY={150}
-                         bigSize={350} bigAxisX={-240} bigAxisY={-75}/>
+                <div className={'circles'}>
+                    <Circles smallSize={180} smallAxisX={-240} smallAxisY={150}
+                             bigSize={350} bigAxisX={-240} bigAxisY={-75}/>
+                </div>
 
                 <div className={s.position}>
 
-                    <h2 className={s.title}>популярные услуги</h2>
+                    <div className={s.title}>популярные услуги</div>
 
                     <div className={s.cards}>
 
                         {(isServicesLoading ? [...Array(3)] : services.items.slice(0, 3)).map((obj, index) =>
-                            isServicesLoading
-                                ? <Card key={index} isLoading={true}/>
+
+                            isServicesLoading ?
+
+                                <Card key={index} isLoading={true}/>
+
                                 :
-                                <Card key={index} isPopular={true}
+
+                                <Card key={obj._id} isPopular={true}
                                       price={obj.price}
                                       name={obj.name}
                                       description={obj.description}
@@ -51,10 +57,10 @@ export const PopularServices = () => {
                     <Link to={"/services"} onClick={scrollToTop} className={s.btn}>Все услуги</Link>
                 </div>
 
-
-                <Circles smallSize={180} smallAxisX={1350} smallAxisY={400}
-                         bigSize={350} bigAxisX={1100} bigAxisY={400}/>
-
+                <div className={'circles'}>
+                    <Circles smallSize={180} smallAxisX={1350} smallAxisY={400}
+                             bigSize={350} bigAxisX={1100} bigAxisY={400}/>
+                </div>
             </div>
         </>
     )

@@ -21,10 +21,13 @@ export const TeamDoctor = () => {
 
     return (
         <div className='container'>
+
             <div className={s.wrapper}>
 
-                <Circles smallSize={180} smallAxisX={-125} smallAxisY={200}
-                         bigSize={350} bigAxisX={-204} bigAxisY={-60}/>
+                <div className={'circles'}>
+                    <Circles smallSize={180} smallAxisX={-125} smallAxisY={200}
+                             bigSize={350} bigAxisX={-204} bigAxisY={-60}/>
+                </div>
 
                 <Circles smallSize={180} smallAxisX={400} smallAxisY={200}
                          bigSize={350} bigAxisX={350} bigAxisY={-100}/>
@@ -32,10 +35,10 @@ export const TeamDoctor = () => {
                 <div className={s.img}>
 
                     {
-                        employers.items.map((employer, idx) =>
-                            <img className={s.three}
+                        employers.items.slice(0, 4).map((employer, index) =>
+                            <img className={`${s.three} ${index > 0 ? 'hide-on-mobile' : ''}`}
                                  src={(employer.avatarUrl) ? `http://localhost:4444${employer.avatarUrl}` : `http://localhost:4444/uploads/default_service.png`}
-                                 key={idx} alt="employer"/>
+                                 key={employer._id} alt="employer"/>
                         )
                     }
                 </div>

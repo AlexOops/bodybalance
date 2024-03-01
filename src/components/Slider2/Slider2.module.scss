@@ -1,74 +1,117 @@
 .slider {
-  height: 600px;
+  height: 75vh; /* Процент от высоты окна просмотра */
   display: flex;
   flex-direction: column;
-  padding: 160px 20px 0 ;
+  align-items: flex-start;
+  justify-content: center;
   box-sizing: border-box;
 }
 
-  .sliderBackground {
-    position: absolute;
-    top: -140px;
+.sliderBackground {
+  position: absolute;
+  top: -17.5vh; /* Процент от высоты окна просмотра */
+}
+
+.sliderImg {
+  position: absolute;
+  width: 100%;
+  max-height: 81.25vh; /* Процент от высоты окна просмотра */
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.contain {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  transition: translate;
+  transition-property: transform;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+}
+
+.sliderName {
+  font-weight: 500;
+  font-size: 4vw; /* Относительно ширины окна просмотра */
+  line-height: 140%;
+  text-transform: uppercase;
+  width: 78.75vw; /* Максимальная ширина, которую элемент может занимать */
+  height: auto; /* Высота автоматически адаптируется под содержимое */
+  max-width: 630px; /* Максимальная ширина для больших экранов */
+}
+
+.sliderText {
+  margin-top: 1.25vh;
+  font-weight: 300;
+  font-size: 1.5vw; /* Относительно ширины окна просмотра */
+  line-height: 140%;
+  height: auto; /* Высота автоматически адаптируется под содержимое */
+  max-width: 630px; /* Максимальная ширина для больших экранов */
+}
+
+.signUp {
+  margin-top: 2.5vh;
+  width: 10.875vw; /* Процент от ширины окна просмотра */
+  height: 8vh; /* Процент от высоты окна просмотра */
+  max-width: 174px; /* Максимальная ширина для больших экранов */
+  max-height: 64px; /* Максимальная высота для больших экранов */
+  background: #D78DFF;
+  border-radius: 40px;
+  border: none;
+  color: #fff;
+  font-weight: 400;
+  font-size: 1.25vw; /* Относительно ширины окна просмотра */
+  line-height: 24px;
+
+  &:hover {
+    cursor: pointer;
   }
+}
 
-  .sliderImg {
-    position: absolute;
-    width: 100%;
-    height: 650px;
-    z-index: -2;
-    background-repeat: no-repeat;
-    background-size: cover;
+.dots {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 7.5vh; /* Процент от высоты окна просмотра */
+}
+
+@media (min-width: 1200px) {
+  .slider {
+    padding: 0 8%;
   }
-
-  .contain {
-    position: relative;
-    display: flex;
-    overflow: hidden;
-
-    transition: translate;
-    transition-property: transform;
-    transition-duration: 300ms;
-    transition-timing-function: ease-in-out;
-  }
+}
 
 
-  .sliderName {
-    font-weight: 500;
-    font-size: 80px;
-    line-height: 140%;
-    text-transform: uppercase;
-    width: 630px;
-    height: 112px;
+@media (max-width: 1200px) {
+  .slider {
+    height: 50vh;
+    padding: 0 8%;
   }
 
   .sliderText {
-    margin-top: 10px;
-    font-weight: 300;
-    font-size: 24px;
-    line-height: 140%;
-    width: 630px;
-    height: 102px;
+    font-size: 2vw;
+  }
+}
+
+/* Для экранов шириной 768px */
+@media (max-width: 768px) {
+  .slider {
+    height: 40vh;
+    padding: 0 10%;
   }
 
-  .signUp {
-    margin-top: 30px;
-    width: 174px;
-    height: 64px;
-    background: #D78DFF;
-    border-radius: 40px;
-    border: none;
-    color: #fff;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
+  .sliderText {
+    font-size: 3vw;
+  }
+}
 
-    &:hover {
-      cursor: pointer;
-    }
+/* Для экранов шириной 400px */
+@media (max-width: 400px) {
+  .slider {
+    height: 30vh;
   }
 
-  .dots {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 60px;
+  .sliderText {
+    font-size: 3.5vw;
   }
+}
