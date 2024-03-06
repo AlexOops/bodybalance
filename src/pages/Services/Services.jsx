@@ -34,11 +34,15 @@ export const Services = () => {
     return (
         <>
             <div className="container-color">
+
                 <div className={s.main}>
+
                     <div className={s.description}>
 
-                        <Circles smallSize={280} smallAxisX={140} smallAxisY={-20}
-                                 bigSize={430} bigAxisX={-145} bigAxisY={-40}/>
+                        <div className={'circles'}>
+                            <Circles smallSize={280} smallAxisX={140} smallAxisY={-20}
+                                     bigSize={430} bigAxisX={-145} bigAxisY={-40}/>
+                        </div>
 
                         <h1 className={s.title}>Наши услуги</h1>
                         <p className={s.text}>Картельные сговоры не допускают ситуации, при которой реплицированные с
@@ -46,6 +50,7 @@ export const Services = () => {
                             вне зависимости от их уровня, должны быть представлены в исключительно положительном
                             свете.</p>
                     </div>
+
                     <div className={s.servicesTitleWrap}>
                         <h2 className={s.servicesTitle}>Все услуги</h2>
                     </div>
@@ -56,11 +61,11 @@ export const Services = () => {
 
                                 isServicesLoading ?
                                     (
-                                        <div className={s.margin} key={index}>
+                                        <div className={s.serviceCard} key={index}>
                                             <Card key={index} isLoading={true}/>
                                         </div>
                                     ) : (
-                                        <div className={s.margin} key={item._id} onClick={(event) => {
+                                        <div className={s.serviceCard} key={item._id} onClick={(event) => {
                                             setModal(event, item)
                                         }}>
                                             <Card
@@ -76,6 +81,7 @@ export const Services = () => {
                     </div>
                 </div>
             </div>
+
             <div className="container" ref={scrollToRef}>
 
                 <AppointmentForm
@@ -89,12 +95,13 @@ export const Services = () => {
                     source_name={'services'}
                 />
 
-                <Circles smallSize={270} smallAxisX={-140} smallAxisY={170}
-                         bigSize={420} bigAxisX={-90} bigAxisY={215}/>
+                <div className={'circles'}>
+                    <Circles smallSize={270} smallAxisX={-140} smallAxisY={170}
+                             bigSize={420} bigAxisX={-90} bigAxisY={215}/>
 
-                <Circles smallSize={345} smallAxisX={945} smallAxisY={220}
-                         bigSize={530} bigAxisX={1020} bigAxisY={-40}/>
-
+                    <Circles smallSize={345} smallAxisX={945} smallAxisY={220}
+                             bigSize={530} bigAxisX={1020} bigAxisY={-40}/>
+                </div>
             </div>
 
             <Modal type='modalService'>

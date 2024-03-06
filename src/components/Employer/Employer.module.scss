@@ -19,12 +19,13 @@
 }
 
 .employerTitle {
-  margin: 30px 0 0 0;
+  padding-top: 10px;
   font-weight: 500;
   font-size: 20px;
   line-height: 140%;
   color: #D78DFF;
 }
+
 .employerTitleFull {
   font-style: normal;
   font-weight: 600;
@@ -35,8 +36,6 @@
   text-transform: uppercase;
 
   color: #4F4E4E;
-
-
 }
 
 //.card {
@@ -62,9 +61,19 @@
   display: flex;
   max-width: 1070px;
   height: 684px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
+
 .leftBox {
   width: 49%;
+
+  @media (max-width: 768px) {
+    width: 55%;
+  }
 }
 
 .flexCenter {
@@ -97,12 +106,18 @@
     background: #D78DFF;
   }
 }
+
 .employerImageFull {
   width: 100%;
   height: 100%;
   border-radius: 50px 0 0 50px;
   object-fit: cover;
   object-position: center;
+
+  @media (max-width: 768px) {
+    padding-top: 20px;
+    border-radius: 50px ;
+  }
 }
 
 .cardDoctor {
@@ -110,24 +125,36 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   background: #FFFFFF;
   box-shadow: 0 0 20px rgba(255, 226, 255, 0.65);
   border-radius: 20px;
 
-  &:hover{
+  &:hover {
     box-shadow: 0 0 8px 4px #D78DFF;
   }
 
   .cardImage {
     width: 100%;
-    border-radius: 20px 20px 0px 0px;
+    border-radius: 20px 20px 0 0;
+  }
+
+  @media (max-width: 600px) {
+    width: 80%;
+    margin-bottom: 30px;
+  }
+
+  @media (max-width: 500px) {
+    width: 60%;
   }
 }
 
 .profession {
   margin-bottom: 30px;
+  padding-top: 5px;
+  text-align: center;
 }
+
 .professionFull {
 
   margin: 6px 0 0 0;
@@ -220,6 +247,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    width: 99%;
+    justify-content: center;
+  }
 }
 
 .modalName {
@@ -263,16 +295,19 @@
     background: #D78DFF;
   }
 }
+
 .certificates {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 40px;
 }
-.certificateItem{
+
+.certificateItem {
   width: 30%;
   //height: 80px;
 }
+
 .certificateItemFull {
   width: 500px;
 }
@@ -281,6 +316,10 @@
   display: flex;
   flex-direction: row;
   justify-content: right;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 }
 
 .button {
@@ -289,6 +328,8 @@
   align-items: flex-start;
   padding: 20px 30px;
   gap: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 
   height: 64px;
   width: 266px;

@@ -5,7 +5,8 @@
 }
 
 .left {
-  width: 520px;
+  max-width: 490px;
+  width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -13,8 +14,7 @@
 }
 
 .right {
-  width: 660px;
-  margin-top: -70px;
+  max-width: 660px;
 }
 
 .logo {
@@ -36,17 +36,7 @@
   background-size: cover;
   background-position: 100% 15%;
   background-repeat: no-repeat;
-  border-radius:  40px 40px 0 0;
-}
-
-.nameSection {
-  text-align: left;
-}
-
-.descriptionSpecialist {
-  padding: 10px 0 30px 0;
-  font-size: 24px;
-  text-align: justify;
+  border-radius: 40px 40px 0 0;
 }
 
 .description {
@@ -56,6 +46,13 @@
   background: var(--white, #FFF);
   box-shadow: 0 4px 20px 0 rgba(255, 226, 255, 0.55);
 }
+
+.descriptionSpecialist {
+  padding: 10px 0 30px 0;
+  font-size: 24px;
+  text-align: justify;
+}
+
 
 .nameSpecialist {
   padding-bottom: 15px;
@@ -69,7 +66,6 @@
 .profSpecialist {
   line-height: 130%;
   text-align: center;
-  width: 460px;
 }
 
 .button {
@@ -86,5 +82,71 @@
     cursor: pointer;
     color: #fff;
     background-color: #9e8dff;
+  }
+}
+
+@media (min-width: 1200px) {
+  .position {
+    padding-bottom: 50px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .logo {
+    display: none;
+  }
+
+  .avatar {
+    height: 400px; /* Уменьшаем высоту аватара */
+    width: 80%;
+  }
+
+  .description {
+    width: 80%;
+  }
+
+  .right {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+
+@media (max-width: 1000px) {
+  .logo {
+    display: flex;
+  }
+
+  .position {
+    flex-direction: column;
+    padding-bottom: 40px;
+  }
+
+  .left {
+    padding-bottom: 40px;
+  }
+}
+
+@media (max-width: 900px) {
+  .avatar {
+    width: 80%;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .logo {
+    display: none;
+  }
+
+  .right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nameSection {
+    display: none;
   }
 }

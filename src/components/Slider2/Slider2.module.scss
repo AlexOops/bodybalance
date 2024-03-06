@@ -33,8 +33,8 @@
 
 .sliderName {
   font-weight: 500;
-  font-size: 4vw; /* Относительно ширины окна просмотра */
   line-height: 140%;
+  font-size: 60px;
   text-transform: uppercase;
   width: 78.75vw; /* Максимальная ширина, которую элемент может занимать */
   height: auto; /* Высота автоматически адаптируется под содержимое */
@@ -44,7 +44,7 @@
 .sliderText {
   margin-top: 1.25vh;
   font-weight: 300;
-  font-size: 1.5vw; /* Относительно ширины окна просмотра */
+  font-size: 22px; /* Относительно ширины окна просмотра */
   line-height: 140%;
   height: auto; /* Высота автоматически адаптируется под содержимое */
   max-width: 630px; /* Максимальная ширина для больших экранов */
@@ -87,10 +87,6 @@
     height: 50vh;
     padding: 0 8%;
   }
-
-  .sliderText {
-    font-size: 2vw;
-  }
 }
 
 /* Для экранов шириной 768px */
@@ -100,18 +96,11 @@
     padding: 0 10%;
   }
 
-  .sliderText {
-    font-size: 3vw;
-  }
-}
-
-/* Для экранов шириной 400px */
-@media (max-width: 400px) {
-  .slider {
-    height: 30vh;
+  .sliderName {
+    font-size: 40px;
   }
 
   .sliderText {
-    font-size: 3.5vw;
+    font-size: 18px;
   }
 }

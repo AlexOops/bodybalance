@@ -5,7 +5,7 @@ label {
 .main {
   display: flex;
   flex-direction: column;
-  margin: 80px 0;
+  padding-top: 40px;
 }
 
 .calendarField {
@@ -19,9 +19,8 @@ label {
 .selectRow {
   position: relative;
   display: flex;
-  width: 843px;
+  max-width: 843px;
   height: 66px;
-  //height: ;
 }
 
 .select {
@@ -31,7 +30,7 @@ label {
   flex-direction: column;
   align-items: flex-start;
   padding: 0;
-  width: 843px;
+  width: 100%;
   z-index: 10;
 
   /* white */
@@ -39,7 +38,6 @@ label {
   /* pink */
   outline: 1.5px solid #D78DFF;
   border-radius: 34px;
-
 }
 
 .selectHeader {
@@ -84,7 +82,6 @@ label {
       background-position: center;
     }
   }
-
 }
 
 .selectContainer {
@@ -99,7 +96,6 @@ label {
     display: none;
   }
 }
-
 
 .selectInput {
   display: none;
@@ -132,9 +128,7 @@ label {
     background-color: #D78DFF !important;
     color: #ffffff;
   }
-
 }
-
 
 .selectText {
   font-style: normal;
@@ -172,6 +166,8 @@ label {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .flexRowContainer {
@@ -188,9 +184,6 @@ label {
 
 .flexRelative {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .error {
@@ -200,7 +193,6 @@ label {
   top: 3%;
   right: 20px;
   color: coral;
-
 }
 
 .width50 {
@@ -219,8 +211,6 @@ label {
   gap: 12px;
   height: 66px;
   width: 100%;
-
-
   background: #FFFFFF;
   /* pink */
   outline: 1.5px solid #D78DFF;
@@ -304,17 +294,14 @@ label {
   height: 64px;
 
   /* pink */
-
   background: #D78DFF;
   border-radius: 40px;
-
 
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
   color: #FFFFFF;
-
 
   &:hover {
     cursor: pointer;
@@ -327,3 +314,49 @@ label {
   padding: 40px;
 }
 
+@media (max-width: 768px) {
+  .form {
+    padding: 0 20px;
+  }
+}
+
+@media (min-width: 661px) {
+  .flexRelative {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 660px) {
+  .form {
+    padding: 0 20px;
+  }
+
+  .selectHeader {
+    padding: 19px 10px 20px 10px;
+  }
+
+  .flexRowContainer {
+    display: contents;
+  }
+
+  .flexRowContainerContact {
+    flex-wrap: wrap;
+  }
+
+  .flexRelative {
+    margin-top: 20px;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .flexSBetween {
+    justify-content: center;
+  }
+
+  .button {
+    justify-content: center;
+    width: 100%;
+  }
+}

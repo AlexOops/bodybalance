@@ -7,7 +7,7 @@ import {Card} from "../../components/Card/Card";
 import Modal from "../../components/Modal/Modal";
 import {Recommendation} from "../../components/Recommendation/Recommendation";
 import {AppointmentForm} from "../../components/AppointmentForm/AppointmentForm";
-import AlexMitkin from "../../assets/doc/AlexMitkin.JPG";
+import AlexMitkin from "../../assets/doc/AlexMitkin_new.JPG";
 import {Circles} from "../../components/Circles/Circles";
 
 export const OnlineRehabilitation = () => {
@@ -34,7 +34,7 @@ export const OnlineRehabilitation = () => {
     return (
         <>
             <div className={'container-color'}>
-                <div className={'container'}>
+                <div className={s.main}>
                     <div className={s.header}>
                         <p className={s.title}>Онлайн-реабилитация</p>
                         <p className={s.text}>Онлайн-реабилитация – удалённо консультироваться у
@@ -58,19 +58,22 @@ export const OnlineRehabilitation = () => {
                         avatar={AlexMitkin}
                     />
 
+                    <div className={s.servicesTitleWrap}>
+                        <h2 className={s.servicesTitle}>Онлайн-программы</h2>
+                    </div>
+
                     <div className={s.services}>
-                        <div className={s.servicesTitleWrap}>
-                            <h2 className={s.servicesTitle}>Онлайн-программы</h2>
-                        </div>
                         {
                             (isOnlineServiceListLoading ? [...Array(3)] : onlineServiceList.items)?.map((item, idx) =>
 
                                 isOnlineServiceListLoading ? (
-                                    <div key={idx}>
+                                    <div className={s.serviceCard} key={idx}>
                                         <Card key={idx} isLoading={true}/>
                                     </div>
                                 ) : (
-                                    <div key={idx} onClick={(event) => setModal(event, item)}>
+                                    <div className={s.serviceCard}
+                                         key={item._id}
+                                         onClick={(event) => setModal(event, item)}>
                                         <Card
                                             id={item._id}
                                             name={item.name}
@@ -93,12 +96,13 @@ export const OnlineRehabilitation = () => {
                     source_name={'rehabilitation'}
                 />
 
-                <Circles smallSize={270} smallAxisX={-140} smallAxisY={170}
-                         bigSize={420} bigAxisX={-90} bigAxisY={215}/>
+                <div className={'circles'}>
+                    <Circles smallSize={270} smallAxisX={-140} smallAxisY={170}
+                             bigSize={420} bigAxisX={-90} bigAxisY={215}/>
 
-                <Circles smallSize={345} smallAxisX={945} smallAxisY={220}
-                         bigSize={530} bigAxisX={1020} bigAxisY={-40}/>
-
+                    <Circles smallSize={345} smallAxisX={945} smallAxisY={220}
+                             bigSize={530} bigAxisX={1020} bigAxisY={-40}/>
+                </div>
             </div>
 
             <Modal type='modalService'>

@@ -7,7 +7,7 @@
 
 .title {
   padding: 40px 0;
-  font-size: 3vw;
+  font-size: 60px;
   line-height: 140%;
   font-weight: 500;
   text-transform: uppercase;
@@ -21,6 +21,13 @@
   padding: 0;
   gap: 30px;
   justify-content: center;
+}
+
+.cardItem {
+  max-width: 380px;
+
+  margin: 10px; /* Отступы вокруг карточек для создания пространства между ними */
+  flex: 1 1 250px; /* Карточки будут иметь базовую ширину 250px и будут расти, чтобы заполнить доступное пространство */
 }
 
 /* Изменение выравнивания карточек для определенных размеров экрана */
@@ -60,13 +67,6 @@
 }
 
 
-/* Адаптация для планшетов и мобильных устройств */
-@media (min-width: 1200px) {
-  .title {
-    font-size: 3.5vw;
-  }
-}
-
 @media (max-width: 1200px) {
 
   .title {
@@ -90,6 +90,7 @@
 
   .title {
     padding: 30px 10px;
+    font-size: 40px;
   }
 
   .cards {
@@ -100,7 +101,7 @@
 @media (max-width: 400px) {
 
   .title {
-    padding: 15px 5px;
+    padding: 35px 5px;
   }
 
   .title {

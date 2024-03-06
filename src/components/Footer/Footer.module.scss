@@ -3,9 +3,11 @@
   align-items: center;
   justify-content: space-between;
   height: 307px;
+
   @media screen and (max-width: 1350px) {
     margin: 0 30px;
   }
+
   @media screen and (max-width: 560px) {
     flex-direction: column;
   }
@@ -18,19 +20,26 @@
   }
 }
 
+.logo {
+  @media screen and (max-width: 560px) {
+    padding-bottom: 50px;
+  }
+}
+
 .menu {
   height: 147px;
+
   @media screen and (max-width: 900px) {
     display: none;
   }
 }
-.menuList{
+
+.menuList {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   height: 147px;
 }
-
 
 .menuItems {
   font-weight: 400;
@@ -39,7 +48,8 @@
   margin-bottom: 13.2px;
   display: flex;
   align-items: center;
-  @media screen and (max-width: 420px)  and (min-width: 320px){
+
+  @media screen and (max-width: 420px) and (min-width: 320px) {
     font-size: 14px;
   }
 }

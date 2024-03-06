@@ -32,25 +32,27 @@ export const PopularServices = () => {
 
                 <div className={s.position}>
 
-                    <div className={s.title}>популярные услуги</div>
+                    <h1 className={s.title}>популярные услуги</h1>
 
                     <div className={s.cards}>
 
                         {(isServicesLoading ? [...Array(3)] : services.items.slice(0, 3)).map((obj, index) =>
 
                             isServicesLoading ?
-
-                                <Card key={index} isLoading={true}/>
-
+                                <div className={s.cardItem}>
+                                    <Card key={index} isLoading={true}/>
+                                </div>
                                 :
 
-                                <Card key={obj._id} isPopular={true}
-                                      price={obj.price}
-                                      name={obj.name}
-                                      description={obj.description}
-                                      text={obj.text}
-                                      imageUrl={(obj.imageUrl) ? `http://localhost:4444${obj.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
-                                />
+                                <div className={s.cardItem}>
+                                    <Card key={obj._id} isPopular={true}
+                                          price={obj.price}
+                                          name={obj.name}
+                                          description={obj.description}
+                                          text={obj.text}
+                                          imageUrl={(obj.imageUrl) ? `http://localhost:4444${obj.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                                    />
+                                </div>
                         )}
                     </div>
 

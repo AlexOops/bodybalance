@@ -1,10 +1,9 @@
-
-
 .menuList {
   display: flex;
   justify-content: space-around;
   align-items: center;
   margin-left: 15px;
+
   @media screen and (max-width: 889px) {
     flex-direction: column;
     justify-content: space-between;
@@ -17,18 +16,22 @@
   margin-right: 26px;
   white-space: nowrap;
   margin-bottom: 1px;
+
   &:hover {
     cursor: pointer;
     color: #9e8dff;
     border-bottom: 1px solid #D78DFF;
   }
+
   @media screen and (max-width: 1290px) and (min-width: 1024px) {
     font-size: 16px;
   }
+
   @media screen and (max-width: 1023px) and (min-width: 768px) {
     font-size: 14px;
     margin-right: 20px;
   }
+
   @media screen and (max-width: 889px) {
     transition: transform 0.3s cubic-bezier(1, 0.5, 0, 1);
   }
@@ -36,6 +39,7 @@
 
 .nav {
   display: flex;
+
   @media only screen and (max-width: 889px) {
     height: 48%;
   }

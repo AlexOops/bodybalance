@@ -10,11 +10,9 @@ import {setSelectedEmployer} from "../../redux/slices/employers";
 export const Card = (
     {
         id,
-        price,
         name,
         recommendations,
         description,
-        isPopular,
         imageUrl,
         isLoading,
         isFull,
@@ -60,7 +58,6 @@ export const Card = (
                     </>
 
                     <div className={s.flexSB}>
-                        <div className={s.price}>{price}</div>
                         <button className={s.button} onClick={handleSelectService} type="submit">Записаться</button>
                     </div>
                 </div>

@@ -22,7 +22,7 @@ export const Registration = () => {
         watch,
         handleSubmit,
         formState:
-            {errors, isValid}
+            {errors}
     } = useForm({
         // defaultValues: {
         //     fullName: "",
@@ -43,30 +43,26 @@ export const Registration = () => {
         values.fullName = values.firstName + ' ' + values.secondName;
         const data = await dispatch(fetchRegister(values));
 
-        if(!data.payload){
+        if (!data.payload) {
             alert('Не удалось зарегистрироваться');
         }
 
-        if('token' in data.payload) { //если есть токен в payload
+        if ('token' in data.payload) { //если есть токен в payload
             // то мы авторизованы
             window.localStorage.setItem('token', data.payload.token); //сохраним токен в Localstorage
         }
     };
-    if(isAuth){
+    if (isAuth) {
         dispatch(closeModal());
     }
 
     return (
         <div className={styles.registration}>
-            <div className={styles.circles}>
-                <div style={{position: "relative"}}>
-                    <div className='circleFirst'/>
-                    <div className='circleSecond'/>
-                </div>
-            </div>
+
             <h2 className={stylesLogin.title}>
                 Регистрация
             </h2>
+
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className={stylesLogin.fieldRow}>
                     <Input className={stylesLogin.field}
@@ -87,9 +83,12 @@ export const Registration = () => {
                            disableUnderline={true}
                            fullWidth
                     />
+
                     {errors.firstName && errors.firstName.type === "required" && <div className={stylesLogin.error}>{errors.firstName.message}</div>}
                     {errors.firstName && <div className={stylesLogin.error}>{errors.firstName.message}</div>}
+
                 </div>
+
                 <div className={stylesLogin.fieldRow}>
                     <Input className={stylesLogin.field}
                            error={Boolean(errors.secondName?.message)} //подсвечиваем красным если true
@@ -108,10 +107,14 @@ export const Registration = () => {
                            disableUnderline={true}
                            fullWidth
                     />
+
                     {errors.secondName && errors.secondName.type === "required" && <div className={stylesLogin.error}>{errors.secondName.message}</div>}
-                    {errors.secondName &&<div className={stylesLogin.error}>{errors.secondName.message}</div>}
+                    {errors.secondName && <div className={stylesLogin.error}>{errors.secondName.message}</div>}
+
                 </div>
+
                 <div className={stylesLogin.fieldRow}>
+
                     <Input className={stylesLogin.field}
                            error={Boolean(errors.email?.message)} //подсвечиваем красным если true
                            {...register('email', {
@@ -125,10 +128,13 @@ export const Registration = () => {
                            fullWidth
                            disableUnderline={true}
                     />
+
                     {errors.email && errors.email.type === "required" && <div className={stylesLogin.error}>{errors.email.message}</div>}
                     {errors.email && <div className={stylesLogin.error}>{errors.email.message}</div>}
+
                 </div>
                 <div className={stylesLogin.fieldRow}>
+
                     <Input className={stylesLogin.field}
                            error={Boolean(errors.password?.message)} //подсвечиваем красным если true
                            type="password"
@@ -139,19 +145,26 @@ export const Registration = () => {
                                    message: 'Пароль должен содержать не менее 8 символов'
                                },
                                validate: (str) =>
-                                       [/[a-z]/, /[A-Z]/, /[0-9]/, /[^a-zA-Z0-9]/].every((pattern) =>
-                                           pattern.test(str)
-                                   )|| 'Пароль должен содержать буквы разных регистров, цифры и спецсимволы',
+                                   [/[a-z]/, /[A-Z]/, /[0-9]/, /[^a-zA-Z0-9]/].every((pattern) =>
+                                       pattern.test(str)
+                                   ) || 'Пароль должен содержать буквы разных регистров, цифры и спецсимволы',
                            })}
                            placeholder='Введите пароль'
                            fullWidth
                            disableUnderline={true}
                     />
-                    {errors.password && errors.password.type === "required" && <div className={stylesLogin.error}>{errors.password.message}</div>}
-                    {errors.password && errors.password.type === "minLength" && <div className={stylesLogin.error}>{errors.password.message}</div>}
-                    {errors.password && errors.password.type === "validate" && <div className={stylesLogin.error}>{errors.password.message}</div>}
+
+                    {errors.password && errors.password.type === "required" &&
+                        <div className={stylesLogin.error}>{errors.password.message}</div>}
+                    {errors.password && errors.password.type === "minLength" &&
+                        <div className={stylesLogin.error}>{errors.password.message}</div>}
+                    {errors.password && errors.password.type === "validate" &&
+                        <div className={stylesLogin.error}>{errors.password.message}</div>}
+
                 </div>
+
                 <div className={stylesLogin.fieldRow}>
+
                     <Input className={stylesLogin.field}
                            error={Boolean(errors.confirm_password?.message)} //подсвечиваем красным если true
                            type="password"
@@ -168,15 +181,19 @@ export const Registration = () => {
                            fullWidth
                            disableUnderline={true}
                     />
-                    {errors.confirm_password && errors.confirm_password.type === "required" && <div className={stylesLogin.error}>{errors.confirm_password.message}</div>}
-                    {errors.confirm_password && errors.confirm_password.type === "validate" && <div className={stylesLogin.error}>{errors.confirm_password.message}</div>}
+
+                    {errors.confirm_password && errors.confirm_password.type === "required" &&
+                        <div className={stylesLogin.error}>{errors.confirm_password.message}</div>}
+                    {errors.confirm_password && errors.confirm_password.type === "validate" &&
+                        <div className={stylesLogin.error}>{errors.confirm_password.message}</div>}
+
                 </div>
+
                 <div className={styles.login}>
                     <div>Есть аккаунт? <span onClick={clickLogin}>Войдите!</span></div>
-                    <button type="submit" className={styles.button}>
-                        Зарегистрироваться
-                    </button>
+                    <button type="submit" className={styles.button}>Зарегистрироваться</button>
                 </div>
+
             </form>
         </div>
     );

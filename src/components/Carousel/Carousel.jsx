@@ -18,7 +18,7 @@ const Carousel = ({children, show = 1}) => {
             }
             const timeout = setInterval(() => {
                 setCurrentIndex(prevState => prevState + 1)
-            }, 5000)
+            }, 10000)
             return () => {
                 clearInterval(timeout)
             }
@@ -62,7 +62,7 @@ const Carousel = ({children, show = 1}) => {
                     </button>
                 }
 
-                {!(show > 1) ?
+                {!(show > 0) ?
 
                     <div className={s.contentWrapper}>
                         <div

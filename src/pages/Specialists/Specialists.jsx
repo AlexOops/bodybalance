@@ -12,15 +12,21 @@ import {Employer} from "../../components/Employer/Employer";
 import Carousel from "../../components/Carousel/Carousel";
 import DmitryBocharnikov from '../../assets/doc/DmitryBocharnikov.jpg'
 import {Circles} from "../../components/Circles/Circles";
+import {useWindowSize} from "../../components/UseWindowSize/UseWindowSize";
+
+
 
 const certificates = [{img: certificate}, {img: certificate}, {img: certificate}, {img: certificate}, {img: certificate}]
 
 export const Specialists = () => {
+
     const dispatch = useDispatch();
     const {services} = useSelector(state => state.services);
     const {employers} = useSelector(state => state.employers);
     const [card, setCard] = useState({});
     const [certificateUrl, setCertificateUrl] = useState('');
+
+    const { width } = useWindowSize();
 
     const openFullCard = (employer) => {
         setCard(employer);
@@ -41,6 +47,19 @@ export const Specialists = () => {
     const clickCardButton = () => {
         scrollToRef.current.scrollIntoView({behavior: 'smooth', block: 'start'});
     }
+
+    // для отображения элементов(карточек) на странице в зависимости от размера экрана
+    let show;
+    if (width > 1200) {
+        show = 4;
+    } else if (width > 900) {
+        show = 3;
+    } else if (width > 600) {
+        show = 2;
+    } else {
+        show = 1;
+    }
+
 
     useEffect(() => {
         dispatch(fetchEmployers());
@@ -71,7 +90,7 @@ export const Specialists = () => {
                     />
 
                 </div>
-                <div className={'container-carousel'}>
+                <div className={`container-carousel ${s.specialists}`}>
                     <div className={'flexRelative'}>
                         <div className={s.servicesTitleWrap}>
                             <h2 className={s.servicesTitle} ref={scrollToEmployersRef}>Наша команда</h2>
@@ -79,7 +98,7 @@ export const Specialists = () => {
 
                         <div className={`${s.positionDoc}`}>
 
-                            <Carousel show={4}>
+                            <Carousel show={show}>
 
                                 {employers.items.map((employer, idx) => {
 
@@ -140,30 +159,33 @@ export const Specialists = () => {
                     source_name={'specialists'}
                 />
 
-                <Circles smallSize={270} smallAxisX={-140} smallAxisY={170}
-                         bigSize={420} bigAxisX={-90} bigAxisY={215}/>
+                <div className={'circles'}>
+                    <Circles smallSize={270} smallAxisX={-140} smallAxisY={170}
+                             bigSize={420} bigAxisX={-90} bigAxisY={215}/>
 
-                <Circles smallSize={345} smallAxisX={945} smallAxisY={220}
-                         bigSize={530} bigAxisX={1020} bigAxisY={-40}/>
-
+                    <Circles smallSize={345} smallAxisX={945} smallAxisY={220}
+                             bigSize={530} bigAxisX={1020} bigAxisY={-40}/>
+                </div>
             </div>
-            <div className="container-color">
+
+            <div className={`container-color ${s.sertificats}`}>
+
                 <div className={s.servicesTitleWrap}>
                     <h2 className={s.servicesTitle}>Сертификаты наших специалистов</h2>
                 </div>
-                <div className={'container-carousel container-slider'}>
-                    <div style={{marginTop: 64}}>
 
+                <div className={`container-carousel container-slider ${s.certificates}`}>
+                    <>
                         <Carousel show={4}>
                             {certificates.map(el =>
                                 <div key={nanoid()}>
-                                    <div style={{padding: 8}}>
+                                    <div className={s.cardCert}>
                                         <img src={el.img} alt="" style={{width: '100%'}}/>
                                     </div>
                                 </div>
                             )}
                         </Carousel>
-                    </div>
+                    </>
                 </div>
             </div>
         </>

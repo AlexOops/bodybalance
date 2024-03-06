@@ -27,10 +27,10 @@ export const TeamDoctor = () => {
                 <div className={'circles'}>
                     <Circles smallSize={180} smallAxisX={-125} smallAxisY={200}
                              bigSize={350} bigAxisX={-204} bigAxisY={-60}/>
-                </div>
 
-                <Circles smallSize={180} smallAxisX={400} smallAxisY={200}
-                         bigSize={350} bigAxisX={350} bigAxisY={-100}/>
+                    <Circles smallSize={180} smallAxisX={400} smallAxisY={200}
+                             bigSize={350} bigAxisX={350} bigAxisY={-100}/>
+                </div>
 
                 <div className={s.img}>
 

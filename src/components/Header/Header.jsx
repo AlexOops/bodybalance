@@ -52,9 +52,11 @@ export const Header = () => {
         <div className={'container-color'}>
             <div className={'container'}>
                 <div className={s.header}>
+
                     <Link to={'/'}>
                         <img className={s.logo} src={logo} alt="logo"/>
                     </Link>
+
                     <div
                         onClick={() => handleVisible()}
                         className={s.toggle}>
@@ -72,9 +74,13 @@ export const Header = () => {
                             <span className={s.bar}></span>
                         </label>
                     </div>
+
                     <div style={visible ? {display: 'flex'} : undefined} className={s.burger}>
+
                         <Navigate setVisible={setVisible}/>
+
                         <div className={s.border}/>
+
                         <div className={s.login}>
 
                             {isAuth ? (

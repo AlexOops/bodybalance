@@ -75,13 +75,15 @@ export const Contacts = () => {
                     </div>
                 </div>
             </div>
+
             <div className={s.content}>
+                <div className={'circles'}>
+                    <Circles smallSize={175} smallAxisX={-140} smallAxisY={170}
+                             bigSize={350} bigAxisX={-90} bigAxisY={215}/>
 
-                <Circles smallSize={175} smallAxisX={-140} smallAxisY={170}
-                         bigSize={350} bigAxisX={-90} bigAxisY={215}/>
-
-                <Circles smallSize={270} smallAxisX={1050} smallAxisY={490}
-                         bigSize={480} bigAxisX={1200} bigAxisY={210}/>
+                    <Circles smallSize={270} smallAxisX={1050} smallAxisY={490}
+                             bigSize={480} bigAxisX={1200} bigAxisY={210}/>
+                </div>
 
                 <div className={s.contacts}>
                     <p className={s.contactsTitle}>Мы на связи</p>
@@ -101,6 +103,7 @@ export const Contacts = () => {
                         </li>
                     </ul>
                 </div>
+
                 <form className={s.form} onSubmit={handleSubmit}>
 
                     <Select selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>

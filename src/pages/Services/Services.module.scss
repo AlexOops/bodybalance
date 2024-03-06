@@ -12,17 +12,14 @@
 
 .description {
   position: relative;
-  max-width: 630px;
   z-index: 3;
-  margin-top: 80px;
-}
-
-.margin {
-  margin-bottom: 30px;
+  max-width: 630px;
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
-  //font-family: 'Rubik';
   font-style: normal;
   font-weight: 500;
   font-size: 60px;
@@ -30,8 +27,18 @@
   color: #4F4E4E;
 }
 
+.text {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 140%;
+  color: #4F4E4E;
+  padding: 16px 0 80px 0;
+  text-align: justify;
+}
+
 .servicesTitleWrap {
-  padding-top: 150px;
+  padding-top: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,19 +78,26 @@
     border-radius: 55px;
     position: absolute;
     top: calc(50% - 3px);
-    right: 0px;
+    right: 0;
     text-align: center;
 
   }
 }
 
 .servicesItems {
+  margin-top: 40px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 40px 0 0 0;
-  //gap: 30px;
+  justify-content: space-around; /* Распределение карточек по ширине контейнера с равными промежутками */
 }
+
+.serviceCard {
+  max-width: 380px;
+
+  margin: 10px; /* Отступы вокруг карточек для создания пространства между ними */
+  flex: 1 1 250px; /* Карточки будут иметь базовую ширину 250px и будут расти, чтобы заполнить доступное пространство */
+}
+
 
 .serviceItem {
   display: flex;
@@ -96,7 +110,7 @@
   width: 410px;
   height: 570px;
   background: #FFFFFF;
-  box-shadow: 0px 0px 20px rgba(255, 226, 255, 0.65);
+  box-shadow: 0 0 20px rgba(255, 226, 255, 0.65);
   border-radius: 25px;
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box; /* Firefox, other Gecko */
@@ -133,16 +147,8 @@
   text-align: center;
   text-transform: uppercase;
   color: #4F4E4E;
-
 }
 
-.text {
-  font-style: normal;
-  font-weight: 300;
-  font-size: 24px;
-  line-height: 140%;
-  color: #4F4E4E;
-}
 
 .itemText {
   //position: relative;
@@ -173,7 +179,6 @@
 .itemPrice {
   display: flex;
   width: 100%;
-  font-family: 'Rubik';
   font-style: normal;
   font-weight: 500;
   font-size: 30px;
@@ -193,5 +198,41 @@
     color: #fff;
     background-color: #9e8dff;
     border: 2px solid #9e8dff;
+  }
+}
+
+@media (max-width: 1200px) {
+  .description {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .servicesTitle {
+    padding: 20px 50px;
+
+    &:before {
+      display: none;
+    }
+
+    &:after {
+      display: none;
+    }
+  }
+
+  .title {
+    font-size: 35px;
+  }
+
+  .text {
+    font-size: 20px;
+    padding-bottom: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .list {
+    max-width: 360px;
   }
 }

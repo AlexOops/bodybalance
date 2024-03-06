@@ -7,6 +7,8 @@
 .description {
   max-width: 630px;
   padding-top: 80px;
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
@@ -18,7 +20,12 @@
 }
 
 .appointmentFormBlock {
-position: relative;
+  position: relative;
+}
+
+.specialists {
+  padding: 0;
+  overflow: hidden;
 }
 
 .servicesTitleWrap {
@@ -28,15 +35,14 @@ position: relative;
 }
 
 .servicesTitle {
-  margin-top: 110px;
   min-width: 248px;
   position: relative;
-  font-size: 40px;
+
   line-height: 47px;
   text-transform: uppercase;
 
   color: #4F4E4E;
-  padding: 0 250px;
+  padding: 40px 250px;
 
   &:before {
     content: "";
@@ -72,16 +78,16 @@ position: relative;
   line-height: 140%;
   color: #4F4E4E;
   padding: 16px 0 80px 0;
+  text-align: justify;
 }
 
 .positionDoc {
   position: relative;
   display: flex;
   justify-content: space-between;
-  margin: 40px 60px 80px;
+  margin: 40px 0 80px;
   align-items: center;
 }
-
 
 .name {
   font-weight: 500;
@@ -106,6 +112,40 @@ position: relative;
 .margin {
   height: 40px;
 }
+
+.cardCert {
+  padding: 0 10px;
+}
+
 .certificates {
-  padding: 0 20px ;
+  padding-bottom: 40px;
+}
+
+@media (max-width: 1200px) {
+  .description {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .servicesTitle {
+    padding: 20px 50px;
+
+    &:before {
+      display: none;
+    }
+
+    &:after {
+      display: none;
+    }
+  }
+
+  .title {
+    font-size: 35px;
+  }
+
+  .text {
+    font-size: 20px;
+    padding-bottom: 50px;
+  }
 }

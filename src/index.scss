@@ -59,7 +59,7 @@ p {
   padding: 0 0 50px 0;
 
   @media screen and (min-width: 1290px) {
-    width: 1290px;
+    max-width: 1290px;
   }
 
   @media screen and (max-width: 1289px) {
@@ -112,30 +112,6 @@ a {
 
 .active {
   color: #D78DFF;
-}
-
-.circleFirst {
-  position: absolute;
-  width: 346px;
-  height: 335px;
-  border-radius: 50%;
-  left: 3px;
-  top: 39px;
-  background: rgba(237, 207, 253, 0.2);
-  transform: matrix(-1, 0, 0, 1, 0, 0);
-  z-index: -2;
-}
-
-.circleSecond {
-  position: absolute;
-  width: 192px;
-  height: 190px;
-  left: 210px;
-  top: 0;
-  background: rgba(237, 207, 253, 0.2);
-  transform: matrix(-1, 0, 0, 1, 0, 0);
-  border-radius: 50%;
-  z-index: -1;
 }
 
 .flexRelative {
