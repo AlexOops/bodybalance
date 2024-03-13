@@ -13,7 +13,7 @@ import {TextField} from "@mui/material";
 
 export const Main = () => {
     const dispatch = useDispatch();
-
+    const apiUrl = process.env.REACT_APP_API_URL;
     const user = useSelector(state => state.auth.data);
     const {patients} = useSelector(state => state.patients);
     const {employers} = useSelector(state => state.employers);
@@ -201,7 +201,7 @@ export const Main = () => {
                                 <>
                                     <p className={s.subTitle}>МОЙ ВРАЧ</p>
                                     <img className={s.mySpecialistImg}
-                                         src={(attendingDoctor.avatarUrl) ? `http://localhost:4444${attendingDoctor.avatarUrl}` : `http://localhost:4444/uploads/default_service.png`} alt={'doc'}/>
+                                         src={(attendingDoctor.avatarUrl) ? `${apiUrl}${attendingDoctor.avatarUrl}` : `http://localhost:4444/uploads/default_service.png`} alt={'doc'}/>
                                     <p>{attendingDoctor.fullName}</p>
                                 </>
                             ) : (

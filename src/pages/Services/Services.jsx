@@ -11,6 +11,7 @@ import {Circles} from "../../components/Circles/Circles";
 
 export const Services = () => {
     const dispatch = useDispatch();
+    const apiUrl = process.env.REACT_APP_API_URL;
     const {services} = useSelector(state => state.services);
     const [service, setService] = useState({});
 
@@ -73,7 +74,7 @@ export const Services = () => {
                                                 name={item.name}
                                                 recommendations={item.recommendations}
                                                 text={item.text}
-                                                imageUrl={(item.imageUrl) ? `http://localhost:4444${item.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                                                imageUrl={(item.imageUrl) ? `${apiUrl}${item.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
                                             />
                                         </div>
                                     )
@@ -112,7 +113,7 @@ export const Services = () => {
                     name={service.name}
                     description={service.description}
                     recommendations={service.recommendations}
-                    imageUrl={(service.imageUrl) ? `http://localhost:4444${service.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                    imageUrl={(service.imageUrl) ? `${apiUrl}${service.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
                     handleAction={cardAction}
                 />
             </Modal>

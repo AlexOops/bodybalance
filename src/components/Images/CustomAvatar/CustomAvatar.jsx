@@ -2,9 +2,12 @@ import React from 'react';
 import Avatar from '@mui/material/Avatar';
 
 const CustomAvatar = ({avatarUrl, fullName, size}) => {
+
+    const apiUrl = process.env.REACT_APP_API_URL;
+
     if (avatarUrl) {
         // Если есть URL аватарки, показываем аватарку
-        return <Avatar src={`http://localhost:4444${avatarUrl}?timestamp=${new Date().getTime()}`} alt={fullName}
+        return <Avatar src={`${apiUrl}${avatarUrl}?timestamp=${new Date().getTime()}`} alt={fullName}
                        style={{width: size, height: size}}/>;
     } else {
         // Иначе показываем инициалы

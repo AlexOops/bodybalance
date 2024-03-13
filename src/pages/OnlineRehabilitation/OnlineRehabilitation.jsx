@@ -11,7 +11,7 @@ import AlexMitkin from "../../assets/doc/AlexMitkin_new.JPG";
 import {Circles} from "../../components/Circles/Circles";
 
 export const OnlineRehabilitation = () => {
-
+    const apiUrl = process.env.REACT_APP_API_URL;
     const dispatch = useDispatch();
     const onlineServiceList = useSelector((state) => state.onlineServices.onlineServices);
     const isOnlineServiceListLoading = onlineServiceList.status === 'loading';
@@ -79,7 +79,7 @@ export const OnlineRehabilitation = () => {
                                             name={item.name}
                                             description={item.description}
                                             recommendations={item.text}
-                                            imageUrl={(item.imageUrl) ? `http://localhost:4444${item.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                                            imageUrl={(item.imageUrl) ? `${apiUrl}${item.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
                                         />
                                     </div>
                                 )
@@ -110,7 +110,7 @@ export const OnlineRehabilitation = () => {
                     isFull={true}
                     id={service._id}
                     name={service.name}
-                    imageUrl={(service.imageUrl) ? `http://localhost:4444${service.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                    imageUrl={(service.imageUrl) ? `${apiUrl}${service.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
                     description={service.description}
                     recommendations={service.text}
                     handleAction={cardAction}
