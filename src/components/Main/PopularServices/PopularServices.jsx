@@ -10,6 +10,7 @@ export const PopularServices = () => {
     const dispatch = useDispatch();
     const {services} = useSelector(state => state.services);
     const isServicesLoading = services.status === 'loading'; // boolean
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         dispatch(fetchServices());
@@ -50,7 +51,7 @@ export const PopularServices = () => {
                                           name={obj.name}
                                           description={obj.description}
                                           text={obj.text}
-                                          imageUrl={(obj.imageUrl) ? `http://localhost:4444${obj.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                                          imageUrl={(obj.imageUrl) ? `${apiUrl}${obj.imageUrl}` : `http://localhost:4444/uploads/default_service.png`}
                                     />
                                 </div>
                         )}

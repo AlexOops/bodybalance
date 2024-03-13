@@ -22,6 +22,8 @@ export const Employer = ({
 
     const dispatch = useDispatch();
 
+    const apiUrl = process.env.REACT_APP_API_URL;
+
     const handleSelectService = () => {
         dispatch(setSelectedEmployer({id: id, name: name + ' - ' + profession}));
         dispatch(closeModal('modalEmployer'));
@@ -41,7 +43,7 @@ export const Employer = ({
                 <div className={s.certificates}>{certificates?.map((doc, key) =>
                     <img key={"certificate" + key}
                          className={s.certificateItem}
-                         src={`http://localhost:4444${doc}`}
+                         src={`${apiUrl}${doc}`}
                          alt="сертификат"
                          onClick={() => openImageFromParent(doc)}
                     />

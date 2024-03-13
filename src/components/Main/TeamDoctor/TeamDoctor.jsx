@@ -6,9 +6,10 @@ import {fetchEmployers} from "../../../redux/slices/employers";
 import {Circles} from "../../Circles/Circles";
 
 export const TeamDoctor = () => {
-
     const dispatch = useDispatch();
     const {employers} = useSelector(state => state.employers);
+    const apiUrl = process.env.REACT_APP_API_URL;
+
     const scrollToTop = () => {
         window.scrollTo({
             top: 0
@@ -37,7 +38,7 @@ export const TeamDoctor = () => {
                     {
                         employers.items.slice(0, 4).map((employer, index) =>
                             <img className={`${s.three} ${index > 0 ? 'hide-on-mobile' : ''}`}
-                                 src={(employer.avatarUrl) ? `http://localhost:4444${employer.avatarUrl}` : `http://localhost:4444/uploads/default_service.png`}
+                                 src={(employer.avatarUrl) ? `${apiUrl}${employer.avatarUrl}` : `http://localhost:4444/uploads/default_service.png`}
                                  key={employer._id} alt="employer"/>
                         )
                     }

@@ -16,6 +16,7 @@ export const Training = () => {
         dispatch(fetchTraining());
     }, [dispatch]);
 
+    const apiUrl = process.env.REACT_APP_API_URL;
     const patientData = patients && patients.items ? patients.items.find((patient) => patient.userId === user._id) : null;
 
     const trainingCatalog = patientData && patientData.catalogVideoId
@@ -54,7 +55,7 @@ export const Training = () => {
                                     <div className={s.item} onClick={() => handleCatalogClick(trainingCatalog)}>
                                         <img
                                             className={s.itemImage}
-                                            src={(trainingCatalog.imageUrl) ? `http://localhost:4444${trainingCatalog.imageUrl}` : training_1}
+                                            src={(trainingCatalog.imageUrl) ? `${apiUrl}${trainingCatalog.imageUrl}` : training_1}
                                             alt="trn1"/>
 
                                         <div className={s.itemContent}>
