@@ -14,19 +14,17 @@ import DmitryBocharnikov from '../../assets/doc/DmitryBocharnikov.jpg'
 import {Circles} from "../../components/Circles/Circles";
 import {useWindowSize} from "../../components/UseWindowSize/UseWindowSize";
 
-
-
 const certificates = [{img: certificate}, {img: certificate}, {img: certificate}, {img: certificate}, {img: certificate}]
 
 export const Specialists = () => {
-
+    const apiUrl = process.env.REACT_APP_API_URL;
     const dispatch = useDispatch();
     const {services} = useSelector(state => state.services);
     const {employers} = useSelector(state => state.employers);
     const [card, setCard] = useState({});
     const [certificateUrl, setCertificateUrl] = useState('');
 
-    const { width } = useWindowSize();
+    const {width} = useWindowSize();
 
     const openFullCard = (employer) => {
         setCard(employer);
@@ -108,8 +106,8 @@ export const Specialists = () => {
 
                                         <Employer
                                             id={employer._id}
-                                            imageUrl={(employer.avatarUrl) ? `${process.env.REACT_APP_API_URI}${employer.avatarUrl}` :
-                                                `${process.env.REACT_APP_API_URI}/uploads/default_service.png`}
+                                            imageUrl={(employer.avatarUrl) ? `${apiUrl}${employer.avatarUrl}` :
+                                                `${apiUrl}/uploads/default_service.png`}
                                             name={employer.fullName}
                                             profession={employer.employer.profession}
                                             description={employer.employer.description}
@@ -129,8 +127,9 @@ export const Specialists = () => {
                                           id={card._id}
 
                                           imageUrl={card.avatarUrl ?
-                                              `${process.env.REACT_APP_API_URI}${card.avatarUrl}` :
-                                              `${process.env.REACT_APP_API_URI}/uploads/default_service.png`}
+                                              `${apiUrl}${card.avatarUrl}` :
+                                              `${apiUrl}/uploads/default_service.png`}
+
                                           name={card.fullName}
                                           profession={card.employer.profession}
                                           description={card.employer.description}
@@ -142,7 +141,7 @@ export const Specialists = () => {
                         </Modal>
                         <Modal type={'modalGallery'}>
                             <div className={s.modalGallery}>
-                                <img src={certificateUrl ? `${process.env.REACT_APP_API_URI}${certificateUrl}` : ""}
+                                <img src={certificateUrl ? `${apiUrl}${certificateUrl}` : ""}
                                      alt="сертификат"/>
                             </div>
                         </Modal>
